@@ -1,4 +1,6 @@
-import { Shape, Thickness, Plunge, Grade, SubStr, FracSpac, FracStr, MethodInput, MiningMethod, ScoredMethod, RawMethodInput } from '../types';
+import { 
+  type Thickness, 
+  type Plunge, type SubStr, type FracSpac,  type MethodInput, type MiningMethod, type ScoredMethod, type RawMethodInput } from '../types';
 
 export function getThicknessCat(val: number | ''): Thickness {
   if (val === '') return 'I';

@@ -1,5 +1,5 @@
-import React from 'react';
-import { ScoredMethod, ChartDataRow } from '../../types';
+
+import {type ScoredMethod, type ChartDataRow } from '../../types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface SelectionMatrixProps {
@@ -12,7 +12,7 @@ export default function SelectionMatrix({ chartData, results }: SelectionMatrixP
     <>
       <h2 className="text-sm uppercase tracking-widest text-[#aaa] mb-6 font-bold mt-12">03 / Selection Matrix</h2>
       
-      <div className="h-[300px] w-full mb-8">
+      <div className="h-75 w-full mb-8">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 0, left: 10, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#333" />

@@ -51,7 +51,7 @@ export default function App() {
     <div className="w-full min-h-screen bg-[#121212] text-[#E5E5E5] font-sans flex flex-col p-4 md:p-8 overflow-auto">
       <Header />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 grow">
         {/* Input Column  */}
         <div className="lg:col-span-4 lg:border-r border-[#333] lg:pr-8 lg:sticky lg:top-8 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto scroll-elegant lg:pb-8">
           <h2 className="text-sm uppercase tracking-widest text-[#aaa] mb-6 font-bold">01 / Analysis Inputs</h2>

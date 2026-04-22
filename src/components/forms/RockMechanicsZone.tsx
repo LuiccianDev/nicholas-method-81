@@ -1,5 +1,5 @@
-import React from 'react';
-import { RawMethodInput } from '../../types';
+
+import {type RawMethodInput } from '../../types';
 import SelectField from '../ui/SelectField';
 import NumberField from '../ui/NumberField';
 import { getSubStrLabel, getFracSpacLabel } from '../../lib/nicholasData';

@@ -1,5 +1,5 @@
-import React from 'react';
-import { ScoredMethod } from '../../types';
+
+import { type ScoredMethod } from '../../types';
 
 export default function MethodRecommendation({ bestMethod, absoluteBest }: { bestMethod?: ScoredMethod, absoluteBest?: ScoredMethod }) {
   const isSurfaceMoreViable = absoluteBest?.method === 'Open Pit' && absoluteBest.total > (bestMethod?.total || 0);
@@ -7,7 +7,7 @@ export default function MethodRecommendation({ bestMethod, absoluteBest }: { bes
   return (
     <div className="relative bg-[#1a1a1a] p-8 border border-[#333] mb-8 flex flex-col border-t-2 border-t-[#D4AF37]">
       <div className="mb-auto">
-        <p className="text-[48px] sm:text-[64px] md:text-[80px] font-serif italic leading-none text-[#D4AF37] break-words drop-shadow-sm">
+        <p className="text-[48px] sm:text-[64px] md:text-[80px] font-serif italic leading-none text-[#D4AF37] wrap-break-word drop-shadow-sm">
           {bestMethod?.method || 'None.'}
         </p>
         <p className="text-xl md:text-3xl font-light tracking-tight text-[#A3A3A3] mt-2">Optimal Underground Method</p>
