@@ -1,5 +1,3 @@
-
-
 interface NumberFieldProps {
   label: string;
   value: number | '';
@@ -10,19 +8,29 @@ interface NumberFieldProps {
   unit?: string;
 }
 
-export default function NumberField({ label, value, onChange, placeholder, note, derivedLabel, unit }: NumberFieldProps) {
+export default function NumberField({
+  label,
+  value,
+  onChange,
+  placeholder,
+  note,
+  derivedLabel,
+  unit,
+}: NumberFieldProps) {
   return (
     <div className="group mb-4">
-      <div className="flex justify-between items-baseline mb-2">
-        <label className="block text-[10px] uppercase text-[#A3A3A3] tracking-tighter">{label}</label>
+      <div className="mb-2 flex items-baseline justify-between">
+        <label className="block text-[10px] tracking-tighter text-[#A3A3A3] uppercase">
+          {label}
+        </label>
         {derivedLabel && (
-          <span className="text-[9px] uppercase font-mono tracking-[0.1em] bg-[#1a1a1a] border border-[#D4AF37]/40 text-[#D4AF37] px-1.5 py-0.5">
+          <span className="border border-[#D4AF37]/40 bg-[#1a1a1a] px-1.5 py-0.5 font-mono text-[9px] tracking-[0.1em] text-[#D4AF37] uppercase">
             {derivedLabel}
           </span>
         )}
       </div>
-      <div className="flex justify-between items-center bg-[#1a1a1a] border border-[#333] group-hover:border-[#D4AF37]/50 transition-colors relative mb-2 focus-within:border-[#D4AF37]">
-        <input 
+      <div className="relative mb-2 flex items-center justify-between border border-[#333] bg-[#1a1a1a] transition-colors group-hover:border-[#D4AF37]/50 focus-within:border-[#D4AF37]">
+        <input
           type="number"
           value={value}
           onChange={(e) => {
@@ -30,12 +38,16 @@ export default function NumberField({ label, value, onChange, placeholder, note,
             onChange(val === '' ? '' : Number(val));
           }}
           placeholder={placeholder}
-          className="block w-full bg-transparent text-sm font-mono text-[#E5E5E5] px-3 py-3 outline-none z-10 focus:text-[#D4AF37]"
+          className="z-10 block w-full bg-transparent px-3 py-3 font-mono text-sm text-[#E5E5E5] outline-none focus:text-[#D4AF37]"
         />
-        {unit && <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#A3A3A3] text-xs font-mono">{unit}</div>}
+        {unit && (
+          <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 font-mono text-xs text-[#A3A3A3]">
+            {unit}
+          </div>
+        )}
       </div>
       {note && (
-        <p className="text-[9px] sm:text-[10px] text-[#A3A3A3] font-sans leading-snug border-l-2 border-[#333] pl-2 mt-1 py-0.5">
+        <p className="mt-1 border-l-2 border-[#333] py-0.5 pl-2 font-sans text-[9px] leading-snug text-[#A3A3A3] sm:text-[10px]">
           {note}
         </p>
       )}

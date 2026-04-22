@@ -40,7 +40,7 @@ export interface MethodInput {
   fwFracStr: FracStr;
 }
 
-export type MiningMethod = 
+export type MiningMethod =
   | 'Open Pit'
   | 'Block Caving'
   | 'Sublevel Stoping'

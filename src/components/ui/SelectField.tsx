@@ -1,5 +1,3 @@
-
-
 interface SelectFieldProps {
   label: string;
   value: string;
@@ -8,24 +6,40 @@ interface SelectFieldProps {
   note?: string;
 }
 
-export default function SelectField({ label, value, onChange, options, note }: SelectFieldProps) {
+export default function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+  note,
+}: SelectFieldProps) {
   return (
     <div className="group mb-4">
-      <label className="block text-[10px] uppercase text-[#A3A3A3] mb-2 tracking-tighter">{label}</label>
-      <div className="flex justify-between items-center bg-[#1a1a1a] border border-[#333] group-hover:border-[#D4AF37]/50 transition-colors relative mb-2 focus-within:border-[#D4AF37]">
-        <select 
+      <label className="mb-2 block text-[10px] tracking-tighter text-[#A3A3A3] uppercase">
+        {label}
+      </label>
+      <div className="relative mb-2 flex items-center justify-between border border-[#333] bg-[#1a1a1a] transition-colors group-hover:border-[#D4AF37]/50 focus-within:border-[#D4AF37]">
+        <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="block w-full bg-transparent text-sm font-medium italic text-[#E5E5E5] px-3 py-3 outline-none appearance-none cursor-pointer z-10 focus:text-[#D4AF37]"
+          className="z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-3 text-sm font-medium text-[#E5E5E5] italic outline-none focus:text-[#D4AF37]"
         >
-          {options.map(o => (
-            <option key={o.value} value={o.value} className="bg-[#121212] text-white not-italic py-2">{o.label}</option>
+          {options.map((o) => (
+            <option
+              key={o.value}
+              value={o.value}
+              className="bg-[#121212] py-2 text-white not-italic"
+            >
+              {o.label}
+            </option>
           ))}
         </select>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#A3A3A3] text-xs">▼</div>
+        <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-[#A3A3A3]">
+          ▼
+        </div>
       </div>
       {note && (
-        <p className="text-[9px] sm:text-[10px] text-[#A3A3A3] font-sans leading-snug border-l-2 border-[#333] pl-2 mt-1 py-0.5">
+        <p className="mt-1 border-l-2 border-[#333] py-0.5 pl-2 font-sans text-[9px] leading-snug text-[#A3A3A3] sm:text-[10px]">
           {note}
         </p>
       )}
