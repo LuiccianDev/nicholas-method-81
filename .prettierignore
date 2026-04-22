@@ -1,0 +1,14 @@
+*
+!src/
+!src/**/*
+
+dist/
+node_modules/
+coverage/
+.pnpm-store/
+*.tsbuildinfo
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+.git/
+.vscode/
