@@ -1,3 +1,4 @@
+
 interface SelectFieldProps {
   label: string;
   value: string;
@@ -15,31 +16,31 @@ export default function SelectField({
 }: SelectFieldProps) {
   return (
     <div className="group mb-4">
-      <label className="mb-2 block text-[10px] tracking-tighter text-[#A3A3A3] uppercase">
+      <label className="text-foreground-muted mb-2 block text-[10px] tracking-tighter uppercase">
         {label}
       </label>
-      <div className="relative mb-2 flex items-center justify-between border border-[#333] bg-[#1a1a1a] transition-colors group-hover:border-[#D4AF37]/50 focus-within:border-[#D4AF37]">
+      <div className="border-border bg-surface-muted group-hover:border-primary/50 focus-within:border-primary relative mb-2 flex items-center justify-between border transition-colors">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-3 text-sm font-medium text-[#E5E5E5] italic outline-none focus:text-[#D4AF37]"
+          className="text-foreground focus:text-primary z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-3 text-sm font-medium italic outline-none"
         >
           {options.map((o) => (
             <option
               key={o.value}
               value={o.value}
-              className="bg-[#121212] py-2 text-white not-italic"
+              className="bg-surface text-foreground py-2 not-italic"
             >
               {o.label}
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-[#A3A3A3]">
+        <div className="text-foreground-muted pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs">
           ▼
         </div>
       </div>
       {note && (
-        <p className="mt-1 border-l-2 border-[#333] py-0.5 pl-2 font-sans text-[9px] leading-snug text-[#A3A3A3] sm:text-[10px]">
+        <p className="border-border-strong text-foreground-muted mt-1 border-l-2 py-0.5 pl-2 font-sans text-[9px] leading-snug sm:text-[10px]">
           {note}
         </p>
       )}

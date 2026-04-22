@@ -1,4 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X } from 'lucide-react';
 import { type RawMethodInput, type ChartDataRow } from './types';
 import {
   calculateScores,
@@ -13,6 +15,26 @@ import NumberField from './components/ui/NumberField';
 import RockMechanicsZone from './components/forms/RockMechanicsZone';
 import MethodRecommendation from './components/results/MethodRecommendation';
 import SelectionMatrix from './components/results/SelectionMatrix';
+import ResultsTable from './components/results/ResultsTable';
+
+const THEME_STORAGE_KEY = 'theme';
+
+const getInitialTheme = (): 'light' | 'dark' => {
+  if (typeof window === 'undefined') {
+    return 'dark';
+  }
+
+  const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (storedTheme === 'light' || storedTheme === 'dark') {
+    return storedTheme;
+  }
+
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+
+  return 'light';
+};
 
 const DEFAULT_INPUT: RawMethodInput = {
   shape: 'M',
@@ -33,6 +55,30 @@ const DEFAULT_INPUT: RawMethodInput = {
 
 export default function App() {
   const [input, setInput] = useState<RawMethodInput>(DEFAULT_INPUT);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(getInitialTheme);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    root.classList.toggle('light', theme === 'light');
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    if (!document.startViewTransition) {
+      setTheme((currentTheme) =>
+        currentTheme === 'light' ? 'dark' : 'light'
+      );
+      return;
+    }
+
+    document.startViewTransition(() => {
+      setTheme((currentTheme) =>
+        currentTheme === 'light' ? 'dark' : 'light'
+      );
+    });
+  };
 
   const derivedInput = useMemo(() => deriveMethodInput(input), [input]);
   const results = useMemo(() => calculateScores(derivedInput), [derivedInput]);
@@ -61,21 +107,28 @@ export default function App() {
   );
 
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-auto bg-[#121212] p-4 font-sans text-[#E5E5E5] md:p-8">
-      <Header />
+    <div className="flex min-h-screen w-full flex-col overflow-auto bg-surface p-4 font-sans text-foreground md:p-8">
+      <Header toggleTheme={toggleTheme} theme={theme} />
 
-      <div className="grid grow grid-cols-1 gap-8 lg:grid-cols-12">
-        {/* Input Column  */}
-        <div className="scroll-elegant border-[#333] lg:sticky lg:top-8 lg:col-span-4 lg:max-h-[calc(100vh-4rem)] lg:overflow-y-auto lg:border-r lg:pr-8 lg:pb-8">
-          <h2 className="mb-6 text-sm font-bold tracking-widest text-[#aaa] uppercase">
+      <div className="grid grow grid-cols-1 gap-x-8 lg:grid-cols-12">
+        <div className="mb-4 lg:col-span-4">
+          <h2 className="text-primary text-[11px] font-bold tracking-[0.3em] uppercase">
             01 / Analysis Inputs
           </h2>
+        </div>
+        <div className="mb-4 lg:col-span-8 lg:px-6">
+          <h2 className="text-primary text-[11px] font-bold tracking-[0.3em] uppercase">
+            02 / Method Recommendation
+          </h2>
+        </div>
 
+        {/* Input Column  */}
+        <div className="scroll-elegant border-border lg:sticky lg:top-8 lg:col-span-4 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto lg:border-r lg:pr-8 lg:pb-8">
           <div className="mb-8">
-            <h3 className="mb-4 border-b border-[#333] pb-2 font-mono text-[10px] tracking-widest text-[#A3A3A3] uppercase">
+            <h3 className="border-border-strong text-foreground-muted mb-4 ml-2 border-l pb-0.5 pl-2 font-mono text-[10px] tracking-widest uppercase">
               Geometry & Grade
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-4 pl-3">
               <SelectField
                 label="General Shape"
                 value={input.shape}
@@ -125,7 +178,7 @@ export default function App() {
           </div>
 
           <div>
-            <h3 className="mb-4 border-b border-[#333] pb-2 font-mono text-[10px] tracking-widest text-[#A3A3A3] uppercase">
+            <h3 className="border-border-strong text-foreground-muted mb-4 ml-2 border-l pb-0.5 pl-2 font-mono text-[10px] tracking-widest uppercase">
               Rock Mechanics
             </h3>
             <div className="space-y-6">
@@ -152,18 +205,64 @@ export default function App() {
         </div>
 
         {/* Result Column */}
-        <div className="lg:col-span-8 lg:px-4">
-          <h2 className="mb-6 text-sm font-bold tracking-widest text-[#aaa] uppercase">
-            02 / Method Recommendation
-          </h2>
-
+        <div className="lg:col-span-8 lg:px-6">
           <MethodRecommendation
             bestMethod={bestUnderground}
             absoluteBest={absoluteBest}
+            onOpenDetails={() => setIsDetailsOpen(true)}
           />
           <SelectionMatrix chartData={chartData} results={results} />
         </div>
       </div>
+
+      {/* Details Modal */}
+      <AnimatePresence>
+        {isDetailsOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsDetailsOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="border-border bg-surface relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden border shadow-2xl"
+            >
+              <div className="border-border flex items-center justify-between border-b p-6">
+                <div>
+                  <h3 className="text-primary font-serif text-2xl italic">
+                    Result Matrix
+                  </h3>
+                  <p className="text-foreground-muted font-mono text-[10px] tracking-widest uppercase">
+                    Numerical Breakdown / Nicholas Optimization
+                  </p>
+                </div>
+                <button
+                  onClick={() => setIsDetailsOpen(false)}
+                  className="text-foreground-muted hover:bg-surface-muted hover:text-foreground p-2 transition-colors"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              <div className="scroll-elegant overflow-y-auto p-6">
+                <ResultsTable results={results} />
+              </div>
+              <div className="border-border bg-surface-muted flex justify-end border-t p-4">
+                <button
+                  onClick={() => setIsDetailsOpen(false)}
+                  className="bg-border text-foreground hover:bg-border-strong px-6 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>

@@ -1,4 +1,5 @@
-import { type ScoredMethod, type ChartDataRow } from '../../types';
+import { useState, useEffect } from 'react';
+import { type ScoredMethod,type ChartDataRow } from '../../types';
 import {
   BarChart,
   Bar,
@@ -17,131 +18,108 @@ interface SelectionMatrixProps {
 
 export default function SelectionMatrix({
   chartData,
-  results,
 }: SelectionMatrixProps) {
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 640;
+  const yAxisWidth = isMobile ? 80 : 120;
+  const axisFontSize = isMobile ? 9 : 11;
+  const tickFontSize = isMobile ? 8 : 10;
+  const chartHeight = Math.max(
+    isMobile ? 450 : 350,
+    chartData.length * (isMobile ? 45 : 35)
+  );
+
   return (
     <>
-      <h2 className="mt-12 mb-6 text-sm font-bold tracking-widest text-[#aaa] uppercase">
+      <h2 className="text-foreground-muted mt-12 mb-6 text-sm font-bold tracking-widest uppercase">
         03 / Selection Matrix
       </h2>
 
-      <div className="mb-8 h-75 w-full">
+      <div style={{ height: `${chartHeight}px` }} className="mb-8 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={chartData}
             layout="vertical"
-            margin={{ top: 0, right: 0, left: 10, bottom: 0 }}
+            margin={{ top: 10, right: 20, left: isMobile ? 0 : 20, bottom: 0 }}
           >
             <CartesianGrid
               strokeDasharray="3 3"
               horizontal={true}
               vertical={false}
-              stroke="#333"
+              stroke="var(--color-border)"
             />
             <XAxis
               type="number"
-              tick={{ fontSize: 10, fill: '#A3A3A3', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#333' }}
+              tick={{
+                fontSize: tickFontSize,
+                fill: 'var(--color-foreground-muted)',
+                fontFamily: 'monospace',
+              }}
+              axisLine={{ stroke: 'var(--color-border)' }}
               tickLine={false}
+              minTickGap={10}
             />
             <YAxis
               dataKey="name"
               type="category"
-              width={100}
+              width={yAxisWidth}
               tick={{
-                fontSize: 12,
-                fill: '#E5E5E5',
+                fontSize: axisFontSize,
+                fill: 'var(--color-foreground)',
                 fontFamily: 'serif',
                 fontStyle: 'italic',
               }}
-              axisLine={{ stroke: '#333' }}
+              axisLine={{ stroke: 'var(--color-border)' }}
               tickLine={false}
+              interval={0}
             />
             <Tooltip
-              cursor={{ fill: '#222' }}
+              cursor={{ fill: 'var(--color-surface-muted)' }}
               contentStyle={{
                 borderRadius: '0',
-                border: '1px solid #D4AF37',
-                backgroundColor: '#1a1a1a',
-                color: '#fff',
-                fontSize: '12px',
+                border: '1px solid var(--color-primary)',
+                backgroundColor: 'var(--color-tooltip)',
+                color: 'var(--color-tooltip-foreground)',
+                fontSize: '10px',
               }}
             />
             <Legend
+              verticalAlign="top"
+              align={isMobile ? 'center' : 'right'}
+              layout="horizontal"
+              iconType="square"
+              iconSize={8}
               wrapperStyle={{
-                paddingTop: '5px',
-                fontSize: '10px',
+                paddingBottom: '20px',
+                fontSize: '9px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
-                color: '#A3A3A3',
+                color: 'var(--color-foreground-muted)',
               }}
             />
             <Bar
               dataKey="Geometry"
               stackId="a"
-              fill="#D4AF37"
-              name="Geometry (Gold)"
+              fill="var(--color-primary)"
+              name="Geometry"
             />
             <Bar
               dataKey="RockMechanics"
               stackId="a"
-              fill="#B87333"
-              name="Rock (Copper)"
+              fill="var(--color-secondary)"
+              name="Rock"
             />
           </BarChart>
         </ResponsiveContainer>
-      </div>
-
-      <div className="overflow-x-auto border-t border-[#333]">
-        <table className="w-full text-left text-sm text-[#E5E5E5]">
-          <thead className="border-b border-[#333] font-mono text-[10px] tracking-widest text-[#A3A3A3] uppercase">
-            <tr>
-              <th className="px-4 py-4 font-normal">Rank</th>
-              <th className="px-4 py-4 font-normal">Method</th>
-              <th className="px-4 py-4 text-right font-normal">Geo</th>
-              <th className="px-4 py-4 text-right font-normal">Rock</th>
-              <th className="px-4 py-4 text-right font-normal text-[#D4AF37]">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((result, idx) => {
-              const eliminated =
-                (result.total !== undefined && result.total < 0) ||
-                result.isEliminated;
-              const isFirst = idx === 0 && !eliminated;
-              return (
-                <tr
-                  key={result.method}
-                  className={`border-b border-[#222] last:border-0 ${eliminated ? 'opacity-30' : 'hover:bg-[#1a1a1a]'} transition-colors`}
-                >
-                  <td
-                    className={`px-4 py-4 font-mono text-[10px] ${isFirst ? 'text-[#D4AF37]' : 'text-[#A3A3A3]'}`}
-                  >
-                    {!eliminated ? `0${idx + 1}`.slice(-2) : '-'}
-                  </td>
-                  <td
-                    className={`px-4 py-4 font-serif italic ${eliminated ? 'text-[#888] line-through' : isFirst ? 'font-bold text-[#D4AF37]' : 'text-white'}`}
-                  >
-                    {result.method}
-                  </td>
-                  <td className="px-4 py-4 text-right font-mono text-xs">
-                    {result.geometryScore}
-                  </td>
-                  <td className="px-4 py-4 text-right font-mono text-xs text-[#B87333]">
-                    {result.rockTotal}
-                  </td>
-                  <td
-                    className={`px-4 py-4 text-right font-mono text-xs ${isFirst ? 'font-bold text-[#D4AF37]' : 'text-white'}`}
-                  >
-                    {result.total}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
       </div>
     </>
   );
