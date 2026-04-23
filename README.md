@@ -14,6 +14,7 @@
 
 Aplicacion web para recomendar metodos de minado usando una matriz de evaluacion basada en geometria del deposito y condiciones geomecanicas.
 </div>
+
 ## Caracteristicas
 
 - Formulario de entrada para parametros del yacimiento.
