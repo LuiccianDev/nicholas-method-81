@@ -12,79 +12,85 @@
 ![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-3-F7B93E?logo=prettier&logoColor=black)
 
-Aplicacion web para recomendar metodos de minado usando una matriz de evaluacion basada en geometria del deposito y condiciones geomecanicas.
+Web application to recommend mining methods using an evaluation matrix based on deposit geometry and geomechanical conditions.
 </div>
 
-## Caracteristicas
+## Features
 
-- Formulario de entrada para parametros del yacimiento.
-- Normalizacion de variables continuas a categorias del metodo.
-- Calculo de puntajes por metodo minero.
-- Visualizacion de resultados en tabla, seleccion y grafico.
-- Recomendacion del mejor metodo absoluto y mejor metodo subterraneo.
+- Input form for deposit parameters.
+- Normalization of continuous variables into method categories.
+- Score calculation by mining method.
+- Results visualization in table, selection matrix, and chart.
+- Recommendation of the best overall method and best underground method.
 
-## Metodo Nicholas 1981: enfoque numerico de seleccion
+## Nicholas Method 1981: Numerical Selection Approach
 
-Esta aplicacion implementa una adaptacion practica del metodo de seleccion de metodos de minado propuesto por Nicholas en 1981.
-La logica central es convertir condiciones geologicas y geomecanicas del yacimiento en puntajes comparables por metodo, para ordenar alternativas de forma objetiva.
+This application implements a practical adaptation of the mining method selection methodology proposed by Nicholas in 1981.
+The core logic is to convert geological and geomechanical conditions of the deposit into comparable scores by method, to rank alternatives objectively.
 
-Flujo general del metodo en esta app:
+General workflow of the method in this app:
 
-1. Definicion de variables de entrada del deposito.
-	- Geometria y condicion general: forma, potencia, buzamiento y ley.
-	- Condiciones geomecanicas por zona: mena, techo y muro piso.
-2. Categorizacion de variables continuas.
-	- Algunas entradas numericas se transforman en categorias discretas para poder evaluar con tablas de decision.
-3. Evaluacion por matrices de puntuacion.
-	- Cada metodo minero recibe puntajes por criterio.
-	- Se calcula un puntaje geometrico y un puntaje geomecanico total.
-4. Suma y ranking de alternativas.
-	- Puntaje total = geometria + geomecanica.
-	- Los metodos se ordenan de mayor a menor para obtener recomendacion.
-5. Regla de descarte.
-	- Valores fuertemente penalizados en la matriz indican combinaciones no recomendables para ese metodo.
+1. Definition of deposit input variables.
+	- Geometry and general condition: shape, thickness, dip angle, and grade.
+	- Geomechanical conditions by zone: ore body, hanging wall, and footwall.
+2. Categorization of continuous variables.
+	- Some numerical inputs are transformed into discrete categories to enable evaluation with decision tables.
+3. Evaluation by scoring matrices.
+	- Each mining method receives scores by criterion.
+	- A geometric score and total geomechanical score are calculated.
+4. Sum and ranking of alternatives.
+	- Total score = geometry + geomechanics.
+	- Methods are ranked from highest to lowest to obtain recommendations.
+5. Exclusion rule.
+	- Strongly penalized values in the matrix indicate combinations not recommended for that method.
 
-Alcance de esta implementacion:
+Scope of this implementation:
 
-- Sirve como herramienta de apoyo para preseleccion tecnica.
-- No reemplaza estudios de ingenieria de detalle, costos, ventilacion, secuencia operativa, seguridad, ni validacion geotecnica especifica del proyecto.
+- Serves as a support tool for technical preselection.
+- Does not replace detailed engineering studies, cost analysis, ventilation, operational sequence, safety, or project-specific geotechnical validation.
 
-## Referencia metodologica
+## Methodological Reference
 
 - Nicholas, D. E. (1981). Method Selection: A Numerical Approach.
-- Fuente consultada: https://www.cnitucson.com/publications/1981_Nicholas_436-Method%20Selection%20-%20A%20Numerical%20Approach%201981.pdf
-- Nota: esta descripcion resume el enfoque metodologico y no reproduce contenido textual extenso del documento original.
+- Source consulted: https://www.cnitucson.com/publications/1981_Nicholas_436-Method%20Selection%20-%20A%20Numerical%20Approach%201981.pdf
+- Note: this description summarizes the methodological approach and does not reproduce extensive textual content from the original document.
 
 
-## Requisitos
+## Requirements
 
 - Node.js 20+
 - pnpm 10+
 
-## Instalacion
+## Installation
 
 ```bash
 pnpm install
 ```
 
-## Scripts disponibles
+## Available Scripts
 
 ```bash
-pnpm dev       # Inicia entorno de desarrollo con Vite
-pnpm build     # Compila TypeScript y genera build de produccion
-pnpm preview   # Previsualiza el build generado
-pnpm lint      # Ejecuta ESLint
-pnpm format    # Formatea el proyecto con Prettier
+pnpm dev       # Start development environment with Vite
+pnpm build     # Compile TypeScript and generate production build
+pnpm preview   # Preview the generated build
+pnpm lint      # Run ESLint
+pnpm format    # Format project with Prettier
 ```
 
-## Uso rapido
+## Quick Start
 
 ```bash
 pnpm dev
 ```
 
-Luego abre la URL local mostrada por Vite (por defecto `http://localhost:5173`).
+Then open the local URL shown by Vite (default `http://localhost:5173`).
 
-## Licencia
+## License
 
-Este proyecto se distribuye bajo licencia MIT. Consulta el archivo `LICENSE` para mas detalles.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  Developed with ❤️ for the Mining Industry.
+</div>
