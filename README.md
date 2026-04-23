@@ -1,8 +1,8 @@
-# Method Nicholas
 
-Aplicacion web para recomendar metodos de minado usando una matriz de evaluacion basada en geometria del deposito y condiciones geomecanicas.
+<div align="center">
 
-## Tecnologias
+<img src="public/banner.png" alt="Mining Glossary Banner" width="100%">
+
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
@@ -12,6 +12,8 @@ Aplicacion web para recomendar metodos de minado usando una matriz de evaluacion
 ![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?logo=eslint&logoColor=white)
 ![Prettier](https://img.shields.io/badge/Prettier-3-F7B93E?logo=prettier&logoColor=black)
 
+Aplicacion web para recomendar metodos de minado usando una matriz de evaluacion basada en geometria del deposito y condiciones geomecanicas.
+</div>
 ## Caracteristicas
 
 - Formulario de entrada para parametros del yacimiento.

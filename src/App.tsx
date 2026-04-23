@@ -1,12 +1,13 @@
-import { useState, useMemo } from 'react';
+import { Suspense, lazy, useMemo, useState } from 'react';
 import { type RawMethodInput, type ChartDataRow } from './types';
 import { calculateScores, deriveMethodInput } from './lib/nicholasData';
 import { useTheme } from './hooks/useTheme';
 import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
 import InputSection from './components/sections/InputSection';
 import ResultsSection from './components/sections/ResultsSection';
-import DetailsModal from './components/sections/DetailsModal';
+
+const Footer = lazy(() => import('./components/layout/Footer'));
+const DetailsModal = lazy(() => import('./components/sections/DetailsModal'));
 
 const DEFAULT_INPUT: RawMethodInput = {
   shape: 'M',
@@ -77,13 +78,21 @@ export default function App() {
       </div>
 
       {/* Details Modal */}
-      <DetailsModal
-        isOpen={isDetailsOpen}
-        onClose={() => setIsDetailsOpen(false)}
-        results={results}
-      />
+      <Suspense fallback={null}>
+        <DetailsModal
+          isOpen={isDetailsOpen}
+          onClose={() => setIsDetailsOpen(false)}
+          results={results}
+        />
+      </Suspense>
 
-      <Footer />
+      <Suspense
+        fallback={
+          <div className="min-h-screen border-t border-border bg-surface" />
+        }
+      >
+        <Footer />
+      </Suspense>
     </div>
   );
 }

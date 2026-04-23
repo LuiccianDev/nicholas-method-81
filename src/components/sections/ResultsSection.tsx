@@ -1,6 +1,8 @@
+import { Suspense, lazy } from 'react';
 import { type ScoredMethod, type ChartDataRow } from '../../types';
 import MethodRecommendation from '../results/MethodRecommendation';
-import SelectionMatrix from '../results/SelectionMatrix';
+
+const SelectionMatrix = lazy(() => import('../results/SelectionMatrix'));
 
 interface ResultsSectionProps {
   bestUnderground: ScoredMethod | undefined;
@@ -24,7 +26,13 @@ export default function ResultsSection({
         absoluteBest={absoluteBest}
         onOpenDetails={onOpenDetails}
       />
-      <SelectionMatrix chartData={chartData} results={results} />
+      <Suspense
+        fallback={
+          <div className="mb-8 h-90 w-full animate-pulse border border-border bg-surface-muted" />
+        }
+      >
+        <SelectionMatrix chartData={chartData} results={results} />
+      </Suspense>
     </div>
   );
 }
