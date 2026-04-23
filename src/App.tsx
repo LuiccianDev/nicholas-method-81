@@ -58,7 +58,6 @@ export default function App() {
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-auto bg-surface p-4 font-sans text-foreground md:p-8">
-
       <Header toggleTheme={toggleTheme} theme={theme} />
 
       <div className="grid grow grid-cols-1 gap-x-8 lg:grid-cols-12">
@@ -83,11 +82,6 @@ export default function App() {
         onClose={() => setIsDetailsOpen(false)}
         results={results}
       />
-
-
-
-
-
 
       <Footer />
     </div>
