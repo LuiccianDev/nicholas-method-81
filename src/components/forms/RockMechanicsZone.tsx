@@ -1,4 +1,3 @@
-
 import { type RawMethodInput } from '../../types';
 import SelectField from '../ui/SelectField';
 import NumberField from '../ui/NumberField';
@@ -19,7 +18,7 @@ export default function RockMechanicsZone({
 }: RockMechanicsZoneProps) {
   return (
     <div className="mb-6">
-      <h4 className="border-border-strong text-foreground-muted mb-3 ml-2 border-l pl-2 text-[10px] uppercase">
+      <h4 className="mb-3 ml-2 border-l border-border-strong pl-2 text-[10px] text-foreground-muted uppercase">
         {title}
       </h4>
       <div className="pl-3">

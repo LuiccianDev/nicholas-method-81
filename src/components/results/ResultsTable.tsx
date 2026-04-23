@@ -1,5 +1,4 @@
-
-import {type ScoredMethod } from '../../types';
+import { type ScoredMethod } from '../../types';
 
 interface ResultsTableProps {
   results: ScoredMethod[];
@@ -7,15 +6,15 @@ interface ResultsTableProps {
 
 export default function ResultsTable({ results }: ResultsTableProps) {
   return (
-    <div className="border-border overflow-x-auto border">
-      <table className="text-foreground w-full text-left text-sm">
-        <thead className="border-border bg-surface-muted text-foreground-muted sticky top-0 border-b font-mono text-[10px] tracking-widest uppercase md:relative">
+    <div className="overflow-x-auto border border-border">
+      <table className="w-full text-left text-sm text-foreground">
+        <thead className="sticky top-0 border-b border-border bg-surface-muted font-mono text-[10px] tracking-widest text-foreground-muted uppercase md:relative">
           <tr>
             <th className="px-4 py-4 font-normal">Rank</th>
             <th className="px-4 py-4 font-normal">Method</th>
             <th className="px-4 py-4 text-right font-normal">Geo</th>
             <th className="px-4 py-4 text-right font-normal">Rock</th>
-            <th className="text-primary px-4 py-4 text-right font-normal">
+            <th className="px-4 py-4 text-right font-normal text-primary">
               Total
             </th>
           </tr>
@@ -44,7 +43,7 @@ export default function ResultsTable({ results }: ResultsTableProps) {
                 <td className="px-4 py-4 text-right font-mono text-xs">
                   {result.geometryScore}
                 </td>
-                <td className="text-secondary px-4 py-4 text-right font-mono text-xs">
+                <td className="px-4 py-4 text-right font-mono text-xs text-secondary">
                   {result.rockTotal}
                 </td>
                 <td

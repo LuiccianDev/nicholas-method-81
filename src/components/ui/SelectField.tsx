@@ -1,4 +1,3 @@
-
 interface SelectFieldProps {
   label: string;
   value: string;
@@ -16,31 +15,31 @@ export default function SelectField({
 }: SelectFieldProps) {
   return (
     <div className="group mb-4">
-      <label className="text-foreground-muted mb-2 block text-[10px] tracking-tighter uppercase">
+      <label className="mb-2 block text-[10px] tracking-tighter text-foreground-muted uppercase">
         {label}
       </label>
-      <div className="border-border bg-surface-muted group-hover:border-primary/50 focus-within:border-primary relative mb-2 flex items-center justify-between border transition-colors">
+      <div className="relative mb-2 flex items-center justify-between border border-border bg-surface-muted transition-colors group-hover:border-primary/50 focus-within:border-primary">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="text-foreground focus:text-primary z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-3 text-sm font-medium italic outline-none"
+          className="z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-3 text-sm font-medium text-foreground italic outline-none focus:text-primary"
         >
           {options.map((o) => (
             <option
               key={o.value}
               value={o.value}
-              className="bg-surface text-foreground py-2 not-italic"
+              className="bg-surface py-2 text-foreground not-italic"
             >
               {o.label}
             </option>
           ))}
         </select>
-        <div className="text-foreground-muted pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs">
+        <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-foreground-muted">
           ▼
         </div>
       </div>
       {note && (
-        <p className="border-border-strong text-foreground-muted mt-1 border-l-2 py-0.5 pl-2 font-sans text-[9px] leading-snug sm:text-[10px]">
+        <p className="mt-1 border-l-2 border-border-strong py-0.5 pl-2 font-sans text-[9px] leading-snug text-foreground-muted sm:text-[10px]">
           {note}
         </p>
       )}

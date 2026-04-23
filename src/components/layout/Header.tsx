@@ -1,4 +1,3 @@
-
 import { motion } from 'motion/react';
 import { Sun, Moon } from 'lucide-react';
 
@@ -48,18 +47,18 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="border-border mb-8 flex flex-col items-start justify-between gap-4 border-b pb-6 md:flex-row md:items-end"
+      className="mb-8 flex flex-col items-start justify-between gap-4 border-b border-border pb-6 md:flex-row md:items-end"
     >
       <div className="max-w-xl">
         <motion.p
           variants={itemVariants}
-          className="text-primary mb-2 font-mono text-[10px] tracking-[0.3em] uppercase"
+          className="mb-2 font-mono text-[10px] tracking-[0.3em] text-primary uppercase"
         >
           Mining Method Advisor
         </motion.p>
         <motion.h1
           variants={itemVariants}
-          className="text-foreground font-serif text-4xl leading-none font-bold tracking-tight italic md:text-6xl"
+          className="font-serif text-4xl leading-none font-bold tracking-tight text-foreground italic md:text-6xl"
         >
           Nicholas Selector
           <span className="text-primary">.</span>
@@ -69,7 +68,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
         <motion.button
           variants={rightItemVariants}
           onClick={toggleTheme}
-          className="border-border bg-surface-muted text-foreground-muted hover:border-primary hover:text-primary cursor-pointer rounded-full border p-2 transition-all"
+          className="cursor-pointer rounded-full border border-border bg-surface-muted p-2 text-foreground-muted transition-all hover:border-primary hover:text-primary"
           aria-label="Toggle Theme"
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -77,13 +76,13 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
         <div className="text-left md:text-right">
           <motion.p
             variants={rightItemVariants}
-            className="text-foreground-muted font-mono text-xs"
+            className="font-mono text-xs text-foreground-muted"
           >
             REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE
           </motion.p>
           <motion.p
             variants={rightItemVariants}
-            className="text-foreground-muted font-mono text-xs"
+            className="font-mono text-xs text-foreground-muted"
           >
             EST. 1981 / ROCK MECHANICS
           </motion.p>

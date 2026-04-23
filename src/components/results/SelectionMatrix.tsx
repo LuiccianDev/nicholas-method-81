@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { type ScoredMethod,type ChartDataRow } from '../../types';
+import { type ScoredMethod, type ChartDataRow } from '../../types';
 import {
   BarChart,
   Bar,
@@ -16,9 +16,7 @@ interface SelectionMatrixProps {
   results: ScoredMethod[];
 }
 
-export default function SelectionMatrix({
-  chartData,
-}: SelectionMatrixProps) {
+export default function SelectionMatrix({ chartData }: SelectionMatrixProps) {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -40,9 +38,11 @@ export default function SelectionMatrix({
 
   return (
     <>
-      <h2 className="text-foreground-muted mt-12 mb-6 text-sm font-bold tracking-widest uppercase">
-        03 / Selection Matrix
-      </h2>
+      <div className="mb-4 lg:col-span-8 lg:px-6">
+        <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
+          02 / Method Recommendation
+        </h2>
+      </div>
 
       <div style={{ height: `${chartHeight}px` }} className="mb-8 w-full">
         <ResponsiveContainer width="100%" height="100%">
