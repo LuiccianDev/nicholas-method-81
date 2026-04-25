@@ -2,7 +2,7 @@ import { type RawMethodInput } from '../../types';
 import { getThicknessLabel, getPlungeLabel } from '../../lib/nicholasData';
 import DropdownSelect from '../ui/DropdownSelect';
 import NumericInput from '../ui/NumericInput';
-import GeotechnicalInput from './GeotechnicalInput';
+import GeotechnicalInput from '../ui/GeotechnicalInput';
 
 interface ParametersFormProps {
   input: RawMethodInput;

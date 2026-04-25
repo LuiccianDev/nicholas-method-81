@@ -2,7 +2,8 @@ import { Suspense, lazy, useMemo, useState } from 'react';
 import { type RawMethodInput, type ChartDataRow } from '../../types';
 import { calculateScores, deriveMethodInput } from '../../lib/nicholasData';
 import ParametersForm from '../calculator/ParametersForm';
-import AnalysisDashboard from '../calculator/AnalysisDashboard';
+import BestMethodCard from '../calculator/BestMethodCard';
+import ComparisonChart from '../calculator/ComparisonChart';
 
 const ScoringMatrixModal = lazy(
   () => import('../calculator/ScoringMatrixModal')
@@ -60,15 +61,14 @@ export default function Main() {
       <div className="grid h-full grid-cols-1 gap-x-8 lg:grid-cols-12">
         {/* Input Column */}
         <ParametersForm input={input} updateInput={updateInput} />
-
-        {/* Results Column */}
-        <AnalysisDashboard
-          bestUnderground={bestUnderground}
-          absoluteBest={absoluteBest}
-          chartData={chartData}
-          results={results}
-          onOpenDetails={() => setIsDetailsOpen(true)}
-        />
+        <div className="scroll-elegant flex min-h-0 flex-col lg:col-span-8 lg:h-full lg:overflow-y-auto lg:px-2">
+          <BestMethodCard
+            bestMethod={bestUnderground}
+            absoluteBest={absoluteBest}
+            onOpenDetails={() => setIsDetailsOpen(true)}
+          />
+          <ComparisonChart chartData={chartData} results={results} />
+        </div>
       </div>
 
       {/* Details Modal */}
