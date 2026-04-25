@@ -28,7 +28,7 @@ const ComparisonChart = memo(function ComparisonChart({
   );
 
   const isMobile = windowWidth < 640;
-  const yAxisWidth = isMobile ? 80 : 120;
+  const yAxisWidth = isMobile ? 110 : 120;
   const axisFontSize = isMobile ? 9 : 11;
   const tickFontSize = isMobile ? 8 : 10;
   const chartHeight = Math.max(
@@ -44,12 +44,12 @@ const ComparisonChart = memo(function ComparisonChart({
         </h2>
       </div>
 
-      <div style={{ height: `${chartHeight}px` }} className="mb-8 w-full">
+      <div style={{ height: `${chartHeight}px` }} className="mb-2 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={chartData}
             layout="vertical"
-            margin={{ top: 0, right: 20, left: isMobile ? 0 : 20, bottom: 0 }}
+            margin={{ top: 0, right: 50, left: isMobile ? 0 : 20, bottom: 0 }}
           >
             <CartesianGrid
               strokeDasharray="3 3"
@@ -76,7 +76,7 @@ const ComparisonChart = memo(function ComparisonChart({
                 fontSize: axisFontSize,
                 fill: 'var(--color-foreground)',
                 fontFamily: 'serif',
-                fontStyle: 'italic',
+
               }}
               axisLine={{ stroke: 'var(--color-border)' }}
               tickLine={false}
