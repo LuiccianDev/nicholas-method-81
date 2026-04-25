@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { type ScoredMethod, type ChartDataRow } from '../../types';
+import { memo, useSyncExternalStore } from 'react';
+import { type ChartDataRow } from '../../types';
 import {
   BarChart,
   Bar,
@@ -13,19 +13,19 @@ import {
 
 interface ComparisonChartProps {
   chartData: ChartDataRow[];
-  results: ScoredMethod[];
 }
 
-export default function ComparisonChart({ chartData }: ComparisonChartProps) {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1200
+const ComparisonChart = memo(function ComparisonChart({
+  chartData,
+}: ComparisonChartProps) {
+  const windowWidth = useSyncExternalStore(
+    (callback) => {
+      window.addEventListener('resize', callback);
+      return () => window.removeEventListener('resize', callback);
+    },
+    () => window.innerWidth,
+    () => 1200
   );
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const isMobile = windowWidth < 640;
   const yAxisWidth = isMobile ? 80 : 120;
@@ -123,4 +123,6 @@ export default function ComparisonChart({ chartData }: ComparisonChartProps) {
       </div>
     </>
   );
-}
+});
+
+export default ComparisonChart;

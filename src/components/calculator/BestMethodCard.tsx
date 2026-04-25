@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
 
@@ -7,7 +8,7 @@ interface BestMethodCardProps {
   onOpenDetails: () => void;
 }
 
-export default function BestMethodCard({
+const BestMethodCard = memo(function BestMethodCard({
   bestMethod,
   absoluteBest,
   onOpenDetails,
@@ -72,4 +73,6 @@ export default function BestMethodCard({
       </div>
     </>
   );
-}
+});
+
+export default BestMethodCard;

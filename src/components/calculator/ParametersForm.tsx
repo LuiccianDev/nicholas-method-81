@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { type RawMethodInput } from '../../types';
 import { getThicknessLabel, getPlungeLabel } from '../../lib/nicholasData';
 import DropdownSelect from '../ui/DropdownSelect';
@@ -9,7 +10,7 @@ interface ParametersFormProps {
   updateInput: (key: keyof RawMethodInput, value: string | number) => void;
 }
 
-export default function ParametersForm({
+const ParametersForm = memo(function ParametersForm({
   input,
   updateInput,
 }: ParametersFormProps) {
@@ -107,4 +108,6 @@ export default function ParametersForm({
       </div>
     </div>
   );
-}
+});
+
+export default ParametersForm;
