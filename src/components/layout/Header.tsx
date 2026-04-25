@@ -42,6 +42,18 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
     },
   };
 
+  const themeToggleVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.215, 0.61, 0.355, 1.0] as const,
+      },
+    },
+  };
+
   return (
     <motion.header
       initial="hidden"
@@ -66,10 +78,13 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       </div>
       <div className="flex w-full flex-col items-start gap-x-8 gap-y-4 md:w-auto md:flex-row md:items-end">
         <motion.button
-          variants={rightItemVariants}
+          variants={themeToggleVariants}
           onClick={toggleTheme}
-          className="cursor-pointer rounded-full border border-border bg-surface-muted p-2 text-foreground-muted transition-all hover:border-primary hover:text-primary"
-          aria-label="Toggle Theme"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center justify-center cursor-pointer rounded-full border border-border bg-surface-muted p-2 text-foreground-muted transition-all duration-300 hover:border-primary hover:bg-card hover:text-primary"
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          title={`Current theme: ${theme}`}
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </motion.button>

@@ -14,14 +14,11 @@ export default function Footer() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 300);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    toggleVisibility();
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
@@ -41,105 +38,145 @@ export default function Footer() {
     () => {
       if (!footerRef.current) return;
 
-      // Smooth entry for H4 and P
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: 'top 80%',
-          once: true,
-        },
-      });
+      const q = gsap.utils.selector(footerRef);
+      const footerLinks = q<HTMLAnchorElement>('.footer-link');
+      const networkTitle = q<HTMLHeadingElement>('.network-title');
 
-      tl.from(titleRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out',
-      }).from(
-        descriptionRef.current,
+      const mm = gsap.matchMedia();
+
+      mm.add(
         {
-          y: 20,
-          opacity: 0,
-          duration: 1,
-          ease: 'power2.out',
+          desktop: '(min-width: 1024px)',
+          reduceMotion: '(prefers-reduced-motion: reduce)',
         },
-        '-=0.7'
-      );
+        (context) => {
+          const { desktop, reduceMotion } = context.conditions as {
+            desktop: boolean;
+            reduceMotion: boolean;
+          };
 
-      // Surprising animation for the details div
-      gsap.from(detailsRef.current, {
-        scrollTrigger: {
-          trigger: detailsRef.current,
-          start: 'top 90%',
-          once: true,
-        },
-        scale: 0.8,
-        rotationX: 45,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'back.out(1.7)',
-      });
+          const mainDuration = reduceMotion ? 0 : 1;
 
-      // Lateral animations for links
-      gsap.fromTo(
-        '.footer-link',
-        {
-          x: 50,
-          opacity: 0,
-        },
-        {
-          scrollTrigger: {
-            trigger: linksRef.current,
-            start: 'top 95%',
-            once: true,
-          },
-          x: 0,
-          opacity: 1,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: 'power2.out',
-        }
-      );
-
-      // Animate network title too
-      gsap.fromTo(
-        '.network-title',
-        { opacity: 0, y: 10 },
-        {
-          scrollTrigger: {
-            trigger: linksRef.current,
-            start: 'top 95%',
-            once: true,
-          },
-          opacity: 0.8,
-          y: 0,
-          duration: 0.8,
-        }
-      );
-
-      // Big text reveal (existing)
-      if (textRef.current && textContainerRef.current) {
-        gsap.fromTo(
-          textRef.current,
-          {
-            y: '100%',
-            opacity: 0,
-            scale: 0.9,
-          },
-          {
-            y: '0%',
-            opacity: 1,
-            scale: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: textContainerRef.current,
-              start: 'top 95%',
-              end: 'bottom bottom',
-              scrub: 1.5,
+          // Intro reveal for title and description.
+          const introTimeline = gsap.timeline({
+            defaults: {
+              duration: mainDuration,
+              ease: 'power2.out',
             },
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: 'top 80%',
+              once: true,
+            },
+          });
+
+          introTimeline
+            .from(titleRef.current, {
+              y: reduceMotion ? 0 : 30,
+              autoAlpha: reduceMotion ? 1 : 0,
+            })
+            .from(
+              descriptionRef.current,
+              {
+                y: reduceMotion ? 0 : 20,
+                autoAlpha: reduceMotion ? 1 : 0,
+              },
+              reduceMotion ? '>' : '-=0.7'
+            );
+
+          gsap.from(detailsRef.current, {
+            scrollTrigger: {
+              trigger: detailsRef.current,
+              start: 'top 90%',
+              once: true,
+            },
+            scale: reduceMotion ? 1 : 0.88,
+            rotationX: reduceMotion || !desktop ? 0 : 24,
+            autoAlpha: reduceMotion ? 1 : 0,
+            duration: reduceMotion ? 0 : 1,
+            ease: 'back.out(1.7)',
+            transformPerspective: 800,
+          });
+
+          if (footerLinks.length) {
+            gsap.fromTo(
+              footerLinks,
+              {
+                x: reduceMotion ? 0 : desktop ? 50 : 28,
+                autoAlpha: reduceMotion ? 1 : 0,
+              },
+              {
+                scrollTrigger: {
+                  trigger: linksRef.current,
+                  start: 'top 95%',
+                  once: true,
+                },
+                x: 0,
+                autoAlpha: 1,
+                stagger: reduceMotion ? 0 : 0.1,
+                duration: reduceMotion ? 0 : 0.8,
+                ease: 'power2.out',
+              }
+            );
           }
-        );
-      }
+
+          if (networkTitle.length) {
+            gsap.fromTo(
+              networkTitle,
+              {
+                y: reduceMotion ? 0 : 10,
+                autoAlpha: reduceMotion ? 0.8 : 0,
+              },
+              {
+                scrollTrigger: {
+                  trigger: linksRef.current,
+                  start: 'top 95%',
+                  once: true,
+                },
+                autoAlpha: 0.8,
+                y: 0,
+                duration: reduceMotion ? 0 : 0.8,
+                ease: 'power2.out',
+              }
+            );
+          }
+
+          if (textRef.current && textContainerRef.current) {
+            if (reduceMotion) {
+              gsap.set(textRef.current, {
+                yPercent: 0,
+                scale: 1,
+                autoAlpha: 1,
+              });
+            } else {
+              gsap.fromTo(
+                textRef.current,
+                {
+                  yPercent: 100,
+                  autoAlpha: 0,
+                  scale: 0.92,
+                },
+                {
+                  yPercent: 0,
+                  autoAlpha: 1,
+                  scale: 1,
+                  ease: 'power3.out',
+                  scrollTrigger: {
+                    trigger: textContainerRef.current,
+                    start: 'top 95%',
+                    end: 'bottom bottom',
+                    scrub: 1.2,
+                  },
+                }
+              );
+            }
+          }
+        }
+      );
+
+      return () => {
+        mm.revert();
+      };
     },
     { scope: footerRef }
   );
@@ -155,7 +192,7 @@ export default function Footer() {
         <div className="flex flex-col justify-start lg:col-span-7 lg:pr-12">
           <h4
             ref={titleRef}
-            className="mb-8 font-serif text-4xl leading-tight tracking-tight text-primary italic lg:text-6xl"
+            className="mb-8 font-serif text-4xl leading-tight tracking-tight text-secondary italic lg:text-6xl"
           >
             Mining Underground
           </h4>
@@ -234,7 +271,7 @@ export default function Footer() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   onClick={scrollToTop}
-                  className="mt-12 w-fit cursor-pointer bg-primary px-8 py-3 font-mono text-[11px] tracking-[0.2em] text-surface uppercase transition-colors duration-300 hover:bg-secondary lg:ml-auto"
+                  className="mt-12 w-fit cursor-pointer bg-secondary dark:bg-primary  px-8 py-3 font-mono text-[11px] tracking-[0.2em] text-surface uppercase transition-colors duration-300 hover:bg-primary hover:dark:bg-secondary lg:ml-auto"
                 >
                   Back to top
                 </motion.button>
@@ -247,11 +284,11 @@ export default function Footer() {
       {/* Giant Reveal Text Container - Edge to Edge */}
       <div
         ref={textContainerRef}
-        className="relative mt-auto flex w-full items-end justify-center overflow-hidden"
+        className="relative mt-auto flex w-full items-end justify-center overflow-hidden mb-8"
       >
         <h1
           ref={textRef}
-          className="m-0 w-full bg-linear-to-b from-primary to-secondary bg-clip-text p-0 text-center font-sans text-[20vw] leading-[0.8] font-black tracking-tight text-transparent"
+          className="m-0 w-full  bg-secondary dark:bg-primary bg-clip-text p-0 text-center font-sans text-[20vw] leading-[0.8] font-black tracking-tight text-transparent"
         >
           LUICCIAN
         </h1>

@@ -5,25 +5,37 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Typography */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   --font-serif:
     'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times,
     serif;
 
+  /* Semantic Surface Colors */
   --color-surface: #fefefe;
   --color-surface-muted: #f5f5f5;
+
+  /* Semantic Foreground Colors */
   --color-foreground: #171717;
   --color-foreground-muted: #737373;
+
+  /* Accent Colors */
   --color-primary: #daac14;
   --color-secondary: #dd7412;
+
+  /* Structural Colors */
   --color-border: #e5e5e5;
   --color-border-strong: #d4d4d4;
+
+  /* Component Colors */
   --color-card: #ffffff;
+  --color-card-muted: #fafafa;
   --color-tooltip: #ffffff;
   --color-tooltip-foreground: #171717;
 }
 
+/* Dark Mode Overrides */
 .dark {
   --color-surface: #121212;
   --color-surface-muted: #1a1a1a;
@@ -34,10 +46,12 @@
   --color-border: #262626;
   --color-border-strong: #404040;
   --color-card: #1a1a1a;
+  --color-card-muted: #262626;
   --color-tooltip: #1a1a1a;
   --color-tooltip-foreground: #ffffff;
 }
 
+/* Base Styles */
 body {
   background-color: var(--color-surface);
   color: var(--color-foreground);
@@ -69,8 +83,7 @@ html::-webkit-scrollbar-thumb:hover {
   background: var(--color-foreground-muted);
 }
 
-
-
+/* Scrollbar Utility Class */
 .scroll-elegant {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border-strong) transparent;
