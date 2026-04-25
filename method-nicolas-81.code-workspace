@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "name": "Root"
+        },
+        {
+            "path": "src",
+            "name": "Source"
+        },
+
+    ],
+        "settings": {
+
+        "files.exclude": {
+            "src": true,
+        }
+        }
+
+}
