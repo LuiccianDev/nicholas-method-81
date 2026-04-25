@@ -4,7 +4,6 @@ import DropdownSelect from '../ui/DropdownSelect';
 import NumericInput from '../ui/NumericInput';
 import GeotechnicalInput from './GeotechnicalInput';
 
-
 interface ParametersFormProps {
   input: RawMethodInput;
   updateInput: (key: keyof RawMethodInput, value: string | number) => void;
@@ -15,7 +14,7 @@ export default function ParametersForm({
   updateInput,
 }: ParametersFormProps) {
   return (
-    <div className="flex flex-col lg:sticky lg:top-8 lg:col-span-4 lg:h-[calc(100vh-8rem)]">
+    <div className="flex min-h-0 flex-col lg:col-span-4 lg:h-full">
       {/* 01. Section Title - Outside of scroll */}
       <div className="mb-4 flex-none">
         <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">

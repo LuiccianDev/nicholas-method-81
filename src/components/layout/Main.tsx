@@ -56,8 +56,8 @@ export default function Main() {
   );
 
   return (
-    <main className="flex grow flex-col">
-      <div className="grid grow grid-cols-1 gap-x-8 lg:grid-cols-12">
+    <main className="flex min-h-0 flex-1 flex-col">
+      <div className="grid h-full grid-cols-1 gap-x-8 lg:grid-cols-12">
         {/* Input Column */}
         <ParametersForm input={input} updateInput={updateInput} />
 

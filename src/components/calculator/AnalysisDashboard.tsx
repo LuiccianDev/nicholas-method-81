@@ -20,14 +20,13 @@ export default function AnalysisDashboard({
   onOpenDetails,
 }: AnalysisDashboardProps) {
   return (
-    <div className="lg:col-span-8 lg:px-4">
+    <div className="scroll-elegant flex min-h-0 flex-col lg:col-span-8 lg:h-full lg:overflow-y-auto lg:px-4">
       <BestMethodCard
         bestMethod={bestUnderground}
         absoluteBest={absoluteBest}
         onOpenDetails={onOpenDetails}
       />
-        <ComparisonChart chartData={chartData} results={results} />
-
+      <ComparisonChart chartData={chartData} results={results} />
     </div>
   );
 }

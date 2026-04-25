@@ -9,10 +9,12 @@ export default function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-auto bg-surface p-4 font-sans text-foreground md:p-8">
-      <Header toggleTheme={toggleTheme} theme={theme} />
-
-      <Main />
+    <div className="flex min-h-screen w-full flex-col bg-surface font-sans text-foreground">
+      {/* Main App Viewport Section */}
+      <div className="flex h-[100dvh] flex-col p-4 md:p-8">
+        <Header toggleTheme={toggleTheme} theme={theme} />
+        <Main />
+      </div>
 
       <Suspense
         fallback={
