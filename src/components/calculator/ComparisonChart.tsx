@@ -11,12 +11,12 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-interface SelectionMatrixProps {
+interface ComparisonChartProps {
   chartData: ChartDataRow[];
   results: ScoredMethod[];
 }
 
-export default function SelectionMatrix({ chartData }: SelectionMatrixProps) {
+export default function ComparisonChart({ chartData }: ComparisonChartProps) {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -38,8 +38,8 @@ export default function SelectionMatrix({ chartData }: SelectionMatrixProps) {
 
   return (
     <>
-      <div className="mb-4 lg:col-span-8 lg:px-6">
-        <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
+      <div className="mb-2 lg:col-span-8 lg:px-6">
+        <h2 className="text-[10px] font-bold tracking-[0.3em] text-primary uppercase">
           02 / Method Recommendation
         </h2>
       </div>
@@ -49,7 +49,7 @@ export default function SelectionMatrix({ chartData }: SelectionMatrixProps) {
           <BarChart
             data={chartData}
             layout="vertical"
-            margin={{ top: 10, right: 20, left: isMobile ? 0 : 20, bottom: 0 }}
+            margin={{ top: 0, right: 20, left: isMobile ? 0 : 20, bottom: 0 }}
           >
             <CartesianGrid
               strokeDasharray="3 3"

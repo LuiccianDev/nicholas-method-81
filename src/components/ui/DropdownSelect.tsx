@@ -1,4 +1,4 @@
-interface SelectFieldProps {
+interface DropdownSelectProps {
   label: string;
   value: string;
   onChange: (v: string) => void;
@@ -6,13 +6,13 @@ interface SelectFieldProps {
   note?: string;
 }
 
-export default function SelectField({
+export default function DropdownSelect({
   label,
   value,
   onChange,
   options,
   note,
-}: SelectFieldProps) {
+}: DropdownSelectProps) {
   return (
     <div className="group mb-4">
       <label className="mb-2 block text-[10px] tracking-tighter text-foreground-muted uppercase">

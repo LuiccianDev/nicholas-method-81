@@ -1,10 +1,10 @@
 import { type ScoredMethod } from '../../types';
 
-interface ResultsTableProps {
+interface RankingTableProps {
   results: ScoredMethod[];
 }
 
-export default function ResultsTable({ results }: ResultsTableProps) {
+export default function RankingTable({ results }: RankingTableProps) {
   return (
     <div className="overflow-x-auto border border-border">
       <table className="w-full text-left text-sm text-foreground">

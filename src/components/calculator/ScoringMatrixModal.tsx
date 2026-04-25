@@ -1,19 +1,19 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { type ScoredMethod } from '../../types';
-import ResultsTable from '../results/ResultsTable';
+import RankingTable from './RankingTable';
 
-interface DetailsModalProps {
+interface ScoringMatrixModalProps {
   isOpen: boolean;
   onClose: () => void;
   results: ScoredMethod[];
 }
 
-export default function DetailsModal({
+export default function ScoringMatrixModal({
   isOpen,
   onClose,
   results,
-}: DetailsModalProps) {
+}: ScoringMatrixModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -54,7 +54,7 @@ export default function DetailsModal({
 
             {/* Body */}
             <div className="scroll-elegant overflow-y-auto p-6">
-              <ResultsTable results={results} />
+              <RankingTable results={results} />
             </div>
 
             {/* Footer */}

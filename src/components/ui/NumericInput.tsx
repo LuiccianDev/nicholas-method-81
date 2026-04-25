@@ -1,4 +1,4 @@
-interface NumberFieldProps {
+interface NumericInputProps {
   label: string;
   value: number | '';
   onChange: (v: number | '') => void;
@@ -8,7 +8,7 @@ interface NumberFieldProps {
   unit?: string;
 }
 
-export default function NumberField({
+export default function NumericInput({
   label,
   value,
   onChange,
@@ -16,7 +16,7 @@ export default function NumberField({
   note,
   derivedLabel,
   unit,
-}: NumberFieldProps) {
+}: NumericInputProps) {
   return (
     <div className="group mb-4">
       <div className="mb-2 flex items-baseline justify-between">
