@@ -1,42 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 @import 'tailwindcss';
+@import './toggleTheme.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* Typography */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   --font-serif:
     'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times,
     serif;
 
+  /* Semantic Surface Colors */
   --color-surface: #fefefe;
   --color-surface-muted: #f5f5f5;
+
+  /* Semantic Foreground Colors */
   --color-foreground: #171717;
   --color-foreground-muted: #737373;
-  --color-primary: #a17c00;
-  --color-secondary: #b87333;
+
+  /* Accent Colors */
+  --color-primary: #daac14;
+  --color-secondary: #dd7412;
+
+  /* Structural Colors */
   --color-border: #e5e5e5;
   --color-border-strong: #d4d4d4;
+
+  /* Component Colors */
   --color-card: #ffffff;
+  --color-card-muted: #fafafa;
   --color-tooltip: #ffffff;
   --color-tooltip-foreground: #171717;
 }
 
+/* Dark Mode Overrides */
 .dark {
   --color-surface: #121212;
   --color-surface-muted: #1a1a1a;
-  --color-foreground: #e5e5e5;
-  --color-foreground-muted: #a3a3a3;
+  --color-foreground: #e0d3d3;
+  --color-foreground-muted: #d3d1d1;
   --color-primary: #d4af37;
   --color-secondary: #b87333;
   --color-border: #262626;
   --color-border-strong: #404040;
   --color-card: #1a1a1a;
+  --color-card-muted: #262626;
   --color-tooltip: #1a1a1a;
   --color-tooltip-foreground: #ffffff;
 }
 
+/* Base Styles */
 body {
   background-color: var(--color-surface);
   color: var(--color-foreground);
@@ -54,43 +69,21 @@ html {
 html::-webkit-scrollbar {
   width: 6px;
 }
+
 html::-webkit-scrollbar-track {
   background: transparent;
 }
+
 html::-webkit-scrollbar-thumb {
   background: var(--color-border-strong);
   border-radius: 10px;
 }
+
 html::-webkit-scrollbar-thumb:hover {
   background: var(--color-foreground-muted);
 }
 
-/* View Transition API */
-::view-transition-new(root) {
-  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="white"/></svg>')
-    center / 0 no-repeat;
-  animation: scale 1s;
-  animation-fill-mode: both;
-}
-
-::view-transition-old(root),
-.dark::view-transition-old(root) {
-  animation: none;
-  animation-fill-mode: both;
-  z-index: -1;
-}
-
-.dark::view-transition-new(root) {
-  animation: scale 1s;
-  animation-fill-mode: both;
-}
-
-@keyframes scale {
-  to {
-    mask-size: 200vmax;
-  }
-}
-
+/* Scrollbar Utility Class */
 .scroll-elegant {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border-strong) transparent;
@@ -99,13 +92,16 @@ html::-webkit-scrollbar-thumb:hover {
 .scroll-elegant::-webkit-scrollbar {
   width: 4px;
 }
+
 .scroll-elegant::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .scroll-elegant::-webkit-scrollbar-thumb {
   background: var(--color-border-strong);
   border-radius: 4px;
 }
+
 .scroll-elegant::-webkit-scrollbar-thumb:hover {
   background: var(--color-foreground-muted);
 }

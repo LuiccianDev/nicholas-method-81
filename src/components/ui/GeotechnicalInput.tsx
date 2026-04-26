@@ -1,28 +1,28 @@
 import { type RawMethodInput } from '../../types';
-import SelectField from '../ui/SelectField';
-import NumberField from '../ui/NumberField';
+import DropdownSelect from './DropdownSelect';
+import NumericInput from './NumericInput';
 import { getSubStrLabel, getFracSpacLabel } from '../../lib/nicholasData';
 
-interface RockMechanicsZoneProps {
+interface GeotechnicalInputProps {
   title: string;
   prefix: 'ore' | 'hw' | 'fw';
   input: RawMethodInput;
   updateInput: (k: keyof RawMethodInput, v: string | number) => void;
 }
 
-export default function RockMechanicsZone({
+export default function GeotechnicalInput({
   title,
   prefix,
   input,
   updateInput,
-}: RockMechanicsZoneProps) {
+}: GeotechnicalInputProps) {
   return (
     <div className="mb-6">
       <h4 className="mb-3 ml-2 border-l border-border-strong pl-2 text-[10px] text-foreground-muted uppercase">
         {title}
       </h4>
       <div className="pl-3">
-        <NumberField
+        <NumericInput
           label="Substance Strength Ratio"
           value={input[`${prefix}SubStr`]}
           onChange={(v) =>
@@ -32,7 +32,7 @@ export default function RockMechanicsZone({
           derivedLabel={getSubStrLabel(input[`${prefix}SubStr`])}
           note="Ratio of uniaxial compressive strength to overburden pressure. Weak: Ratio < 8 • Moderate: Ratio between 8 and 15 • Strong: Ratio > 15"
         />
-        <NumberField
+        <NumericInput
           label="Fracture Spacing"
           value={input[`${prefix}FracSpac`]}
           onChange={(v) =>
@@ -42,7 +42,7 @@ export default function RockMechanicsZone({
           derivedLabel={getFracSpacLabel(input[`${prefix}FracSpac`])}
           note="Very Close: > 16 fractures/m (RQD 0-20%) • Close: 10-16 fractures/m (RQD 20-40%) • Wide: 3-10 fractures/m (RQD 40-70%) • Very Wide: < 3 fractures/m (RQD 70-100%)"
         />
-        <SelectField
+        <DropdownSelect
           label="Fracture Strength"
           value={input[`${prefix}FracStr`]}
           onChange={(v) =>

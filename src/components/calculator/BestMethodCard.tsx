@@ -1,17 +1,18 @@
+import { memo } from 'react';
 import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
 
-interface MethodRecommendationProps {
+interface BestMethodCardProps {
   bestMethod?: ScoredMethod;
   absoluteBest?: ScoredMethod;
   onOpenDetails: () => void;
 }
 
-export default function MethodRecommendation({
+const BestMethodCard = memo(function BestMethodCard({
   bestMethod,
   absoluteBest,
   onOpenDetails,
-}: MethodRecommendationProps) {
+}: BestMethodCardProps) {
   const isSurfaceMoreViable =
     absoluteBest?.method === 'Open Pit' &&
     absoluteBest.total > (bestMethod?.total || 0);
@@ -25,7 +26,7 @@ export default function MethodRecommendation({
       </div>
       <div className="relative mb-8 flex flex-col border border-t-2 border-border border-t-primary bg-card p-8">
         <div className="mb-auto">
-          <p className="font-serif text-[48px] leading-none wrap-break-word text-primary italic drop-shadow-sm sm:text-[64px] md:text-[80px]">
+          <p className="font-serif text-[48px] leading-none wrap-break-word text-primary text-secondary italic drop-shadow-sm sm:text-[64px] md:text-[80px] dark:text-primary">
             {bestMethod?.method || 'None.'}
           </p>
           <p className="mt-2 text-xl font-light tracking-tight text-foreground-muted md:text-3xl">
@@ -33,7 +34,7 @@ export default function MethodRecommendation({
           </p>
         </div>
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-4 space-y-4">
           <p className="max-w-2xl text-sm leading-relaxed text-foreground-muted">
             Based on the{' '}
             <span className="text-foreground italic underline">Geometry</span>{' '}
@@ -50,7 +51,7 @@ export default function MethodRecommendation({
               <span className="mt-0.5 font-mono text-sm text-foreground-muted">
                 ↳
               </span>
-              <p className="font-mono text-[11px] leading-relaxed text-foreground-muted">
+              <p className="font-mono text-[10px] leading-relaxed text-foreground-muted">
                 <strong className="text-foreground">SURFACE COMPARISON:</strong>{' '}
                 Note that{' '}
                 <span className="text-foreground italic">Open Pit</span> scored
@@ -60,38 +61,11 @@ export default function MethodRecommendation({
               </p>
             </div>
           )}
-
-          <div className="grid grid-cols-2 gap-4 py-4 sm:grid-cols-3">
-            <div className="border-l-2 border-primary pl-4">
-              <p className="text-[10px] text-foreground-muted uppercase">
-                Total Score
-              </p>
-              <p className="font-mono text-lg tracking-tighter text-foreground">
-                {bestMethod?.total || 0}
-              </p>
-            </div>
-            <div className="border-l-2 border-primary pl-4">
-              <p className="text-[10px] text-foreground-muted uppercase">
-                Geo Component
-              </p>
-              <p className="font-mono text-lg tracking-tighter text-primary opacity-90">
-                {bestMethod?.geometryScore || 0}
-              </p>
-            </div>
-            <div className="hidden border-l-2 border-secondary pl-4 sm:block">
-              <p className="text-[10px] text-foreground-muted uppercase">
-                Rock Component
-              </p>
-              <p className="font-mono text-lg tracking-tighter text-secondary">
-                {bestMethod?.rockTotal || 0}
-              </p>
-            </div>
-          </div>
         </div>
 
         <button
           onClick={onOpenDetails}
-          className="group absolute right-4 bottom-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-primary text-primary transition-all duration-300 hover:bg-primary hover:text-surface"
+          className="group absolute top-4 right-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-primary text-secondary transition-all duration-300 hover:bg-secondary hover:text-surface dark:text-primary dark:hover:bg-primary"
           title="View Full Calculation Matrix"
         >
           <ListTree className="h-5 w-5" />
@@ -99,4 +73,6 @@ export default function MethodRecommendation({
       </div>
     </>
   );
-}
+});
+
+export default BestMethodCard;
