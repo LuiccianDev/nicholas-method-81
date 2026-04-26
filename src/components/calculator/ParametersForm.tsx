@@ -15,7 +15,7 @@ const ParametersForm = memo(function ParametersForm({
   updateInput,
 }: ParametersFormProps) {
   return (
-    <div className="flex min-h-0 flex-col lg:col-span-4 lg:h-full">
+    <div className="flex h-full min-h-0 flex-col">
       {/* 01. Section Title - Outside of scroll */}
       <div className="mb-4 flex-none">
         <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
