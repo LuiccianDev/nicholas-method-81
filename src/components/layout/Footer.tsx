@@ -189,18 +189,20 @@ export default function Footer() {
 
   const socialLinks = [
     { name: 'Instagram', url: 'https://www.instagram.com/luiccian_dev' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/william-guevara-lazaro-79274b2a3' },
+    {
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/william-guevara-lazaro-79274b2a3',
+    },
     { name: 'GitHub', url: 'https://github.com/LuiccianDev' },
   ];
 
   return (
     <footer
       ref={footerRef}
-      className="relative flex min-h-[85vh] lg:min-h-screen flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 lg:pt-24 font-sans"
+      className="relative flex min-h-[85vh] flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 font-sans lg:min-h-screen lg:pt-24"
     >
       {/* Top Grid - Description & Links (wrapped with padding instead of footer) */}
       <div className="relative z-20 grid grid-cols-1 gap-12 px-6 sm:gap-16 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:px-20">
-        
         {/* Left Column - Project Description */}
         <div className="flex flex-col justify-start lg:col-span-7 lg:pr-12">
           <h4
@@ -218,7 +220,7 @@ export default function Footer() {
             by comparing the characteristics of your deposit with the
             requirements of each.
           </p>
-          
+
           <div
             ref={detailsRef}
             className="flex flex-col gap-8 border-t border-border pt-8 sm:flex-row sm:gap-12 lg:pt-10"
@@ -242,17 +244,20 @@ export default function Footer() {
 
         {/* Right Column - Social Links */}
         <div className="mt-10 flex flex-col justify-start sm:mt-12 lg:col-span-5 lg:mt-0 lg:items-end">
-          <div ref={linksRef} className="flex flex-col space-y-6 sm:space-y-8 lg:text-right">
+          <div
+            ref={linksRef}
+            className="flex flex-col space-y-6 sm:space-y-8 lg:text-right"
+          >
             <h4 className="network-title font-mono text-[10px] tracking-[0.2em] text-secondary uppercase opacity-80 sm:text-[11px]">
               Network
             </h4>
-            
+
             <div className="flex flex-col space-y-4 sm:space-y-6">
               {socialLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.url}
-                  className="footer-link block w-full font-serif text-3xl italic text-foreground transition-all duration-300 hover:text-primary hover:translate-x-2 md:text-4xl lg:hover:-translate-x-2"
+                  className="footer-link block w-full font-serif text-3xl text-foreground italic transition-all duration-300 hover:translate-x-2 hover:text-primary md:text-4xl lg:hover:-translate-x-2"
                 >
                   {link.name}
                 </a>
@@ -267,7 +272,7 @@ export default function Footer() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   onClick={scrollToTop}
-                  className="mb-12 w-fit cursor-pointer bg-secondary dark:bg-primary  px-8 py-3 font-mono text-[11px] tracking-[0.2em] text-surface uppercase transition-colors duration-300 hover:bg-primary hover:dark:bg-secondary lg:ml-auto"
+                  className="mb-12 w-fit cursor-pointer bg-secondary px-8 py-3 font-mono text-[11px] tracking-[0.2em] text-surface uppercase transition-colors duration-300 hover:bg-primary lg:ml-auto dark:bg-primary hover:dark:bg-secondary"
                 >
                   Back to top
                 </motion.button>
@@ -280,11 +285,11 @@ export default function Footer() {
       {/* Giant Reveal Text Container - Edge to Edge */}
       <div
         ref={textContainerRef}
-        className="relative mt-auto flex w-full items-end justify-center overflow-hidden mb-8"
+        className="relative mt-auto mb-8 flex w-full items-end justify-center overflow-hidden"
       >
         <h1
           ref={textRef}
-          className="m-0 w-full  bg-secondary dark:bg-primary bg-clip-text p-0 text-center font-sans text-[20vw] leading-[0.8] font-black tracking-tight text-transparent"
+          className="m-0 w-full bg-secondary bg-clip-text p-0 text-center font-sans text-[20vw] leading-[0.8] font-black tracking-tight text-transparent dark:bg-primary"
         >
           LUICCIAN
         </h1>

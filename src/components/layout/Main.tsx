@@ -1,5 +1,5 @@
 import { Suspense, useCallback, lazy, useState } from 'react';
-import { motion , type Variants} from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 import { useNicholasCalculator } from '../../hooks/useNicholasCalculator';
 import ParametersForm from '../calculator/ParametersForm';
 import BestMethodCard from '../calculator/BestMethodCard';
@@ -11,26 +11,26 @@ const ScoringMatrixModal = lazy(
 
 // Framer Motion Variants & Styles
 
-const containerVariants : Variants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      type: 'spring', 
+      type: 'spring',
       staggerChildren: 0.25,
     },
   },
 };
 
-const itemVariants : Variants = {
-  hidden: { opacity: 0, x: 50},
+const itemVariants: Variants = {
+  hidden: { opacity: 0, x: 50 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { 
-      type: 'spring', 
-      bounce: 0, 
-      duration: 1.2 
+    transition: {
+      type: 'spring',
+      bounce: 0,
+      duration: 1.2,
     },
   },
 };
@@ -53,20 +53,20 @@ export default function Main() {
 
   return (
     <main className="flex min-h-0 flex-1 flex-col overflow-x-hidden">
-      <motion.div 
+      <motion.div
         className="grid h-full grid-cols-1 gap-x-8 lg:grid-cols-12"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Input Column */}
-        <motion.div 
-          variants={itemVariants} 
+        <motion.div
+          variants={itemVariants}
           className="flex min-h-0 flex-col lg:col-span-4 lg:h-full"
         >
           <ParametersForm input={input} updateInput={updateInput} />
         </motion.div>
-        
+
         {/* Results Column */}
         <motion.div
           variants={itemVariants}

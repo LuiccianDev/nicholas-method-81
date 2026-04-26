@@ -76,7 +76,6 @@ const ComparisonChart = memo(function ComparisonChart({
                 fontSize: axisFontSize,
                 fill: 'var(--color-foreground)',
                 fontFamily: 'serif',
-
               }}
               axisLine={{ stroke: 'var(--color-border)' }}
               tickLine={false}

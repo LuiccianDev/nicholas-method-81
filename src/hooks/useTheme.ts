@@ -46,18 +46,18 @@ export function useTheme() {
   // Sync theme to document and localStorage
   useEffect(() => {
     const root = document.documentElement;
-    
+
     // Update CSS class for Tailwind dark mode
     root.classList.remove(LIGHT_THEME, DARK_THEME);
     root.classList.add(theme);
-    
+
     // Persist to localStorage
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
   // Toggle with View Transition API support
   const toggleTheme = useCallback(() => {
-    const nextTheme = (): Theme => 
+    const nextTheme = (): Theme =>
       theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME;
 
     if (!document.startViewTransition) {
