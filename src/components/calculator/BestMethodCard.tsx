@@ -26,7 +26,7 @@ const BestMethodCard = memo(function BestMethodCard({
       </div>
       <div className="relative mb-8 flex flex-col border border-t-2 border-border border-t-primary bg-card p-8">
         <div className="mb-auto">
-          <p className="font-serif text-[48px] leading-none wrap-break-word text-primary text-secondary italic drop-shadow-sm sm:text-[64px] md:text-[80px] dark:text-primary">
+          <p className="font-serif text-[48px] leading-none wrap-break-word text-secondary italic drop-shadow-sm sm:text-[64px] md:text-[80px] dark:text-primary">
             {bestMethod?.method || 'None.'}
           </p>
           <p className="mt-2 text-xl font-light tracking-tight text-foreground-muted md:text-3xl">
