@@ -16,6 +16,7 @@ const containerVariants : Variants = {
   visible: {
     opacity: 1,
     transition: {
+      type: 'spring', 
       staggerChildren: 0.25,
     },
   },
