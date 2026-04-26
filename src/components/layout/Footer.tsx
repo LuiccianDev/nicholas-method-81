@@ -181,86 +181,82 @@ export default function Footer() {
     { scope: footerRef }
   );
 
+  const details = [
+    { label: 'Core Algorithm', value: 'Nicholas Approach' },
+    { label: 'Discipline', value: 'Rock Mechanics' },
+    { label: 'Status', value: 'Engine Active', highlight: true },
+  ];
+
+  const socialLinks = [
+    { name: 'Instagram', url: 'https://www.instagram.com/luiccian_dev' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/william-guevara-lazaro-79274b2a3' },
+    { name: 'GitHub', url: 'https://github.com/LuiccianDev' },
+  ];
+
   return (
     <footer
       ref={footerRef}
-      className="relative flex min-h-screen flex-col justify-between overflow-hidden border-t border-border bg-surface pt-24 font-sans"
+      className="relative flex min-h-[85vh] lg:min-h-screen flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 lg:pt-24 font-sans"
     >
       {/* Top Grid - Description & Links (wrapped with padding instead of footer) */}
-      <div className="relative z-20 grid grid-cols-1 gap-16 px-8 lg:grid-cols-12 lg:gap-12 lg:px-20">
+      <div className="relative z-20 grid grid-cols-1 gap-12 px-6 sm:gap-16 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:px-20">
+        
         {/* Left Column - Project Description */}
         <div className="flex flex-col justify-start lg:col-span-7 lg:pr-12">
           <h4
             ref={titleRef}
-            className="mb-8 font-serif text-4xl leading-tight tracking-tight text-secondary italic lg:text-6xl"
+            className="mb-6 font-serif text-4xl leading-tight tracking-tight text-secondary italic md:text-5xl lg:mb-8 lg:text-6xl"
           >
             Mining Underground
           </h4>
           <p
             ref={descriptionRef}
-            className="mb-12 max-w-2xl font-sans text-[16px] leading-relaxed text-foreground-muted"
+            className="mb-10 max-w-2xl font-sans text-sm leading-relaxed text-foreground-muted sm:text-base lg:mb-12 lg:text-[16px]"
           >
             A numerical decision system for selecting the most suitable mining
             method. It evaluates the technical compatibility of various methods
             by comparing the characteristics of your deposit with the
             requirements of each.
           </p>
+          
           <div
             ref={detailsRef}
-            className="flex flex-col gap-12 border-t border-border pt-10 sm:flex-row"
+            className="flex flex-col gap-8 border-t border-border pt-8 sm:flex-row sm:gap-12 lg:pt-10"
           >
-            <div className="flex flex-col space-y-2">
-              <span className="font-mono text-[11px] tracking-[0.2em] text-secondary uppercase opacity-80">
-                Core Algorithm
-              </span>
-              <span className="text-sm font-medium tracking-wide text-foreground">
-                Nicholas Approach
-              </span>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <span className="font-mono text-[11px] tracking-[0.2em] text-secondary uppercase opacity-80">
-                Discipline
-              </span>
-              <span className="text-sm font-medium tracking-wide text-foreground">
-                Rock Mechanics
-              </span>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <span className="font-mono text-[11px] tracking-[0.2em] text-secondary uppercase opacity-80">
-                Status
-              </span>
-              <span className="text-sm font-medium tracking-wide text-primary">
-                Engine Active
-              </span>
-            </div>
+            {details.map((detail, index) => (
+              <div key={index} className="flex flex-col space-y-2">
+                <span className="font-mono text-[10px] tracking-[0.2em] text-secondary uppercase opacity-80 sm:text-[11px]">
+                  {detail.label}
+                </span>
+                <span
+                  className={`text-sm font-medium tracking-wide ${
+                    detail.highlight ? 'text-primary' : 'text-foreground'
+                  }`}
+                >
+                  {detail.value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Right Column - Social Links */}
-        <div className="mt-12 flex flex-col justify-start lg:col-span-5 lg:mt-0 lg:items-end">
-          <div ref={linksRef} className="flex flex-col space-y-8 lg:text-right">
-            <h4 className="network-title font-mono text-[11px] tracking-[0.2em] text-secondary uppercase opacity-80">
+        <div className="mt-10 flex flex-col justify-start sm:mt-12 lg:col-span-5 lg:mt-0 lg:items-end">
+          <div ref={linksRef} className="flex flex-col space-y-6 sm:space-y-8 lg:text-right">
+            <h4 className="network-title font-mono text-[10px] tracking-[0.2em] text-secondary uppercase opacity-80 sm:text-[11px]">
               Network
             </h4>
-            <div className="flex flex-col space-y-6">
-              <a
-                href="https://www.instagram.com/luiccian_dev"
-                className="footer-link block w-full font-serif text-3xl text-foreground italic transition-all duration-300 hover:-translate-x-2 hover:text-primary lg:text-4xl"
-              >
-                Instagram
-              </a>
-              <a
-                href="https://www.linkedin.com/in/william-guevara-lazaro-79274b2a3"
-                className="footer-link block w-full font-serif text-3xl text-foreground italic transition-all duration-300 hover:-translate-x-2 hover:text-primary lg:text-4xl"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/LuiccianDev"
-                className="footer-link block w-full font-serif text-3xl text-foreground italic transition-all duration-300 hover:-translate-x-2 hover:text-primary lg:text-4xl"
-              >
-                GitHub
-              </a>
+            
+            <div className="flex flex-col space-y-4 sm:space-y-6">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  className="footer-link block w-full font-serif text-3xl italic text-foreground transition-all duration-300 hover:text-primary hover:translate-x-2 md:text-4xl lg:hover:-translate-x-2"
+                >
+                  {link.name}
+                </a>
+              ))}
             </div>
 
             <AnimatePresence>
@@ -271,7 +267,7 @@ export default function Footer() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   onClick={scrollToTop}
-                  className="mt-12 w-fit cursor-pointer bg-secondary dark:bg-primary  px-8 py-3 font-mono text-[11px] tracking-[0.2em] text-surface uppercase transition-colors duration-300 hover:bg-primary hover:dark:bg-secondary lg:ml-auto"
+                  className="mb-12 w-fit cursor-pointer bg-secondary dark:bg-primary  px-8 py-3 font-mono text-[11px] tracking-[0.2em] text-surface uppercase transition-colors duration-300 hover:bg-primary hover:dark:bg-secondary lg:ml-auto"
                 >
                   Back to top
                 </motion.button>

@@ -26,7 +26,7 @@ const BestMethodCard = memo(function BestMethodCard({
       </div>
       <div className="relative mb-8 flex flex-col border border-t-2 border-border border-t-primary bg-card p-8">
         <div className="mb-auto">
-          <p className="font-serif text-[48px] leading-none wrap-break-word text-primary italic drop-shadow-sm sm:text-[64px] md:text-[80px]">
+          <p className="font-serif text-[48px] text-secondary dark:text-primary leading-none wrap-break-word text-primary italic drop-shadow-sm sm:text-[64px] md:text-[80px]">
             {bestMethod?.method || 'None.'}
           </p>
           <p className="mt-2 text-xl font-light tracking-tight text-foreground-muted md:text-3xl">
@@ -65,7 +65,7 @@ const BestMethodCard = memo(function BestMethodCard({
 
         <button
           onClick={onOpenDetails}
-          className="group absolute right-4 bottom-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-primary text-primary transition-all duration-300 hover:bg-primary hover:text-surface"
+          className="group absolute right-4 top-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-primary text-secondary dark:text-primary transition-all duration-300 hover:bg-secondary dark:hover:bg-primary hover:text-surface"
           title="View Full Calculation Matrix"
         >
           <ListTree className="h-5 w-5" />
