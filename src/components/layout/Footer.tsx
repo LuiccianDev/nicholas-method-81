@@ -361,12 +361,12 @@ export default function Footer() {
       <div className="relative z-20 w-full border-t border-border bg-surface px-6 py-8 sm:px-8 lg:px-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           {/* Left: Interactive status pill badge */}
-          <div className="flex w-fit cursor-default items-center gap-2 rounded-full border border-border bg-surface-muted px-4 py-2 shadow-xs transition-all duration-300 hover:bg-card">
+          <div className="flex w-fit cursor-default items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-2 shadow-xs transition-all duration-300 hover:bg-primary/20">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
             </span>
-            <span className="font-mono text-[9px] font-semibold tracking-wider text-foreground-muted uppercase">
+            <span className="font-mono text-[9px] font-semibold tracking-wider text-primary uppercase">
               All systems operational
             </span>
           </div>
