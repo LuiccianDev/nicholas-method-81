@@ -351,7 +351,7 @@ export default function Footer() {
       >
         <h1
           ref={textRef}
-          className="m-0 text-center font-sans   text-[clamp(72px,20vw,350px)] leading-none font-black tracking-tight uppercase antialiased  select-none"
+          className="m-0 text-center font-sans text-[clamp(72px,20vw,350px)] leading-none font-black tracking-tight uppercase antialiased select-none"
         >
           LUICCIAN
         </h1>

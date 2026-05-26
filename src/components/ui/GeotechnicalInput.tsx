@@ -18,9 +18,11 @@ export default function GeotechnicalInput({
 }: GeotechnicalInputProps) {
   return (
     <details className="min-w-0 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-xs">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 text-[10px] font-mono tracking-[0.18em] text-foreground-muted uppercase">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.18em] text-foreground-muted uppercase">
         <span>{title}</span>
-        <span className="text-[9px] tracking-[0.25em] text-primary">DETAILS</span>
+        <span className="text-[9px] tracking-[0.25em] text-primary">
+          DETAILS
+        </span>
       </summary>
       <div className="mt-4 grid min-w-0 gap-3 xl:grid-cols-1 2xl:grid-cols-2">
         <NumericInput
@@ -48,7 +50,10 @@ export default function GeotechnicalInput({
             label="Fracture Strength"
             value={input[`${prefix}FracStr`]}
             onChange={(v) =>
-              updateInput(`${prefix}FracStr` as keyof RawMethodInput, v as string)
+              updateInput(
+                `${prefix}FracStr` as keyof RawMethodInput,
+                v as string
+              )
             }
             options={[
               { value: 'W', label: 'Weak' },
