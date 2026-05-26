@@ -201,17 +201,17 @@ export default function Footer() {
     >
       {/* 1. Upper Floating CTA Card */}
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-[#381525]/30 bg-gradient-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-8 shadow-2xl md:p-12 text-[#ffecc0]">
+        <div className="relative overflow-hidden rounded-3xl border border-[#381525]/30 bg-gradient-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-8 text-[#ffecc0] shadow-2xl md:p-12">
           {/* Subtle nature glows inside the card */}
           <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-gradient-to-tr from-[#b95e82]/20 to-transparent blur-3xl" />
-          <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-gradient-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
+          <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-gradient-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
 
-          <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12 lg:items-center">
+          <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
             {/* Left Header */}
             <div className="lg:col-span-7">
               <h3
                 ref={titleRef}
-                className="font-serif text-2xl font-bold tracking-tight leading-snug sm:text-3xl lg:text-4xl text-[#ffecc0] italic"
+                className="font-serif text-2xl leading-snug font-bold tracking-tight text-[#ffecc0] italic sm:text-3xl lg:text-4xl"
               >
                 Evaluating deposit viability with numerical mechanics logic.
               </h3>
@@ -221,15 +221,20 @@ export default function Footer() {
             <div className="flex flex-col gap-6 lg:col-span-5">
               <p
                 ref={descriptionRef}
-                className="font-mono text-[10px] tracking-widest text-[#dec9a4] uppercase leading-relaxed"
+                className="font-mono text-[10px] leading-relaxed tracking-widest text-[#dec9a4] uppercase"
               >
-                Assess geomechanical conditions, grade distributions, and deposit geometry with David Nicholas' optimized selection engine.
+                Assess geomechanical conditions, grade distributions, and
+                deposit geometry with David Nicholas' optimized selection
+                engine.
               </p>
 
-              <div ref={detailsRef} className="flex flex-wrap items-center gap-4">
+              <div
+                ref={detailsRef}
+                className="flex flex-wrap items-center gap-4"
+              >
                 <button
                   onClick={scrollToTop}
-                  className="group flex cursor-pointer items-center gap-2 rounded-full bg-[#ffecc0] px-6 py-3 font-mono text-[10px] font-bold tracking-widest text-[#230d17] uppercase shadow-md transition-all duration-300 hover:bg-[#ffecc0]/90 hover:scale-[1.03] active:scale-[0.98]"
+                  className="group flex cursor-pointer items-center gap-2 rounded-full bg-[#ffecc0] px-6 py-3 font-mono text-[10px] font-bold tracking-widest text-[#230d17] uppercase shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-[#ffecc0]/90 active:scale-[0.98]"
                 >
                   Get started 🪄
                 </button>
@@ -237,7 +242,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 font-mono text-[10px] font-bold tracking-widest text-[#ffecc0] uppercase transition-all duration-300 hover:text-white hover:scale-[1.03] active:scale-[0.98]"
+                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 font-mono text-[10px] font-bold tracking-widest text-[#ffecc0] uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white active:scale-[0.98]"
                 >
                   ▶ Watch details guide
                 </a>
@@ -256,7 +261,9 @@ export default function Footer() {
               luiccian<span className="text-secondary">.</span>
             </div>
             <p className="max-w-sm font-sans text-xs leading-relaxed text-foreground-muted">
-              There is no risk-free extraction, only optimized selection. Nicholas numerical matrix assesses core geometries and rock conditions to refine mining pathways.
+              There is no risk-free extraction, only optimized selection.
+              Nicholas numerical matrix assesses core geometries and rock
+              conditions to refine mining pathways.
             </p>
           </div>
 
@@ -351,11 +358,11 @@ export default function Footer() {
       {/* 3. Outlined Giant Background Text */}
       <div
         ref={textContainerRef}
-        className="relative mt-auto flex w-full justify-center items-end py-4 select-none pointer-events-none"
+        className="pointer-events-none relative mt-auto flex w-full items-end justify-center py-4 select-none"
       >
         <h1
           ref={textRef}
-          className="m-0 text-center font-sans text-[18vw] leading-none font-black tracking-tighter text-transparent uppercase select-none [-webkit-text-stroke:1px_var(--color-border-strong)] opacity-20 dark:opacity-10 transition-colors duration-500"
+          className="m-0 text-center font-sans text-[18vw] leading-none font-black tracking-tight uppercase antialiased opacity-20 select-none"
         >
           LUICCIAN
         </h1>
@@ -365,23 +372,25 @@ export default function Footer() {
       <div className="relative z-20 w-full border-t border-border bg-surface px-6 py-8 sm:px-8 lg:px-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           {/* Left: Interactive status pill badge */}
-          <div className="flex items-center gap-2 bg-surface-muted border border-border px-4 py-2 rounded-full w-fit hover:bg-card transition-all duration-300 shadow-xs cursor-default">
+          <div className="flex w-fit cursor-default items-center gap-2 rounded-full border border-border bg-surface-muted px-4 py-2 shadow-xs transition-all duration-300 hover:bg-card">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
             </span>
-            <span className="font-mono text-[9px] tracking-wider uppercase text-foreground-muted font-semibold">
+            <span className="font-mono text-[9px] font-semibold tracking-wider text-foreground-muted uppercase">
               All systems operational
             </span>
           </div>
 
           {/* Right: copyright text & legal links */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px] text-foreground-muted">
-            <span>© {new Date().getFullYear()} luiccian. All rights reserved.</span>
-            <a href="#" className="hover:text-primary transition-colors">
+            <span>
+              © {new Date().getFullYear()} luiccian. All rights reserved.
+            </span>
+            <a href="#" className="transition-colors hover:text-primary">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-primary transition-colors">
+            <a href="#" className="transition-colors hover:text-primary">
               Terms of Use
             </a>
 
@@ -393,7 +402,7 @@ export default function Footer() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={scrollToTop}
-                  className="cursor-pointer bg-secondary px-3 py-1 text-surface font-mono text-[9px] tracking-wider uppercase hover:bg-primary transition-all duration-300 rounded-sm ml-auto"
+                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[9px] tracking-wider text-surface uppercase transition-all duration-300 hover:bg-primary"
                 >
                   ↑ TOP
                 </motion.button>

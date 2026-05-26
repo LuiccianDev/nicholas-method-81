@@ -20,11 +20,11 @@ export default function DropdownSelect({
           {label}
         </label>
         {note && (
-          <div className="relative group/tooltip inline-block">
-            <span className="cursor-help text-foreground-muted hover:text-primary transition-colors text-[10px] font-mono px-1 select-none">
+          <div className="group/tooltip relative inline-block">
+            <span className="cursor-help px-1 font-mono text-[10px] text-foreground-muted transition-colors select-none hover:text-primary">
               ⓘ
             </span>
-            <div className="pointer-events-none absolute bottom-full left-0 mb-2 w-72 bg-card border border-border p-3 text-[10px] leading-relaxed text-foreground-muted shadow-xl rounded-lg opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 z-50 normal-case tracking-normal not-italic font-sans">
+            <div className="pointer-events-none absolute bottom-full left-0 z-50 mb-2 w-72 rounded-lg border border-border bg-card p-3 font-sans text-[10px] leading-relaxed tracking-normal text-foreground-muted normal-case not-italic opacity-0 shadow-xl transition-opacity duration-200 group-hover/tooltip:opacity-100">
               {note}
             </div>
           </div>

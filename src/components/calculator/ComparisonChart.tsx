@@ -38,7 +38,7 @@ const ComparisonChart = memo(function ComparisonChart({
 
   return (
     <>
-      <div className="border border-border bg-card p-6 shadow-xs mb-8 relative">
+      <div className="relative mb-8 border border-border bg-card p-6 shadow-xs">
         <h3 className="mb-6 border-l-2 border-border-strong pl-3 font-mono text-[10px] tracking-widest text-foreground-muted uppercase">
           Viability Index Analysis
         </h3>
@@ -95,7 +95,11 @@ const ComparisonChart = memo(function ComparisonChart({
                 layout="horizontal"
                 iconType="square"
                 iconSize={8}
-                formatter={(value) => <span className="text-foreground font-mono text-[9px]">{value}</span>}
+                formatter={(value) => (
+                  <span className="font-mono text-[9px] text-foreground">
+                    {value}
+                  </span>
+                )}
                 wrapperStyle={{
                   paddingBottom: '20px',
                   fontSize: '9px',
