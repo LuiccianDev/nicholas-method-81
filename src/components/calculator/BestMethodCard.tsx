@@ -19,11 +19,6 @@ const BestMethodCard = memo(function BestMethodCard({
 
   return (
     <>
-      <div className="mb-4 lg:col-span-8 lg:px-6">
-        <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
-          02 / Method Recommendation
-        </h2>
-      </div>
       <div className="relative mb-8 flex flex-col border border-t-2 border-border border-t-primary bg-card p-8">
         <div className="mb-auto">
           <p className="font-serif text-[48px] leading-none wrap-break-word text-secondary italic drop-shadow-sm sm:text-[64px] md:text-[80px] dark:text-primary">

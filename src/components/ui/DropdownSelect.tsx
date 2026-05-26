@@ -15,9 +15,21 @@ export default function DropdownSelect({
 }: DropdownSelectProps) {
   return (
     <div className="group mb-4">
-      <label className="mb-2 block text-[10px] tracking-tighter text-foreground-muted uppercase">
-        {label}
-      </label>
+      <div className="mb-2 flex items-center gap-1">
+        <label className="block text-[10px] tracking-tighter text-foreground-muted uppercase">
+          {label}
+        </label>
+        {note && (
+          <div className="relative group/tooltip inline-block">
+            <span className="cursor-help text-foreground-muted hover:text-primary transition-colors text-[10px] font-mono px-1 select-none">
+              ⓘ
+            </span>
+            <div className="pointer-events-none absolute bottom-full left-0 mb-2 w-72 bg-card border border-border p-3 text-[10px] leading-relaxed text-foreground-muted shadow-xl rounded-lg opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 z-50 normal-case tracking-normal not-italic font-sans">
+              {note}
+            </div>
+          </div>
+        )}
+      </div>
       <div className="relative mb-2 flex items-center justify-between border border-border bg-surface-muted transition-colors group-hover:border-primary/50 focus-within:border-primary">
         <select
           value={value}
@@ -38,11 +50,6 @@ export default function DropdownSelect({
           ▼
         </div>
       </div>
-      {note && (
-        <p className="mt-1 border-l-2 border-border-strong py-0.5 pl-2 font-sans text-[9px] leading-snug text-foreground-muted sm:text-[10px]">
-          {note}
-        </p>
-      )}
     </div>
   );
 }

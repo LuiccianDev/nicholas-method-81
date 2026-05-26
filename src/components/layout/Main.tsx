@@ -70,10 +70,15 @@ export default function Main() {
         {/* Results Column */}
         <motion.div
           variants={itemVariants}
-          className={`scroll-elegant flex min-h-0 flex-col transition-opacity duration-300 lg:col-span-8 lg:h-full lg:overflow-y-auto lg:px-2 ${
+          className={`scroll-elegant flex min-h-0 flex-col transition-opacity duration-300 lg:col-span-8 lg:h-full lg:overflow-y-auto lg:px-4 ${
             isPending ? 'opacity-50' : 'opacity-100'
           }`}
         >
+          <div className="mb-4 flex-none">
+            <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
+              02 / Method Recommendation
+            </h2>
+          </div>
           <BestMethodCard
             bestMethod={bestUnderground}
             absoluteBest={absoluteBest}
