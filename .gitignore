@@ -26,3 +26,4 @@ dist-ssr
 .agents/
 skills-lock.json
 .github/
+.kiro/
