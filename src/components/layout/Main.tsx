@@ -54,37 +54,37 @@ export default function Main() {
   return (
     <main className="flex min-h-0 flex-1 flex-col overflow-x-hidden">
       <motion.div
-        className="grid h-full grid-cols-1 gap-x-8 lg:grid-cols-12"
+        className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(20rem,0.78fr)_minmax(0,1.22fr)]"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Input Column */}
         <motion.div
           variants={itemVariants}
-          className="flex min-h-0 flex-col lg:col-span-4 lg:h-full"
+          className="flex min-h-0 min-w-0 flex-col"
         >
           <ParametersForm input={input} updateInput={updateInput} />
         </motion.div>
 
-        {/* Results Column */}
         <motion.div
           variants={itemVariants}
-          className={`scroll-elegant flex min-h-0 flex-col transition-opacity duration-300 lg:col-span-8 lg:h-full lg:overflow-y-auto lg:px-4 ${
-            isPending ? 'opacity-50' : 'opacity-100'
+          className={`scroll-elegant flex min-h-0 min-w-0 flex-col gap-6 transition-opacity duration-300 ${
+            isPending ? 'opacity-60' : 'opacity-100'
           }`}
         >
-          <div className="mb-4 flex-none">
+          <div className="flex-none">
             <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
               02 / Method Recommendation
             </h2>
           </div>
-          <BestMethodCard
-            bestMethod={bestUnderground}
-            absoluteBest={absoluteBest}
-            onOpenDetails={onOpenDetails}
-          />
-          <ComparisonChart chartData={chartData} />
+          <div className="grid gap-6 xl:grid-rows-[auto_auto]">
+            <BestMethodCard
+              bestMethod={bestUnderground}
+              absoluteBest={absoluteBest}
+              onOpenDetails={onOpenDetails}
+            />
+            <ComparisonChart chartData={chartData} />
+          </div>
         </motion.div>
       </motion.div>
 

@@ -32,22 +32,22 @@ const ComparisonChart = memo(function ComparisonChart({
   const axisFontSize = isMobile ? 9 : 11;
   const tickFontSize = isMobile ? 8 : 10;
   const chartHeight = Math.max(
-    isMobile ? 450 : 350,
-    chartData.length * (isMobile ? 45 : 35)
+    isMobile ? 360 : 320,
+    chartData.length * (isMobile ? 42 : 34)
   );
 
   return (
     <>
-      <div className="relative mb-8 border border-border bg-card p-6 shadow-xs">
+      <div className="relative border border-border bg-card p-5 shadow-xs sm:p-6">
         <h3 className="mb-6 border-l-2 border-border-strong pl-3 font-mono text-[10px] tracking-widest text-foreground-muted uppercase">
           Viability Index Analysis
         </h3>
-        <div style={{ height: `${chartHeight}px` }} className="mb-2 w-full">
+        <div style={{ height: `${chartHeight}px` }} className="w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
               layout="vertical"
-              margin={{ top: 0, right: 50, left: isMobile ? 0 : 20, bottom: 0 }}
+              margin={{ top: 0, right: 40, left: isMobile ? 0 : 20, bottom: 0 }}
             >
               <CartesianGrid
                 strokeDasharray="3 3"

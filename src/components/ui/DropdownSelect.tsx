@@ -14,27 +14,27 @@ export default function DropdownSelect({
   note,
 }: DropdownSelectProps) {
   return (
-    <div className="group mb-4">
-      <div className="mb-2 flex items-center gap-1">
+    <div className="group mb-3 min-w-0">
+      <div className="mb-1.5 flex min-w-0 items-center gap-1">
         <label className="block text-[10px] tracking-tighter text-foreground-muted uppercase">
           {label}
         </label>
         {note && (
-          <div className="group/tooltip relative inline-block">
+          <div className="group/tooltip relative inline-block min-w-0">
             <span className="cursor-help px-1 font-mono text-[10px] text-foreground-muted transition-colors select-none hover:text-primary">
               ⓘ
             </span>
-            <div className="pointer-events-none absolute bottom-full left-0 z-50 mb-2 w-72 rounded-lg border border-border bg-card p-3 font-sans text-[10px] leading-relaxed tracking-normal text-foreground-muted normal-case not-italic opacity-0 shadow-xl transition-opacity duration-200 group-hover/tooltip:opacity-100">
+            <div className="pointer-events-none absolute bottom-full left-0 z-50 mb-2 w-64 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-card p-3 font-sans text-[10px] leading-relaxed tracking-normal text-foreground-muted normal-case not-italic opacity-0 shadow-xl transition-opacity duration-200 group-hover/tooltip:opacity-100">
               {note}
             </div>
           </div>
         )}
       </div>
-      <div className="relative mb-2 flex items-center justify-between border border-border bg-surface-muted transition-colors group-hover:border-primary/50 focus-within:border-primary">
+      <div className="relative flex min-w-0 items-center justify-between border border-border bg-surface-muted transition-colors group-hover:border-primary/50 focus-within:border-primary">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-3 text-sm font-medium text-foreground italic outline-none focus:text-primary"
+          className="z-10 block w-full cursor-pointer appearance-none bg-transparent px-3 py-2.5 text-sm font-medium text-foreground italic outline-none focus:text-primary"
         >
           {options.map((o) => (
             <option

@@ -197,27 +197,23 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative flex min-h-[90vh] flex-col justify-between overflow-hidden border-t border-border bg-surface pt-24 font-sans"
+      className="relative flex min-h-[58vh] flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 font-sans"
     >
-      {/* 1. Upper Floating CTA Card */}
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-[#381525]/30 bg-gradient-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-8 text-[#ffecc0] shadow-2xl md:p-12">
-          {/* Subtle nature glows inside the card */}
-          <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-gradient-to-tr from-[#b95e82]/20 to-transparent blur-3xl" />
-          <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-gradient-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
+        <div className="relative overflow-hidden rounded-3xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-[#ffecc0] shadow-2xl md:p-10">
+          <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-linear-to-tr from-[#b95e82]/20 to-transparent blur-3xl" />
+          <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-linear-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
 
           <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
-            {/* Left Header */}
             <div className="lg:col-span-7">
               <h3
                 ref={titleRef}
-                className="font-serif text-2xl leading-snug font-bold tracking-tight text-[#ffecc0] italic sm:text-3xl lg:text-4xl"
+                className="font-serif text-2xl leading-snug font-bold tracking-tight text-[#ffecc0] italic sm:text-[1.7rem] lg:text-3xl"
               >
                 Evaluating deposit viability with numerical mechanics logic.
               </h3>
             </div>
 
-            {/* Right details & buttons */}
             <div className="flex flex-col gap-6 lg:col-span-5">
               <p
                 ref={descriptionRef}
@@ -252,10 +248,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 2. Brand Columns & Navigation links */}
-      <div className="relative z-10 mx-auto mt-16 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
-          {/* Logo & Description */}
+      <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
             <div className="mb-4 font-sans text-3xl font-black tracking-tighter text-foreground uppercase select-none">
               luiccian<span className="text-secondary">.</span>
@@ -267,12 +261,10 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navigation Links Grid */}
           <div
             ref={linksRef}
             className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:gap-4"
           >
-            {/* Column 1: Selector */}
             <div className="flex flex-col space-y-4">
               <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
                 Selector
@@ -299,7 +291,6 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 2: Resources */}
             <div className="flex flex-col space-y-4">
               <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
                 Resources
@@ -332,7 +323,6 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Column 3: Network */}
             <div className="flex flex-col space-y-4">
               <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
                 Network
@@ -355,14 +345,13 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 3. Outlined Giant Background Text */}
       <div
         ref={textContainerRef}
         className="pointer-events-none relative mt-auto flex w-full items-end justify-center py-4 select-none"
       >
         <h1
           ref={textRef}
-          className="m-0 text-center font-sans text-[18vw] leading-none font-black tracking-tight uppercase antialiased opacity-20 select-none"
+          className="m-0 text-center font-sans   text-[clamp(72px,20vw,350px)] leading-none font-black tracking-tight uppercase antialiased  select-none"
         >
           LUICCIAN
         </h1>
