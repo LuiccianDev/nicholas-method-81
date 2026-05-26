@@ -19,23 +19,18 @@ const BestMethodCard = memo(function BestMethodCard({
 
   return (
     <>
-      <div className="mb-4 lg:col-span-8 lg:px-6">
-        <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
-          02 / Method Recommendation
-        </h2>
-      </div>
-      <div className="relative mb-8 flex flex-col border border-t-2 border-border border-t-primary bg-card p-8">
-        <div className="mb-auto">
-          <p className="font-serif text-[48px] leading-none wrap-break-word text-secondary italic drop-shadow-sm sm:text-[64px] md:text-[80px] dark:text-primary">
+      <div className="relative flex min-h-72 flex-col border border-t-2 border-border border-t-primary bg-card p-6 sm:p-8">
+        <div className="mb-auto space-y-3">
+          <p className="max-w-[12ch] font-serif text-[clamp(2.5rem,5vw,5rem)] leading-none wrap-break-word text-secondary italic drop-shadow-sm dark:text-primary">
             {bestMethod?.method || 'None.'}
           </p>
-          <p className="mt-2 text-xl font-light tracking-tight text-foreground-muted md:text-3xl">
+          <p className="text-lg font-light tracking-tight text-foreground-muted sm:text-xl md:text-2xl">
             Optimal Underground Method
           </p>
         </div>
 
-        <div className="mt-4 space-y-4">
-          <p className="max-w-2xl text-sm leading-relaxed text-foreground-muted">
+        <div className="mt-4 grid gap-4">
+          <p className="max-w-2xl text-sm leading-relaxed text-foreground-muted sm:text-[15px]">
             Based on the{' '}
             <span className="text-foreground italic underline">Geometry</span>{' '}
             and{' '}
@@ -47,7 +42,7 @@ const BestMethodCard = memo(function BestMethodCard({
           </p>
 
           {isSurfaceMoreViable && (
-            <div className="mt-4 flex max-w-2xl items-start gap-4 border border-border bg-surface-muted p-4">
+            <div className="flex max-w-2xl items-start gap-4 border border-border bg-surface-muted p-4">
               <span className="mt-0.5 font-mono text-sm text-foreground-muted">
                 ↳
               </span>
@@ -65,7 +60,7 @@ const BestMethodCard = memo(function BestMethodCard({
 
         <button
           onClick={onOpenDetails}
-          className="group absolute top-4 right-4 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-primary text-secondary transition-all duration-300 hover:bg-secondary hover:text-surface dark:text-primary dark:hover:bg-primary"
+          className="group absolute top-4 right-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-primary bg-surface/80 text-secondary backdrop-blur-sm transition-all duration-300 hover:bg-secondary hover:text-surface dark:text-primary dark:hover:bg-primary"
           title="View Full Calculation Matrix"
         >
           <ListTree className="h-5 w-5" />

@@ -9,16 +9,15 @@ export default function App() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-surface font-sans text-foreground">
-      {/* Main App Viewport Section */}
-      <div className="flex h-[100dvh] flex-col p-4 md:p-8">
+    <div className="flex min-h-dvh w-full flex-col overflow-x-hidden bg-surface font-sans text-foreground">
+      <div className="mx-auto flex w-full max-w-400 flex-1 flex-col px-4 py-4 md:px-8 md:py-6">
         <Header toggleTheme={toggleTheme} theme={theme} />
         <Main />
       </div>
 
       <Suspense
         fallback={
-          <div className="min-h-screen border-t border-border bg-surface" />
+          <div className="min-h-dvh border-t border-border bg-surface" />
         }
       >
         <Footer />

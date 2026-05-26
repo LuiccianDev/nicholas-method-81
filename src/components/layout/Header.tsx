@@ -59,7 +59,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="mb-8 flex flex-col items-start justify-between gap-4 border-b border-border pb-6 md:flex-row md:items-end"
+      className="mb-6 flex flex-col items-start justify-between gap-4 border-b border-border pb-5 md:flex-row md:items-end"
     >
       <div className="max-w-xl">
         <motion.p
@@ -70,13 +70,13 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
         </motion.p>
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-4xl leading-none font-bold tracking-tight text-foreground italic md:text-6xl"
+          className="font-serif text-3xl leading-none font-bold tracking-tight text-foreground italic md:text-5xl"
         >
           Nicholas Selector
           <span className="text-primary">.</span>
         </motion.h1>
       </div>
-      <div className="flex w-full flex-col items-start gap-x-8 gap-y-4 md:w-auto md:flex-row md:items-end">
+      <div className="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end">
         <motion.button
           variants={themeToggleVariants}
           onClick={toggleTheme}

@@ -17,11 +17,14 @@ export default function GeotechnicalInput({
   updateInput,
 }: GeotechnicalInputProps) {
   return (
-    <div className="mb-6">
-      <h4 className="mb-3 ml-2 border-l border-border-strong pl-2 text-[10px] text-foreground-muted uppercase">
-        {title}
-      </h4>
-      <div className="pl-3">
+    <details className="min-w-0 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-xs">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.18em] text-foreground-muted uppercase">
+        <span>{title}</span>
+        <span className="text-[9px] tracking-[0.25em] text-primary">
+          DETAILS
+        </span>
+      </summary>
+      <div className="mt-4 grid min-w-0 gap-3 xl:grid-cols-1 2xl:grid-cols-2">
         <NumericInput
           label="Substance Strength Ratio"
           value={input[`${prefix}SubStr`]}
@@ -42,20 +45,25 @@ export default function GeotechnicalInput({
           derivedLabel={getFracSpacLabel(input[`${prefix}FracSpac`])}
           note="Very Close: > 16 fractures/m (RQD 0-20%) • Close: 10-16 fractures/m (RQD 20-40%) • Wide: 3-10 fractures/m (RQD 40-70%) • Very Wide: < 3 fractures/m (RQD 70-100%)"
         />
-        <DropdownSelect
-          label="Fracture Strength"
-          value={input[`${prefix}FracStr`]}
-          onChange={(v) =>
-            updateInput(`${prefix}FracStr` as keyof RawMethodInput, v as string)
-          }
-          options={[
-            { value: 'W', label: 'Weak' },
-            { value: 'M', label: 'Moderate' },
-            { value: 'S', label: 'Strong' },
-          ]}
-          note="Weak: Clean joint with a smooth surface or soft filling (strength < intact rock). Moderate: Clean joint with a rough surface. Strong: Filled with material ≥ intact rock strength."
-        />
+        <div className="min-w-0 xl:col-span-1 2xl:col-span-2">
+          <DropdownSelect
+            label="Fracture Strength"
+            value={input[`${prefix}FracStr`]}
+            onChange={(v) =>
+              updateInput(
+                `${prefix}FracStr` as keyof RawMethodInput,
+                v as string
+              )
+            }
+            options={[
+              { value: 'W', label: 'Weak' },
+              { value: 'M', label: 'Moderate' },
+              { value: 'S', label: 'Strong' },
+            ]}
+            note="Weak: Clean joint with a smooth surface or soft filling (strength < intact rock). Moderate: Clean joint with a rough surface. Strong: Filled with material ≥ intact rock strength."
+          />
+        </div>
       </div>
-    </div>
+    </details>
   );
 }

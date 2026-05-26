@@ -13,42 +13,42 @@
     serif;
 
   /* Semantic Surface Colors */
-  --color-surface: #fefefe;
-  --color-surface-muted: #f5f5f5;
+  --color-surface: #fffdf9;
+  --color-surface-muted: #fbf5e6;
 
   /* Semantic Foreground Colors */
-  --color-foreground: #171717;
-  --color-foreground-muted: #737373;
+  --color-foreground: #67223b;
+  --color-foreground-muted: #914562;
 
   /* Accent Colors */
-  --color-primary: #daac14;
-  --color-secondary: #dd7412;
+  --color-primary: #b95e82;
+  --color-secondary: #e89b6b;
 
   /* Structural Colors */
-  --color-border: #e5e5e5;
-  --color-border-strong: #d4d4d4;
+  --color-border: #ebd1aa;
+  --color-border-strong: #b95e82;
 
   /* Component Colors */
   --color-card: #ffffff;
-  --color-card-muted: #fafafa;
+  --color-card-muted: #fffbf5;
   --color-tooltip: #ffffff;
-  --color-tooltip-foreground: #171717;
+  --color-tooltip-foreground: #67223b;
 }
 
 /* Dark Mode Overrides */
 .dark {
-  --color-surface: #121212;
-  --color-surface-muted: #1a1a1a;
-  --color-foreground: #e0d3d3;
-  --color-foreground-muted: #d3d1d1;
-  --color-primary: #d4af37;
-  --color-secondary: #b87333;
-  --color-border: #262626;
-  --color-border-strong: #404040;
-  --color-card: #1a1a1a;
-  --color-card-muted: #262626;
-  --color-tooltip: #1a1a1a;
-  --color-tooltip-foreground: #ffffff;
+  --color-surface: #0a0104;
+  --color-surface-muted: #1c0610;
+  --color-foreground: #ffecc0;
+  --color-foreground-muted: #dec9a4;
+  --color-primary: #b95e82;
+  --color-secondary: #ffc29b;
+  --color-border: #300c1c;
+  --color-border-strong: #b95e82;
+  --color-card: #18050e;
+  --color-card-muted: #240916;
+  --color-tooltip: #18050e;
+  --color-tooltip-foreground: #ffecc0;
 }
 
 /* Base Styles */

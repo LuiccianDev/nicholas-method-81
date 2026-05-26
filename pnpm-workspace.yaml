@@ -1,3 +1,5 @@
-ignore-scripts: true
 engineStrict: true
+ignore-scripts: true
 minimumReleaseAge: 1440
+overrides:
+  brace-expansion@>=5.0.0 <5.0.6: '>=5.0.6'

@@ -15,22 +15,25 @@ const ParametersForm = memo(function ParametersForm({
   updateInput,
 }: ParametersFormProps) {
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      {/* 01. Section Title - Outside of scroll */}
+    <div className="flex h-full min-h-0 min-w-0 flex-col">
       <div className="mb-4 flex-none">
         <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
           01 / Analysis Inputs
         </h2>
       </div>
 
-      {/* Scrollable Form Content */}
-      <div className="scroll-elegant flex-1 overflow-y-auto border-border lg:border-r lg:pr-8 lg:pb-8">
-        {/* Geometry & Grade */}
-        <section className="mb-8">
-          <h3 className="mb-4 ml-2 border-l border-border-strong pb-0.5 pl-2 font-mono text-[10px] tracking-widest text-foreground-muted uppercase">
-            Geometry &amp; Grade
-          </h3>
-          <div className="space-y-4 pl-3">
+      <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-border bg-card p-5 pr-1 sm:p-6 lg:pr-2">
+        <details
+          open
+          className="mb-5 overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5"
+        >
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.2em] text-foreground-muted uppercase">
+            <span>Geometry &amp; Grade</span>
+            <span className="text-[9px] tracking-[0.3em] text-primary">
+              OPEN
+            </span>
+          </summary>
+          <div className="mt-4 grid min-w-0 gap-4 xl:grid-cols-1 2xl:grid-cols-2">
             <DropdownSelect
               label="General Shape"
               value={input.shape}
@@ -77,14 +80,16 @@ const ParametersForm = memo(function ParametersForm({
               note="Uniform: Grade is consistent with no significant variations. Gradational: Grades display distinct zonal characteristics, transitioning smoothly. Erratic: Grades fluctuate inconsistently with no discernible pattern."
             />
           </div>
-        </section>
+        </details>
 
-        {/* Rock Mechanics */}
-        <section>
-          <h3 className="mb-4 ml-2 border-l border-border-strong pb-0.5 pl-2 font-mono text-[10px] tracking-widest text-foreground-muted uppercase">
-            Rock Mechanics
-          </h3>
-          <div className="space-y-6">
+        <details className="overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.2em] text-foreground-muted uppercase">
+            <span>Rock Mechanics</span>
+            <span className="text-[9px] tracking-[0.3em] text-primary">
+              TOGGLE
+            </span>
+          </summary>
+          <div className="mt-4 grid min-w-0 gap-4">
             <GeotechnicalInput
               title="Ore Zone"
               prefix="ore"
@@ -104,7 +109,7 @@ const ParametersForm = memo(function ParametersForm({
               updateInput={updateInput}
             />
           </div>
-        </section>
+        </details>
       </div>
     </div>
   );
