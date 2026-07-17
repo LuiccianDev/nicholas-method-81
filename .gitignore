@@ -23,7 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+.astro/
+
 .agents/
 skills-lock.json
 .github/
 .kiro/
+.vercel/

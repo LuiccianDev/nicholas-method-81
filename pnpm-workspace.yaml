@@ -1,3 +1,7 @@
+allowBuilds:
+  '@google/genai': true
+  esbuild: true
+  protobufjs: true
 engineStrict: true
 ignore-scripts: true
 minimumReleaseAge: 1440

@@ -10,7 +10,16 @@
     "bracketSameLine": false,
     "proseWrap": "preserve",
     "plugins": [
+        "prettier-plugin-astro",
         "prettier-plugin-tailwindcss"
+    ],
+    "overrides": [
+        {
+            "files": "*.astro",
+            "options": {
+                "parser": "astro"
+            }
+        }
     ],
     "tailwindStylesheet": "./src/styles/index.css"
 }

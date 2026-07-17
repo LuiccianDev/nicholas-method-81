@@ -1,6 +1,6 @@
 import { Suspense, useCallback, lazy, useState } from 'react';
 import { motion, type Variants } from 'motion/react';
-import { useNicholasCalculator } from '../../hooks/useNicholasCalculator';
+import { useNicholasContext } from '../../context/NicholasContext';
 import ParametersForm from '../calculator/ParametersForm';
 import BestMethodCard from '../calculator/BestMethodCard';
 import ComparisonChart from '../calculator/ComparisonChart';
@@ -8,8 +8,6 @@ import ComparisonChart from '../calculator/ComparisonChart';
 const ScoringMatrixModal = lazy(
   () => import('../calculator/ScoringMatrixModal')
 );
-
-// Framer Motion Variants & Styles
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -44,7 +42,7 @@ export default function Main() {
     absoluteBest,
     bestUnderground,
     isPending,
-  } = useNicholasCalculator();
+  } = useNicholasContext();
 
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -88,7 +86,6 @@ export default function Main() {
         </motion.div>
       </motion.div>
 
-      {/* Details Modal */}
       <Suspense fallback={null}>
         <ScoringMatrixModal
           isOpen={isDetailsOpen}
