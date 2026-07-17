@@ -1,4 +1,4 @@
-import { memo, useSyncExternalStore } from 'react';
+import { memo, useSyncExternalStore, useState, useEffect } from 'react';
 import { type ChartDataRow } from '../../types';
 import {
   BarChart,
@@ -18,6 +18,12 @@ interface ComparisonChartProps {
 const ComparisonChart = memo(function ComparisonChart({
   chartData,
 }: ComparisonChartProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const windowWidth = useSyncExternalStore(
     (callback) => {
       window.addEventListener('resize', callback);
@@ -43,6 +49,7 @@ const ComparisonChart = memo(function ComparisonChart({
           Viability Index Analysis
         </h3>
         <div style={{ height: `${chartHeight}px` }} className="w-full">
+          {isMounted ? (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
@@ -126,6 +133,9 @@ const ComparisonChart = memo(function ComparisonChart({
               />
             </BarChart>
           </ResponsiveContainer>
+          ) : (
+          <div className="flex items-center justify-center" style={{ height: `${chartHeight}px` }} />
+          )}
         </div>
       </div>
     </>
