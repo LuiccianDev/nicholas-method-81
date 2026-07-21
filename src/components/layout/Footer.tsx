@@ -252,7 +252,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
             <div className="mb-4 font-sans text-3xl font-black tracking-tighter text-foreground uppercase select-none">
-              luiccian<span className="text-secondary">.</span>
+              luiccian
             </div>
             <p className="max-w-sm font-sans text-xs leading-relaxed text-foreground-muted">
               There is no risk-free extraction, only optimized selection.

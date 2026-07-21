@@ -50,91 +50,99 @@ const ComparisonChart = memo(function ComparisonChart({
         </h3>
         <div style={{ height: `${chartHeight}px` }} className="w-full">
           {isMounted ? (
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={chartData}
-              layout="vertical"
-              margin={{ top: 0, right: 40, left: isMobile ? 0 : 20, bottom: 0 }}
-            >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                horizontal={true}
-                vertical={false}
-                stroke="var(--color-border)"
-              />
-              <XAxis
-                type="number"
-                tick={{
-                  fontSize: tickFontSize,
-                  fill: 'var(--color-foreground-muted)',
-                  fontFamily: 'monospace',
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={chartData}
+                layout="vertical"
+                margin={{
+                  top: 0,
+                  right: 40,
+                  left: isMobile ? 0 : 20,
+                  bottom: 0,
                 }}
-                axisLine={{ stroke: 'var(--color-border)' }}
-                tickLine={false}
-                minTickGap={10}
-              />
-              <YAxis
-                dataKey="name"
-                type="category"
-                width={yAxisWidth}
-                tick={{
-                  fontSize: axisFontSize,
-                  fill: 'var(--color-foreground)',
-                  fontFamily: 'serif',
-                }}
-                axisLine={{ stroke: 'var(--color-border)' }}
-                tickLine={false}
-                interval={0}
-              />
-              <Tooltip
-                cursor={{ fill: 'var(--color-surface-muted)' }}
-                contentStyle={{
-                  borderRadius: '0',
-                  border: '1px solid var(--color-primary)',
-                  backgroundColor: 'var(--color-tooltip)',
-                  color: 'var(--color-tooltip-foreground)',
-                  fontSize: '10px',
-                }}
-              />
-              <Legend
-                verticalAlign="top"
-                align={isMobile ? 'center' : 'right'}
-                layout="horizontal"
-                iconType="square"
-                iconSize={8}
-                formatter={(value) => (
-                  <span className="font-mono text-[9px] text-foreground">
-                    {value}
-                  </span>
-                )}
-                wrapperStyle={{
-                  paddingBottom: '20px',
-                  fontSize: '9px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  color: 'var(--color-foreground-muted)',
-                }}
-              />
-              <Bar
-                dataKey="Geometry"
-                stackId="a"
-                fill="var(--color-primary)"
-                stroke="var(--color-surface)"
-                strokeWidth={1.5}
-                name="Geometry"
-              />
-              <Bar
-                dataKey="RockMechanics"
-                stackId="a"
-                fill="var(--color-secondary)"
-                stroke="var(--color-surface)"
-                strokeWidth={1.5}
-                name="Rock"
-              />
-            </BarChart>
-          </ResponsiveContainer>
+              >
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  horizontal={true}
+                  vertical={false}
+                  stroke="var(--color-border)"
+                />
+                <XAxis
+                  type="number"
+                  tick={{
+                    fontSize: tickFontSize,
+                    fill: 'var(--color-foreground-muted)',
+                    fontFamily: 'monospace',
+                  }}
+                  axisLine={{ stroke: 'var(--color-border)' }}
+                  tickLine={false}
+                  minTickGap={10}
+                />
+                <YAxis
+                  dataKey="name"
+                  type="category"
+                  width={yAxisWidth}
+                  tick={{
+                    fontSize: axisFontSize,
+                    fill: 'var(--color-foreground)',
+                    fontFamily: 'serif',
+                  }}
+                  axisLine={{ stroke: 'var(--color-border)' }}
+                  tickLine={false}
+                  interval={0}
+                />
+                <Tooltip
+                  cursor={{ fill: 'var(--color-surface-muted)' }}
+                  contentStyle={{
+                    borderRadius: '0',
+                    border: '1px solid var(--color-primary)',
+                    backgroundColor: 'var(--color-tooltip)',
+                    color: 'var(--color-tooltip-foreground)',
+                    fontSize: '10px',
+                  }}
+                />
+                <Legend
+                  verticalAlign="top"
+                  align={isMobile ? 'center' : 'right'}
+                  layout="horizontal"
+                  iconType="square"
+                  iconSize={8}
+                  formatter={(value) => (
+                    <span className="font-mono text-[9px] text-foreground">
+                      {value}
+                    </span>
+                  )}
+                  wrapperStyle={{
+                    paddingBottom: '20px',
+                    fontSize: '9px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    color: 'var(--color-foreground-muted)',
+                  }}
+                />
+                <Bar
+                  dataKey="Geometry"
+                  stackId="a"
+                  fill="var(--color-primary)"
+                  stroke="var(--color-surface)"
+                  strokeWidth={1.5}
+                  name="Geometry"
+                />
+                <Bar
+                  dataKey="RockMechanics"
+                  stackId="a"
+                  fill="var(--color-secondary)"
+                  stroke="var(--color-surface)"
+                  strokeWidth={1.5}
+                  name="Rock"
+                />
+              </BarChart>
+            </ResponsiveContainer>
           ) : (
-          <div className="flex items-center justify-center" style={{ height: `${chartHeight}px` }} />
+            <div
+              className="flex items-center justify-center"
+              style={{ height: `${chartHeight}px` }}
+            />
           )}
         </div>
       </div>

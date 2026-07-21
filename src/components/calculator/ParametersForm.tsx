@@ -4,6 +4,7 @@ import { getThicknessLabel, getPlungeLabel } from '../../lib/nicholasData';
 import DropdownSelect from '../ui/DropdownSelect';
 import NumericInput from '../ui/NumericInput';
 import GeotechnicalInput from '../ui/GeotechnicalInput';
+import Presets from './Presets';
 
 interface ParametersFormProps {
   input: RawMethodInput;
@@ -23,6 +24,8 @@ const ParametersForm = memo(function ParametersForm({
       </div>
 
       <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-border bg-card p-5 pr-1 sm:p-6 lg:pr-2">
+        <Presets />
+
         <details
           open
           className="mb-5 overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5"

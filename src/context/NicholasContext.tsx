@@ -30,6 +30,7 @@ const DEFAULT_INPUT: RawMethodInput = {
 interface NicholasContextType {
   input: RawMethodInput;
   updateInput: (key: keyof RawMethodInput, value: string | number) => void;
+  setInputValues: (newInput: RawMethodInput) => void;
   results: ScoredMethod[];
   chartData: ChartDataRow[];
   absoluteBest: ScoredMethod | undefined;
@@ -51,6 +52,12 @@ export function NicholasProvider({ children }: { children: ReactNode }) {
     },
     []
   );
+
+  const setInputValues = useCallback((newInput: RawMethodInput) => {
+    startTransition(() => {
+      setInput(newInput);
+    });
+  }, []);
 
   const derivedInput = useMemo(() => deriveMethodInput(input), [input]);
   const results = useMemo(() => calculateScores(derivedInput), [derivedInput]);
@@ -90,6 +97,7 @@ export function NicholasProvider({ children }: { children: ReactNode }) {
       value={{
         input,
         updateInput,
+        setInputValues,
         results,
         chartData,
         absoluteBest,
