@@ -25,28 +25,21 @@ export default function ChatBot() {
       id: 'welcome',
       role: 'assistant',
       content:
-        '¡Hola! Soy tu asistente para el Método de Nicholas 81. Puedes hacer preguntas sobre la evaluación geotécnica, la selección del método o los resultados de tu cálculo.',
+        "Hello! I'm your Nicholas Method 81 assistant. Ask me anything about your geotechnical input parameters, score breakdown, or underground mining method selection.",
     },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // Estado para la animación suave de tipeo/revelado de texto
+  // Smooth typewriter reveal state
   const [activeTypingId, setActiveTypingId] = useState<string | null>(null);
-  const [typedLengthMap, setTypedLengthMap] = useState<Record<string, number>>(
-    {}
-  );
+  const [typedLengthMap, setTypedLengthMap] = useState<Record<string, number>>({});
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const typingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const {
-    input: calcInput,
-    results,
-    absoluteBest,
-    bestUnderground,
-  } = useNicholasContext();
+  const { input: calcInput, results, absoluteBest, bestUnderground } = useNicholasContext();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -72,7 +65,6 @@ export default function ChatBot() {
     if (typingTimerRef.current) clearInterval(typingTimerRef.current);
 
     typingTimerRef.current = setInterval(() => {
-      // Avanzar de 2 en 2 caracteres para una velocidad fluida y elegante (~15-20ms)
       currentLength = Math.min(currentLength + 2, fullText.length);
       setTypedLengthMap((prev) => ({ ...prev, [msgId]: currentLength }));
 
@@ -90,7 +82,6 @@ export default function ChatBot() {
 
     if (!messageText) setInput('');
 
-    // Si había una animación corriendo, cancelarla e instanciarla completa inmediatamente
     if (typingTimerRef.current) {
       clearInterval(typingTimerRef.current);
       typingTimerRef.current = null;
@@ -124,7 +115,7 @@ export default function ChatBot() {
 
       const data = await res.json();
       const assistantMessageId = `assistant-${Date.now()}`;
-      const replyText = data.reply || '❌ No se pudo obtener una respuesta.';
+      const replyText = data.reply || '❌ Could not retrieve a response.';
 
       setMessages((prev) => [
         ...prev,
@@ -140,7 +131,7 @@ export default function ChatBot() {
         {
           id: `err-${Date.now()}`,
           role: 'assistant',
-          content: '❌ Error de conexión. Intenta nuevamente.',
+          content: '❌ Connection error. Please try again.',
         },
       ]);
     } finally {
@@ -169,17 +160,17 @@ export default function ChatBot() {
         id: 'welcome-reset',
         role: 'assistant',
         content:
-          'Historial reiniciado. Hazme cualquier consulta sobre el Método de Nicholas 81.',
+          'Chat history reset. Ask me anything about Nicholas Method 81.',
       },
     ]);
   };
 
   const topMethodName =
-    bestUnderground?.method || absoluteBest?.method || 'el método recomendable';
+    bestUnderground?.method || absoluteBest?.method || 'recommended method';
   const quickPrompts = [
-    `¿Por qué se descarta Open Pit en subterránea?`,
-    `¿Por qué se recomienda ${topMethodName}?`,
-    'Resume mi caso geotécnico',
+    `Why is Open Pit set aside for underground selection?`,
+    `Why is ${topMethodName} recommended?`,
+    'Summarize my geotechnical case',
   ];
 
   return (
@@ -187,7 +178,7 @@ export default function ChatBot() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed right-4 bottom-4 z-50 flex size-14 cursor-pointer items-center justify-center rounded-full border border-border bg-primary text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl active:scale-95 md:right-6 md:bottom-6"
-        aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat'}
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
       </button>
@@ -208,18 +199,18 @@ export default function ChatBot() {
             </div>
             <div>
               <h3 className="text-sm leading-tight font-semibold text-foreground">
-                Asistente Nicholas 81
+                Nicholas 81 Assistant
               </h3>
               <p className="text-[10px] text-foreground-muted">
-                IA Geotécnica Minera
+                Geotechnical Mining AI
               </p>
             </div>
           </div>
           <button
             onClick={clearChat}
             className="flex size-8 cursor-pointer items-center justify-center rounded-lg text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
-            title="Reiniciar chat"
-            aria-label="Reiniciar conversación"
+            title="Reset chat"
+            aria-label="Reset chat history"
           >
             <Trash2 size={15} />
           </button>
@@ -260,7 +251,7 @@ export default function ChatBot() {
                 >
                   {displayedText}
                   {isTyping && (
-                    <span className="ml-0.5 animate-pulse font-bold text-primary">
+                    <span className="ml-0.5 font-bold text-primary animate-pulse">
                       │
                     </span>
                   )}
@@ -268,8 +259,8 @@ export default function ChatBot() {
                   {msg.role === 'assistant' && !isTyping && (
                     <button
                       onClick={() => handleCopy(msg.id, msg.content)}
-                      className="absolute top-1.5 right-1.5 hidden rounded p-1 text-foreground-muted opacity-0 transition-all group-hover:block group-hover:opacity-100 hover:bg-surface"
-                      title="Copiar texto"
+                      className="absolute top-1.5 right-1.5 hidden rounded p-1 text-foreground-muted opacity-0 transition-all hover:bg-surface group-hover:block group-hover:opacity-100"
+                      title="Copy message"
                     >
                       {copiedId === msg.id ? (
                         <Check size={12} className="text-green-500" />
@@ -314,7 +305,7 @@ export default function ChatBot() {
         <div className="border-t border-border/50 bg-surface-muted/30 px-3 py-2">
           <div className="mb-1 flex items-center gap-1 text-[10px] font-medium tracking-wider text-foreground-muted uppercase">
             <Sparkles size={11} className="text-primary" />
-            <span>Sugerencias rápidas</span>
+            <span>Quick Suggestions</span>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {quickPrompts.map((promptText, i) => (
@@ -341,7 +332,7 @@ export default function ChatBot() {
               maxLength={500}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Escribe tu consulta (máx 500 caracteres)..."
+              placeholder="Ask a question (max 500 chars)..."
               className="flex-1 rounded-xl border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none placeholder:text-foreground-muted/50 focus:border-primary focus:ring-1 focus:ring-primary"
               disabled={isLoading}
             />
@@ -349,7 +340,7 @@ export default function ChatBot() {
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
               className="flex size-9 cursor-pointer items-center justify-center rounded-xl bg-primary text-white transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
-              aria-label="Enviar mensaje"
+              aria-label="Send message"
             >
               <Send size={16} />
             </button>

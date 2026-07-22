@@ -13,8 +13,8 @@ interface PresetOption {
 const PRESETS: PresetOption[] = [
   {
     id: 'narrow-vein',
-    name: 'Veta Angosta Profunda',
-    description: 'Veta inclinada (70°), espesor 3m, roca de alta competencia.',
+    name: 'Deep Narrow Vein',
+    description: 'Steeply dipping vein (70°), 3m thickness, high rock mass strength.',
     icon: Pickaxe,
     data: {
       shape: 'I',
@@ -35,9 +35,9 @@ const PRESETS: PresetOption[] = [
   },
   {
     id: 'porphyry-mass',
-    name: 'Cuerpo Masivo Porfídico',
+    name: 'Massive Porphyry Body',
     description:
-      'Depósito masivo profundo (60m espesor), competencia moderada a baja.',
+      'Deep massive deposit (65m thickness), moderate to weak rock strength.',
     icon: Layers,
     data: {
       shape: 'M',
@@ -58,9 +58,9 @@ const PRESETS: PresetOption[] = [
   },
   {
     id: 'shallow-mantle',
-    name: 'Manto Somero Competente',
+    name: 'Competent Shallow Bed',
     description:
-      'Cuerpo tabular de bajo buzamiento (15°), roca muy competente.',
+      'Flat/tabular deposit (15° plunge), highly competent rock mass.',
     icon: ShieldAlert,
     data: {
       shape: 'TP',
@@ -89,7 +89,7 @@ export default function Presets() {
       <div className="mb-3 flex items-center gap-2">
         <Sparkles className="size-4 text-primary" />
         <h3 className="text-sm font-semibold text-foreground">
-          Escenarios Geológicos Predefinidos (1-Clic)
+          Predefined Geological Scenarios (1-Click)
         </h3>
       </div>
       <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
