@@ -78,6 +78,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       </div>
       <div className="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end">
         <motion.button
+          suppressHydrationWarning
           variants={themeToggleVariants}
           onClick={toggleTheme}
           whileHover={{ scale: 1.1 }}

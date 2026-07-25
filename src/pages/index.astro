@@ -37,20 +37,26 @@ import '../styles/index.css';
     <meta property="og:image" content="/banner.png" />
     <meta property="og:site_name" content="Nicholas Method 81" />
 
-    <script>
+    <script is:inline>
       (function () {
         try {
           var storedTheme = window.localStorage.getItem('theme');
+          var resolvedTheme;
           if (
             storedTheme === 'dark' ||
             (!storedTheme &&
               window.matchMedia('(prefers-color-scheme: dark)').matches)
           ) {
+            resolvedTheme = 'dark';
             document.documentElement.classList.add('dark');
           } else {
+            resolvedTheme = 'light';
             document.documentElement.classList.add('light');
           }
-        } catch (e) {}
+          window.__INITIAL_THEME__ = resolvedTheme;
+        } catch (e) {
+          window.__INITIAL_THEME__ = 'dark';
+        }
       })();
     </script>
   </head>

@@ -1,4 +1,4 @@
-import { memo, useSyncExternalStore, useState, useEffect } from 'react';
+import { memo, useSyncExternalStore, useState, useEffect, useRef } from 'react';
 import { type ChartDataRow } from '../../types';
 import {
   BarChart,
@@ -18,10 +18,28 @@ interface ComparisonChartProps {
 const ComparisonChart = memo(function ComparisonChart({
   chartData,
 }: ComparisonChartProps) {
-  const [isMounted, setIsMounted] = useState(false);
+  const [dimensions, setDimensions] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsMounted(true);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentBoxSize[0].inlineSize;
+        const height = entry.contentBoxSize[0].blockSize;
+        if (width > 0 && height > 0) {
+          setDimensions({ width, height });
+        }
+      }
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
   }, []);
 
   const windowWidth = useSyncExternalStore(
@@ -48,9 +66,16 @@ const ComparisonChart = memo(function ComparisonChart({
         <h3 className="mb-6 border-l-2 border-border-strong pl-3 font-mono text-[10px] tracking-widest text-foreground-muted uppercase">
           Viability Index Analysis
         </h3>
-        <div style={{ height: `${chartHeight}px` }} className="w-full">
-          {isMounted ? (
-            <ResponsiveContainer width="100%" height="100%">
+        <div
+          ref={containerRef}
+          style={{ height: `${chartHeight}px` }}
+          className="w-full min-w-0"
+        >
+          {dimensions ? (
+            <ResponsiveContainer
+              width={dimensions.width}
+              height={dimensions.height}
+            >
               <BarChart
                 data={chartData}
                 layout="vertical"

@@ -14,7 +14,8 @@ const PRESETS: PresetOption[] = [
   {
     id: 'narrow-vein',
     name: 'Deep Narrow Vein',
-    description: 'Steeply dipping vein (70°), 3m thickness, high rock mass strength.',
+    description:
+      'Steeply dipping vein (70°), 3m thickness, high rock mass strength.',
     icon: Pickaxe,
     data: {
       shape: 'I',

@@ -34,12 +34,19 @@ export default function ChatBot() {
 
   // Smooth typewriter reveal state
   const [activeTypingId, setActiveTypingId] = useState<string | null>(null);
-  const [typedLengthMap, setTypedLengthMap] = useState<Record<string, number>>({});
+  const [typedLengthMap, setTypedLengthMap] = useState<Record<string, number>>(
+    {}
+  );
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const typingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const { input: calcInput, results, absoluteBest, bestUnderground } = useNicholasContext();
+  const {
+    input: calcInput,
+    results,
+    absoluteBest,
+    bestUnderground,
+  } = useNicholasContext();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -251,7 +258,7 @@ export default function ChatBot() {
                 >
                   {displayedText}
                   {isTyping && (
-                    <span className="ml-0.5 font-bold text-primary animate-pulse">
+                    <span className="ml-0.5 animate-pulse font-bold text-primary">
                       │
                     </span>
                   )}
@@ -259,7 +266,7 @@ export default function ChatBot() {
                   {msg.role === 'assistant' && !isTyping && (
                     <button
                       onClick={() => handleCopy(msg.id, msg.content)}
-                      className="absolute top-1.5 right-1.5 hidden rounded p-1 text-foreground-muted opacity-0 transition-all hover:bg-surface group-hover:block group-hover:opacity-100"
+                      className="absolute top-1.5 right-1.5 hidden rounded p-1 text-foreground-muted opacity-0 transition-all group-hover:block group-hover:opacity-100 hover:bg-surface"
                       title="Copy message"
                     >
                       {copiedId === msg.id ? (

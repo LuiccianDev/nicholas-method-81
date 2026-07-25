@@ -1,39 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 
-// Constants
 const THEME_STORAGE_KEY = 'theme' as const;
-const PREFERS_DARK_QUERY = '(prefers-color-scheme: dark)' as const;
 const LIGHT_THEME = 'light' as const;
 const DARK_THEME = 'dark' as const;
 
-// Types
 type Theme = typeof LIGHT_THEME | typeof DARK_THEME;
 
-/**
- * Determines the initial theme from localStorage, system preference, or default.
- * - Respects localStorage if set to 'light' or 'dark'
- * - Falls back to system preference (prefers-color-scheme)
- * - Defaults to 'dark' if no preference found
- */
 const getInitialTheme = (): Theme => {
-  // SSR safety: return default during server-side rendering
-  if (typeof window === 'undefined') {
-    return DARK_THEME;
-  }
-
-  // Priority 1: Check localStorage
-  const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-  if (storedTheme === LIGHT_THEME || storedTheme === DARK_THEME) {
-    return storedTheme;
-  }
-
-  // Priority 2: Check system preference
-  if (window.matchMedia(PREFERS_DARK_QUERY).matches) {
-    return DARK_THEME;
-  }
-
-  // Priority 3: Default to light
-  return LIGHT_THEME;
+  if (typeof window === 'undefined') return LIGHT_THEME;
+  const t = (window as any).__INITIAL_THEME__;
+  return t === DARK_THEME || t === LIGHT_THEME ? t : LIGHT_THEME;
 };
 
 /**
