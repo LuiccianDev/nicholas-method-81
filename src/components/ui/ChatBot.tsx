@@ -249,34 +249,37 @@ export default function ChatBot() {
                 >
                   {msg.role === 'user' ? <User size={14} /> : <Bot size={14} />}
                 </div>
-                <div
-                  className={`relative max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
-                    msg.role === 'user'
-                      ? 'bg-primary text-white'
-                      : 'border border-border/50 bg-surface-muted text-foreground'
-                  }`}
-                >
-                  {displayedText}
-                  {isTyping && (
-                    <span className="ml-0.5 animate-pulse font-bold text-primary">
-                      │
-                    </span>
-                  )}
-
-                  {msg.role === 'assistant' && !isTyping && (
-                    <button
-                      onClick={() => handleCopy(msg.id, msg.content)}
-                      className="absolute top-1.5 right-1.5 hidden rounded p-1 text-foreground-muted opacity-0 transition-all group-hover:block group-hover:opacity-100 hover:bg-surface"
-                      title="Copy message"
-                    >
-                      {copiedId === msg.id ? (
-                        <Check size={12} className="text-green-500" />
-                      ) : (
-                        <Copy size={12} />
+                {msg.role === 'assistant' ? (
+                  <div className="flex max-w-[85%] flex-col">
+                    <div className="rounded-2xl border border-border/50 bg-surface-muted px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-foreground">
+                      {displayedText}
+                      {isTyping && (
+                        <span className="ml-0.5 animate-pulse font-bold text-primary">
+                          │
+                        </span>
                       )}
-                    </button>
-                  )}
-                </div>
+                    </div>
+                    {!isTyping && (
+                      <div className="mt-1 flex justify-end">
+                        <button
+                          onClick={() => handleCopy(msg.id, msg.content)}
+                          className="flex cursor-pointer items-center gap-1 rounded p-1 text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
+                          title="Copy message"
+                        >
+                          {copiedId === msg.id ? (
+                            <Check size={12} className="text-green-500" />
+                          ) : (
+                            <Copy size={12} />
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="max-w-[85%] rounded-2xl bg-primary px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-white">
+                    {displayedText}
+                  </div>
+                )}
               </div>
             );
           })}
