@@ -31,3 +31,6 @@ skills-lock.json
 .github/
 .kiro/
 .vercel/
+.playwright-cli
+.kiro/
+opencode.json
