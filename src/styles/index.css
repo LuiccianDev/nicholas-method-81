@@ -33,6 +33,12 @@
   --color-card-muted: #fffbf5;
   --color-tooltip: #ffffff;
   --color-tooltip-foreground: #67223b;
+
+  /* Extended Typography Scale */
+  --text-xxs: 10px;
+  --text-xxs--line-height: 1.2;
+  --text-xxxs: 9px;
+  --text-xxxs--line-height: 1.2;
 }
 
 /* Dark Mode Overrides */
@@ -83,25 +89,21 @@ html::-webkit-scrollbar-thumb:hover {
   background: var(--color-foreground-muted);
 }
 
-/* Scrollbar Utility Class */
-.scroll-elegant {
+/* Scrollbar Utility */
+@utility scroll-elegant {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border-strong) transparent;
-}
-
-.scroll-elegant::-webkit-scrollbar {
-  width: 4px;
-}
-
-.scroll-elegant::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scroll-elegant::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
-  border-radius: 4px;
-}
-
-.scroll-elegant::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground-muted);
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-foreground-muted);
+  }
 }

@@ -1,3 +1,4 @@
+import { cn } from '../../lib/utils';
 import { type ScoredMethod } from '../../types';
 
 interface RankingTableProps {
@@ -8,7 +9,7 @@ export default function RankingTable({ results }: RankingTableProps) {
   return (
     <div className="overflow-x-auto border border-border">
       <table className="w-full text-left text-sm text-foreground">
-        <thead className="sticky top-0 border-b border-border bg-surface-muted font-mono text-[10px] tracking-widest text-foreground-muted uppercase md:relative">
+        <thead className="sticky top-0 border-b border-border bg-surface-muted font-mono text-xxs tracking-widest text-foreground-muted uppercase md:relative">
           <tr>
             <th className="px-4 py-4 font-normal">Rank</th>
             <th className="px-4 py-4 font-normal">Method</th>
@@ -28,15 +29,27 @@ export default function RankingTable({ results }: RankingTableProps) {
             return (
               <tr
                 key={result.method}
-                className={`border-border-strong last:border-0 ${eliminated ? 'opacity-30' : 'hover:bg-surface-muted'} border-b transition-colors`}
+                className={cn(
+                  'border-b border-border-strong transition-colors last:border-0',
+                  eliminated && 'opacity-30',
+                  !eliminated && 'hover:bg-surface-muted'
+                )}
               >
                 <td
-                  className={`px-4 py-4 font-mono text-[10px] ${isFirst ? 'text-primary' : 'text-foreground-muted'}`}
+                  className={cn(
+                    'px-4 py-4 font-mono text-xxs',
+                    isFirst ? 'text-primary' : 'text-foreground-muted'
+                  )}
                 >
                   {!eliminated ? `0${idx + 1}`.slice(-2) : '-'}
                 </td>
                 <td
-                  className={`px-4 py-4 font-serif italic ${eliminated ? 'text-zinc-500 line-through' : isFirst ? 'font-bold text-primary' : 'text-foreground'}`}
+                  className={cn(
+                    'px-4 py-4 font-serif italic',
+                    eliminated && 'text-zinc-500 line-through',
+                    !eliminated &&
+                      (isFirst ? 'font-bold text-primary' : 'text-foreground')
+                  )}
                 >
                   {result.method}
                 </td>
@@ -47,7 +60,10 @@ export default function RankingTable({ results }: RankingTableProps) {
                   {result.rockTotal}
                 </td>
                 <td
-                  className={`px-4 py-4 text-right font-mono text-xs ${isFirst ? 'font-bold text-primary' : 'text-foreground'}`}
+                  className={cn(
+                    'px-4 py-4 text-right font-mono text-xs',
+                    isFirst ? 'font-bold text-primary' : 'text-foreground'
+                  )}
                 >
                   {result.total}
                 </td>

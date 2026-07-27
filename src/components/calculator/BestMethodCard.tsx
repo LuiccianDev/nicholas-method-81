@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
+import Button from '../ui/Button';
 
 interface BestMethodCardProps {
   bestMethod?: ScoredMethod;
@@ -46,7 +47,7 @@ const BestMethodCard = memo(function BestMethodCard({
               <span className="mt-0.5 font-mono text-sm text-foreground-muted">
                 ↳
               </span>
-              <p className="font-mono text-[10px] leading-relaxed text-foreground-muted">
+              <p className="font-mono text-xxs leading-relaxed text-foreground-muted">
                 <strong className="text-foreground">SURFACE COMPARISON:</strong>{' '}
                 Note that{' '}
                 <span className="text-foreground italic">Open Pit</span> scored
@@ -58,13 +59,14 @@ const BestMethodCard = memo(function BestMethodCard({
           )}
         </div>
 
-        <button
+        <Button
+          variant="icon"
           onClick={onOpenDetails}
-          className="group absolute top-4 right-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-primary bg-surface/80 text-secondary backdrop-blur-sm transition-all duration-300 hover:bg-secondary hover:text-surface dark:hover:bg-primary"
+          className="absolute top-4 right-4"
           title="View Full Calculation Matrix"
         >
           <ListTree className="h-5 w-5" />
-        </button>
+        </Button>
       </div>
     </>
   );

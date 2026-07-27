@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Sun, Moon } from 'lucide-react';
+import Button from '../ui/Button';
 
 interface HeaderProps {
   toggleTheme: () => void;
@@ -25,7 +26,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.215, 0.61, 0.355, 1.0] as const, // Quartic ease out
+        ease: [0.215, 0.61, 0.355, 1.0] as const,
       },
     },
   };
@@ -64,7 +65,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       <div className="max-w-xl">
         <motion.p
           variants={itemVariants}
-          className="mb-2 font-mono text-[10px] tracking-[0.3em] text-primary uppercase"
+          className="mb-2 font-mono text-xxs tracking-[0.3em] text-primary uppercase"
         >
           Mining Method Advisor
         </motion.p>

@@ -66,7 +66,7 @@ export default function Main() {
 
         <motion.div
           variants={itemVariants}
-          className={`scroll-elegant flex min-h-0 min-w-0 flex-col gap-6 transition-opacity duration-300 ${
+          className={`flex min-h-0 scroll-elegant min-w-0 flex-col gap-6 transition-opacity duration-300 ${
             isPending ? 'opacity-60' : 'opacity-100'
           }`}
         >
