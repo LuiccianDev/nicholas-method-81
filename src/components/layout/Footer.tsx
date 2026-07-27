@@ -266,7 +266,7 @@ export default function Footer() {
             className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:gap-4"
           >
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide text-secondary uppercase opacity-80">
                 Selector
               </h4>
               <div className="flex flex-col space-y-2">
@@ -292,7 +292,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide text-secondary uppercase opacity-80">
                 Resources
               </h4>
               <div className="flex flex-col space-y-2">
@@ -324,7 +324,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide text-secondary uppercase opacity-80">
                 Network
               </h4>
               <div className="flex flex-col space-y-2">
