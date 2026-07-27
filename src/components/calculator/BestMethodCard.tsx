@@ -19,9 +19,9 @@ const BestMethodCard = memo(function BestMethodCard({
 
   return (
     <>
-      <div className="relative flex min-h-72 flex-col border border-t-2 border-border border-t-primary bg-card p-6 sm:p-8">
+      <div className="relative flex min-h-72 w-full min-w-0 flex-col border border-t-2 border-border border-t-primary bg-card p-6 sm:p-8">
         <div className="mb-auto space-y-3">
-          <p className="max-w-[12ch] font-serif text-[clamp(2.5rem,5vw,5rem)] leading-none break-words text-secondary italic drop-shadow-sm dark:text-primary">
+          <p className="max-w-[12ch] font-serif text-[clamp(2.5rem,5vw,5rem)] leading-none wrap-break-word text-secondary italic drop-shadow-sm">
             {bestMethod?.method || 'None.'}
           </p>
           <p className="text-lg font-light tracking-tight text-foreground-muted sm:text-xl md:text-2xl">
@@ -60,7 +60,7 @@ const BestMethodCard = memo(function BestMethodCard({
 
         <button
           onClick={onOpenDetails}
-          className="group absolute top-4 right-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-primary bg-surface/80 text-secondary backdrop-blur-sm transition-all duration-300 hover:bg-secondary hover:text-surface dark:text-primary dark:hover:bg-primary"
+          className="group absolute top-4 right-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-primary bg-surface/80 text-secondary backdrop-blur-sm transition-all duration-300 hover:bg-secondary hover:text-surface dark:hover:bg-primary"
           title="View Full Calculation Matrix"
         >
           <ListTree className="h-5 w-5" />

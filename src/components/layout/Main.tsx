@@ -75,7 +75,7 @@ export default function Main() {
               02 / Method Recommendation
             </h2>
           </div>
-          <div className="grid gap-6 xl:grid-rows-[auto_auto]">
+          <div className="grid w-full min-w-0 gap-6 xl:grid-rows-[auto_auto]">
             <BestMethodCard
               bestMethod={bestUnderground}
               absoluteBest={absoluteBest}
