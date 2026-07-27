@@ -23,7 +23,7 @@ const ParametersForm = memo(function ParametersForm({
         </h2>
       </div>
 
-      <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-border bg-card p-5 pr-1 sm:p-6 lg:pr-2">
+      <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-border bg-card p-5 sm:p-6 lg:p-6">
         <Presets />
 
         <details

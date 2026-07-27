@@ -130,15 +130,11 @@ export default function Presets() {
               type="button"
               onClick={() => setInputValues(preset.data)}
               whileTap={{ scale: 0.97 }}
-              className={`
-                group relative flex flex-col items-start rounded-xl border p-3 text-left transition-all duration-200
-                ${
-                  isActive
-                    ? 'border-primary/70 bg-primary/4 shadow-xs'
-                    : 'border-border/80 bg-card hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface hover:shadow-md'
-                }
-                active:translate-y-0
-              `}
+              className={`group relative flex flex-col items-start rounded-xl border p-3 text-left transition-all duration-200 ${
+                isActive
+                  ? 'border-primary/70 bg-primary/4 shadow-xs'
+                  : 'border-border/80 bg-card hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface hover:shadow-md'
+              } active:translate-y-0`}
             >
               {isActive && (
                 <span className="absolute right-1.5 bottom-1.5 text-primary">
@@ -147,7 +143,9 @@ export default function Presets() {
               )}
               <div
                 className={`mb-2 flex items-center gap-2 text-xs font-medium transition-colors ${
-                  isActive ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                  isActive
+                    ? 'text-primary'
+                    : 'text-foreground group-hover:text-primary'
                 }`}
               >
                 <span>{preset.name}</span>

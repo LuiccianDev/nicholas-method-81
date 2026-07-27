@@ -62,7 +62,7 @@ const ComparisonChart = memo(function ComparisonChart({
 
   return (
     <>
-      <div className="relative border border-border bg-card p-5 shadow-xs sm:p-6">
+      <div className="relative border border-t-2 border-border border-t-primary bg-card p-5 shadow-xs sm:p-6">
         <h3 className="mb-6 border-l-2 border-border-strong pl-3 font-mono text-[10px] tracking-widest text-foreground-muted uppercase">
           Viability Index Analysis
         </h3>

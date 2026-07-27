@@ -52,7 +52,7 @@ export default function Main() {
   return (
     <main className="flex min-h-0 flex-1 flex-col overflow-x-hidden">
       <motion.div
-        className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(20rem,0.78fr)_minmax(0,1.22fr)]"
+        className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
