@@ -71,7 +71,7 @@ export default function Main() {
           }`}
         >
           <div className="flex-none">
-            <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
+            <h2 className="text-xs font-bold tracking-widest text-primary uppercase">
               02 / Method Recommendation
             </h2>
           </div>

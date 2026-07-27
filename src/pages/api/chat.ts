@@ -8,48 +8,6 @@ const MODELS = [
   'gemini-3.1-flash-lite',
 ] as const;
 
-// ─── Rate limiter ────────────────────────────────────────────────────────────
-const WINDOW_MS = 60_000;
-const MAX_REQUESTS = 10;
-
-const ipLog = new Map<string, number[]>();
-
-function getClientIP(request: Request): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  if (forwarded) {
-    const ip = forwarded.split(',')[0].trim();
-    if (ip) return ip;
-  }
-  const cfIp = request.headers.get('cf-connecting-ip');
-  if (cfIp) return cfIp.trim();
-
-  const realIp = request.headers.get('x-real-ip');
-  if (realIp) return realIp.trim();
-
-  return '127.0.0.1';
-}
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const timestamps = (ipLog.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  if (timestamps.length >= MAX_REQUESTS) return true;
-  ipLog.set(ip, [...timestamps, now]);
-  return false;
-}
-
-// Periodic cleanup
-if (typeof setInterval !== 'undefined') {
-  setInterval(() => {
-    const now = Date.now();
-    for (const [ip, timestamps] of ipLog.entries()) {
-      const fresh = timestamps.filter((t) => now - t < WINDOW_MS);
-      if (fresh.length === 0) ipLog.delete(ip);
-      else ipLog.set(ip, fresh);
-    }
-  }, 5 * 60_000);
-}
-// ─────────────────────────────────────────────────────────────────────────────
-
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
@@ -88,17 +46,6 @@ export const POST: APIRoute = async ({ request }) => {
   const contentLength = Number(request.headers.get('content-length') ?? 0);
   if (contentLength > MAX_BODY_SIZE) {
     return jsonResponse({ reply: 'Request body too large.' }, 413);
-  }
-
-  const ip = getClientIP(request);
-
-  if (isRateLimited(ip)) {
-    return jsonResponse(
-      {
-        reply: 'Too many requests. Please wait a moment before trying again.',
-      },
-      429
-    );
   }
 
   let payload: {

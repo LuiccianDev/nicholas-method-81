@@ -1,3 +1,3 @@
-export function cn(...inputs: unknown[]) {
-  return inputs.flat().filter(Boolean).join(' ');
+export function cn(...inputs: (string | false | null | undefined)[]) {
+  return inputs.filter(Boolean).join(' ');
 }

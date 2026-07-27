@@ -10,6 +10,10 @@ interface GeotechnicalInputProps {
   updateInput: (k: keyof RawMethodInput, v: string | number) => void;
 }
 
+function keyFor<K extends keyof RawMethodInput>(k: K): K {
+  return k;
+}
+
 export default function GeotechnicalInput({
   title,
   prefix,
@@ -18,19 +22,15 @@ export default function GeotechnicalInput({
 }: GeotechnicalInputProps) {
   return (
     <details className="min-w-0 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-xs">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.18em] text-foreground-muted uppercase">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
         <span>{title}</span>
-        <span className="text-[9px] tracking-[0.25em] text-primary">
-          DETAILS
-        </span>
+        <span className="text-xxxs tracking-widest text-primary">DETAILS</span>
       </summary>
       <div className="mt-4 grid min-w-0 gap-3 xl:grid-cols-1 2xl:grid-cols-2">
         <NumericInput
           label="Substance Strength Ratio"
           value={input[`${prefix}SubStr`]}
-          onChange={(v) =>
-            updateInput(`${prefix}SubStr` as keyof RawMethodInput, v)
-          }
+          onChange={(v) => updateInput(keyFor(`${prefix}SubStr`), v)}
           unit="Ratio"
           derivedLabel={getSubStrLabel(input[`${prefix}SubStr`])}
           note="Ratio of uniaxial compressive strength to overburden pressure. Weak: Ratio < 8 • Moderate: Ratio between 8 and 15 • Strong: Ratio > 15"
@@ -38,9 +38,7 @@ export default function GeotechnicalInput({
         <NumericInput
           label="Fracture Spacing"
           value={input[`${prefix}FracSpac`]}
-          onChange={(v) =>
-            updateInput(`${prefix}FracSpac` as keyof RawMethodInput, v)
-          }
+          onChange={(v) => updateInput(keyFor(`${prefix}FracSpac`), v)}
           unit="frac/m"
           derivedLabel={getFracSpacLabel(input[`${prefix}FracSpac`])}
           note="Very Close: > 16 fractures/m (RQD 0-20%) • Close: 10-16 fractures/m (RQD 20-40%) • Wide: 3-10 fractures/m (RQD 40-70%) • Very Wide: < 3 fractures/m (RQD 70-100%)"
@@ -49,12 +47,7 @@ export default function GeotechnicalInput({
           <DropdownSelect
             label="Fracture Strength"
             value={input[`${prefix}FracStr`]}
-            onChange={(v) =>
-              updateInput(
-                `${prefix}FracStr` as keyof RawMethodInput,
-                v as string
-              )
-            }
+            onChange={(v) => updateInput(keyFor(`${prefix}FracStr`), v)}
             options={[
               { value: 'W', label: 'Weak' },
               { value: 'M', label: 'Moderate' },

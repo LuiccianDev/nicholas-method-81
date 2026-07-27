@@ -8,7 +8,7 @@ type Theme = typeof LIGHT_THEME | typeof DARK_THEME;
 
 const getInitialTheme = (): Theme => {
   if (typeof window === 'undefined') return LIGHT_THEME;
-  const t = (window as any).__INITIAL_THEME__;
+  const t = (window as { __INITIAL_THEME__?: Theme }).__INITIAL_THEME__;
   return t === DARK_THEME || t === LIGHT_THEME ? t : LIGHT_THEME;
 };
 

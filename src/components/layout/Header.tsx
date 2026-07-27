@@ -65,7 +65,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
       <div className="max-w-xl">
         <motion.p
           variants={itemVariants}
-          className="mb-2 font-mono text-xxs tracking-[0.3em] text-primary uppercase"
+          className="mb-2 font-mono text-xxs tracking-widest text-primary uppercase"
         >
           Mining Method Advisor
         </motion.p>

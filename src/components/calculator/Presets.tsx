@@ -11,21 +11,8 @@ interface PresetOption {
 }
 
 function inputsMatch(a: RawMethodInput, b: RawMethodInput): boolean {
-  return (
-    a.shape === b.shape &&
-    a.thickness === b.thickness &&
-    a.plunge === b.plunge &&
-    a.depth === b.depth &&
-    a.grade === b.grade &&
-    a.oreSubStr === b.oreSubStr &&
-    a.oreFracSpac === b.oreFracSpac &&
-    a.oreFracStr === b.oreFracStr &&
-    a.hwSubStr === b.hwSubStr &&
-    a.hwFracSpac === b.hwFracSpac &&
-    a.hwFracStr === b.hwFracStr &&
-    a.fwSubStr === b.fwSubStr &&
-    a.fwFracSpac === b.fwFracSpac &&
-    a.fwFracStr === b.fwFracStr
+  return (Object.keys(a) as (keyof RawMethodInput)[]).every(
+    (k) => a[k] === b[k]
   );
 }
 
@@ -154,7 +141,7 @@ export default function Presets() {
                 {preset.badges.map((badge) => (
                   <span
                     key={badge.label}
-                    className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface/50 px-1.5 py-0.5 text-[10px] text-foreground-muted"
+                    className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface/50 px-1.5 py-0.5 text-xxs text-foreground-muted"
                   >
                     <span className="font-medium text-foreground/70">
                       {badge.label}:

@@ -39,6 +39,12 @@
   --text-xxs--line-height: 1.2;
   --text-xxxs: 9px;
   --text-xxxs--line-height: 1.2;
+  --text-xs: 11px;
+  --text-xs--line-height: 1.2;
+
+  /* Tracking Tokens */
+  --tracking-widest: 0.3em;
+  --tracking-wide: 0.2em;
 }
 
 /* Dark Mode Overrides */

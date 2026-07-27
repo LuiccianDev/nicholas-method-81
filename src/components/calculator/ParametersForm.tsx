@@ -18,7 +18,7 @@ const ParametersForm = memo(function ParametersForm({
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-col">
       <div className="mb-4 flex-none">
-        <h2 className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
+        <h2 className="text-xs font-bold tracking-widest text-primary uppercase">
           01 / Analysis Inputs
         </h2>
       </div>
@@ -30,11 +30,9 @@ const ParametersForm = memo(function ParametersForm({
           open
           className="mb-5 overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5"
         >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.2em] text-foreground-muted uppercase">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
             <span>Geometry &amp; Grade</span>
-            <span className="text-[9px] tracking-[0.3em] text-primary">
-              OPEN
-            </span>
+            <span className="text-xxxs tracking-widest text-primary">OPEN</span>
           </summary>
           <div className="mt-4 grid min-w-0 gap-4 xl:grid-cols-1 2xl:grid-cols-2">
             <DropdownSelect
@@ -86,9 +84,9 @@ const ParametersForm = memo(function ParametersForm({
         </details>
 
         <details className="overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[10px] tracking-[0.2em] text-foreground-muted uppercase">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
             <span>Rock Mechanics</span>
-            <span className="text-[9px] tracking-[0.3em] text-primary">
+            <span className="text-xxxs tracking-widest text-primary">
               TOGGLE
             </span>
           </summary>
