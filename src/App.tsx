@@ -1,9 +1,9 @@
 import { Suspense, lazy } from 'react';
-import { useTheme } from './hooks/useTheme';
-import { NicholasProvider } from './context/NicholasContext';
+import { useTheme } from './state/theme';
+import { NicholasProvider } from './state/calculator';
 import Header from './components/layout/Header';
 import Main from './components/layout/Main';
-import ChatBot from './components/ui/ChatBot';
+import ChatBot from './components/chat/ChatBot';
 
 const Footer = lazy(() => import('./components/layout/Footer'));
 

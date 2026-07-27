@@ -22,9 +22,7 @@ export default function RankingTable({ results }: RankingTableProps) {
         </thead>
         <tbody>
           {results.map((result, idx) => {
-            const eliminated =
-              (result.total !== undefined && result.total < 0) ||
-              result.isEliminated;
+            const eliminated = result.isEliminated;
             const isFirst = idx === 0 && !eliminated;
             return (
               <tr

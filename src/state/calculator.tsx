@@ -8,7 +8,8 @@ import {
   type ReactNode,
 } from 'react';
 import type { RawMethodInput, ScoredMethod, ChartDataRow } from '../types';
-import { calculateScores, deriveMethodInput } from '../lib/nicholasData';
+import { calculateScores } from '../lib/nicholas/calculateScores';
+import { deriveMethodInput } from '../lib/nicholas/categorizeInput';
 
 const DEFAULT_INPUT: RawMethodInput = {
   shape: 'I',
@@ -69,26 +70,18 @@ export function NicholasProvider({ children }: { children: ReactNode }) {
         Geometry: Math.max(0, r.geometryScore),
         RockMechanics: Math.max(0, r.rockTotal),
         Total: r.total,
-        isEliminated: r.total < 0 || r.geometryScore < 0 || r.rockTotal < 0,
+        isEliminated: r.isEliminated,
       }))
       .filter((r) => !r.isEliminated);
   }, [results]);
 
   const absoluteBest = useMemo(
-    () =>
-      results.find(
-        (r) => !(r.total < 0 || r.geometryScore < 0 || r.rockTotal < 0)
-      ),
+    () => results.find((r) => !r.isEliminated),
     [results]
   );
 
   const bestUnderground = useMemo(
-    () =>
-      results.find(
-        (r) =>
-          r.method !== 'Open Pit' &&
-          !(r.total < 0 || r.geometryScore < 0 || r.rockTotal < 0)
-      ),
+    () => results.find((r) => r.method !== 'Open Pit' && !r.isEliminated),
     [results]
   );
 

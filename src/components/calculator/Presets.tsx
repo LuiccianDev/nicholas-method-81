@@ -1,7 +1,7 @@
 import { Sparkles, Check } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { RawMethodInput } from '../../types';
-import { useNicholasContext } from '../../context/NicholasContext';
+import { useNicholasContext } from '../../state/calculator';
 
 interface PresetOption {
   id: string;

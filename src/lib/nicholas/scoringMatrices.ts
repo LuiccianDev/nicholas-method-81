@@ -1,81 +1,6 @@
-import type {
-  Thickness,
-  Plunge,
-  SubStr,
-  FracSpac,
-  MethodInput,
-  MiningMethod,
-  ScoredMethod,
-  RawMethodInput,
-} from '../types';
+import type { MiningMethod } from '../../types';
 
-export function getThicknessCat(val: number | ''): Thickness {
-  if (val === '') return 'I';
-  if (val < 10) return 'N';
-  if (val <= 30) return 'I';
-  if (val <= 100) return 'T';
-  return 'VT';
-}
-
-export function getThicknessLabel(val: number | '') {
-  return { N: 'Narrow', I: 'Intermediate', T: 'Thick', VT: 'Very Thick' }[
-    getThicknessCat(val)
-  ];
-}
-
-export function getPlungeCat(val: number | ''): Plunge {
-  if (val === '') return 'I';
-  if (val < 20) return 'F';
-  if (val <= 55) return 'I';
-  return 'S';
-}
-
-export function getPlungeLabel(val: number | '') {
-  return { F: 'Flat', I: 'Intermediate', S: 'Steep' }[getPlungeCat(val)];
-}
-
-export function getSubStrCat(val: number | ''): SubStr {
-  if (val === '') return 'M';
-  if (val < 8) return 'W';
-  if (val <= 15) return 'M';
-  return 'S';
-}
-
-export function getSubStrLabel(val: number | '') {
-  return { W: 'Weak', M: 'Moderate', S: 'Strong' }[getSubStrCat(val)];
-}
-
-export function getFracSpacCat(val: number | ''): FracSpac {
-  if (val === '') return 'C';
-  if (val < 3) return 'VW';
-  if (val <= 10) return 'W';
-  if (val <= 16) return 'C';
-  return 'VC';
-}
-
-export function getFracSpacLabel(val: number | '') {
-  return { VC: 'Very Close', C: 'Close', W: 'Wide', VW: 'Very Wide' }[
-    getFracSpacCat(val)
-  ];
-}
-
-export function deriveMethodInput(raw: RawMethodInput): MethodInput {
-  return {
-    shape: raw.shape,
-    thickness: getThicknessCat(raw.thickness),
-    plunge: getPlungeCat(raw.plunge),
-    grade: raw.grade,
-    oreSubStr: getSubStrCat(raw.oreSubStr),
-    oreFracSpac: getFracSpacCat(raw.oreFracSpac),
-    oreFracStr: raw.oreFracStr,
-    hwSubStr: getSubStrCat(raw.hwSubStr),
-    hwFracSpac: getFracSpacCat(raw.hwFracSpac),
-    hwFracStr: raw.hwFracStr,
-    fwSubStr: getSubStrCat(raw.fwSubStr),
-    fwFracSpac: getFracSpacCat(raw.fwFracSpac),
-    fwFracStr: raw.fwFracStr,
-  };
-}
+export const ELIMINATED = -49;
 
 export const MINING_METHODS: MiningMethod[] = [
   'Open Pit',
@@ -90,7 +15,7 @@ export const MINING_METHODS: MiningMethod[] = [
   'Square Set',
 ];
 
-const T3_GEOMETRY = {
+export const T3_GEOMETRY = {
   'Open Pit': {
     shape: { M: 3, TP: 2, I: 3 },
     thickness: { N: 2, I: 3, T: 4, VT: 4 },
@@ -99,7 +24,7 @@ const T3_GEOMETRY = {
   },
   'Block Caving': {
     shape: { M: 4, TP: 2, I: 0 },
-    thickness: { N: -49, I: 0, T: 2, VT: 4 },
+    thickness: { N: ELIMINATED, I: 0, T: 2, VT: 4 },
     plunge: { F: 3, I: 2, S: 4 },
     grade: { U: 4, G: 2, E: 0 },
   },
@@ -111,19 +36,19 @@ const T3_GEOMETRY = {
   },
   'Sublevel Caving': {
     shape: { M: 3, TP: 4, I: 1 },
-    thickness: { N: -49, I: 0, T: 4, VT: 4 },
+    thickness: { N: ELIMINATED, I: 0, T: 4, VT: 4 },
     plunge: { F: 1, I: 1, S: 4 },
     grade: { U: 4, G: 2, E: 0 },
   },
   Longwall: {
-    shape: { M: -49, TP: 4, I: -49 },
-    thickness: { N: 4, I: 0, T: -49, VT: -49 },
-    plunge: { F: 4, I: 0, S: -49 },
+    shape: { M: ELIMINATED, TP: 4, I: ELIMINATED },
+    thickness: { N: 4, I: 0, T: ELIMINATED, VT: ELIMINATED },
+    plunge: { F: 4, I: 0, S: ELIMINATED },
     grade: { U: 4, G: 2, E: 0 },
   },
   'Room & Pillar': {
     shape: { M: 0, TP: 4, I: 2 },
-    thickness: { N: 4, I: 2, T: -49, VT: -49 },
+    thickness: { N: 4, I: 2, T: ELIMINATED, VT: ELIMINATED },
     plunge: { F: 4, I: 1, S: 0 },
     grade: { U: 3, G: 3, E: 3 },
   },
@@ -141,7 +66,7 @@ const T3_GEOMETRY = {
   },
   'Top Slicing': {
     shape: { M: 3, TP: 3, I: 0 },
-    thickness: { N: -49, I: 0, T: 3, VT: 4 },
+    thickness: { N: ELIMINATED, I: 0, T: 3, VT: 4 },
     plunge: { F: 4, I: 1, S: 2 },
     grade: { U: 4, G: 2, E: 0 },
   },
@@ -153,7 +78,7 @@ const T3_GEOMETRY = {
   },
 };
 
-const T4A_ORE = {
+export const T4A_ORE = {
   'Open Pit': {
     sub: { W: 3, M: 4, S: 4 },
     spac: { VC: 2, C: 3, W: 4, VW: 4 },
@@ -165,7 +90,7 @@ const T4A_ORE = {
     str: { W: 4, M: 3, S: 0 },
   },
   'Sublevel Stoping': {
-    sub: { W: -49, M: 3, S: 4 },
+    sub: { W: ELIMINATED, M: 3, S: 4 },
     spac: { VC: 0, C: 0, W: 1, VW: 4 },
     str: { W: 0, M: 2, S: 4 },
   },
@@ -206,7 +131,7 @@ const T4A_ORE = {
   },
 };
 
-const T4B_HANGING_WALL = {
+export const T4B_HANGING_WALL = {
   'Open Pit': {
     sub: { W: 3, M: 4, S: 4 },
     spac: { VC: 2, C: 3, W: 4, VW: 4 },
@@ -218,8 +143,8 @@ const T4B_HANGING_WALL = {
     str: { W: 4, M: 2, S: 0 },
   },
   'Sublevel Stoping': {
-    sub: { W: -49, M: 3, S: 4 },
-    spac: { VC: -49, C: 0, W: 1, VW: 4 },
+    sub: { W: ELIMINATED, M: 3, S: 4 },
+    spac: { VC: ELIMINATED, C: 0, W: 1, VW: 4 },
     str: { W: 0, M: 2, S: 4 },
   },
   'Sublevel Caving': {
@@ -259,7 +184,7 @@ const T4B_HANGING_WALL = {
   },
 };
 
-const T4C_FOOTWALL = {
+export const T4C_FOOTWALL = {
   'Open Pit': {
     sub: { W: 3, M: 4, S: 4 },
     spac: { VC: 2, C: 3, W: 4, VW: 4 },
@@ -311,49 +236,3 @@ const T4C_FOOTWALL = {
     str: { W: 4, M: 4, S: 2 },
   },
 };
-
-export function calculateScores(input: MethodInput): ScoredMethod[] {
-  return MINING_METHODS.map((method) => {
-    // Geo/Grade
-    const geo = T3_GEOMETRY[method];
-    const shp = geo.shape[input.shape];
-    const thk = geo.thickness[input.thickness];
-    const pln = geo.plunge[input.plunge];
-    const grd = geo.grade[input.grade];
-    const geometryScore = shp + thk + pln + grd;
-
-    // Ore Zone
-    const ore = T4A_ORE[method];
-    const oSub = ore.sub[input.oreSubStr];
-    const oSpac = ore.spac[input.oreFracSpac];
-    const oStr = ore.str[input.oreFracStr];
-    const oreScore = oSub + oSpac + oStr;
-
-    // Hanging Wall
-    const hwData = T4B_HANGING_WALL[method];
-    const hwSub = hwData.sub[input.hwSubStr];
-    const hwSpac = hwData.spac[input.hwFracSpac];
-    const hwStr = hwData.str[input.hwFracStr];
-    const hwScore = hwSub + hwSpac + hwStr;
-
-    // Footwall
-    const fwData = T4C_FOOTWALL[method];
-    const fwSub = fwData.sub[input.fwSubStr];
-    const fwSpac = fwData.spac[input.fwFracSpac];
-    const fwStr = fwData.str[input.fwFracStr];
-    const fwScore = fwSub + fwSpac + fwStr;
-
-    const rockTotal = oreScore + hwScore + fwScore;
-    const total = geometryScore + rockTotal;
-
-    return {
-      method,
-      geometryScore,
-      oreScore,
-      hwScore,
-      fwScore,
-      rockTotal,
-      total,
-    };
-  }).sort((a, b) => b.total - a.total); // Sort highest first
-}

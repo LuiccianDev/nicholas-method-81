@@ -1,9 +1,12 @@
 import { memo } from 'react';
 import { type RawMethodInput } from '../../types';
-import { getThicknessLabel, getPlungeLabel } from '../../lib/nicholasData';
+import {
+  getThicknessLabel,
+  getPlungeLabel,
+} from '../../lib/nicholas/categorizeInput';
 import DropdownSelect from '../ui/DropdownSelect';
 import NumericInput from '../ui/NumericInput';
-import GeotechnicalInput from '../ui/GeotechnicalInput';
+import GeotechnicalInput from './GeotechnicalInput';
 import Presets from './Presets';
 
 interface ParametersFormProps {

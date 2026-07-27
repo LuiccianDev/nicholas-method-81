@@ -9,8 +9,9 @@ import {
   Check,
   Sparkles,
 } from 'lucide-react';
-import IconHelmet from './IconHelmet';
-import { useNicholasContext } from '../../context/NicholasContext';
+import IconHelmet from '../icons/IconHelmet';
+import { useNicholasContext } from '../../state/calculator';
+import { useTypingAnimation } from '../../hooks/useTypingAnimation';
 
 interface ChatMessage {
   id: string;
@@ -32,15 +33,15 @@ export default function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // Smooth typewriter reveal state
-  const [activeTypingId, setActiveTypingId] = useState<string | null>(null);
-  const [typedLengthMap, setTypedLengthMap] = useState<Record<string, number>>(
-    {}
-  );
+  const {
+    activeId: activeTypingId,
+    start: triggerSmoothTyping,
+    stop: stopTyping,
+    getDisplayedText,
+  } = useTypingAnimation();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const typingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const {
     input: calcInput,
     results,
@@ -50,7 +51,7 @@ export default function ChatBot() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, typedLengthMap, isLoading]);
+  }, [messages, activeTypingId, isLoading]);
 
   useEffect(() => {
     if (isOpen) {
@@ -58,42 +59,12 @@ export default function ChatBot() {
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    return () => {
-      if (typingTimerRef.current) clearInterval(typingTimerRef.current);
-    };
-  }, []);
-
-  const triggerSmoothTyping = (msgId: string, fullText: string) => {
-    setActiveTypingId(msgId);
-    setTypedLengthMap((prev) => ({ ...prev, [msgId]: 0 }));
-
-    let currentLength = 0;
-    if (typingTimerRef.current) clearInterval(typingTimerRef.current);
-
-    typingTimerRef.current = setInterval(() => {
-      currentLength = Math.min(currentLength + 2, fullText.length);
-      setTypedLengthMap((prev) => ({ ...prev, [msgId]: currentLength }));
-
-      if (currentLength >= fullText.length) {
-        if (typingTimerRef.current) clearInterval(typingTimerRef.current);
-        typingTimerRef.current = null;
-        setActiveTypingId(null);
-      }
-    }, 16);
-  };
-
   const handleSend = async (messageText?: string) => {
     const textToSend = (messageText ?? input).trim();
     if (!textToSend || isLoading) return;
 
     if (!messageText) setInput('');
-
-    if (typingTimerRef.current) {
-      clearInterval(typingTimerRef.current);
-      typingTimerRef.current = null;
-      setActiveTypingId(null);
-    }
+    stopTyping();
 
     const userMessageId = `user-${Date.now()}`;
     setMessages((prev) => [
@@ -160,8 +131,7 @@ export default function ChatBot() {
   };
 
   const clearChat = () => {
-    if (typingTimerRef.current) clearInterval(typingTimerRef.current);
-    setActiveTypingId(null);
+    stopTyping();
     setMessages([
       {
         id: 'welcome-reset',
@@ -202,7 +172,6 @@ export default function ChatBot() {
         }`}
         style={{ maxHeight: '75vh', height: '520px' }}
       >
-        {/* Chat Header */}
         <div className="flex items-center justify-between border-b border-border bg-surface-muted px-4 py-3">
           <div className="flex items-center gap-2">
             <div className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -227,15 +196,10 @@ export default function ChatBot() {
           </button>
         </div>
 
-        {/* Chat Messages */}
         <div className="scroll-elegant flex-1 space-y-3 overflow-y-auto p-4">
           {messages.map((msg) => {
             const isTyping = activeTypingId === msg.id;
-            const textLength = typedLengthMap[msg.id];
-            const displayedText =
-              isTyping && textLength !== undefined
-                ? msg.content.slice(0, textLength)
-                : msg.content;
+            const displayedText = getDisplayedText(msg.id, msg.content);
 
             return (
               <div
@@ -315,7 +279,6 @@ export default function ChatBot() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Dynamic Suggestion Chips */}
         <div className="border-t border-border/50 bg-surface-muted/30 px-3 py-2">
           <div className="mb-1 flex items-center gap-1 text-[10px] font-medium tracking-wider text-foreground-muted uppercase">
             <Sparkles size={11} className="text-primary" />
@@ -336,7 +299,6 @@ export default function ChatBot() {
           </div>
         </div>
 
-        {/* Input Footer */}
         <div className="flex flex-col gap-1 border-t border-border p-3">
           <div className="flex items-center gap-2">
             <input

@@ -1,6 +1,6 @@
 import { Suspense, useCallback, lazy, useState } from 'react';
 import { motion, type Variants } from 'motion/react';
-import { useNicholasContext } from '../../context/NicholasContext';
+import { useNicholasContext } from '../../state/calculator';
 import ParametersForm from '../calculator/ParametersForm';
 import BestMethodCard from '../calculator/BestMethodCard';
 import ComparisonChart from '../calculator/ComparisonChart';
