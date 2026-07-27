@@ -1,22 +1,38 @@
-import { Sparkles, Layers, Pickaxe, ShieldAlert } from 'lucide-react';
+import { Sparkles, Check } from 'lucide-react';
+import { motion } from 'motion/react';
 import type { RawMethodInput } from '../../types';
 import { useNicholasContext } from '../../context/NicholasContext';
 
 interface PresetOption {
   id: string;
   name: string;
-  description: string;
-  icon: typeof Sparkles;
   data: RawMethodInput;
+  badges: { label: string; value: string }[];
+}
+
+function inputsMatch(a: RawMethodInput, b: RawMethodInput): boolean {
+  return (
+    a.shape === b.shape &&
+    a.thickness === b.thickness &&
+    a.plunge === b.plunge &&
+    a.depth === b.depth &&
+    a.grade === b.grade &&
+    a.oreSubStr === b.oreSubStr &&
+    a.oreFracSpac === b.oreFracSpac &&
+    a.oreFracStr === b.oreFracStr &&
+    a.hwSubStr === b.hwSubStr &&
+    a.hwFracSpac === b.hwFracSpac &&
+    a.hwFracStr === b.hwFracStr &&
+    a.fwSubStr === b.fwSubStr &&
+    a.fwFracSpac === b.fwFracSpac &&
+    a.fwFracStr === b.fwFracStr
+  );
 }
 
 const PRESETS: PresetOption[] = [
   {
     id: 'narrow-vein',
     name: 'Deep Narrow Vein',
-    description:
-      'Steeply dipping vein (70°), 3m thickness, high rock mass strength.',
-    icon: Pickaxe,
     data: {
       shape: 'I',
       thickness: 3,
@@ -33,13 +49,16 @@ const PRESETS: PresetOption[] = [
       fwFracSpac: 15,
       fwFracStr: 'S',
     },
+    badges: [
+      { label: 'Shape', value: 'Irregular' },
+      { label: 'Thickness', value: '3 m' },
+      { label: 'Depth', value: '850 m' },
+      { label: 'Grade', value: 'Gradational' },
+    ],
   },
   {
     id: 'porphyry-mass',
     name: 'Massive Porphyry Body',
-    description:
-      'Deep massive deposit (65m thickness), moderate to weak rock strength.',
-    icon: Layers,
     data: {
       shape: 'M',
       thickness: 65,
@@ -56,13 +75,16 @@ const PRESETS: PresetOption[] = [
       fwFracSpac: 12,
       fwFracStr: 'M',
     },
+    badges: [
+      { label: 'Shape', value: 'Equi-dimensional' },
+      { label: 'Thickness', value: '65 m' },
+      { label: 'Depth', value: '550 m' },
+      { label: 'Grade', value: 'Uniform' },
+    ],
   },
   {
     id: 'shallow-mantle',
     name: 'Competent Shallow Bed',
-    description:
-      'Flat/tabular deposit (15° plunge), highly competent rock mass.',
-    icon: ShieldAlert,
     data: {
       shape: 'TP',
       thickness: 12,
@@ -79,11 +101,17 @@ const PRESETS: PresetOption[] = [
       fwFracSpac: 17,
       fwFracStr: 'S',
     },
+    badges: [
+      { label: 'Shape', value: 'Platy / Tabular' },
+      { label: 'Thickness', value: '12 m' },
+      { label: 'Depth', value: '220 m' },
+      { label: 'Grade', value: 'Erratic' },
+    ],
   },
 ];
 
 export default function Presets() {
-  const { setInputValues } = useNicholasContext();
+  const { input, setInputValues } = useNicholasContext();
 
   return (
     <div className="mb-6 rounded-2xl border border-border bg-surface-muted/40 p-4 shadow-sm">
@@ -95,22 +123,49 @@ export default function Presets() {
       </div>
       <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
         {PRESETS.map((preset) => {
-          const Icon = preset.icon;
+          const isActive = inputsMatch(input, preset.data);
           return (
-            <button
+            <motion.button
               key={preset.id}
               type="button"
               onClick={() => setInputValues(preset.data)}
-              className="group flex flex-col items-start rounded-xl border border-border/80 bg-card p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface hover:shadow-md active:translate-y-0"
+              whileTap={{ scale: 0.97 }}
+              className={`
+                group relative flex flex-col items-start rounded-xl border p-3 text-left transition-all duration-200
+                ${
+                  isActive
+                    ? 'border-primary/70 bg-primary/4 shadow-xs'
+                    : 'border-border/80 bg-card hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface hover:shadow-md'
+                }
+                active:translate-y-0
+              `}
             >
-              <div className="mb-1 flex items-center gap-2 text-xs font-medium text-foreground group-hover:text-primary">
-                <Icon className="size-3.5 text-primary" />
+              {isActive && (
+                <span className="absolute right-1.5 bottom-1.5 text-primary">
+                  <Check className="size-4" />
+                </span>
+              )}
+              <div
+                className={`mb-2 flex items-center gap-2 text-xs font-medium transition-colors ${
+                  isActive ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                }`}
+              >
                 <span>{preset.name}</span>
               </div>
-              <p className="line-clamp-2 text-xs leading-tight text-foreground-muted">
-                {preset.description}
-              </p>
-            </button>
+              <div className="flex flex-wrap gap-1">
+                {preset.badges.map((badge) => (
+                  <span
+                    key={badge.label}
+                    className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface/50 px-1.5 py-0.5 text-[10px] text-foreground-muted"
+                  >
+                    <span className="font-medium text-foreground/70">
+                      {badge.label}:
+                    </span>
+                    {badge.value}
+                  </span>
+                ))}
+              </div>
+            </motion.button>
           );
         })}
       </div>

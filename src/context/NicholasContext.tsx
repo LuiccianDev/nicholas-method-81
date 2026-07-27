@@ -11,20 +11,20 @@ import type { RawMethodInput, ScoredMethod, ChartDataRow } from '../types';
 import { calculateScores, deriveMethodInput } from '../lib/nicholasData';
 
 const DEFAULT_INPUT: RawMethodInput = {
-  shape: 'M',
-  thickness: 20,
-  plunge: 45,
-  depth: 500,
-  grade: 'U',
-  oreSubStr: 10,
-  oreFracSpac: 12,
-  oreFracStr: 'M',
-  hwSubStr: 10,
-  hwFracSpac: 12,
+  shape: 'I',
+  thickness: 3,
+  plunge: 70,
+  depth: 850,
+  grade: 'G',
+  oreSubStr: 14,
+  oreFracSpac: 16,
+  oreFracStr: 'S',
+  hwSubStr: 12,
+  hwFracSpac: 14,
   hwFracStr: 'M',
-  fwSubStr: 10,
-  fwFracSpac: 12,
-  fwFracStr: 'M',
+  fwSubStr: 14,
+  fwFracSpac: 15,
+  fwFracStr: 'S',
 };
 
 interface NicholasContextType {
