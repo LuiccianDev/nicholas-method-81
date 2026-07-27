@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-  MessageCircle,
   X,
   Send,
   Bot,
@@ -10,6 +9,7 @@ import {
   Check,
   Sparkles,
 } from 'lucide-react';
+import IconHelmet from './IconHelmet';
 import { useNicholasContext } from '../../context/NicholasContext';
 
 interface ChatMessage {
@@ -184,10 +184,14 @@ export default function ChatBot() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 bottom-4 z-50 flex size-14 cursor-pointer items-center justify-center rounded-full border border-border bg-primary text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl active:scale-95 md:right-6 md:bottom-6"
+        className="fixed right-4 bottom-4 z-50 flex size-14 cursor-pointer items-center justify-center rounded-full border border-border bg-foreground-muted text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl active:scale-95 md:right-6 md:bottom-6"
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? (
+          <X size={24} />
+        ) : (
+          <IconHelmet className="size-15 text-foreground-muted" />
+        )}
       </button>
 
       <div
