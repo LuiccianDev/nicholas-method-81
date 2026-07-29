@@ -5,11 +5,13 @@ import {
   useMemo,
   useState,
   useTransition,
+  useEffect,
   type ReactNode,
 } from 'react';
 import type { RawMethodInput, ScoredMethod, ChartDataRow } from '../types';
 import { calculateScores } from '../lib/nicholas/calculateScores';
 import { deriveMethodInput } from '../lib/nicholas/categorizeInput';
+import { publishCalculatorData } from '../lib/nicholas/calculatorStore';
 
 const DEFAULT_INPUT: RawMethodInput = {
   shape: 'I',
@@ -84,6 +86,15 @@ export function NicholasProvider({ children }: { children: ReactNode }) {
     () => results.find((r) => r.method !== 'Open Pit' && !r.isEliminated),
     [results]
   );
+
+  useEffect(() => {
+    publishCalculatorData({
+      input,
+      results,
+      bestUndergroundMethod: bestUnderground?.method,
+      absoluteBestMethod: absoluteBest?.method,
+    });
+  }, [input, results, bestUnderground, absoluteBest]);
 
   return (
     <NicholasContext.Provider

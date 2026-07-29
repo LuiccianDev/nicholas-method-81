@@ -48,13 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
     return jsonResponse({ reply: 'Request body too large.' }, 413);
   }
 
-  let payload: {
-    message?: unknown;
-    inputs?: unknown;
-    results?: unknown;
-    bestUnderground?: unknown;
-    absoluteBest?: unknown;
-  };
+  let payload: Record<string, unknown>;
 
   try {
     payload = await request.json();
@@ -77,13 +71,11 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const apiKey = GEMINI_API_KEY;
-
-  if (!apiKey) {
+  if (!GEMINI_API_KEY) {
     return jsonResponse({ reply: 'Gemini API key is not configured.' }, 500);
   }
 
-  const ai = new GoogleGenAI({ apiKey });
+  const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
   const safeInputs =
     typeof inputs === 'object' && inputs !== null ? inputs : {};
@@ -104,6 +96,7 @@ ${JSON.stringify(safeResults, null, 2)}
 
   let outputText = '';
   let lastError: unknown;
+  let wasQuotaError = false;
 
   for (const model of MODELS) {
     try {
@@ -123,22 +116,22 @@ ${JSON.stringify(safeResults, null, 2)}
       lastError = err;
       const status = (err as { status?: number })?.status;
       if (status === 429) {
-        console.warn(`Model ${model} hit quota limit — not retrying.`);
-        break;
+        wasQuotaError = true;
+        console.warn(`Model ${model} quota exhausted, trying next...`);
+        continue;
       }
       console.warn(`Model ${model} failed, trying next...`, err);
     }
   }
 
   if (!outputText) {
-    const isQuotaError = (lastError as { status?: number })?.status === 429;
     return jsonResponse(
       {
-        reply: isQuotaError
+        reply: wasQuotaError
           ? 'AI quota exhausted. Please wait a moment and try again.'
           : 'Could not generate a response at this time. Please try again.',
       },
-      isQuotaError ? 429 : 502
+      wasQuotaError ? 429 : 502
     );
   }
 

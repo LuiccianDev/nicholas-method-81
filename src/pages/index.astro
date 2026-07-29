@@ -1,5 +1,8 @@
 ---
+import ThemeToggle from '../components/ui/ThemeToggle';
 import App from '../App';
+import ChatBot from '../components/chat/ChatBot';
+import Footer from '../components/layout/Footer.astro';
 import '../styles/index.css';
 ---
 
@@ -61,6 +64,49 @@ import '../styles/index.css';
     </script>
   </head>
   <body>
-    <App client:load />
+    <div
+      class="flex min-h-dvh w-full flex-col overflow-x-hidden bg-surface font-sans text-foreground"
+    >
+      <div
+        class="mx-auto flex w-full max-w-400 flex-1 flex-col px-4 py-4 md:px-8 md:py-6"
+      >
+        <header
+          class="mb-6 flex flex-col items-start justify-between gap-4 border-b border-border pb-5 md:flex-row md:items-end"
+          id="top"
+        >
+          <div class="max-w-xl">
+            <p
+              class="mb-2 font-mono text-xxs tracking-widest text-primary uppercase"
+            >
+              Mining Method Advisor
+            </p>
+            <h1
+              class="font-serif text-3xl leading-none font-bold tracking-tight text-foreground italic md:text-5xl"
+            >
+              Nicholas Selector<span class="text-primary">.</span>
+            </h1>
+          </div>
+          <div
+            class="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end"
+          >
+            <ThemeToggle client:idle />
+            <div class="text-left md:text-right">
+              <p class="font-mono text-xs text-foreground-muted">
+                REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE
+              </p>
+              <p class="font-mono text-xs text-foreground-muted">
+                EST. 1981 / ROCK MECHANICS
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <App client:load />
+      </div>
+
+      <Footer />
+
+      <ChatBot client:idle />
+    </div>
   </body>
 </html>

@@ -1,11 +1,16 @@
 import type { MethodInput, ScoredMethod } from '../../types';
 import {
+  ELIMINATED,
   MINING_METHODS,
   T3_GEOMETRY,
   T4A_ORE,
   T4B_HANGING_WALL,
   T4C_FOOTWALL,
 } from './scoringMatrices';
+
+function includeEliminated(...values: number[]) {
+  return values.some((v) => v <= ELIMINATED);
+}
 
 export function calculateScores(input: MethodInput): ScoredMethod[] {
   return MINING_METHODS.map((method) => {
@@ -45,7 +50,12 @@ export function calculateScores(input: MethodInput): ScoredMethod[] {
       fwScore,
       rockTotal,
       total,
-      isEliminated: total < 0 || geometryScore < 0 || rockTotal < 0,
+      isEliminated: includeEliminated(
+        geometryScore,
+        oreScore,
+        hwScore,
+        fwScore
+      ),
     };
   }).sort((a, b) => b.total - a.total);
 }

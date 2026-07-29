@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import {
   X,
   Send,
@@ -10,142 +10,154 @@ import {
   Sparkles,
 } from 'lucide-react';
 import IconHelmet from '../icons/IconHelmet';
-import { useNicholasContext } from '../../state/calculator';
-import { useTypingAnimation } from '../../hooks/useTypingAnimation';
+import { useChat, type ChatMessage } from '../../hooks/useChat';
 
-interface ChatMessage {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
+function ChatBubble({
+  message,
+  isTyping,
+  displayedText,
+  copiedId,
+  onCopy,
+}: {
+  message: ChatMessage;
+  isTyping: boolean;
+  displayedText: string;
+  copiedId: string | null;
+  onCopy: (id: string, content: string) => void;
+}) {
+  return (
+    <div
+      className={`group relative flex items-start gap-2 ${
+        message.role === 'user' ? 'flex-row-reverse' : ''
+      }`}
+    >
+      <div
+        className={`flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+          message.role === 'user'
+            ? 'bg-primary text-white'
+            : 'bg-surface-muted text-foreground'
+        }`}
+      >
+        {message.role === 'user' ? <User size={14} /> : <Bot size={14} />}
+      </div>
+      {message.role === 'assistant' ? (
+        <div className="flex max-w-[85%] flex-col">
+          <div className="rounded-2xl border border-border/50 bg-surface-muted px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-foreground">
+            {displayedText}
+            {isTyping && (
+              <span className="ml-0.5 animate-pulse font-bold text-primary">
+                │
+              </span>
+            )}
+          </div>
+          {!isTyping && (
+            <div className="mt-1 flex justify-end">
+              <button
+                onClick={() => onCopy(message.id, message.content)}
+                className="flex cursor-pointer items-center gap-1 rounded p-1 text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
+                title="Copy message"
+              >
+                {copiedId === message.id ? (
+                  <Check size={12} className="text-green-500" />
+                ) : (
+                  <Copy size={12} />
+                )}
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="max-w-[85%] rounded-2xl bg-primary px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-white">
+          {displayedText}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LoadingDots() {
+  return (
+    <div className="flex items-start gap-2">
+      <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-muted text-foreground">
+        <Bot size={14} />
+      </div>
+      <div className="rounded-2xl border border-border/50 bg-surface-muted px-4 py-3 text-sm text-foreground-muted">
+        <div className="flex items-center gap-1.5">
+          {[0, 150, 300].map((delay) => (
+            <span
+              key={delay}
+              className="size-1.5 animate-bounce rounded-full bg-primary"
+              style={{ animationDelay: `${delay}ms` }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QuickSuggestions({
+  prompts,
+  onSelect,
+  disabled,
+}: {
+  prompts: string[];
+  onSelect: (text: string) => void;
+  disabled: boolean;
+}) {
+  return (
+    <div className="border-t border-border/50 bg-surface-muted/30 px-3 py-2">
+      <div className="mb-1 flex items-center gap-1 text-[10px] font-medium tracking-wider text-foreground-muted uppercase">
+        <Sparkles size={11} className="text-primary" />
+        <span>Quick Suggestions</span>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {prompts.map((promptText, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => onSelect(promptText)}
+            disabled={disabled}
+            className="rounded-lg border border-border bg-card px-2.5 py-1 text-xs text-foreground-muted transition-all hover:border-primary hover:text-foreground hover:shadow-xs active:scale-95 disabled:opacity-50"
+          >
+            {promptText}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: 'welcome',
-      role: 'assistant',
-      content:
-        "Hello! I'm your Nicholas Method 81 assistant. Ask me anything about your geotechnical input parameters, score breakdown, or underground mining method selection.",
-    },
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-
   const {
-    activeId: activeTypingId,
-    start: triggerSmoothTyping,
-    stop: stopTyping,
+    messages,
+    input,
+    setInput,
+    isLoading,
+    copiedId,
+    activeTypingId,
     getDisplayedText,
-  } = useTypingAnimation();
-
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const {
-    input: calcInput,
-    results,
-    absoluteBest,
-    bestUnderground,
-  } = useNicholasContext();
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, activeTypingId, isLoading]);
+    messagesEndRef,
+    inputRef,
+    sendMessage,
+    handleKeyDown,
+    handleCopy,
+    clearChat,
+    bestUndergroundMethod,
+    absoluteBestMethod,
+  } = useChat();
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 150);
     }
-  }, [isOpen]);
-
-  const handleSend = async (messageText?: string) => {
-    const textToSend = (messageText ?? input).trim();
-    if (!textToSend || isLoading) return;
-
-    if (!messageText) setInput('');
-    stopTyping();
-
-    const userMessageId = `user-${Date.now()}`;
-    setMessages((prev) => [
-      ...prev,
-      { id: userMessageId, role: 'user', content: textToSend },
-    ]);
-    setIsLoading(true);
-
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: textToSend,
-          inputs: calcInput,
-          bestUnderground: bestUnderground?.method,
-          absoluteBest: absoluteBest?.method,
-          results: results.map((r) => ({
-            method: r.method,
-            geometryScore: r.geometryScore,
-            rockTotal: r.rockTotal,
-            total: r.total,
-          })),
-        }),
-      });
-
-      const data = await res.json();
-      const assistantMessageId = `assistant-${Date.now()}`;
-      const replyText = data.reply || '❌ Could not retrieve a response.';
-
-      setMessages((prev) => [
-        ...prev,
-        { id: assistantMessageId, role: 'assistant', content: replyText },
-      ]);
-
-      if (res.ok && data.reply) {
-        triggerSmoothTyping(assistantMessageId, replyText);
-      }
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `err-${Date.now()}`,
-          role: 'assistant',
-          content: '❌ Connection error. Please try again.',
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-
-  const handleCopy = (id: string, content: string) => {
-    navigator.clipboard.writeText(content);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
-  const clearChat = () => {
-    stopTyping();
-    setMessages([
-      {
-        id: 'welcome-reset',
-        role: 'assistant',
-        content:
-          'Chat history reset. Ask me anything about Nicholas Method 81.',
-      },
-    ]);
-  };
+  }, [isOpen, inputRef]);
 
   const topMethodName =
-    bestUnderground?.method || absoluteBest?.method || 'recommended method';
+    bestUndergroundMethod || absoluteBestMethod || 'recommended method';
   const quickPrompts = [
-    `Why is Open Pit set aside for underground selection?`,
+    'Why is Open Pit set aside for underground selection?',
     `Why is ${topMethodName} recommended?`,
     'Summarize my geotechnical case',
   ];
@@ -197,107 +209,27 @@ export default function ChatBot() {
         </div>
 
         <div className="scroll-elegant flex-1 space-y-3 overflow-y-auto p-4">
-          {messages.map((msg) => {
-            const isTyping = activeTypingId === msg.id;
-            const displayedText = getDisplayedText(msg.id, msg.content);
+          {messages.map((msg) => (
+            <ChatBubble
+              key={msg.id}
+              message={msg}
+              isTyping={activeTypingId === msg.id}
+              displayedText={getDisplayedText(msg.id, msg.content)}
+              copiedId={copiedId}
+              onCopy={handleCopy}
+            />
+          ))}
 
-            return (
-              <div
-                key={msg.id}
-                className={`group relative flex items-start gap-2 ${
-                  msg.role === 'user' ? 'flex-row-reverse' : ''
-                }`}
-              >
-                <div
-                  className={`flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
-                    msg.role === 'user'
-                      ? 'bg-primary text-white'
-                      : 'bg-surface-muted text-foreground'
-                  }`}
-                >
-                  {msg.role === 'user' ? <User size={14} /> : <Bot size={14} />}
-                </div>
-                {msg.role === 'assistant' ? (
-                  <div className="flex max-w-[85%] flex-col">
-                    <div className="rounded-2xl border border-border/50 bg-surface-muted px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-foreground">
-                      {displayedText}
-                      {isTyping && (
-                        <span className="ml-0.5 animate-pulse font-bold text-primary">
-                          │
-                        </span>
-                      )}
-                    </div>
-                    {!isTyping && (
-                      <div className="mt-1 flex justify-end">
-                        <button
-                          onClick={() => handleCopy(msg.id, msg.content)}
-                          className="flex cursor-pointer items-center gap-1 rounded p-1 text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
-                          title="Copy message"
-                        >
-                          {copiedId === msg.id ? (
-                            <Check size={12} className="text-green-500" />
-                          ) : (
-                            <Copy size={12} />
-                          )}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="max-w-[85%] rounded-2xl bg-primary px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-white">
-                    {displayedText}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-
-          {isLoading && (
-            <div className="flex items-start gap-2">
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-muted text-foreground">
-                <Bot size={14} />
-              </div>
-              <div className="rounded-2xl border border-border/50 bg-surface-muted px-4 py-3 text-sm text-foreground-muted">
-                <div className="flex items-center gap-1.5">
-                  <span
-                    className="size-1.5 animate-bounce rounded-full bg-primary"
-                    style={{ animationDelay: '0ms' }}
-                  />
-                  <span
-                    className="size-1.5 animate-bounce rounded-full bg-primary"
-                    style={{ animationDelay: '150ms' }}
-                  />
-                  <span
-                    className="size-1.5 animate-bounce rounded-full bg-primary"
-                    style={{ animationDelay: '300ms' }}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+          {isLoading && <LoadingDots />}
 
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="border-t border-border/50 bg-surface-muted/30 px-3 py-2">
-          <div className="mb-1 flex items-center gap-1 text-[10px] font-medium tracking-wider text-foreground-muted uppercase">
-            <Sparkles size={11} className="text-primary" />
-            <span>Quick Suggestions</span>
-          </div>
-          <div className="flex flex-wrap gap-1.5">
-            {quickPrompts.map((promptText, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => handleSend(promptText)}
-                disabled={isLoading}
-                className="rounded-lg border border-border bg-card px-2.5 py-1 text-xs text-foreground-muted transition-all hover:border-primary hover:text-foreground hover:shadow-xs active:scale-95 disabled:opacity-50"
-              >
-                {promptText}
-              </button>
-            ))}
-          </div>
-        </div>
+        <QuickSuggestions
+          prompts={quickPrompts}
+          onSelect={sendMessage}
+          disabled={isLoading}
+        />
 
         <div className="flex flex-col gap-1 border-t border-border p-3">
           <div className="flex items-center gap-2">
@@ -313,7 +245,7 @@ export default function ChatBot() {
               disabled={isLoading}
             />
             <button
-              onClick={() => handleSend()}
+              onClick={() => sendMessage()}
               disabled={!input.trim() || isLoading}
               className="flex size-9 cursor-pointer items-center justify-center rounded-xl bg-primary text-white transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               aria-label="Send message"

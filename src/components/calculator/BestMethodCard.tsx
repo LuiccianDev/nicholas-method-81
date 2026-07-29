@@ -62,10 +62,10 @@ const BestMethodCard = memo(function BestMethodCard({
         <Button
           variant="icon"
           onClick={onOpenDetails}
-          className="absolute top-4 right-4 "
+          className="absolute top-4 right-4"
           title="View Full Calculation Matrix"
         >
-          <ListTree className="size-10 " />
+          <ListTree className="size-10" />
         </Button>
       </div>
     </>

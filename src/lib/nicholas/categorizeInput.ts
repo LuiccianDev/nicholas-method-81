@@ -7,54 +7,93 @@ import type {
   RawMethodInput,
 } from '../../types';
 
-export function getThicknessCat(val: number | ''): Thickness {
-  if (val === '') return 'I';
-  if (val < 10) return 'N';
-  if (val <= 30) return 'I';
-  if (val <= 100) return 'T';
-  return 'VT';
+interface CategoryDef<T extends string> {
+  defaultValue: T;
+  labels: Record<T, string>;
+  thresholds: [limit: number, cat: T][];
 }
 
+function categorize<T extends string>(
+  val: number | '',
+  { defaultValue, labels, thresholds }: CategoryDef<T>
+): T {
+  if (val === '') return defaultValue;
+  for (let i = 0; i < thresholds.length; i++) {
+    const [limit, cat] = thresholds[i];
+    if (i === 0 ? val < limit : val <= limit) return cat;
+  }
+  const cats = Object.keys(labels) as T[];
+  return cats[cats.length - 1];
+}
+
+function labelFor<T extends string>(cat: T, labels: Record<T, string>): string {
+  return labels[cat];
+}
+
+const THICKNESS: CategoryDef<Thickness> = {
+  defaultValue: 'I',
+  labels: { N: 'Narrow', I: 'Intermediate', T: 'Thick', VT: 'Very Thick' },
+  thresholds: [
+    [10, 'N'],
+    [30, 'I'],
+    [100, 'T'],
+  ],
+};
+
+const PLUNGE: CategoryDef<Plunge> = {
+  defaultValue: 'I',
+  labels: { F: 'Flat', I: 'Intermediate', S: 'Steep' },
+  thresholds: [
+    [20, 'F'],
+    [55, 'I'],
+  ],
+};
+
+const SUB_STR: CategoryDef<SubStr> = {
+  defaultValue: 'M',
+  labels: { W: 'Weak', M: 'Moderate', S: 'Strong' },
+  thresholds: [
+    [8, 'W'],
+    [15, 'M'],
+  ],
+};
+
+const FRAC_SPAC: CategoryDef<FracSpac> = {
+  defaultValue: 'C',
+  labels: { VC: 'Very Close', C: 'Close', W: 'Wide', VW: 'Very Wide' },
+  thresholds: [
+    [3, 'VW'],
+    [9, 'W'],
+    [15, 'C'],
+  ],
+};
+
+export function getThicknessCat(val: number | ''): Thickness {
+  return categorize(val, THICKNESS);
+}
 export function getThicknessLabel(val: number | '') {
-  return { N: 'Narrow', I: 'Intermediate', T: 'Thick', VT: 'Very Thick' }[
-    getThicknessCat(val)
-  ];
+  return labelFor(getThicknessCat(val), THICKNESS.labels);
 }
 
 export function getPlungeCat(val: number | ''): Plunge {
-  if (val === '') return 'I';
-  if (val < 20) return 'F';
-  if (val <= 55) return 'I';
-  return 'S';
+  return categorize(val, PLUNGE);
 }
-
 export function getPlungeLabel(val: number | '') {
-  return { F: 'Flat', I: 'Intermediate', S: 'Steep' }[getPlungeCat(val)];
+  return labelFor(getPlungeCat(val), PLUNGE.labels);
 }
 
 export function getSubStrCat(val: number | ''): SubStr {
-  if (val === '') return 'M';
-  if (val < 8) return 'W';
-  if (val <= 15) return 'M';
-  return 'S';
+  return categorize(val, SUB_STR);
 }
-
 export function getSubStrLabel(val: number | '') {
-  return { W: 'Weak', M: 'Moderate', S: 'Strong' }[getSubStrCat(val)];
+  return labelFor(getSubStrCat(val), SUB_STR.labels);
 }
 
 export function getFracSpacCat(val: number | ''): FracSpac {
-  if (val === '') return 'C';
-  if (val < 3) return 'VW';
-  if (val <= 10) return 'W';
-  if (val <= 16) return 'C';
-  return 'VC';
+  return categorize(val, FRAC_SPAC);
 }
-
 export function getFracSpacLabel(val: number | '') {
-  return { VC: 'Very Close', C: 'Close', W: 'Wide', VW: 'Very Wide' }[
-    getFracSpacCat(val)
-  ];
+  return labelFor(getFracSpacCat(val), FRAC_SPAC.labels);
 }
 
 export function deriveMethodInput(raw: RawMethodInput): MethodInput {

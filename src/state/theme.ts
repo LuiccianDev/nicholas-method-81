@@ -1,38 +1,33 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const THEME_STORAGE_KEY = 'theme' as const;
-const LIGHT_THEME = 'light' as const;
-const DARK_THEME = 'dark' as const;
+type Theme = 'light' | 'dark';
 
-type Theme = typeof LIGHT_THEME | typeof DARK_THEME;
-
-const getInitialTheme = (): Theme => {
-  if (typeof window === 'undefined') return LIGHT_THEME;
+function getInitialTheme(): Theme {
+  if (typeof window === 'undefined') return 'light';
   const t = (window as { __INITIAL_THEME__?: Theme }).__INITIAL_THEME__;
-  return t === DARK_THEME || t === LIGHT_THEME ? t : LIGHT_THEME;
-};
+  return t === 'dark' || t === 'light' ? t : 'light';
+}
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove(LIGHT_THEME, DARK_THEME);
+    root.classList.remove('light', 'dark');
     root.classList.add(theme);
-    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    window.localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    const nextTheme = (): Theme =>
-      theme === LIGHT_THEME ? DARK_THEME : LIGHT_THEME;
+    const next = theme === 'light' ? 'dark' : 'light';
 
     if (!document.startViewTransition) {
-      setTheme(nextTheme);
+      setTheme(next);
       return;
     }
 
     document.startViewTransition(() => {
-      setTheme(nextTheme);
+      setTheme(next);
     });
   }, [theme]);
 
