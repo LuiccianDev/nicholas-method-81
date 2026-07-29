@@ -20,7 +20,7 @@ export default function GeotechnicalInput({
   updateInput,
 }: GeotechnicalInputProps) {
   return (
-    <details className="min-w-0 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-xs">
+    <details className="min-w-0 overflow-hidden border border-border bg-card/70 p-4 shadow-xs">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
         <span>{title}</span>
         <span className="text-xxxs tracking-widest text-primary">DETAILS</span>

@@ -95,7 +95,7 @@ export default function Presets() {
   const { input, setInputValues } = useNicholasContext();
 
   return (
-    <div className="mb-6 rounded-2xl border border-border bg-surface-muted/40 p-4 shadow-sm">
+    <div className="mb-6 border border-border bg-surface-muted/40 p-4 shadow-sm">
       <div className="mb-3 flex items-center gap-2">
         <Sparkles className="size-4 text-primary" />
         <h3 className="text-sm font-semibold text-foreground">
@@ -111,10 +111,10 @@ export default function Presets() {
               type="button"
               onClick={() => setInputValues(preset.data)}
               whileTap={{ scale: 0.97 }}
-              className={`group relative flex flex-col items-start rounded-xl border p-3 text-left transition-all duration-200 ${
+              className={`group relative flex flex-col items-start border p-3 text-left transition-all duration-200 ${
                 isActive
-                  ? 'border-primary/70 bg-primary/4 shadow-xs'
-                  : 'border-border/80 bg-card hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface hover:shadow-md'
+                  ? 'border-t-2 border-border border-t-primary bg-primary/4 shadow-xs'
+                  : 'border-border/80 bg-card hover:border-primary/50 hover:bg-surface'
               } active:translate-y-0`}
             >
               <div

@@ -26,12 +26,12 @@ const ParametersForm = memo(function ParametersForm({
         </h2>
       </div>
 
-      <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-border bg-card p-5 sm:p-6 lg:p-6">
+      <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-t-2 border-border border-t-primary bg-card p-5 sm:p-6 lg:p-6">
         <Presets />
 
         <details
           open
-          className="mb-5 overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5"
+          className="mb-5 overflow-hidden border border-border bg-surface/60 p-4 shadow-xs sm:p-5"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
             <span>Geometry &amp; Grade</span>
@@ -80,7 +80,7 @@ const ParametersForm = memo(function ParametersForm({
           </div>
         </details>
 
-        <details className="overflow-hidden rounded-2xl border border-border bg-surface/60 p-4 shadow-xs sm:p-5">
+        <details className="overflow-hidden border border-border bg-surface/60 p-4 shadow-xs sm:p-5">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
             <span>Rock Mechanics</span>
             <span className="text-xxxs tracking-widest text-primary">

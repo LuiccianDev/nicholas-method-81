@@ -193,7 +193,7 @@ export default function Footer() {
       className="relative mt-8 flex min-h-[58vh] flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 font-sans"
     >
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="dark relative overflow-hidden rounded-3xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-foreground shadow-2xl md:p-10">
+        <div className="dark relative overflow-hidden rounded-xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-foreground shadow-2xl md:p-10">
           <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-linear-to-tr from-primary/20 to-transparent blur-3xl" />
           <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-linear-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
 
