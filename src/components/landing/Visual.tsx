@@ -20,7 +20,7 @@ export default function VisualDashboard() {
     const mm = gsap.matchMedia();
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      const tl = gsap.timeline({
+      const entranceTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top 80%',
@@ -29,15 +29,15 @@ export default function VisualDashboard() {
         },
       });
 
-      tl.fromTo(
+      entranceTl.fromTo(
         imageWrapperRef.current,
         { clipPath: 'inset(100% 0 0 0)' },
-        { clipPath: 'inset(0% 0 0 0)', duration: DURATIONS.imageReveal, ease: EASINGS.smoothSlowInOut },
+        { clipPath: 'inset(60% 0 0 0)', duration: DURATIONS.imageReveal, ease: EASINGS.smoothSlowInOut },
       )
         .fromTo(
           imageRef.current,
-          { scale: 1, opacity: 0 },
-          { scale: 1, opacity: 1, duration: DURATIONS.imageReveal, ease: EASINGS.smoothSlowInOut },
+          { opacity: 0 },
+          { opacity: 1, duration: DURATIONS.imageReveal, ease: EASINGS.smoothSlowInOut },
           0,
         )
         .fromTo(
@@ -60,22 +60,22 @@ export default function VisualDashboard() {
           start: 'top bottom',
           end: 'bottom top',
           scrub: 1,
-          markers: true,       
         },
       });
 
-      gsap.fromTo(imageRef.current, {
-        objectPosition: 'center 100%',
+      gsap.fromTo(imageWrapperRef.current, {
+        clipPath: 'inset(100% 0 0 0)',
       }, {
-        objectPosition: 'center 0%',
+        clipPath: 'inset(0% 0 0 0)',
+        ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 20px',
-          end: 'bottom 50px',
+          start: '400px 500px',
+          end: '+=800 20px',
           pin: true,
           pinSpacing: true,
           scrub: 1,
-          markers: false,
+          markers: true,
         },
       });
     });
@@ -89,14 +89,14 @@ export default function VisualDashboard() {
       className="w-full px-4 sm:px-6 lg:px-8 pb-4"
       data-purpose="visual-container"
     >
-      <div ref={containerInnerRef} className="w-full relative rounded-md overflow-hidden min-h-150 shadow-xl">
+      <div ref={containerInnerRef} className="w-full relative border overflow-hidden min-h-150 ">
         <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden" >
           <img
             ref={imageRef}
             alt="Environmental field background"
             className="absolute inset-0 w-full h-full object-cover "
             src="/dashboard_bg.jpg"
-            style={{ scale: 1, opacity: 0, objectPosition: 'center 100%' }}
+            
           />
         </div>
         <div
