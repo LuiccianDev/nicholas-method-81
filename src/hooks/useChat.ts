@@ -30,6 +30,8 @@ export function useChat() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [bestUndergroundMethod, setBestUnderground] = useState<string | undefined>();
+  const [absoluteBestMethod, setAbsoluteBest] = useState<string | undefined>();
   const calcDataRef = useRef<CalculatorSnapshot>(getCalculatorData());
 
   const {
@@ -45,6 +47,8 @@ export function useChat() {
   useEffect(() => {
     const unsub = subscribeCalculatorData((data) => {
       calcDataRef.current = data;
+      setBestUnderground(data.bestUndergroundMethod);
+      setAbsoluteBest(data.absoluteBestMethod);
     });
     return unsub;
   }, []);
@@ -141,8 +145,6 @@ export function useChat() {
     stopTyping();
     setMessages([RESET_MESSAGE]);
   }, [stopTyping]);
-
-  const { bestUndergroundMethod, absoluteBestMethod } = calcDataRef.current;
 
   return {
     messages,

@@ -8,10 +8,6 @@ import {
   T4C_FOOTWALL,
 } from './scoringMatrices';
 
-function includeEliminated(...values: number[]) {
-  return values.some((v) => v <= ELIMINATED);
-}
-
 export function calculateScores(input: MethodInput): ScoredMethod[] {
   return MINING_METHODS.map((method) => {
     const geo = T3_GEOMETRY[method];
@@ -42,6 +38,22 @@ export function calculateScores(input: MethodInput): ScoredMethod[] {
     const rockTotal = oreScore + hwScore + fwScore;
     const total = geometryScore + rockTotal;
 
+    const allScores = [
+      geo.shape[input.shape],
+      geo.thickness[input.thickness],
+      geo.plunge[input.plunge],
+      geo.grade[input.grade],
+      ore.sub[input.oreSubStr],
+      ore.spac[input.oreFracSpac],
+      ore.str[input.oreFracStr],
+      hwData.sub[input.hwSubStr],
+      hwData.spac[input.hwFracSpac],
+      hwData.str[input.hwFracStr],
+      fwData.sub[input.fwSubStr],
+      fwData.spac[input.fwFracSpac],
+      fwData.str[input.fwFracStr],
+    ];
+
     return {
       method,
       geometryScore,
@@ -50,12 +62,7 @@ export function calculateScores(input: MethodInput): ScoredMethod[] {
       fwScore,
       rockTotal,
       total,
-      isEliminated: includeEliminated(
-        geometryScore,
-        oreScore,
-        hwScore,
-        fwScore
-      ),
+      isEliminated: allScores.some((v) => v <= ELIMINATED),
     };
   }).sort((a, b) => b.total - a.total);
 }
