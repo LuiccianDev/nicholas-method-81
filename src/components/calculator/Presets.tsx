@@ -24,7 +24,6 @@ const PRESETS: PresetOption[] = [
       shape: 'I',
       thickness: 3,
       plunge: 70,
-      depth: 850,
       grade: 'G',
       oreSubStr: 14,
       oreFracSpac: 16,
@@ -39,7 +38,6 @@ const PRESETS: PresetOption[] = [
     badges: [
       { label: 'Shape', value: 'Irregular' },
       { label: 'Thickness', value: '3 m' },
-      { label: 'Depth', value: '850 m' },
       { label: 'Grade', value: 'Gradational' },
     ],
   },
@@ -50,7 +48,6 @@ const PRESETS: PresetOption[] = [
       shape: 'M',
       thickness: 65,
       plunge: 45,
-      depth: 550,
       grade: 'U',
       oreSubStr: 8,
       oreFracSpac: 10,
@@ -65,7 +62,6 @@ const PRESETS: PresetOption[] = [
     badges: [
       { label: 'Shape', value: 'Equi-dimensional' },
       { label: 'Thickness', value: '65 m' },
-      { label: 'Depth', value: '550 m' },
       { label: 'Grade', value: 'Uniform' },
     ],
   },
@@ -76,7 +72,6 @@ const PRESETS: PresetOption[] = [
       shape: 'TP',
       thickness: 12,
       plunge: 15,
-      depth: 220,
       grade: 'E',
       oreSubStr: 16,
       oreFracSpac: 18,
@@ -91,7 +86,6 @@ const PRESETS: PresetOption[] = [
     badges: [
       { label: 'Shape', value: 'Platy / Tabular' },
       { label: 'Thickness', value: '12 m' },
-      { label: 'Depth', value: '220 m' },
       { label: 'Grade', value: 'Erratic' },
     ],
   },

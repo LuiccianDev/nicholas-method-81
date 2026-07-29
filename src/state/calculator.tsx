@@ -17,7 +17,6 @@ const DEFAULT_INPUT: RawMethodInput = {
   shape: 'I',
   thickness: 3,
   plunge: 70,
-  depth: 850,
   grade: 'G',
   oreSubStr: 14,
   oreFracSpac: 16,

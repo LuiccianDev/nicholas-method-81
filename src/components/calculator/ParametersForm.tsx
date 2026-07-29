@@ -65,13 +65,7 @@ const ParametersForm = memo(function ParametersForm({
               derivedLabel={getPlungeLabel(input.plunge)}
               note="Flat: Dip is less than 20°. Intermediate: Dip is between 20° and 55°. Steep: Dip is greater than 55°."
             />
-            <NumericInput
-              label="Depth Below Surface"
-              value={input.depth}
-              onChange={(v) => updateInput('depth', v)}
-              unit="m"
-              note="Provide actual depth. Contextual metric."
-            />
+            
             <DropdownSelect
               label="Grade Distribution"
               value={input.grade}

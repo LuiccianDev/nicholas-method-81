@@ -62,9 +62,9 @@ const FRAC_SPAC: CategoryDef<FracSpac> = {
   defaultValue: 'C',
   labels: { VC: 'Very Close', C: 'Close', W: 'Wide', VW: 'Very Wide' },
   thresholds: [
-    [3, 'VW'],
-    [9, 'W'],
-    [15, 'C'],
+    [4, 'VW'],
+    [10, 'W'],
+    [16, 'C'],
   ],
 };
 

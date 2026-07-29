@@ -11,7 +11,6 @@ export interface RawMethodInput {
   shape: Shape;
   thickness: number | '';
   plunge: number | '';
-  depth: number | '';
   grade: Grade;
   oreSubStr: number | '';
   oreFracSpac: number | '';
