@@ -1,34 +1,49 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import { EASINGS, DURATIONS, DISTANCES } from './animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
-  const headingLine1Ref = useRef<HTMLSpanElement>(null);
-  const headingLine2Ref = useRef<HTMLSpanElement>(null);
+  const headingSpanRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: EASINGS.smoothSlow } });
+    const mm = gsap.matchMedia();
 
-    tl.fromTo(
-      taglineRef.current,
-      { y: DISTANCES.fadeUp, opacity: 0 },
-      { y: 0, opacity: 1, duration: DURATIONS.heroLine },
-    )
-      .fromTo(
-        headingLine1Ref.current,
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const tl = gsap.timeline({ defaults: { ease: EASINGS.smoothSlow } });
+
+      tl.fromTo(
+        taglineRef.current,
         { y: DISTANCES.fadeUp, opacity: 0 },
         { y: 0, opacity: 1, duration: DURATIONS.heroLine },
-        `-=${DURATIONS.heroStagger}`,
       )
-      .fromTo(
-        headingLine2Ref.current,
-        { y: DISTANCES.fadeUp, opacity: 0 },
-        { y: 0, opacity: 1, duration: DURATIONS.heroLine },
-        `-=${DURATIONS.heroStagger}`,
-      );
+        .fromTo(
+          headingSpanRef.current,
+          { y: DISTANCES.fadeUp, opacity: 0 },
+          { y: 0, opacity: 1, duration: DURATIONS.heroLine },
+          `-=${DURATIONS.heroStagger}`,
+        );
+
+      gsap.to(containerRef.current, {
+        opacity: 0,
+        y: -5,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'top top',
+          scrub: 1,
+          markers: true,
+        },
+      });
+    });
+
+    return () => mm.revert();
   }, { scope: containerRef });
 
   return (
@@ -45,8 +60,7 @@ export default function Hero() {
         before a single tree comes down
       </p>
       <h1 className="text-[44px] font-extrabold text-[#111111] leading-tight px-2 tracking-tighter">
-        <span ref={headingLine1Ref} className="block">See the impact before you break ground</span>
-
+        <span ref={headingSpanRef} className="block">See the impact before you break ground</span>
       </h1>
     </header>
   );

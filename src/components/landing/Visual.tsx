@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function VisualDashboard() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const containerInnerRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const overlayTextRef = useRef<HTMLDivElement>(null);
@@ -35,7 +36,7 @@ export default function VisualDashboard() {
       )
         .fromTo(
           imageRef.current,
-          { scale: 0.8, opacity: 0 },
+          { scale: 1, opacity: 0 },
           { scale: 1, opacity: 1, duration: DURATIONS.imageReveal, ease: EASINGS.smoothSlowInOut },
           0,
         )
@@ -61,6 +62,19 @@ export default function VisualDashboard() {
           scrub: 1,
         },
       });
+
+      gsap.to(containerInnerRef.current, {
+        height: '100vh',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: '+=3000',
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+        },
+      });
     });
 
     return () => mm.revert();
@@ -72,12 +86,12 @@ export default function VisualDashboard() {
       className="w-full px-4 sm:px-6 lg:px-8 pb-4"
       data-purpose="visual-container"
     >
-      <div className="w-full relative rounded-md overflow-hidden min-h-[600px] shadow-xl">
+      <div ref={containerInnerRef} className="w-full relative rounded-md overflow-hidden min-h-[600px] shadow-xl">
         <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden" style={{ clipPath: 'inset(100% 0 0 0)' }}>
           <img
             ref={imageRef}
             alt="Environmental field background"
-            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            className="absolute inset-0 w-full h-full object-cover will-change-transform bg-bottom"
             src="/dashboard_bg.jpg"
             style={{ scale: 1, opacity: 0 }}
           />

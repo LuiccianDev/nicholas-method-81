@@ -16,7 +16,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className="flex items-center justify-between px-4 py-6 bg-white relative z-50"
+        className="flex items-center justify-between px-4 py-6  fixed top-5 left-0 right-0 z-50"
         data-purpose="main-navigation"
       >
         <div className="flex-1">
