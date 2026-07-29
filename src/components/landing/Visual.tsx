@@ -54,25 +54,28 @@ export default function VisualDashboard() {
         );
 
       gsap.to(gradientRef.current, {
-        opacity: 0.6,
+        opacity: 1,
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top bottom',
           end: 'bottom top',
           scrub: 1,
+          markers: true,       
         },
       });
 
-      gsap.to(containerInnerRef.current, {
-        height: '100vh',
-        ease: 'none',
+      gsap.fromTo(imageRef.current, {
+        objectPosition: 'center 100%',
+      }, {
+        objectPosition: 'center 0%',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top top',
-          end: '+=3000',
+          start: 'top 20px',
+          end: 'bottom 50px',
           pin: true,
           pinSpacing: true,
           scrub: 1,
+          markers: false,
         },
       });
     });
@@ -86,28 +89,28 @@ export default function VisualDashboard() {
       className="w-full px-4 sm:px-6 lg:px-8 pb-4"
       data-purpose="visual-container"
     >
-      <div ref={containerInnerRef} className="w-full relative rounded-md overflow-hidden min-h-[600px] shadow-xl">
-        <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden" style={{ clipPath: 'inset(100% 0 0 0)' }}>
+      <div ref={containerInnerRef} className="w-full relative rounded-md overflow-hidden min-h-150 shadow-xl">
+        <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden" >
           <img
             ref={imageRef}
             alt="Environmental field background"
-            className="absolute inset-0 w-full h-full object-cover will-change-transform bg-bottom"
+            className="absolute inset-0 w-full h-full object-cover "
             src="/dashboard_bg.jpg"
-            style={{ scale: 1, opacity: 0 }}
+            style={{ scale: 1, opacity: 0, objectPosition: 'center 100%' }}
           />
         </div>
         <div
           ref={gradientRef}
-          className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 opacity-0"
+          className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 opacity-0"
         />
 
         <div ref={overlayTextRef}>
-          <div className="absolute top-[40%] left-12 max-w-[120px]">
+          <div className="absolute top-[40%] left-12 max-w-30">
             <p className="text-white font-bold text-xl leading-tight">
               Drone + sensor fusion
             </p>
           </div>
-          <div className="absolute top-[40%] right-12 text-right max-w-[140px]">
+          <div className="absolute top-[40%] right-12 text-right max-w-35">
             <p className="text-white font-bold text-xl leading-tight">
               Risk flagged automatically
             </p>

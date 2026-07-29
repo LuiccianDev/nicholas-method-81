@@ -14,6 +14,9 @@ export default function App() {
       <Navigation />
       <Hero />
       <VisualDashboard />
+      <Hero />
+      <Hero />
+      <Hero />
     </motion.div>
   );
 }

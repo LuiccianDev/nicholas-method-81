@@ -38,7 +38,7 @@ export default function Hero() {
           start: 'top top',
           end: 'top top',
           scrub: 1,
-          markers: true,
+          markers: false,
         },
       });
     });
