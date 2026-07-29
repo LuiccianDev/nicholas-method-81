@@ -34,3 +34,4 @@ skills-lock.json
 .playwright-cli
 .kiro/
 opencode.json
+*.mp4
