@@ -117,11 +117,6 @@ export default function Presets() {
                   : 'border-border/80 bg-card hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface hover:shadow-md'
               } active:translate-y-0`}
             >
-              {isActive && (
-                <span className="absolute right-1.5 bottom-1.5 text-primary">
-                  <Check className="size-4" />
-                </span>
-              )}
               <div
                 className={`mb-2 flex items-center gap-2 text-xs font-medium transition-colors ${
                   isActive

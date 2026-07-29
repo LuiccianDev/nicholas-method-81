@@ -22,7 +22,7 @@ const BestMethodCard = memo(function BestMethodCard({
     <>
       <div className="relative flex min-h-72 w-full min-w-0 flex-col border border-t-2 border-border border-t-primary bg-card p-6 sm:p-8">
         <div className="mb-auto space-y-3">
-          <p className=" font-serif text-[clamp(2.5rem,5vw,5rem)] leading-none wrap-break-word text-secondary italic drop-shadow-sm">
+          <p className="font-serif text-[clamp(2.5rem,5vw,5rem)] leading-none wrap-break-word text-secondary italic drop-shadow-sm">
             {bestMethod?.method || 'None.'}
           </p>
           <p className="text-lg font-light tracking-tight text-foreground-muted sm:text-xl md:text-2xl">
@@ -43,7 +43,7 @@ const BestMethodCard = memo(function BestMethodCard({
           </p>
 
           {isSurfaceMoreViable && (
-            <div className="flex max-w-auto items-start gap-4 border border-border bg-surface-muted p-4">
+            <div className="max-w-auto flex items-start gap-4 border border-border bg-surface-muted p-4">
               <span className="mt-0.5 font-mono text-sm text-foreground-muted">
                 ↳
               </span>

@@ -30,7 +30,9 @@ export function useChat() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [bestUndergroundMethod, setBestUnderground] = useState<string | undefined>();
+  const [bestUndergroundMethod, setBestUnderground] = useState<
+    string | undefined
+  >();
   const [absoluteBestMethod, setAbsoluteBest] = useState<string | undefined>();
   const calcDataRef = useRef<CalculatorSnapshot>(getCalculatorData());
 
