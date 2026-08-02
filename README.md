@@ -65,7 +65,7 @@ pnpm install
 ```bash
 pnpm dev
 ```
-Then open the local URL shown by Vite (default `http://localhost:5173`).
+Then open the local URL shown by Vite (default `http://localhost:4321`).
 
 ---
 
