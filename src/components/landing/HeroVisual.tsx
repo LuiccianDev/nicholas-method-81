@@ -93,7 +93,7 @@ export default function HeroVisual() {
             ease: 'none',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: '30px 20px',
+              start: 'top 30px',
               end: '+=20',
               scrub: 1,
               pin: true,
@@ -111,19 +111,19 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full px-4 H-h-[80vh] pb-4 sm:px-6 lg:px-8"
+      className="w-full px-4  pb-4 sm:px-6 lg:px-8"
       data-purpose="hero-visual"
     >
       <div className="relative h-svh overflow-hidden border">
         <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
           <p
             ref={taglineRef}
-            className="mx-auto mb-6 max-w-[280px] text-[11px] leading-relaxed font-medium tracking-tight text-black uppercase"
+            className="mx-auto mb-6 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
           >
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
           </p>
-          <h1 className="px-2 text-[44px] leading-tight font-extrabold tracking-tighter text-black">
+          <h1 className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black">
             <span ref={headingSpanRef} className="block">
               See the impact before you break ground
             </span>
