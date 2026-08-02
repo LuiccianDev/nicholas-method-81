@@ -49,17 +49,6 @@ export default function HeroVisual() {
             `-=${DURATIONS.heroStagger}`
           )
           .fromTo(
-            imageWrapperRef.current,
-            { clipPath: 'inset(100% 0 0 0)', opacity: 1 },
-            {
-              clipPath: 'inset(25% 0 0 0)',
-              opacity: 1,
-              duration: DURATIONS.imageReveal,
-              ease: EASINGS.smoothSlowInOut,
-            },
-            '-=0.2'
-          )
-          .fromTo(
             overlayTextRef.current?.children,
             { y: 20, opacity: 0 },
             {
@@ -97,15 +86,15 @@ export default function HeroVisual() {
         });
 
         gsap.fromTo(
-          imageWrapperRef.current,
-          { clipPath: 'inset(80% 0 0 0)' },
+          imageRef.current,
+          { clipPath: 'inset(100% 0 0 0)' },
           {
             clipPath: 'inset(0% 0 0 0)',
             ease: 'none',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top bottom',
-              end: 'center center',
+              start: 'top top',
+              end: '+=300',
               scrub: 1,
             },
           }
@@ -120,19 +109,19 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full  px-4 pb-4 sm:px-6 lg:px-8"
+      className="w-full px-4 pb-4 sm:px-6 lg:px-8"
       data-purpose="hero-visual"
     >
       <div className="relative h-svh overflow-hidden border">
         <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
           <p
             ref={taglineRef}
-            className="mx-auto mb-6 max-w-[280px] text-[11px] leading-relaxed font-medium tracking-tight text-black uppercase "
+            className="mx-auto mb-6 max-w-[280px] text-[11px] leading-relaxed font-medium tracking-tight text-black uppercase"
           >
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
           </p>
-          <h1 className="px-2 text-[44px] leading-tight font-extrabold tracking-tighter text-black ">
+          <h1 className="px-2 text-[44px] leading-tight font-extrabold tracking-tighter text-black">
             <span ref={headingSpanRef} className="block">
               See the impact before you break ground
             </span>
@@ -144,6 +133,7 @@ export default function HeroVisual() {
             ref={imageRef}
             alt="Environmental field background"
             className="absolute inset-0 h-full w-full object-cover"
+            style={{ clipPath: 'inset(100% 0 0 0)' }}
             src="/dashboard_bg.jpg"
           />
         </div>
