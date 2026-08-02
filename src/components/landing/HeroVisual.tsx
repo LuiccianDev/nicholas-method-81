@@ -34,7 +34,7 @@ export default function HeroVisual() {
               start: 'top 20px',
               end: '+=20',
               scrub: true,
-              markers: true,
+              markers: false,
             },
           }
         );
