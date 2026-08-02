@@ -3,12 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import {
-  EASINGS,
-  DURATIONS,
-  DISTANCES,
-  SCROLL_TRIGGER_DEFAULTS,
-} from './animations';
+import CounterDisplay from './components/CounterDisplay';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,7 +77,7 @@ export default function HeroVisual() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mx-auto mb-6 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
+            className="mx-auto my-10 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
           >
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
@@ -92,7 +88,7 @@ export default function HeroVisual() {
             transition={{ duration: 0.5, delay: 1.2 }}
             className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black"
           >
-            <span className="block">
+            <span >
               See the impact before you break ground
             </span>
           </motion.h1>
@@ -209,48 +205,3 @@ export default function HeroVisual() {
   );
 }
 
-function CounterDisplay({
-  start,
-  end,
-  suffix,
-  containerRef,
-  decimals = 0,
-}: {
-  start: number;
-  end: number;
-  suffix: string;
-  containerRef: React.RefObject<HTMLDivElement | null>;
-  decimals?: number;
-}) {
-  const [value, setValue] = useState(start);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const obj = { value: start };
-      gsap.to(obj, {
-        value: end,
-        duration: DURATIONS.counter,
-        ease: EASINGS.smoothSlow,
-        onUpdate: () =>
-          setValue(
-            decimals > 0
-              ? parseFloat(obj.value.toFixed(decimals))
-              : Math.round(obj.value)
-          ),
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: SCROLL_TRIGGER_DEFAULTS.start,
-        },
-      });
-    },
-    { scope: ref, dependencies: [end] }
-  );
-
-  return (
-    <div ref={ref} className="mb-1 text-4xl font-bold">
-      {value}
-      {suffix}
-    </div>
-  );
-}

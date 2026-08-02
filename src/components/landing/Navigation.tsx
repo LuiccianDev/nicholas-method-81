@@ -16,17 +16,17 @@ export default function Navigation() {
   return (
     <>
       <motion.nav
-        className="fixed top-5 right-0 left-0 z-50 flex items-center justify-between px-4 py-6"
+        className="fixed top-5 right-0 left-0 z-50 flex items-center justify-between px-10 py-6"
         data-purpose="main-navigation"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="flex-1">
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="ml-10 rounded-sm bg-[#1A1A1A] px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
+            className=" rounded-sm bg-[#1A1A1A] px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
             data-purpose="cta-book-demo"
           >
             Book a Demo
@@ -65,7 +65,7 @@ export default function Navigation() {
             <Menu className="h-5 w-5" />
           </motion.button>
         </div>
-        <div className="mr-10 flex flex-1 items-center justify-end space-x-4">
+        <div className=" flex flex-1 items-center justify-end space-x-4">
           <motion.div
             whileHover={{ opacity: 0.6 }}
             className="cursor-pointer text-[10px] font-bold tracking-widest text-gray-500 uppercase"
