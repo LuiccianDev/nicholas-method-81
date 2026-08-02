@@ -47,11 +47,9 @@ export default function CounterDisplay({
   );
 
   return (
-
     <div ref={ref} className="mb-1 text-4xl font-bold">
       {value}
       {suffix}
     </div>
-
   );
 }

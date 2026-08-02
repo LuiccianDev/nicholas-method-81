@@ -1,10 +1,9 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import CounterDisplay from './components/CounterDisplay';
-
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,7 +27,6 @@ export default function HeroVisual() {
           {
             opacity: 0,
             y: -5,
-            duracion: 0,
             scrollTrigger: {
               trigger: containerRef.current,
               start: 'top 20px',
@@ -88,16 +86,11 @@ export default function HeroVisual() {
             transition={{ duration: 0.5, delay: 1.2 }}
             className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black"
           >
-            <span >
-              See the impact before you break ground
-            </span>
+            <span>See the impact before you break ground</span>
           </motion.h1>
         </div>
 
-        <div
-          ref={imageWrapperRef}
-          className="absolute inset-0 overflow-hidden rounded-xl"
-        >
+        <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
           <motion.img
             ref={imageRef}
             alt="Environmental field background"
@@ -204,4 +197,3 @@ export default function HeroVisual() {
     </main>
   );
 }
-

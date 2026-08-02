@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 
 const menuItems = [
   { label: 'Features', href: '#' },
@@ -26,7 +27,7 @@ export default function Navigation() {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className=" rounded-sm bg-[#1A1A1A] px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
+            className="rounded-sm bg-[#1A1A1A] px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
             data-purpose="cta-book-demo"
           >
             Book a Demo
@@ -65,7 +66,7 @@ export default function Navigation() {
             <Menu className="h-5 w-5" />
           </motion.button>
         </div>
-        <div className=" flex flex-1 items-center justify-end space-x-4">
+        <div className="flex flex-1 items-center justify-end space-x-4">
           <motion.div
             whileHover={{ opacity: 0.6 }}
             className="cursor-pointer text-[10px] font-bold tracking-widest text-gray-500 uppercase"
@@ -75,23 +76,21 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
+      {isMenuOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-50">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-50 bg-black/40"
+              className="absolute inset-0 bg-black/40"
               onClick={() => setIsMenuOpen(false)}
             />
             <motion.aside
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-white shadow-2xl"
+              className="absolute top-0 right-0 flex h-full w-72 flex-col bg-white shadow-2xl"
             >
               <div className="flex items-center justify-between border-b border-gray-100 px-6 py-6">
                 <span className="text-lg font-black tracking-wide uppercase">
@@ -135,9 +134,9 @@ export default function Navigation() {
                 </motion.button>
               </div>
             </motion.aside>
-          </>
+          </div>,
+          document.body
         )}
-      </AnimatePresence>
     </>
   );
 }
