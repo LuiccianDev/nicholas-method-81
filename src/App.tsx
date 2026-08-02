@@ -10,17 +10,6 @@ const ScoringMatrixModal = lazy(
   () => import('./components/calculator/ScoringMatrixModal')
 );
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      staggerChildren: 0.25,
-    },
-  },
-};
-
 const itemVariants: Variants = {
   hidden: { opacity: 0, x: 50 },
   visible: {
@@ -54,9 +43,11 @@ function CalculatorContent() {
     <main className="flex min-h-0 flex-1 flex-col overflow-x-hidden">
       <motion.div
         className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0 }}
+        animate={{opacity: 1,transition: {
+            type: 'spring',
+            staggerChildren: 0.25,
+          }}}
       >
         <motion.div
           variants={itemVariants}
