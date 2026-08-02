@@ -62,7 +62,7 @@ export default function HeroVisual() {
           )
           .fromTo(
             cardsRef.current?.children,
-            { y: 30, opacity: 0, scale: 0.95 },
+            { y: 30, opacity: 0, scale: 1 },
             {
               y: 0,
               opacity: 1,
@@ -87,15 +87,17 @@ export default function HeroVisual() {
 
         gsap.fromTo(
           imageRef.current,
-          { clipPath: 'inset(100% 0 0 0)' },
+          { clipPath: 'inset(40% 0 0 0)' },
           {
             clipPath: 'inset(0% 0 0 0)',
             ease: 'none',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top top',
-              end: '+=300',
+              start: '30px 20px',
+              end: '+=20',
               scrub: 1,
+              pin: true,
+              markers: true
             },
           }
         );
@@ -109,7 +111,7 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full px-4 pb-4 sm:px-6 lg:px-8"
+      className="w-full px-4 H-h-[80vh] pb-4 sm:px-6 lg:px-8"
       data-purpose="hero-visual"
     >
       <div className="relative h-svh overflow-hidden border">
@@ -133,7 +135,7 @@ export default function HeroVisual() {
             ref={imageRef}
             alt="Environmental field background"
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ clipPath: 'inset(100% 0 0 0)' }}
+            style={{ clipPath: 'inset(20% 0 0 0)' }}
             src="/dashboard_bg.jpg"
           />
         </div>
