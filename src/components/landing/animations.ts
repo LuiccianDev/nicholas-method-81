@@ -4,7 +4,7 @@ export const EASINGS = {
   smoothSlow: 'power3.out',
   smoothSlowInOut: 'power3.inOut',
   elastic: 'elastic.out(1, 0.5)',
-}
+};
 
 export const DURATIONS = {
   heroLine: 0.8,
@@ -15,15 +15,15 @@ export const DURATIONS = {
   section: 0.6,
   counter: 1.5,
   cardStagger: 0.12,
-}
+};
 
 export const SCROLL_TRIGGER_DEFAULTS = {
   start: 'top 85%',
   end: 'bottom 20%',
   toggleActions: 'play none none reverse' as const,
-}
+};
 
 export const DISTANCES = {
   fadeUp: 40,
   fadeUpSmall: 20,
-}
+};

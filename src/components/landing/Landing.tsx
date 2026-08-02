@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
 import Navigation from './Navigation';
-import Hero from './Hero';
-import VisualDashboard from './Visual';
+import HeroVisual from './HeroVisual';
 
 export default function App() {
   return (
@@ -9,14 +8,10 @@ export default function App() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="bg-white min-h-screen text-black pt-[72px]"
+      className="min-h-screen bg-white pt-[72px] text-black"
     >
       <Navigation />
-      <Hero />
-      <VisualDashboard />
-      <Hero />
-      <Hero />
-      <Hero />
+      <HeroVisual />
     </motion.div>
   );
 }
