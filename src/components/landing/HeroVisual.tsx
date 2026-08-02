@@ -14,8 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLParagraphElement>(null);
-  const headingSpanRef = useRef<HTMLSpanElement>(null);
+  const taglineRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const overlayTextRef = useRef<HTMLDivElement>(null);
@@ -27,52 +26,22 @@ export default function HeroVisual() {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const tl = gsap.timeline({
-          defaults: { ease: EASINGS.smoothSlow },
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse',
-          },
-        });
 
-        tl.fromTo(
-          taglineRef.current,
-          { y: DISTANCES.fadeUp, opacity: 0 },
-          { y: 0, opacity: 1, duration: DURATIONS.heroLine }
-        )
-          .fromTo(
-            headingSpanRef.current,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: DURATIONS.heroLine },
-            `-=${DURATIONS.heroStagger}`
-          )
-          .fromTo(
-            overlayTextRef.current?.children,
-            { y: 20, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.15,
-              ease: EASINGS.smooth,
+
+        // Scroll triger usando gsap para hreflind
+        gsap.fromTo(
+          taglineRef.current, 
+          { opacity: 1, y: 0 },
+          { opacity: 0, y: -5, duracion : 0.05,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 20px', 
+              end: '+=20',
+              scrub: true,
+              markers : true,
             },
-            '-=0.6'
-          )
-          .fromTo(
-            cardsRef.current?.children,
-            { y: 30, opacity: 0, scale: 1 },
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: 0.5,
-              stagger: DURATIONS.cardStagger,
-              ease: EASINGS.smooth,
-            },
-            '-=0.3'
-          );
+          }
+        );
 
         gsap.to(gradientRef.current, {
           opacity: 1,
@@ -97,7 +66,7 @@ export default function HeroVisual() {
               end: '+=20',
               scrub: 1,
               pin: true,
-              markers: true
+              markers: false,
             },
           }
         );
@@ -111,23 +80,32 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full px-4  pb-4 sm:px-6 lg:px-8"
+      className="w-full   sm:px-6 lg:px-8"
       data-purpose="hero-visual"
     >
       <div className="relative h-svh overflow-hidden border">
-        <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
-          <p
-            ref={taglineRef}
+        <div 
+        ref={taglineRef}
+        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
+          <motion.p
+            initial={{ opacity: 0 , y: 20 }}
+            animate={{ opacity: 1 , y: 0 }}
+            transition={{ duration: 0.6 }}
             className="mx-auto mb-6 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
           >
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
-          </p>
-          <h1 className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black">
-            <span ref={headingSpanRef} className="block">
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black"
+          >
+            <span  className="block">
               See the impact before you break ground
             </span>
-          </h1>
+          </motion.h1>
         </div>
 
         <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">

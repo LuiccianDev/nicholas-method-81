@@ -50,7 +50,7 @@ export default function Navigation() {
               <circle cx="12" cy="14" fill="black" r="2"></circle>
             </svg>
           </motion.div>
-          <span className="text-lg font-black tracking-[0.2em] uppercase">
+          <span className="text-lg font-black tracking-wide uppercase">
             Terra
           </span>
           <motion.button
@@ -91,7 +91,7 @@ export default function Navigation() {
               className="fixed top-0 right-0 z-50 flex h-full w-72 flex-col bg-white shadow-2xl"
             >
               <div className="flex items-center justify-between border-b border-gray-100 px-6 py-6">
-                <span className="text-lg font-black tracking-[0.2em] uppercase">
+                <span className="text-lg font-black tracking-wide uppercase">
                   Menu
                 </span>
                 <motion.button
