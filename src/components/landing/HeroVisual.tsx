@@ -50,24 +50,14 @@ export default function HeroVisual() {
           )
           .fromTo(
             imageWrapperRef.current,
-            { clipPath: 'inset(100% 0 0 0)', opacity: 0 },
+            { clipPath: 'inset(100% 0 0 0)', opacity: 1 },
             {
-              clipPath: 'inset(0% 0 0 0)',
+              clipPath: 'inset(25% 0 0 0)',
               opacity: 1,
               duration: DURATIONS.imageReveal,
               ease: EASINGS.smoothSlowInOut,
             },
             '-=0.2'
-          )
-          .fromTo(
-            imageRef.current,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              duration: DURATIONS.imageReveal,
-              ease: EASINGS.smoothSlowInOut,
-            },
-            '<'
           )
           .fromTo(
             overlayTextRef.current?.children,
@@ -107,16 +97,15 @@ export default function HeroVisual() {
         });
 
         gsap.fromTo(
-          containerRef.current,
-          { opacity: 1, y: 0 },
+          imageWrapperRef.current,
+          { clipPath: 'inset(80% 0 0 0)' },
           {
-            opacity: 0,
-            y: -20,
+            clipPath: 'inset(0% 0 0 0)',
             ease: 'none',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'center top',
-              end: 'bottom top',
+              start: 'top bottom',
+              end: 'center center',
               scrub: 1,
             },
           }
@@ -131,19 +120,19 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full px-4 pb-4 sm:px-6 lg:px-8"
+      className="w-full  px-4 pb-4 sm:px-6 lg:px-8"
       data-purpose="hero-visual"
     >
       <div className="relative h-svh overflow-hidden border">
-        <div className="flex flex-col items-center justify-center px-6 pt-12 text-center">
+        <div className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
           <p
             ref={taglineRef}
-            className="mx-auto mb-6 max-w-[280px] text-[11px] leading-relaxed font-medium tracking-tight text-white uppercase"
+            className="mx-auto mb-6 max-w-[280px] text-[11px] leading-relaxed font-medium tracking-tight text-black uppercase "
           >
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
           </p>
-          <h1 className="px-2 text-[44px] leading-tight font-extrabold tracking-tighter text-white">
+          <h1 className="px-2 text-[44px] leading-tight font-extrabold tracking-tighter text-black ">
             <span ref={headingSpanRef} className="block">
               See the impact before you break ground
             </span>
