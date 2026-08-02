@@ -80,10 +80,10 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full   sm:px-6 lg:px-8"
+      className="w-full h-svh sm:px-6 lg:px-8"
       data-purpose="hero-visual"
     >
-      <div className="relative h-svh overflow-hidden border">
+      <div className="relative h-full overflow-hidden border">
         <div 
         ref={taglineRef}
         className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
