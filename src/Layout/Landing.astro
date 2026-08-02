@@ -1,5 +1,4 @@
 ---
-
 import '../styles/index.css';
 ---
 
@@ -37,7 +36,12 @@ import '../styles/index.css';
     <meta property="og:image" content="/banner.png" />
     <meta property="og:site_name" content="Nicholas Method 81" />
   </head>
-  <body class="bg-red-500 dark:bg-gray-900 text-gray-900 dark:text-white mt-20">
+  <body>
+    <!-- este div es comoun dividod de apeerciende  tenr un amrgin top de alagoas y que pareca ams sismetricoas -->
+    <div
+      class="fixed top-0 right-0 left-0 z-49 min-h-5 flex-col bg-white font-sans"
+    >
+    </div>
     <slot />
   </body>
 </html>

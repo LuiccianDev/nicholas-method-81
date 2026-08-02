@@ -19,40 +19,29 @@ export default function HeroVisual() {
   const imageRef = useRef<HTMLImageElement>(null);
   const overlayTextRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-  const gradientRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-
-
         // Scroll triger usando gsap para hreflind
         gsap.fromTo(
-          taglineRef.current, 
+          taglineRef.current,
           { opacity: 1, y: 0 },
-          { opacity: 0, y: -5, duracion : 0.05,
+          {
+            opacity: 0,
+            y: -5,
+            duracion: 0,
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top 20px', 
+              start: 'top 20px',
               end: '+=20',
               scrub: true,
-              markers : true,
+              markers: true,
             },
           }
         );
-
-        gsap.to(gradientRef.current, {
-          opacity: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1,
-          },
-        });
 
         gsap.fromTo(
           imageRef.current,
@@ -80,17 +69,18 @@ export default function HeroVisual() {
   return (
     <main
       ref={containerRef}
-      className="w-full h-svh sm:px-6 lg:px-8"
+      className="h-svh w-full px-5"
       data-purpose="hero-visual"
     >
-      <div className="relative h-full overflow-hidden border">
-        <div 
-        ref={taglineRef}
-        className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center">
+      <div className="relative h-full overflow-hidden">
+        <div
+          ref={taglineRef}
+          className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center"
+        >
           <motion.p
-            initial={{ opacity: 0 , y: 20 }}
-            animate={{ opacity: 1 , y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="mx-auto mb-6 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
           >
             AI analyzes site data and predicts environmental risk — <br />
@@ -99,30 +89,37 @@ export default function HeroVisual() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
             className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black"
           >
-            <span  className="block">
+            <span className="block">
               See the impact before you break ground
             </span>
           </motion.h1>
         </div>
 
-        <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
-          <img
+        <div
+          ref={imageWrapperRef}
+          className="absolute inset-0 overflow-hidden rounded-xl"
+        >
+          <motion.img
             ref={imageRef}
             alt="Environmental field background"
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ clipPath: 'inset(20% 0 0 0)' }}
+            style={{ clipPath: 'inset(40% 0 0 0)' }}
             src="/dashboard_bg.jpg"
+            initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
+            transition={{ duration: 0.9, ease: 'easeInOut' }}
           />
         </div>
-        <div
-          ref={gradientRef}
-          className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/20 opacity-0"
-        />
 
-        <div ref={overlayTextRef}>
+        <motion.div
+          ref={overlayTextRef}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.5 }}
+        >
           <div className="absolute top-1/2 left-12 max-w-30 -translate-y-1/2">
             <p className="text-xl leading-tight font-bold text-white">
               Drone + sensor fusion
@@ -133,9 +130,14 @@ export default function HeroVisual() {
               Risk flagged automatically
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="absolute right-0 bottom-8 left-0 flex justify-center px-4">
+        <motion.div
+          className="absolute right-0 bottom-40 left-0 flex justify-center px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.5 }}
+        >
           <div ref={cardsRef} className="flex w-full max-w-lg flex-col gap-2">
             <div className="grid grid-cols-2 gap-2">
               <motion.div
@@ -201,7 +203,7 @@ export default function HeroVisual() {
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </main>
   );

@@ -15,9 +15,12 @@ export default function Navigation() {
 
   return (
     <>
-      <nav
+      <motion.nav
         className="fixed top-5 right-0 left-0 z-50 flex items-center justify-between px-4 py-6"
         data-purpose="main-navigation"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="flex-1">
           <motion.button
@@ -70,7 +73,7 @@ export default function Navigation() {
             Login / Sign Up
           </motion.div>
         </div>
-      </nav>
+      </motion.nav>
 
       <AnimatePresence>
         {isMenuOpen && (
