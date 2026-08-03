@@ -31,8 +31,9 @@ export default function Navigation() {
             Book
           </motion.button>
         </div>
-        <div className="flex flex-1 items-center justify-center space-x-3">
-          <span className="text-lg font-black tracking-wide uppercase">
+        <div className="flex items-center justify-center pl-4 bg-white rounded-sm">
+          
+          <span className="text-lg font-black tracking-wide uppercase pr-2">
             Luiccian
           </span>
           <motion.button
@@ -43,11 +44,12 @@ export default function Navigation() {
           >
             <Menu className="h-5 w-5" />
           </motion.button>
+
         </div>
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex flex-1 items-center justify-end ">
           <motion.div
             whileHover={{ opacity: 0.6 }}
-            className="cursor-pointer text-[10px] font-bold tracking-widest text-gray-500 uppercase"
+            className="cursor-pointer text-[10px] font-bold tracking-widest text-gray-500 uppercase bg-white px-4 py-2 rounded-sm"
           >
             Login / Sign Up
           </motion.div>
