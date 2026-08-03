@@ -15,7 +15,6 @@ export default function HeroVisual() {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLVideoElement>(null);
   const pinTriggerRef = useRef<HTMLDivElement>(null);
-  const noteRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -52,14 +51,6 @@ export default function HeroVisual() {
           }
         );
 
-        gsap.fromTo(noteRef.current,
-          {
-            opacity : 1 , y : 100
-          
-          },{
-            opacity : 0 
-          }
-        )
 
         // Pin del hero: crea el espacio de scroll que activa las cards
         ScrollTrigger.create({
@@ -100,9 +91,10 @@ export default function HeroVisual() {
           </motion.p>
           <BlurText text="See the impact before you break ground" />
         </div>
-        <div
-          ref={noteRef}
-
+        <motion.div
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
         >
           <div className="absolute top-1/2 left-12 max-w-40 -translate-y-1/2 z-10">
             <p className="text-2xl leading-tight font-bold text-white">
@@ -114,7 +106,7 @@ export default function HeroVisual() {
               Risk flagged automatically
             </p>
           </div>
-        </div>
+        </motion.div>
 
         <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
           <motion.video
