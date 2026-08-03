@@ -3,7 +3,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import { motion } from 'motion/react';
-import Cards from './components/Cards';
 import BlurText from './components/BlurText';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -98,7 +97,6 @@ export default function HeroVisual() {
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
         </div>
-        <Cards />
       </div>
     </main>
   );
