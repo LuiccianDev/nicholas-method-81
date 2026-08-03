@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { motion } from 'motion/react';
 import BlurText from './components/BlurText';
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroVisual() {
@@ -95,9 +94,8 @@ export default function HeroVisual() {
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
             animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-          />        
+          />
         </div>
-
       </div>
     </div>
   );
