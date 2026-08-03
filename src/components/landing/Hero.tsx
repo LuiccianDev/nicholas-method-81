@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { motion } from 'motion/react';
 import BlurText from './components/BlurText';
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroVisual() {
@@ -46,7 +47,6 @@ export default function HeroVisual() {
               start: 'top 30px',
               end: '+=20',
               scrub: 1,
-              pin: true,
               markers: false,
             },
           }
@@ -89,14 +89,15 @@ export default function HeroVisual() {
             autoPlay
             muted
             loop
-            className="absolute inset-0 h-[98%] w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
             style={{ clipPath: 'inset(40% 0 0 0)' }}
-            src="/public/video-test.mp4"
+            src="/video-test.mp4"
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
             animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
-          />
+          />        
         </div>
+
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ export default function CounterDisplay({
       const obj = { value: start };
       gsap.to(obj, {
         value: end,
-        duration: DURATIONS.counter,
+        duration: 0.5,
         ease: EASINGS.smoothSlow,
         onUpdate: () =>
           setValue(
@@ -47,7 +47,7 @@ export default function CounterDisplay({
   );
 
   return (
-    <div ref={ref} className="mb-1 text-4xl font-bold">
+    <div ref={ref} className="mb-1 w-full text-center text-4xl font-bold tabular-nums">
       {value}
       {suffix}
     </div>
