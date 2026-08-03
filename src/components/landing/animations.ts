@@ -1,3 +1,6 @@
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 export const EASINGS = {
   smooth: 'power2.out',
   smoothInOut: 'power2.inOut',
@@ -27,3 +30,30 @@ export const DISTANCES = {
   fadeUp: 40,
   fadeUpSmall: 20,
 };
+
+/**
+ * Creates a fade-up tween with ScrollTrigger on an array of elements.
+ * Use inside useGSAP() with mm.add('(prefers-reduced-motion: no-preference)', ...).
+ */
+export function createFadeUpScrollTrigger(
+  targets: Element | Element[] | null,
+  trigger: Element | null,
+  stagger = 0
+) {
+  if (!targets || !trigger) return;
+  return gsap.fromTo(
+    targets,
+    { opacity: 0, y: DISTANCES.fadeUp },
+    {
+      opacity: 1,
+      y: 0,
+      duration: DURATIONS.section,
+      ease: EASINGS.smooth,
+      stagger,
+      scrollTrigger: {
+        trigger,
+        ...SCROLL_TRIGGER_DEFAULTS,
+      },
+    }
+  );
+}

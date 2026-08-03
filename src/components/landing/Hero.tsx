@@ -1,16 +1,17 @@
+// HeroVisual.tsx
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import { motion } from 'motion/react';
 import BlurText from './components/BlurText';
+import CardsCarousel from './components/CardsCarousel';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLVideoElement>(null);
 
   useGSAP(
@@ -18,7 +19,6 @@ export default function HeroVisual() {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // Scroll triger usando gsap para hreflind
         gsap.fromTo(
           taglineRef.current,
           { opacity: 1, y: 0 },
@@ -30,14 +30,13 @@ export default function HeroVisual() {
               start: 'top 20px',
               end: '+=20',
               scrub: true,
-              markers: false,
             },
           }
         );
 
         gsap.fromTo(
           imageRef.current,
-          { clipPath: 'inset(40% 0 0 0)' },
+          { clipPath: 'inset(35% 0 0 0)' },
           {
             clipPath: 'inset(0% 0 0 0)',
             ease: 'none',
@@ -46,10 +45,20 @@ export default function HeroVisual() {
               start: 'top 30px',
               end: '+=20',
               scrub: 1,
-              markers: false,
             },
           }
         );
+
+        // Pin del hero: pina el contenedor completo
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: 'top top',
+          end: '+=150%',
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+          markers: false,
+        });
       });
 
       return () => mm.revert();
@@ -77,24 +86,39 @@ export default function HeroVisual() {
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
           </motion.p>
-          {/* Effecto blr de tetx revelear  */}
           <BlurText text="See the impact before you break ground" />
         </div>
+        <motion.div
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+        >
+          <div className="absolute top-1/2 left-12 z-10 max-w-40 -translate-y-1/2">
+            <p className="text-2xl leading-tight font-bold text-white">
+              Drone + sensor fusion
+            </p>
+          </div>
+          <div className="absolute top-1/2 right-12 z-10 max-w-40 -translate-y-1/2 text-right">
+            <p className="text-2xl leading-tight font-bold text-white">
+              Risk flagged automatically
+            </p>
+          </div>
+        </motion.div>
 
-        <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
-          {/* se pude cambais por iamgen o un video , ahoara soslode pruebas l evideo etxo y lc colres  */}
+        <div className="absolute inset-0 overflow-hidden">
           <motion.video
             ref={imageRef}
             autoPlay
             muted
             loop
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ clipPath: 'inset(40% 0 0 0)' }}
+            style={{ clipPath: 'inset(35% 0 0 0)' }}
             src="/video-test.mp4"
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-            animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(35% 0 0 0)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
+          <CardsCarousel pinTrigger={containerRef} />
         </div>
       </div>
     </div>
