@@ -1,6 +1,4 @@
 // Card.tsx
-import { motion } from 'motion/react';
-import { forwardRef, useImperativeHandle, useRef } from 'react';
 import CounterDisplay from './CounterDisplay';
 
 type CardProps = {
@@ -16,19 +14,21 @@ type CardProps = {
   active?: boolean;
 };
 
-const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { label, value, suffix, status, size, decimals = 0, isFlag = false, prefixText, unit, active = false },
-  ref
-) {
-  const localRef = useRef<HTMLDivElement>(null);
-  useImperativeHandle(ref, () => localRef.current as HTMLDivElement);
-
+export default function Card({
+  label,
+  value,
+  suffix,
+  status,
+  size,
+  decimals = 0,
+  isFlag = false,
+  prefixText,
+  unit,
+  active = false,
+}: CardProps) {
   return (
-    <motion.div
-      ref={localRef}
-      whileHover={{ y: -4, scale: 1.01 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className={`rounded-xl border p-4 text-white backdrop-blur-md ${size}`}
+    <div
+      className={`rounded-xl border p-4 text-white backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] ${size}`}
     >
       {isFlag ? (
         <>
@@ -69,8 +69,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
           </p>
         </>
       )}
-    </motion.div>
+    </div>
   );
-});
-
-export default Card;
+}

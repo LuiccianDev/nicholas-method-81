@@ -59,7 +59,7 @@ export default function HeroVisual() {
           pin: true,
           pinSpacing: true,
           scrub: 1,
-          markers : false
+          markers: false,
         });
       });
 
