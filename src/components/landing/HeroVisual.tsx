@@ -38,7 +38,7 @@ export default function HeroVisual() {
 
         gsap.fromTo(
           imageRef.current,
-          { clipPath: 'inset(40% 0 0 0)' },
+          { clipPath: 'inset(35% 0 0 0)' },
           {
             clipPath: 'inset(0% 0 0 0)',
             ease: 'none',
@@ -115,10 +115,10 @@ export default function HeroVisual() {
             muted
             loop
             className="absolute inset-0 h-full w-full object-cover"
-            style={{ clipPath: 'inset(40% 0 0 0)' }}
+            style={{ clipPath: 'inset(35% 0 0 0)' }}
             src="/video-test.mp4"
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-            animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
+            animate={{ opacity: 1, clipPath: 'inset(35% 0 0 0)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
           <CardsCarousel pinTrigger={pinTriggerRef} />
