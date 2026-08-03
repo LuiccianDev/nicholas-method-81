@@ -31,7 +31,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         // Grupo 1: entrada conservada, reposa abajo en y:100
         gsap.set(group1Ref.current, { y: 105, opacity: 0 });
         gsap.to(group1Ref.current, {
-          y: 150,
+          y: 110,
           opacity: 1,
           duration: 0.5,
           delay: 0.5,
@@ -54,7 +54,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         tl.call(() => setActiveGroup(0), undefined, 0);
         tl.fromTo(
           group1Ref.current,
-          { y: 150 },
+          { y: 110 },
           { y: -50, duration: 0.4, ease: 'circ.out' },
           0
         );
@@ -132,10 +132,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           suffix=""
           decimals={1}
           status="Flag"
-          isFlag
-          prefixText="Detected at"
-          unit="m"
-          size="h-40 w-full max-w-lg"
+          size="h-50 w-full max-w-lg"
           active={activeGroup === 0}
         />
       </div>

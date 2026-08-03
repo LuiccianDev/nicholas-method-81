@@ -53,7 +53,7 @@ export default function CounterDisplay({
   );
 
   return (
-    <div ref={ref} className="mb-1 w-full text-center text-4xl">
+    <div ref={ref} className="mb-1 w-full text-center font-bold text-5xl">
       {value}
       {suffix}
     </div>
