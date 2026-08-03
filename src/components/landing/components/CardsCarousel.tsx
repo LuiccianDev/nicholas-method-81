@@ -36,7 +36,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         });
 
         // Grupo 2 y 3: inician debajo del viewport
-/*      gsap.set(group2Ref.current, { y: 0, opacity: 0, scale: 1 });
+        /*      gsap.set(group2Ref.current, { y: 0, opacity: 0, scale: 1 });
         gsap.set(group3Ref.current, { y: 0, opacity: 0, scale: 1 }); */
 
         const tl = gsap.timeline({
@@ -103,7 +103,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       <div
         ref={group1Ref}
         className="absolute inset-0 flex flex-col items-center justify-center gap-4"
-        style={{ opacity : 0, transform: 'translateY(50px)', }}
+        style={{ opacity: 0, transform: 'translateY(50px)' }}
       >
         <div className="grid w-full max-w-lg grid-cols-2 gap-2">
           <Card
@@ -140,7 +140,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       <div
         ref={group2Ref}
         className="absolute inset-0 flex items-center justify-center"
-        style={{ opacity : 0, transform: 'translateY(400px)',}}
+        style={{ opacity: 0, transform: 'translateY(400px)' }}
       >
         <Card
           label="Landslide risk"
@@ -157,7 +157,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       <div
         ref={group3Ref}
         className="absolute inset-0 flex items-center justify-center"
-        style={{ opacity : 0, transform: 'translateY(400px)'}}
+        style={{ opacity: 0, transform: 'translateY(400px)' }}
       >
         <div className="grid w-full max-w-lg grid-cols-2 gap-4">
           <Card

@@ -24,7 +24,7 @@ export default function Card({
     <div
       className={`rounded-sm border border-white/10 bg-black/20 p-5 text-white backdrop-blur-md transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] ${size}`}
     >
-      <p className="mb-3 text-xl font-medium text-white/70 pb-2">{label}</p>
+      <p className="mb-3 pb-2 text-xl font-medium text-white/70">{label}</p>
       <CounterDisplay
         start={0}
         end={value}
@@ -35,7 +35,6 @@ export default function Card({
       <p className="mt-1 text-sm font-medium tracking-wide text-white/50">
         {status}
       </p>
-
     </div>
   );
 }
