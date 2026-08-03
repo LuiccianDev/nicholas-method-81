@@ -59,7 +59,7 @@ export default function HeroVisual() {
   );
 
   return (
-    <main
+    <div
       ref={containerRef}
       className="h-svh w-full px-5"
       data-purpose="hero-visual"
@@ -89,7 +89,7 @@ export default function HeroVisual() {
             autoPlay
             muted
             loop
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-[98%] w-full object-cover"
             style={{ clipPath: 'inset(40% 0 0 0)' }}
             src="/public/video-test.mp4"
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
@@ -98,6 +98,6 @@ export default function HeroVisual() {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
