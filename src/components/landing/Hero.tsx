@@ -13,7 +13,6 @@ export default function HeroVisual() {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
-
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -101,8 +100,6 @@ export default function HeroVisual() {
             transition={{ duration: 0.9, ease: 'easeInOut' }}
           />
         </div>
-
-
       </div>
     </main>
   );

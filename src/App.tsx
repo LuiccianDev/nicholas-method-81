@@ -44,10 +44,13 @@ function CalculatorContent() {
       <motion.div
         className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
         initial={{ opacity: 0 }}
-        animate={{opacity: 1,transition: {
+        animate={{
+          opacity: 1,
+          transition: {
             type: 'spring',
             staggerChildren: 0.25,
-          }}}
+          },
+        }}
       >
         <motion.div
           variants={itemVariants}
