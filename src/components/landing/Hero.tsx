@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import { motion } from 'motion/react';
 import Cards from './components/Cards';
+import BlurText from './components/BlurText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,20 +73,14 @@ export default function HeroVisual() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="mx-auto my-10 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
           >
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
           </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black"
-          >
-            <span>See the impact before you break ground</span>
-          </motion.h1>
+
+          <BlurText text="See the impact before you break ground" />
         </div>
 
         <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
@@ -97,7 +92,7 @@ export default function HeroVisual() {
             src="/dashboard_bg.jpg"
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
             animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
-            transition={{ duration: 0.9, ease: 'easeInOut' }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
         </div>
         <Cards />
