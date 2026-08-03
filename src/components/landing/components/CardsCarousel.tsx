@@ -156,7 +156,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       {/* Grupo 3 — 2 cards en grid */}
       <div
         ref={group3Ref}
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute inset-0 flex items-center justify-center "
         style={{ opacity: 0, transform: 'translateY(400px)' }}
       >
         <div className="grid w-full max-w-lg grid-cols-2 gap-4">

@@ -12,9 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
-  const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLVideoElement>(null);
-  const pinTriggerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -51,9 +49,9 @@ export default function HeroVisual() {
           }
         );
 
-        // Pin del hero: crea el espacio de scroll que activa las cards
+        // Pin del hero: pina el contenedor completo
         ScrollTrigger.create({
-          trigger: pinTriggerRef.current,
+          trigger: containerRef.current,
           start: 'top top',
           end: '+=150%',
           pin: true,
@@ -74,7 +72,7 @@ export default function HeroVisual() {
       className="h-svh w-full px-5"
       data-purpose="hero-visual"
     >
-      <div ref={pinTriggerRef} className="relative h-full overflow-hidden">
+      <div className="relative h-full overflow-hidden">
         <div
           ref={taglineRef}
           className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center"
@@ -107,7 +105,7 @@ export default function HeroVisual() {
           </div>
         </motion.div>
 
-        <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
           <motion.video
             ref={imageRef}
             autoPlay
@@ -120,7 +118,7 @@ export default function HeroVisual() {
             animate={{ opacity: 1, clipPath: 'inset(35% 0 0 0)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
-          <CardsCarousel pinTrigger={pinTriggerRef} />
+          <CardsCarousel pinTrigger={containerRef} />
         </div>
       </div>
     </div>
