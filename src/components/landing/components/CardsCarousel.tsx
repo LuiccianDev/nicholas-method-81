@@ -3,15 +3,10 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { type RefObject, useRef } from 'react';
+import { motion } from 'motion/react';
 import Card from './Card';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const CARDS = [
-  { id: 'soil', label: 'Soil stability', value: 87, suffix: '%', decimals: 0, status: 'Low Risk', size: 'h-56 w-full max-w-md' },
-  { id: 'canopy', label: 'Tree canopy loss', value: 12, suffix: '%', decimals: 0, status: 'Projected', size: 'h-56 w-full max-w-md' },
-  { id: 'water', label: 'Water table', value: 3.2, suffix: '', decimals: 1, status: 'Flag', isFlag: true, prefixText: 'Detected at', unit: 'm', size: 'h-48 w-full max-w-xl' },
-];
 
 type CardsCarouselProps = {
   pinTrigger: RefObject<HTMLDivElement | null>;
@@ -19,35 +14,63 @@ type CardsCarouselProps = {
 
 export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  // un ref por card, explícito, sin array/map
+  const soilRef = useRef<HTMLDivElement>(null);
+  const canopyRef = useRef<HTMLDivElement>(null);
+  const waterRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const cards = cardRefs.current.filter((c): c is HTMLDivElement => c !== null);
+        if (!sectionRef.current) return;
 
-        gsap.set(cards, { opacity: 0, y: 0, scale: 0.95 });
+        const containerHeight = sectionRef.current.offsetHeight;
+        const startOffsetY = containerHeight/ 2  ;
+
+        const cards = [soilRef.current, canopyRef.current, waterRef.current].filter(
+          (c): c is HTMLDivElement => c !== null
+        );
+
+
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: pinTrigger.current,
-            start: '20px 20px',
+            start: '51% center',
             end: '+=150%',
             scrub: 1,
-            markers: true,
+            markers : true
           },
         });
 
-        cards.forEach((card, i) => {
-          tl.fromTo(
-            card,
-            { opacity: 0, y: 5, scale: 0.95 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.1, ease: 'power2.out' },
-            i * 2 // separa la entrada de cada card en el timeline
-          );
-        });
+        tl.to(soilRef.current, { y: 0, duration: 1, ease: 'power2.out' }, 0);
+        tl.to(canopyRef.current, { y: 0, duration: 1, ease: 'power2.out' }, 1.2);
+        tl.to(waterRef.current, { y: 0, duration: 1, ease: 'power2.out' }, 2.4);
+
+        gsap.fromTo(
+          soilRef.current,{opacity : 0, y : 400},
+          {opacity : 1,
+            y : 320,
+            duration : 0.5,
+            delay : 1
+          }
+        )
+        gsap.fromTo(
+          canopyRef.current,{opacity : 0,y : 600},
+          {opacity : 1,
+          }
+        )
+        gsap.to(
+          waterRef.current,
+          {opacity : 0,
+          }
+        )
+
+
+
       });
 
       return () => mm.revert();
@@ -56,29 +79,53 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
   );
 
   return (
-    <div ref={sectionRef} className="absolute inset-0 flex flex-col items-center justify-center w-min-7xl">
-      {CARDS.map((card, i) => (
-        <div
-          key={card.id}
-          ref={(el) => {
-            cardRefs.current[i] = el;
-          }}
-          className="absolute "
-
-        >
+    <div
+      ref={sectionRef}
+      className="absolute inset-0 flex flex-col items-center justify-center w-full max-w-2xl mx-auto"
+    >
+        {/* Card 1 — Water table */}
+        <div ref={soilRef} className="w-full flex items-center justify-center">
           <Card
-            label={card.label}
-            value={card.value}
-            suffix={card.suffix}
-            status={card.status}
-            size={card.size}
-            decimals={card.decimals}
-            isFlag={card.isFlag}
-            prefixText={card.prefixText}
-            unit={card.unit}
+            label="Soil stability"
+            value={87}
+            suffix="%"
+            decimals={0}
+            status="Low Risk"
+            size="h-56 w-full max-w-md"
+            active
           />
         </div>
-      ))}
+
+
+        {/* Card 2 — Water table */}
+        <div ref={canopyRef} className="w-full flex items-center justify-center">
+          <Card
+            label="Tree canopy loss"
+            value={12}
+            suffix="%"
+            decimals={0}
+            status="Projected"
+            size="h-56 w-full max-w-md"
+          />
+        </div>
+
+
+      {/* Card 3 — Water table */}
+
+        <div ref={waterRef} className="w-full flex items-center justify-center">
+          <Card
+            label="Water table"
+            value={3.2}
+            suffix=""
+            decimals={1}
+            status="Flag"
+            isFlag
+            prefixText="Detected at"
+            unit="m"
+            size="h-48 w-full max-w-xl"
+          />
+        </div>
+
     </div>
   );
 }

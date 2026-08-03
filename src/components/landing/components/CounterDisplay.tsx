@@ -1,35 +1,44 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef, useState } from 'react';
-import {
-  EASINGS,
-  DURATIONS,
-  DISTANCES,
-  SCROLL_TRIGGER_DEFAULTS,
-} from '../animations';
+import { EASINGS, DURATIONS } from '../animations';
+
+type CounterDisplayProps = {
+  start: number;
+  end: number;
+  suffix: string;
+  decimals?: number;
+  active: boolean;
+};
 
 export default function CounterDisplay({
   start,
   end,
   suffix,
-  containerRef,
   decimals = 0,
-}: {
-  start: number;
-  end: number;
-  suffix: string;
-  containerRef: React.RefObject<HTMLDivElement | null>;
-  decimals?: number;
-}) {
+  active,
+}: CounterDisplayProps) {
   const [value, setValue] = useState(start);
   const ref = useRef<HTMLDivElement>(null);
 
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   useGSAP(
     () => {
+      if (prefersReducedMotion) {
+        setValue(active ? end : start);
+        return;
+      }
+      if (!active) {
+        setValue(start);
+        return;
+      }
       const obj = { value: start };
-      gsap.to(obj, {
+      const tween = gsap.to(obj, {
         value: end,
-        duration: 0.5,
+        duration: DURATIONS.counter,
         ease: EASINGS.smoothSlow,
         onUpdate: () =>
           setValue(
@@ -37,17 +46,17 @@ export default function CounterDisplay({
               ? parseFloat(obj.value.toFixed(decimals))
               : Math.round(obj.value)
           ),
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: SCROLL_TRIGGER_DEFAULTS.start,
-        },
       });
+      return () => tween.kill();
     },
-    { scope: ref, dependencies: [end] }
+    { scope: ref, dependencies: [active, end] }
   );
 
   return (
-    <div ref={ref} className="mb-1 w-full text-center text-4xl font-bold tabular-nums">
+    <div
+      ref={ref}
+      className="mb-1 w-full text-center text-4xl "
+    >
       {value}
       {suffix}
     </div>

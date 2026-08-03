@@ -13,10 +13,11 @@ type CardProps = {
   isFlag?: boolean;
   prefixText?: string;
   unit?: string;
+  active?: boolean;
 };
 
 const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
-  { label, value, suffix, status, size, decimals = 0, isFlag = false, prefixText, unit },
+  { label, value, suffix, status, size, decimals = 0, isFlag = false, prefixText, unit, active = false },
   ref
 ) {
   const localRef = useRef<HTMLDivElement>(null);
@@ -45,8 +46,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
               start={0}
               end={value}
               suffix={suffix}
-              containerRef={localRef}
               decimals={decimals}
+              active={active}
             />
             {unit}
           </div>
@@ -60,8 +61,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
             start={0}
             end={value}
             suffix={suffix}
-            containerRef={localRef}
             decimals={decimals}
+            active={active}
           />
           <p className="text-[8px] font-bold tracking-widest uppercase opacity-60">
             {status}
