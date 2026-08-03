@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import { motion } from 'motion/react';
-import CounterDisplay from './components/CounterDisplay';
+import Cards from './components/Cards';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -100,6 +100,7 @@ export default function HeroVisual() {
             transition={{ duration: 0.9, ease: 'easeInOut' }}
           />
         </div>
+        <Cards />
       </div>
     </main>
   );
