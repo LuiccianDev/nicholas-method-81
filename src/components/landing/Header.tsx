@@ -6,9 +6,7 @@ import { motion } from 'motion/react';
 const menuItems = [
   { label: 'Features', href: '#' },
   { label: 'How it works', href: '#' },
-  { label: 'Pricing', href: '#' },
   { label: 'About', href: '#' },
-  { label: 'Contact', href: '#' },
 ];
 
 export default function Navigation() {
@@ -30,32 +28,12 @@ export default function Navigation() {
             className="rounded-sm bg-[#1A1A1A] px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
             data-purpose="cta-book-demo"
           >
-            Book a Demo
+            Book
           </motion.button>
         </div>
         <div className="flex flex-1 items-center justify-center space-x-3">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex h-6 w-6 items-center justify-center"
-            data-purpose="brand-logo"
-          >
-            <svg
-              className="h-full w-full"
-              fill="none"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 2L4 20H20L12 2Z"
-                stroke="black"
-                strokeLinejoin="round"
-                strokeWidth="2"
-              ></path>
-              <circle cx="12" cy="14" fill="black" r="2"></circle>
-            </svg>
-          </motion.div>
           <span className="text-lg font-black tracking-wide uppercase">
-            Terra
+            Luiccian
           </span>
           <motion.button
             whileTap={{ scale: 0.9 }}
@@ -130,7 +108,7 @@ export default function Navigation() {
                   whileTap={{ scale: 0.98 }}
                   className="w-full rounded-sm bg-[#1A1A1A] px-4 py-3 text-xs font-bold tracking-widest text-white uppercase"
                 >
-                  Book a Demo
+                  Book
                 </motion.button>
               </div>
             </motion.aside>
