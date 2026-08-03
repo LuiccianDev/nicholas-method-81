@@ -12,7 +12,7 @@ export default function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
+  const imageRef = useRef<HTMLVideoElement>(null);
 
   useGSAP(
     () => {
@@ -79,17 +79,20 @@ export default function HeroVisual() {
             AI analyzes site data and predicts environmental risk — <br />
             before a single tree comes down
           </motion.p>
-
+          {/* Effecto blr de tetx revelear  */}
           <BlurText text="See the impact before you break ground" />
         </div>
 
         <div ref={imageWrapperRef} className="absolute inset-0 overflow-hidden">
-          <motion.img
+          {/* se pude cambais por iamgen o un video , ahoara soslode pruebas l evideo etxo y lc colres  */}
+          <motion.video
             ref={imageRef}
-            alt="Environmental field background"
+            autoPlay
+            muted
+            loop
             className="absolute inset-0 h-full w-full object-cover"
             style={{ clipPath: 'inset(40% 0 0 0)' }}
-            src="/dashboard_bg.jpg"
+            src="/public/video-test.mp4"
             initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
             animate={{ opacity: 1, clipPath: 'inset(40% 0 0 0)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
