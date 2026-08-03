@@ -36,9 +36,6 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         });
 
         // Grupo 2 y 3: inician debajo del viewport
-        /*      gsap.set(group2Ref.current, { y: 0, opacity: 0, scale: 1 });
-        gsap.set(group3Ref.current, { y: 0, opacity: 0, scale: 1 }); */
-
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: pinTrigger.current,

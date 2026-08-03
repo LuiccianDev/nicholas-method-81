@@ -93,13 +93,13 @@ export default function HeroVisual() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.55 }}
         >
-          <div className="absolute top-1/2 left-12 z-10 max-w-40 -translate-y-1/2">
-            <p className="text-2xl leading-tight font-bold text-white">
+          <div className="absolute top-1/2 left-12 z-10 max-w-60 -translate-y-1/2">
+            <p className="text-3xl leading-tight font-bold text-white">
               Drone + sensor fusion
             </p>
           </div>
-          <div className="absolute top-1/2 right-12 z-10 max-w-40 -translate-y-1/2 text-right">
-            <p className="text-2xl leading-tight font-bold text-white">
+          <div className="absolute top-1/2 right-12 z-10 max-w-60 -translate-y-1/2 text-right">
+            <p className="text-3xl leading-tight font-bold text-white">
               Risk flagged automatically
             </p>
           </div>
