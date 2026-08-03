@@ -1,11 +1,11 @@
-import Navigation from './Navigation';
-import HeroVisual from './HeroVisual';
+import Header from './Header';
+import Hero from './Hero';
 
 export default function App() {
   return (
     <div className="pt-20 text-black">
-      <Navigation />
-      <HeroVisual />
+      <Header />
+      <Hero />
     </div>
   );
 }
