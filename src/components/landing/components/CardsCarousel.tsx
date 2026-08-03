@@ -28,16 +28,18 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         if (!sectionRef.current) return;
 
-        // Card 1 (Soil): entrada conservada, reposa abajo en y:320
-        gsap.fromTo(
-          soilRef.current,
-          { opacity: 0, y: 400 },
-          { opacity: 1, y: 100, duration: 0.5, delay: 1 }
-        );
+        // Card 1 (Soil): entrada conservada, reposa abajo en y:100
+        gsap.set(soilRef.current, { y: 105, opacity: 0 });
+        gsap.to(soilRef.current, {
+          y: 100,
+          opacity: 1,
+          duration: 0.5,
+          delay: 0.5,
+        });
 
-        // Card 2 (Canopy) y Card 3 (Water): inician debajo del viewport
-        gsap.set(canopyRef.current, { y: 420, opacity: 0, scale: 0.92 });
-        gsap.set(waterRef.current, { y: 420, opacity: 0, scale: 0.92 });
+        // Card 2 y 3: inician debajo del viewport
+        gsap.set(canopyRef.current, { y: 420, opacity: 0, scale: 1 });
+        gsap.set(waterRef.current, { y: 420, opacity: 0, scale: 1 });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -48,50 +50,43 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           },
         });
 
-        // Beat 1: Card 1 sube al centro
-        tl.to(
+        // --- Beat 1: Soil sube al centro ---
+        tl.call(() => setActiveIndex(0), undefined, 0);
+        tl.fromTo(
           soilRef.current,
-          { y: 0, duration: 0.4, ease: 'power2.out' },
-          0.1
+          { y: 100 },
+          { y: -50, duration: 0.4, ease: 'circ.out' },
+          0
         );
 
-        // Beat 2: Card 1 sale, Card 2 entra al centro
+        // --- Transición 1→2: Soil sale mientras Canopy entra (crossfade sincronizado) ---
+        tl.to(
+          soilRef.current,
+          { y: -100, opacity: 0, scale: 0.95, duration: 0.4, ease: 'circ.out' },
+          0.6
+        );
         tl.to(
           canopyRef.current,
-          { y: 0, opacity: 1, scale: 1, duration: 0.53, ease: 'power3.out' },
-          0.9
+          { y: -50, opacity: 1, scale: 1, duration: 0.4, ease: 'circ.out' },
+          0.6
         );
-        tl.to(
-          soilRef.current,
-          {
-            y: -120,
-            opacity: 0,
-            scale: 0.94,
-            duration: 0.35,
-            ease: 'power2.in',
-          },
-          1.25
-        );
-        tl.call(() => setActiveIndex(1), undefined, 1.4);
+        tl.call(() => setActiveIndex(1), undefined, 1.0);
 
-        // Beat 3: Card 2 sale, Card 3 entra al centro
+        // --- Beat 2: Canopy descansa visible en el centro ---
+        // (sin tweens aquí — se mantiene con los valores del beat anterior hasta el siguiente)
+
+        // --- Transición 2→3: Canopy sale mientras Water entra (crossfade sincronizado) ---
+        tl.to(
+          canopyRef.current,
+          { y: -100, opacity: 0, scale: 0.95, duration: 0.4, ease: 'circ.out' },
+          1.6
+        );
         tl.to(
           waterRef.current,
-          { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'power3.out' },
-          1.9
+          { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' },
+          1.6
         );
-        tl.to(
-          canopyRef.current,
-          {
-            y: -120,
-            opacity: 0,
-            scale: 0.94,
-            duration: 0.35,
-            ease: 'power2.in',
-          },
-          2.25
-        );
-        tl.call(() => setActiveIndex(2), undefined, 2.4);
+        tl.call(() => setActiveIndex(2), undefined, 2.0);
       });
 
       mm.add('(prefers-reduced-motion: reduce)', () => {
