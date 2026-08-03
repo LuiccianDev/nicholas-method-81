@@ -55,8 +55,8 @@ export default function BlurText({ text }: { text: string }) {
           style={{
             display: 'inline-block',
             opacity: 0,
-            transform: 'translateX(-2px)',
-            filter: 'blur(16px)',
+            transform: 'translateX(-10px)',
+            filter: 'blur(40px)',
             color: '#666666',
             willChange: 'transform, opacity, filter',
           }}
