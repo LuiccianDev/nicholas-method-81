@@ -11,13 +11,13 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-interface ComparisonChartProps {
+interface ComparisonBarChartProps {
   chartData: ChartDataRow[];
 }
 
-const ComparisonChart = memo(function ComparisonChart({
+const ComparisonBarChart = memo(function ComparisonBarChart({
   chartData,
-}: ComparisonChartProps) {
+}: ComparisonBarChartProps) {
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -134,4 +134,4 @@ const ComparisonChart = memo(function ComparisonChart({
   );
 });
 
-export default ComparisonChart;
+export default ComparisonBarChart;

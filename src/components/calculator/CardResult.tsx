@@ -3,17 +3,17 @@ import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
 import Button from '../ui/Button';
 
-interface BestMethodCardProps {
+interface CardResultProps {
   bestMethod?: ScoredMethod;
   absoluteBest?: ScoredMethod;
   onOpenDetails: () => void;
 }
 
-const BestMethodCard = memo(function BestMethodCard({
+const CardResult = memo(function CardResult({
   bestMethod,
   absoluteBest,
   onOpenDetails,
-}: BestMethodCardProps) {
+}: CardResultProps) {
   const isSurfaceMoreViable =
     absoluteBest?.method === 'Open Pit' &&
     absoluteBest.total > (bestMethod?.total || 0);
@@ -68,4 +68,4 @@ const BestMethodCard = memo(function BestMethodCard({
   );
 });
 
-export default BestMethodCard;
+export default CardResult;

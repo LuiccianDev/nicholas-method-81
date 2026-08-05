@@ -2,8 +2,8 @@ import { Suspense, lazy, useCallback, useState } from 'react';
 import { motion } from 'motion/react';
 import { NicholasProvider } from './state/calculator';
 import ParametersForm from './components/calculator/ParametersForm';
-import BestMethodCard from './components/calculator/BestMethodCard';
-import ComparisonChart from './components/calculator/ComparisonChart';
+import CardResult from './components/calculator/CardResult';
+import BarChart from './components/calculator/BarChart';
 import { useNicholasContext } from './state/calculator';
 
 const ScoringMatrixModal = lazy(
@@ -41,12 +41,12 @@ function CalculatorContent() {
         <ParametersForm input={input} updateInput={updateInput} />
 
         <div className="flex flex-col gap-6">
-          <BestMethodCard
+          <CardResult
             bestMethod={bestUnderground}
             absoluteBest={absoluteBest}
             onOpenDetails={onOpenDetails}
           />
-          <ComparisonChart chartData={chartData} />
+          <BarChart chartData={chartData} />
         </div>
       </motion.div>
 
