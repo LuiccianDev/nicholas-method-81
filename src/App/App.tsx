@@ -1,13 +1,13 @@
 import { Suspense, lazy, useCallback, useState } from 'react';
 import { motion } from 'motion/react';
-import { NicholasProvider } from './state/calculator';
-import ParametersForm from './components/calculator/ParametersForm';
-import CardResult from './components/calculator/CardResult';
-import BarChart from './components/calculator/BarChart';
-import { useNicholasContext } from './state/calculator';
+import { NicholasProvider } from '../state/calculator';
+import ParametersForm from './components/ParametersForm';
+import CardResult from './components/CardResult';
+import BarChart from './components/BarChart';
+import { useNicholasContext } from '../state/calculator';
 
 const ScoringMatrixModal = lazy(
-  () => import('./components/calculator/ScoringMatrixModal')
+  () => import('./components/ScoringMatrixModal')
 );
 
 function CalculatorContent() {
@@ -28,6 +28,7 @@ function CalculatorContent() {
 
   return (
     <>
+    
       <motion.div
         className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
         initial={{ opacity: 0 }}

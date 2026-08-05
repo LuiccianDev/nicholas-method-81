@@ -1,6 +1,6 @@
 import { type RawMethodInput } from '../../types';
-import DropdownSelect from '../ui/DropdownSelect';
-import NumericInput from '../ui/NumericInput';
+import DropdownSelect from '../../components/ui/DropdownSelect';
+import NumericInput from '../../components/ui/NumericInput';
 import {
   getSubStrLabel,
   getFracSpacLabel,

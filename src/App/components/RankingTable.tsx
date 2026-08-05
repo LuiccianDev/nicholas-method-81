@@ -7,17 +7,15 @@ interface RankingTableProps {
 
 export default function RankingTable({ results }: RankingTableProps) {
   return (
-    <div className="overflow-x-auto border border-border">
-      <table className="w-full text-left text-sm text-foreground">
-        <thead className="sticky top-0 border-b border-border bg-surface-muted font-mono text-xxs tracking-widest text-foreground-muted uppercase md:relative">
+    <div className="overflow-x-auto border border-border bg-card">
+      <table className="w-full text-left text-sm">
+        <thead className="sticky top-0 border-b border-border text-xxs tracking-widest uppercase md:relative">
           <tr>
             <th className="px-4 py-4 font-normal">Rank</th>
             <th className="px-4 py-4 font-normal">Method</th>
             <th className="px-4 py-4 text-right font-normal">Geo</th>
             <th className="px-4 py-4 text-right font-normal">Rock</th>
-            <th className="px-4 py-4 text-right font-normal text-primary">
-              Total
-            </th>
+            <th className="px-4 py-4 text-right font-normal">Total</th>
           </tr>
         </thead>
         <tbody>
@@ -30,23 +28,17 @@ export default function RankingTable({ results }: RankingTableProps) {
                 className={cn(
                   'border-b border-border-strong transition-colors last:border-0',
                   eliminated && 'opacity-30',
-                  !eliminated && 'hover:bg-surface-muted'
+                  !eliminated && ''
                 )}
               >
-                <td
-                  className={cn(
-                    'px-4 py-4 font-mono text-xxs',
-                    isFirst ? 'text-primary' : 'text-foreground-muted'
-                  )}
-                >
+                <td className="px-4 py-4 text-xxs">
                   {!eliminated ? `0${idx + 1}`.slice(-2) : '-'}
                 </td>
                 <td
                   className={cn(
                     'px-4 py-4 font-serif italic',
                     eliminated && 'text-zinc-500 line-through',
-                    !eliminated &&
-                      (isFirst ? 'font-bold text-primary' : 'text-foreground')
+                    !eliminated && (isFirst ? 'font-bold text-primary' : '')
                   )}
                 >
                   {result.method}
@@ -60,7 +52,7 @@ export default function RankingTable({ results }: RankingTableProps) {
                 <td
                   className={cn(
                     'px-4 py-4 text-right font-mono text-xs',
-                    isFirst ? 'font-bold text-primary' : 'text-foreground'
+                    isFirst ? 'font-bold text-primary' : ''
                   )}
                 >
                   {result.total}

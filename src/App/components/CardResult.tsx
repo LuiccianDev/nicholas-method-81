@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
-import Button from '../ui/Button';
+import Button from '../../components/ui/Button';
 
 interface CardResultProps {
   bestMethod?: ScoredMethod;

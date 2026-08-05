@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { type ScoredMethod } from '../../types';
 import RankingTable from './RankingTable';
-import Button from '../ui/Button';
+import Button from '../../components/ui/Button';
 
 interface ScoringMatrixModalProps {
   isOpen: boolean;
@@ -25,7 +25,7 @@ export default function ScoringMatrixModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
           />
 
           {/* Panel */}
@@ -33,15 +33,15 @@ export default function ScoringMatrixModal({
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden border border-border bg-surface shadow-2xl"
+            className="relative flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden border border-t-4 border-border border-t-primary bg-card shadow-sm"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-border p-6">
               <div>
-                <h3 className="font-serif text-2xl text-primary italic">
+                <h3 className="font-serif text-2xl text-secondary italic">
                   Result Matrix
                 </h3>
-                <p className="font-mono text-xxs tracking-widest text-foreground-muted uppercase">
+                <p className="text-xxs tracking-widest uppercase">
                   Numerical Breakdown / Nicholas Optimization
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function ScoringMatrixModal({
             </div>
 
             {/* Footer */}
-            <div className="flex justify-end border-t border-border bg-surface-muted p-4">
+            <div className="flex justify-end border-t border-border p-4">
               <Button variant="ghost" onClick={onClose}>
                 Close
               </Button>
