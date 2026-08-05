@@ -120,14 +120,10 @@ export default function HeroVisual() {
               transition={{ duration: 0.8, ease: 'easeInOut' }}
             />
             <CardsCarousel pinTrigger={containerRef} />
-            <div
-              className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-white font-sans"
-            >
-            </div>
+            <div className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-white font-sans"></div>
           </div>
         </div>
       </div>
-
     </>
   );
 }

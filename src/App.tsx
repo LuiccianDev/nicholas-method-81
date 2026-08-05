@@ -40,7 +40,7 @@ function CalculatorContent() {
   const onCloseDetails = useCallback(() => setIsDetailsOpen(false), []);
 
   return (
-    <main className="flex min-h-0 flex-1 flex-col overflow-x-hidden">
+    <main className="flex flex-1 flex-col ">
       <motion.div
         className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
         initial={{ opacity: 0 }}
@@ -54,14 +54,14 @@ function CalculatorContent() {
       >
         <motion.div
           variants={itemVariants}
-          className="flex min-h-0 min-w-0 flex-col"
+          className="flex min-w-0 flex-col"
         >
           <ParametersForm input={input} updateInput={updateInput} />
         </motion.div>
 
         <motion.div
           variants={itemVariants}
-          className={`flex min-h-0 scroll-elegant min-w-0 flex-col gap-6 transition-opacity duration-300 ${
+          className={`flex  scroll-elegant min-w-0 flex-col gap-6 transition-opacity duration-300 ${
             isPending ? 'opacity-60' : 'opacity-100'
           }`}
         >

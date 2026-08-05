@@ -1,0 +1,46 @@
+---
+import ChatBot from '../components/chat/ChatBot';
+import '../styles/index.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nicholas Method 81 | Mining Method Selection</title>
+
+    <meta
+      name="description"
+      content="Evaluate and recommend optimal mining methods using a numerical approach based on deposit geometry and geomechanical conditions."
+    />
+    <meta
+      name="keywords"
+      content="nicholas method, mining method selection, underground mining, geomechanics, engineering software"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+    <meta name="author" content="LuiccianDev" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Nicholas Method 81 | Mining Method Selection"
+    />
+    <meta
+      property="og:description"
+      content="Evaluate and recommend optimal mining methods using a numerical approach based on deposit geometry and geomechanical conditions."
+    />
+    <meta property="og:image" content="/banner.png" />
+    <meta property="og:site_name" content="Nicholas Method 81" />
+  </head>
+  <body>
+    <div class="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6">
+      <slot />
+    </div>
+    <ChatBot client:idle />
+  </body>
+</html>

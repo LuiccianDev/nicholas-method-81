@@ -63,16 +63,15 @@ export default function Header() {
       <div className="max-w-xl">
         <motion.p
           variants={itemVariants}
-          className="mb-2 font-mono text-xxs tracking-widest text-primary uppercase"
+          className="mb-2 font-mono text-xxs tracking-widest  uppercase"
         >
           Mining Method Advisor
         </motion.p>
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-3xl leading-none font-bold tracking-tight text-foreground italic md:text-5xl"
+          className="font-serif text-3xl leading-none font-bold tracking-tight  italic md:text-5xl"
         >
-          Nicholas Selector
-          <span className="text-primary">.</span>
+          Nicholas Selector .
         </motion.h1>
       </div>
       <div className="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end">
@@ -82,7 +81,7 @@ export default function Header() {
           onClick={toggleTheme}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="flex cursor-pointer items-center justify-center rounded-full border border-border bg-surface-muted p-2 text-foreground-muted transition-all duration-300 hover:border-primary hover:bg-card hover:text-primary"
+          className="flex cursor-pointer items-center justify-center rounded-full border border-border p-2 transition-all duration-300 "
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           title={`Current theme: ${theme}`}
         >
@@ -91,13 +90,13 @@ export default function Header() {
         <div className="text-left md:text-right">
           <motion.p
             variants={rightItemVariants}
-            className="font-mono text-xs text-foreground-muted"
+            className="font-mono text-xs "
           >
             REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE
           </motion.p>
           <motion.p
             variants={rightItemVariants}
-            className="font-mono text-xs text-foreground-muted"
+            className="font-mono text-xs "
           >
             EST. 1981 / ROCK MECHANICS
           </motion.p>
