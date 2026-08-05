@@ -7,5 +7,9 @@ ignore-scripts: true
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - path-to-regexp@6.3.0
+  - postcss@8.5.23
+  - brace-expansion@5.0.9
 overrides:
+  brace-expansion@>=4.0.0 <5.0.9: ^5.0.9
   path-to-regexp@>=4.0.0 <6.3.0: ^6.3.0
+  postcss@<=8.5.22: ^8.5.23
