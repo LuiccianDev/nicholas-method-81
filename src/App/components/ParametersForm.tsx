@@ -4,8 +4,8 @@ import {
   getThicknessLabel,
   getPlungeLabel,
 } from '../../lib/nicholas/categorizeInput';
-import DropdownSelect from '../../components/ui/DropdownSelect';
-import NumericInput from '../../components/ui/NumericInput';
+import DropdownSelect from './ui/DropdownSelect';
+import NumericInput from './ui/NumericInput';
 import GeotechnicalInput from './GeotechnicalInput';
 import Presets from './Presets';
 

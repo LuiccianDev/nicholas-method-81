@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { type ScoredMethod } from '../../types';
 import RankingTable from './RankingTable';
-import Button from '../../components/ui/Button';
+import Button from './ui/Button';
 
 interface ScoringMatrixModalProps {
   isOpen: boolean;
