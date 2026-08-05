@@ -27,22 +27,20 @@ function ChatBubble({
 }) {
   return (
     <div
-      className={`group relative flex items-start gap-2 ${
+      className={`group relative flex items-start gap-2 font-roboto ${
         message.role === 'user' ? 'flex-row-reverse' : ''
       }`}
     >
       <div
-        className={`flex size-7 shrink-0 items-center justify-center rounded-full text-[8px] font-semibold ${
-          message.role === 'user'
-            ? 'bg-primary text-white'
-            : 'bg-surface-muted text-foreground'
+        className={`flex size-7 shrink-0 items-center justify-center rounded-full text-[8px] ${
+          message.role === 'user' ? 'bg-primary' : 'bg-tertiary'
         }`}
       >
         {message.role === 'user' ? <User size={14} /> : <Bot size={14} />}
       </div>
       {message.role === 'assistant' ? (
         <div className="flex max-w-[85%] flex-col">
-          <div className="rounded-lg border border-border/50 bg-surface-muted px-3.5 py-2.5 text-[12px] leading-relaxed whitespace-pre-wrap text-foreground">
+          <div className="rounded-lg border border-border bg-background px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap">
             {displayedText}
             {isTyping && (
               <span className="ml-0.5 animate-pulse font-bold text-primary">
@@ -54,7 +52,7 @@ function ChatBubble({
             <div className="mt-1 flex justify-end">
               <button
                 onClick={() => onCopy(message.id, message.content)}
-                className="flex cursor-pointer items-center gap-1 rounded p-1 text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
+                className="flex cursor-pointer items-center gap-1 rounded p-1 transition-colors hover:bg-background"
                 title="Copy message"
               >
                 {copiedId === message.id ? (
@@ -67,7 +65,7 @@ function ChatBubble({
           )}
         </div>
       ) : (
-        <div className="max-w-[85%] rounded-lg bg-primary px-3.5 py-2.5 text-[12px] leading-relaxed whitespace-pre-wrap text-white">
+        <div className="max-w-[85%] rounded-lg bg-primary px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap">
           {displayedText}
         </div>
       )}
@@ -78,10 +76,10 @@ function ChatBubble({
 function LoadingDots() {
   return (
     <div className="flex items-start gap-2">
-      <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-muted text-foreground">
+      <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-background">
         <Bot size={14} />
       </div>
-      <div className="rounded-2xl border border-border/50 bg-surface-muted px-4 py-3 text-sm text-foreground-muted">
+      <div className="rounded-2xl border border-border/50 bg-background px-4 py-3 text-sm">
         <div className="flex items-center gap-1.5">
           {[0, 150, 300].map((delay) => (
             <span
@@ -106,8 +104,8 @@ function QuickSuggestions({
   disabled: boolean;
 }) {
   return (
-    <div className="border-t border-border/50 bg-surface-muted/30 px-3 py-2">
-      <div className="mb-1 flex items-center gap-1 text-[10px] font-medium tracking-wider text-foreground-muted uppercase">
+    <div className="border-t border-border/40 bg-primary/8 px-3 py-2">
+      <div className="mb-1 flex items-center gap-1 font-monserrate text-[10px] tracking-wider uppercase">
         <Sparkles size={11} className="text-primary" />
         <span>Quick Suggestions</span>
       </div>
@@ -118,7 +116,7 @@ function QuickSuggestions({
             type="button"
             onClick={() => onSelect(promptText)}
             disabled={disabled}
-            className="rounded-lg border border-border bg-card px-2.5 py-1 text-xs text-foreground-muted transition-all hover:border-primary hover:text-foreground hover:shadow-xs active:scale-95 disabled:opacity-50"
+            className="rounded-md border border-border px-2.5 py-1 text-xs transition-all hover:border-quaternary hover:bg-secondary/20 active:scale-95 disabled:opacity-50"
           >
             {promptText}
           </button>
@@ -166,43 +164,41 @@ export default function ChatBot() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 bottom-4 z-50 flex size-10 cursor-pointer items-center justify-center border border-border bg-[#b95e82] text-white transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
+        className="fixed right-4 bottom-4 z-50 flex size-13 cursor-pointer items-center justify-center bg-secondary transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         {isOpen ? (
-          <X size={20} />
+          <X size={30} />
         ) : (
-          <IconHelmet className="size-10 text-[#b95e82]" />
+          <IconHelmet className="size-15 text-secondary" />
         )}
       </button>
 
       <div
-        className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl transition-all duration-300 md:right-6 md:bottom-22 ${
+        className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl transition-all duration-300 md:right-6 md:bottom-22 ${
           isOpen
             ? 'pointer-events-auto scale-100 opacity-100'
             : 'pointer-events-none scale-95 opacity-0'
         }`}
-        style={{ maxHeight: '50vh', height: '500px' }}
+        style={{ maxHeight: '70vh', height: '600px' }}
       >
-        <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
+        <div className="flex items-center justify-between bg-secondary px-4 py-3">
           <div className="flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-primary/10">
-              <Bot size={18} />
+            <div className="flex size-7 items-center justify-center rounded-lg bg-primary/50">
+              <Bot size={20} />
             </div>
-            <div>
-              <h3 className="text-sm leading-tight font-semibold">
-                Nicholas 81 Assistant
-              </h3>
-              <p className="text-[10px]">Geotechnical Mining AI</p>
-            </div>
+
+            <h3 className="font-boldonse text-[12px] leading-tight">
+              Nicholas 81 Assistant
+            </h3>
           </div>
           <button
             onClick={clearChat}
-            className="flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors"
+            className="flex size-8 cursor-pointer items-center justify-center"
             title="Reset chat"
             aria-label="Reset chat history"
           >
-            <Trash2 size={15} />
+            <Trash2 size={20} />
           </button>
         </div>
 
@@ -239,7 +235,7 @@ export default function ChatBot() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask a question (max 500 chars)..."
-              className="flex-1 rounded-xl border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+              className="flex-1 rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               disabled={isLoading}
             />
             <button

@@ -193,8 +193,8 @@ export default function Footer() {
       className="relative mt-8 flex min-h-[58vh] flex-col justify-between border-t-2 border-border pt-16"
     >
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-xl bg-tertiary/90 p-7 text-secondary shadow-sm md:p-10">
-          <div className="relative z-10 flex flex-row text-white lg:items-center">
+        <div className="relative rounded-xl bg-secondary p-7 shadow-sm md:p-10">
+          <div className="relative z-10 flex flex-row lg:items-center">
             <h3
               ref={titleRef}
               className="text-3xl leading-snug font-bold tracking-tight italic"
@@ -214,11 +214,11 @@ export default function Footer() {
 
               <div
                 ref={detailsRef}
-                className="flex flex-wrap items-center gap-4"
+                className="flex flex-wrap items-center justify-center gap-4 pt-2 text-[12px] font-bold"
               >
                 <button
                   onClick={scrollToTop}
-                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-black px-6 py-3 font-mono text-[10px] font-bold tracking-widest uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-primary"
+                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-black px-6 py-3 tracking-widest text-white uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-tertiary"
                 >
                   Get started
                 </button>
@@ -226,7 +226,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 font-mono text-[10px] font-bold tracking-widest uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white"
+                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white"
                 >
                   ▶ Watch details guide
                 </a>
@@ -242,7 +242,7 @@ export default function Footer() {
             <div className="mb-4 font-sans text-3xl font-black tracking-tighter uppercase select-none">
               luiccian
             </div>
-            <p className="max-w-sm font-sans text-xs leading-relaxed">
+            <p className="max-w-sm font-sans text-[12px] leading-relaxed">
               There is no risk-free extraction, only optimized selection.
               Nicholas numerical matrix assesses core geometries and rock
               conditions to refine mining pathways.
@@ -254,7 +254,7 @@ export default function Footer() {
             className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:gap-4"
           >
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide uppercase">
+              <h4 className="network-title font-mono text-[14px] font-bold tracking-wide uppercase">
                 Selector
               </h4>
               <div className="flex flex-col space-y-2">
@@ -280,7 +280,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide uppercase">
+              <h4 className="network-title font-mono text-[14px] font-bold tracking-wide uppercase">
                 Resources
               </h4>
               <div className="flex flex-col space-y-2">
@@ -312,7 +312,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide uppercase">
+              <h4 className="network-title font-mono text-[14px] font-bold tracking-wide uppercase">
                 Network
               </h4>
               <div className="flex flex-col space-y-2">
@@ -339,21 +339,17 @@ export default function Footer() {
       >
         <h1
           ref={textRef}
-          className="m-0 text-center font-sans text-[clamp(70px,20vw,340px)] leading-none font-black tracking-tight uppercase antialiased select-none"
+          className="mx-0 mt-15 text-center font-boldonse text-[clamp(50px,15vw,270px)] leading-none font-black tracking-tight text-secondary uppercase antialiased select-none"
         >
           LUICCIAN
         </h1>
       </div>
 
-      <div className="relative z-20 w-full border-t px-6 py-8 text-[14px] sm:px-8 lg:px-12">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="s flex w-fit cursor-default items-center gap-2 px-4 py-2">
-            <span className="font-mono text-[9px] font-semibold tracking-wider">
-              All systems operational
-            </span>
-          </div>
+      <div className="relative z-20 w-full px-6 py-8 text-[14px] sm:px-8 lg:px-12">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 font-roboto md:flex-row md:items-center md:justify-between">
+          <span className="tracking-wider">All systems operational</span>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <span>
               © {new Date().getFullYear()} luiccian. All rights reserved.
             </span>
@@ -368,7 +364,7 @@ export default function Footer() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[12px] tracking-wider uppercase transition-all duration-300 hover:bg-quaternary hover:text-white"
+                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 tracking-wider uppercase transition-all duration-300 hover:bg-quaternary hover:text-white"
                 >
                   ↑ TOP
                 </motion.button>
