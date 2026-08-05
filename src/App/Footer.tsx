@@ -190,10 +190,10 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative mt-8 flex min-h-[58vh] flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 font-sans"
+      className="relative mt-8 flex min-h-[58vh] flex-col justify-between overflow-hidden border-t-2 border-primary pt-16 font-sans"
     >
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="dark relative overflow-hidden rounded-xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-foreground shadow-2xl md:p-10">
+        <div className="dark relative overflow-hidden rounded-xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-secondary shadow-2xl md:p-10">
           <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-linear-to-tr from-primary/20 to-transparent blur-3xl" />
           <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-linear-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
 
@@ -201,7 +201,7 @@ export default function Footer() {
             <div className="lg:col-span-7">
               <h3
                 ref={titleRef}
-                className="font-serif text-2xl leading-snug font-bold tracking-tight text-foreground italic sm:text-[1.7rem] lg:text-3xl"
+                className="font-serif text-2xl leading-snug font-bold tracking-tight italic sm:text-[1.7rem] lg:text-3xl"
               >
                 Evaluating deposit viability with numerical mechanics logic.
               </h3>
@@ -210,7 +210,7 @@ export default function Footer() {
             <div className="flex flex-col gap-6 lg:col-span-5">
               <p
                 ref={descriptionRef}
-                className="font-mono text-[10px] leading-relaxed tracking-widest text-foreground-muted uppercase"
+                className="font-mono text-[10px] leading-relaxed tracking-widest uppercase"
               >
                 Assess geomechanical conditions, grade distributions, and
                 deposit geometry with David Nicholas' optimized selection
@@ -223,7 +223,7 @@ export default function Footer() {
               >
                 <button
                   onClick={scrollToTop}
-                  className="group flex cursor-pointer items-center gap-2 rounded-full bg-foreground px-6 py-3 font-mono text-[10px] font-bold tracking-widest text-surface uppercase shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-foreground/90 active:scale-[0.98]"
+                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-foreground px-6 py-3 font-mono text-[10px] font-bold tracking-widest text-surface uppercase transition-all duration-300 hover:scale-[1.03]"
                 >
                   Get started
                 </button>
@@ -231,7 +231,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 font-mono text-[10px] font-bold tracking-widest text-foreground uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white active:scale-[0.98]"
+                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 font-mono text-[10px] font-bold tracking-widest uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white"
                 >
                   ▶ Watch details guide
                 </a>
@@ -244,10 +244,10 @@ export default function Footer() {
       <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
-            <div className="mb-4 font-sans text-3xl font-black tracking-tighter text-foreground uppercase select-none">
+            <div className="mb-4 font-sans text-3xl font-black tracking-tighter uppercase select-none">
               luiccian
             </div>
-            <p className="max-w-sm font-sans text-xs leading-relaxed text-foreground-muted">
+            <p className="max-w-sm font-sans text-xs leading-relaxed">
               There is no risk-free extraction, only optimized selection.
               Nicholas numerical matrix assesses core geometries and rock
               conditions to refine mining pathways.
@@ -259,25 +259,25 @@ export default function Footer() {
             className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:gap-4"
           >
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide uppercase">
                 Selector
               </h4>
               <div className="flex flex-col space-y-2">
                 <button
                   onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   About Selector
                 </button>
                 <button
                   onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Optimization Logic
                 </button>
                 <button
                   onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Scoring Matrix
                 </button>
@@ -285,7 +285,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide uppercase">
                 Resources
               </h4>
               <div className="flex flex-col space-y-2">
@@ -293,7 +293,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Core Algorithm
                 </a>
@@ -301,7 +301,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Technical Docs
                 </a>
@@ -309,7 +309,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Estimation Guide
                 </a>
@@ -317,7 +317,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[10px] font-bold tracking-wide uppercase">
                 Network
               </h4>
               <div className="flex flex-col space-y-2">
@@ -327,7 +327,7 @@ export default function Footer() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                    className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
                   >
                     {link.name}
                   </a>
@@ -340,7 +340,7 @@ export default function Footer() {
 
       <div
         ref={textContainerRef}
-        className="pointer-events-none relative mt-auto flex w-full items-end justify-center py-4 select-none"
+        className="pointer-events-none relative mt-auto flex w-full items-end justify-center select-none"
       >
         <h1
           ref={textRef}
@@ -352,26 +352,18 @@ export default function Footer() {
 
       <div className="relative z-20 w-full border-t border-border bg-surface px-6 py-8 sm:px-8 lg:px-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="flex w-fit cursor-default items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-2 shadow-xs transition-all duration-300 hover:bg-primary/20">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-            </span>
-            <span className="font-mono text-[9px] font-semibold tracking-wider text-primary uppercase">
+          <div className="s flex w-fit cursor-default items-center gap-2 px-4 py-2">
+            <span className="font-mono text-[9px] font-semibold tracking-wider">
               All systems operational
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px] text-foreground-muted">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px]">
             <span>
               © {new Date().getFullYear()} luiccian. All rights reserved.
             </span>
-            <a href="#" className="transition-colors hover:text-primary">
-              Privacy Policy
-            </a>
-            <a href="#" className="transition-colors hover:text-primary">
-              Terms of Use
-            </a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
 
             <AnimatePresence>
               {isVisible && (
@@ -381,7 +373,7 @@ export default function Footer() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[9px] tracking-wider text-surface uppercase transition-all duration-300 hover:bg-primary"
+                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[12px] tracking-wider text-surface uppercase transition-all duration-300 hover:bg-primary"
                 >
                   ↑ TOP
                 </motion.button>

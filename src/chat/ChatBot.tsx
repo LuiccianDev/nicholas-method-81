@@ -32,7 +32,7 @@ function ChatBubble({
       }`}
     >
       <div
-        className={`flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${
+        className={`flex size-7 shrink-0 items-center justify-center rounded-full text-[8px] font-semibold ${
           message.role === 'user'
             ? 'bg-primary text-white'
             : 'bg-surface-muted text-foreground'
@@ -42,7 +42,7 @@ function ChatBubble({
       </div>
       {message.role === 'assistant' ? (
         <div className="flex max-w-[85%] flex-col">
-          <div className="rounded-2xl border border-border/50 bg-surface-muted px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-foreground">
+          <div className="rounded-lg border border-border/50 bg-surface-muted px-3.5 py-2.5 text-[12px] leading-relaxed whitespace-pre-wrap text-foreground">
             {displayedText}
             {isTyping && (
               <span className="ml-0.5 animate-pulse font-bold text-primary">
@@ -67,7 +67,7 @@ function ChatBubble({
           )}
         </div>
       ) : (
-        <div className="max-w-[85%] rounded-2xl bg-primary px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-white">
+        <div className="max-w-[85%] rounded-lg bg-primary px-3.5 py-2.5 text-[12px] leading-relaxed whitespace-pre-wrap text-white">
           {displayedText}
         </div>
       )}
@@ -166,41 +166,39 @@ export default function ChatBot() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 bottom-4 z-50 flex size-14 cursor-pointer items-center justify-center rounded-full border border-border bg-foreground-muted text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl active:scale-95 md:right-6 md:bottom-6"
+        className="fixed right-4 bottom-4 z-50 flex size-10 cursor-pointer items-center justify-center border border-border bg-[#b95e82] text-white transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
         {isOpen ? (
-          <X size={24} />
+          <X size={20} />
         ) : (
-          <IconHelmet className="size-15 text-foreground-muted" />
+          <IconHelmet className="size-10 text-[#b95e82]" />
         )}
       </button>
 
       <div
-        className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-md flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl transition-all duration-300 md:right-6 md:bottom-22 ${
+        className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl transition-all duration-300 md:right-6 md:bottom-22 ${
           isOpen
             ? 'pointer-events-auto scale-100 opacity-100'
             : 'pointer-events-none scale-95 opacity-0'
         }`}
-        style={{ maxHeight: '75vh', height: '520px' }}
+        style={{ maxHeight: '50vh', height: '500px' }}
       >
-        <div className="flex items-center justify-between border-b border-border bg-surface-muted px-4 py-3">
+        <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
           <div className="flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="flex size-7 items-center justify-center rounded-lg bg-primary/10">
               <Bot size={18} />
             </div>
             <div>
-              <h3 className="text-sm leading-tight font-semibold text-foreground">
+              <h3 className="text-sm leading-tight font-semibold">
                 Nicholas 81 Assistant
               </h3>
-              <p className="text-[10px] text-foreground-muted">
-                Geotechnical Mining AI
-              </p>
+              <p className="text-[10px]">Geotechnical Mining AI</p>
             </div>
           </div>
           <button
             onClick={clearChat}
-            className="flex size-8 cursor-pointer items-center justify-center rounded-lg text-foreground-muted transition-colors hover:bg-surface hover:text-foreground"
+            className="flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors"
             title="Reset chat"
             aria-label="Reset chat history"
           >
@@ -241,7 +239,7 @@ export default function ChatBot() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask a question (max 500 chars)..."
-              className="flex-1 rounded-xl border border-border bg-surface px-3 py-2 text-sm text-foreground outline-none placeholder:text-foreground-muted/50 focus:border-primary focus:ring-1 focus:ring-primary"
+              className="flex-1 rounded-xl border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               disabled={isLoading}
             />
             <button
@@ -253,7 +251,7 @@ export default function ChatBot() {
               <Send size={16} />
             </button>
           </div>
-          <div className="flex justify-end px-1 text-[10px] text-foreground-muted">
+          <div className="flex justify-end px-1 text-[10px]">
             <span>{input.length}/500</span>
           </div>
         </div>
