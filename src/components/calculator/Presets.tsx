@@ -1,4 +1,3 @@
-import { Sparkles, Check } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { RawMethodInput } from '../../types';
 import { useNicholasContext } from '../../state/calculator';
@@ -95,14 +94,12 @@ export default function Presets() {
   const { input, setInputValues } = useNicholasContext();
 
   return (
-    <div className="mb-6 border border-border bg-surface-muted/40 p-4 shadow-sm">
-      <div className="mb-3 flex items-center gap-2">
-        <Sparkles className="size-4 text-primary" />
-        <h3 className="text-sm font-semibold text-foreground">
-          Predefined Geological Scenarios (1-Click)
-        </h3>
-      </div>
-      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+    <div className="mb-6 border border-border p-4">
+      <h3 className="mb-3 text-sm font-semibold">
+        Predefined Geological Scenarios (1-Click)
+      </h3>
+
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         {PRESETS.map((preset) => {
           const isActive = inputsMatch(input, preset.data);
           return (
@@ -114,27 +111,19 @@ export default function Presets() {
               className={`group relative flex flex-col items-start border p-3 text-left transition-all duration-200 ${
                 isActive
                   ? 'border-t-2 border-border border-t-primary bg-primary/4 shadow-xs'
-                  : 'border-border/80 bg-card hover:border-primary/50 hover:bg-surface'
+                  : 'border-border/80 bg-card hover:border-primary/40 hover:bg-surface'
               } active:translate-y-0`}
             >
-              <div
-                className={`mb-2 flex items-center gap-2 text-xs font-medium transition-colors ${
-                  isActive
-                    ? 'text-primary'
-                    : 'text-foreground group-hover:text-primary'
-                }`}
-              >
+              <div className="mb-2 flex items-center gap-2 text-xs font-medium">
                 <span>{preset.name}</span>
               </div>
               <div className="flex flex-wrap gap-1">
                 {preset.badges.map((badge) => (
                   <span
                     key={badge.label}
-                    className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface/50 px-1.5 py-0.5 text-xxs text-foreground-muted"
+                    className="inline-flex items-center gap-1 py-0.5 pl-1 text-xxs"
                   >
-                    <span className="font-medium text-foreground/70">
-                      {badge.label}:
-                    </span>
+                    <span className="font-medium">-{badge.label}:</span>
                     {badge.value}
                   </span>
                 ))}

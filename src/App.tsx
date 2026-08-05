@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useState } from 'react';
-import { motion, type Variants } from 'motion/react';
+import { motion } from 'motion/react';
 import { NicholasProvider } from './state/calculator';
 import ParametersForm from './components/calculator/ParametersForm';
 import BestMethodCard from './components/calculator/BestMethodCard';
@@ -41,18 +41,12 @@ function CalculatorContent() {
         <ParametersForm input={input} updateInput={updateInput} />
 
         <div className="flex flex-col gap-6">
-          <h2 className="text-xs font-bold tracking-widest uppercase">
-            02 / Method Recommendation
-          </h2>
-
-          <div className="flex flex-col gap-6">
-            <BestMethodCard
-              bestMethod={bestUnderground}
-              absoluteBest={absoluteBest}
-              onOpenDetails={onOpenDetails}
-            />
-            <ComparisonChart chartData={chartData} />
-          </div>
+          <BestMethodCard
+            bestMethod={bestUnderground}
+            absoluteBest={absoluteBest}
+            onOpenDetails={onOpenDetails}
+          />
+          <ComparisonChart chartData={chartData} />
         </div>
       </motion.div>
 

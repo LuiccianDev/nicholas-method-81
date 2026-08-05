@@ -19,19 +19,17 @@ const ParametersForm = memo(function ParametersForm({
   updateInput,
 }: ParametersFormProps) {
   return (
-    <div className="flex h-full min-h-0 min-w-0 flex-col">
-      <div className="mb-4 flex-none">
-        <h2 className="text-xs font-bold tracking-widest text-primary uppercase">
-          01 / Analysis Inputs
-        </h2>
-      </div>
+    <div className="flex h-full flex-col">
+      <h2 className="mb-4 text-xs font-bold tracking-widest uppercase">
+        01 / Analysis Inputs
+      </h2>
 
-      <div className="scroll-elegant flex-1 overflow-x-hidden overflow-y-auto border border-t-2 border-border border-t-primary bg-card p-5 sm:p-6 lg:p-6">
+      <div className="flex-1 overflow-y-auto border border-t-2 border-border border-t-primary bg-card p-5 sm:p-6 lg:p-6">
         <Presets />
 
         <details
           open
-          className="mb-5 overflow-hidden border border-border bg-surface/60 p-4 shadow-xs sm:p-5"
+          className="mb-5 overflow-hidden border border-border p-4 shadow-xs sm:p-5"
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
             <span>Geometry &amp; Grade</span>
@@ -80,14 +78,12 @@ const ParametersForm = memo(function ParametersForm({
           </div>
         </details>
 
-        <details className="overflow-hidden border border-border bg-surface/60 p-4 shadow-xs sm:p-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
+        <details className="border border-border p-4 sm:p-5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide uppercase">
             <span>Rock Mechanics</span>
-            <span className="text-xxxs tracking-widest text-primary">
-              TOGGLE
-            </span>
+            <span className="text-xxxs tracking-widest">TOGGLE</span>
           </summary>
-          <div className="mt-4 grid min-w-0 gap-4">
+          <div className="mt-4 grid gap-4">
             <GeotechnicalInput
               title="Ore Zone"
               prefix="ore"

@@ -11,8 +11,8 @@ const variantClasses = {
   primary:
     'bg-secondary text-surface hover:bg-secondary/90 dark:bg-primary dark:text-surface dark:hover:bg-primary/90',
   ghost:
-    'border border-border bg-surface/80 text-foreground-muted backdrop-blur-sm hover:border-primary hover:text-primary',
-  icon: 'flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-primary bg-surface/80 text-secondary backdrop-blur-sm transition-all duration-300 hover:bg-secondary hover:text-surface dark:hover:bg-primary',
+    ' bg-surface/80 text-foreground-muted backdrop-blur-sm hover:border-primary hover:text-primary',
+  icon: 'flex h-11 w-11 cursor-pointer items-center justify-center  border border-primary bg-surface/80 text-secondary backdrop-blur-sm transition-all duration-300 hover:bg-secondary hover:text-surface dark:hover:bg-primary',
 };
 
 const sizeClasses = {
@@ -31,7 +31,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        'inline-flex cursor-pointer items-center justify-center rounded-lg font-medium transition-all duration-300',
+        'inline-flex cursor-pointer items-center justify-center font-medium transition-all duration-300',
         variantClasses[variant],
         sizeClasses[size],
         className

@@ -20,10 +20,10 @@ export default function GeotechnicalInput({
   updateInput,
 }: GeotechnicalInputProps) {
   return (
-    <details className="min-w-0 overflow-hidden border border-border bg-card/70 p-4 shadow-xs">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
+    <details className="min-w-0 overflow-hidden border border-border p-4 shadow-xs">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide uppercase">
         <span>{title}</span>
-        <span className="text-xxxs tracking-widest text-primary">DETAILS</span>
+        <span className="text-xxxs tracking-widest">DETAILS</span>
       </summary>
       <div className="mt-4 grid min-w-0 gap-3 xl:grid-cols-1 2xl:grid-cols-2">
         <NumericInput
