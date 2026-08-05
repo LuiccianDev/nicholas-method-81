@@ -9,8 +9,8 @@ import {
   Check,
   Sparkles,
 } from 'lucide-react';
-import IconHelmet from '../icons/IconHelmet';
-import { useChat, type ChatMessage } from '../../hooks/useChat';
+import IconHelmet from '../App/icons/IconHelmet';
+import { useChat, type ChatMessage } from '../hooks/useChat';
 
 function ChatBubble({
   message,
