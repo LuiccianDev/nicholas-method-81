@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Boldonse&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Julius+Sans+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto:ital,wght@0,100..900;1,100..900&family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
+
 @import 'tailwindcss';
 @import './toggleTheme.css';
 
@@ -6,11 +8,34 @@
 
 @theme {
   /* Typography */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, sans-serif; /* ! no usaar l ofnt sans */
+
   --font-serif:
     'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times,
     serif;
+
+  --font-monserrate: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-dm-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Utiliados fonts */
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-roboto: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+  --font-boldonse: 'Boldonse', ui-sans-serif, system-ui, sans-serif;
+  --font-prompt: 'Prompt', ui-sans-serif, system-ui, sans-serif;
+
+  /* New paleete colores directives */
+
+  --color-primary: #a4cf82;
+  --color-secondary: #f0e76f;
+  --color-tertiary: #ecb65f;
+  --color-quaternary: #e89951;
+
+  --color-text-primary: #0e0701;
+
+  --color-background: #fbfdfa;
+
+  --color-border: #ecb65f;
 
   /* Semantic Surface Colors */
   --color-surface: #fffdf9;
@@ -20,12 +45,6 @@
   --color-foreground: #67223b;
   --color-foreground-muted: #914562;
 
-  /* Accent Colors */
-  --color-primary: #b95e82;
-  --color-secondary: #e89b6b;
-
-  /* Structural Colors */
-  --color-border: #ebd1aa;
   --color-border-strong: #b95e82;
 
   /* Component Colors */
@@ -65,12 +84,13 @@
 
 /* Base Styles */
 body {
-  background-color: var(--color-surface);
-  color: var(--color-foreground);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   transition:
     background-color 0.4s ease,
     color 0.4s ease;
   overflow-x: hidden;
+  font-family: var(--font-prompt);
 }
 
 /* Global Elegant Scrollbar */

@@ -20,20 +20,17 @@ const ParametersForm = memo(function ParametersForm({
 }: ParametersFormProps) {
   return (
     <div className="flex h-full flex-col">
-      <h2 className="mb-4 text-xs font-bold tracking-widest uppercase">
+      <h2 className="mb-4 font-boldonse text-[10px] tracking-widest uppercase">
         01 / Analysis Inputs
       </h2>
 
-      <div className="flex-1 overflow-y-auto border border-t-2 border-border border-t-primary bg-card p-5 sm:p-6 lg:p-6">
+      <div className="flex-1 overflow-y-auto">
         <Presets />
 
-        <details
-          open
-          className="mb-5 overflow-hidden border border-border p-4 shadow-xs sm:p-5"
-        >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide text-foreground-muted uppercase">
+        <details open className="overflow-hidden py-4 sm:py-5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-2 font-mono text-[13px] tracking-wide uppercase">
             <span>Geometry &amp; Grade</span>
-            <span className="text-xxxs tracking-widest text-primary">OPEN</span>
+            <span className="tracking-widest">OPEN</span>
           </summary>
           <div className="mt-4 grid min-w-0 gap-4 xl:grid-cols-1 2xl:grid-cols-2">
             <DropdownSelect
@@ -78,12 +75,12 @@ const ParametersForm = memo(function ParametersForm({
           </div>
         </details>
 
-        <details className="border border-border p-4 sm:p-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide uppercase">
+        <details className="py-4 sm:py-5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[13px] tracking-wide uppercase">
             <span>Rock Mechanics</span>
-            <span className="text-xxxs tracking-widest">TOGGLE</span>
+            <span className="tracking-widest">TOGGLE</span>
           </summary>
-          <div className="mt-4 grid gap-4">
+          <div className="grid gap-4">
             <GeotechnicalInput
               title="Ore Zone"
               prefix="ore"

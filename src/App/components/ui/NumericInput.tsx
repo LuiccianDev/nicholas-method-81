@@ -21,7 +21,7 @@ export default function NumericInput({
 }: NumericInputProps) {
   return (
     <FormField label={label} note={note} derivedLabel={derivedLabel}>
-      <div className="relative flex items-center justify-between border border-border">
+      <div className="relative flex items-center justify-between rounded-lg border border-border">
         <input
           type="number"
           value={value}

@@ -190,27 +190,22 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative mt-8 flex min-h-[58vh] flex-col justify-between overflow-hidden border-t-2 border-primary pt-16 font-sans"
+      className="relative mt-8 flex min-h-[58vh] flex-col justify-between border-t-2 border-border pt-16"
     >
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="dark relative overflow-hidden rounded-xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-secondary shadow-2xl md:p-10">
-          <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-linear-to-tr from-primary/20 to-transparent blur-3xl" />
-          <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-linear-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
+        <div className="relative rounded-xl bg-tertiary/90 p-7 text-secondary shadow-sm md:p-10">
+          <div className="relative z-10 flex flex-row text-white lg:items-center">
+            <h3
+              ref={titleRef}
+              className="text-3xl leading-snug font-bold tracking-tight italic"
+            >
+              Evaluating deposit viability with numerical mechanics logic.
+            </h3>
 
-          <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
-            <div className="lg:col-span-7">
-              <h3
-                ref={titleRef}
-                className="font-serif text-2xl leading-snug font-bold tracking-tight italic sm:text-[1.7rem] lg:text-3xl"
-              >
-                Evaluating deposit viability with numerical mechanics logic.
-              </h3>
-            </div>
-
-            <div className="flex flex-col gap-6 lg:col-span-5">
+            <div className="flex flex-col gap-4 lg:ml-8">
               <p
                 ref={descriptionRef}
-                className="font-mono text-[10px] leading-relaxed tracking-widest uppercase"
+                className="font-monserrate text-[12px] leading-relaxed tracking-widest uppercase"
               >
                 Assess geomechanical conditions, grade distributions, and
                 deposit geometry with David Nicholas' optimized selection
@@ -223,7 +218,7 @@ export default function Footer() {
               >
                 <button
                   onClick={scrollToTop}
-                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-foreground px-6 py-3 font-mono text-[10px] font-bold tracking-widest text-surface uppercase transition-all duration-300 hover:scale-[1.03]"
+                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-black px-6 py-3 font-mono text-[10px] font-bold tracking-widest uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-primary"
                 >
                   Get started
                 </button>
@@ -350,7 +345,7 @@ export default function Footer() {
         </h1>
       </div>
 
-      <div className="relative z-20 w-full border-t border-border bg-surface px-6 py-8 sm:px-8 lg:px-12">
+      <div className="relative z-20 w-full border-t px-6 py-8 text-[14px] sm:px-8 lg:px-12">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="s flex w-fit cursor-default items-center gap-2 px-4 py-2">
             <span className="font-mono text-[9px] font-semibold tracking-wider">
@@ -358,7 +353,7 @@ export default function Footer() {
             </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px]">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono">
             <span>
               © {new Date().getFullYear()} luiccian. All rights reserved.
             </span>
@@ -373,7 +368,7 @@ export default function Footer() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[12px] tracking-wider text-surface uppercase transition-all duration-300 hover:bg-primary"
+                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[12px] tracking-wider uppercase transition-all duration-300 hover:bg-quaternary hover:text-white"
                 >
                   ↑ TOP
                 </motion.button>

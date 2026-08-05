@@ -29,8 +29,8 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
     return () => mql.removeEventListener('change', handler);
   }, []);
 
-  const yAxisWidth = isMobile ? 110 : 120;
-  const axisFontSize = isMobile ? 9 : 11;
+  const yAxisWidth = isMobile ? 120 : 130;
+  const axisFontSize = isMobile ? 10 : 13;
   const tickFontSize = isMobile ? 8 : 10;
   const chartHeight = Math.max(
     isMobile ? 360 : 320,
@@ -39,16 +39,16 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
 
   return (
     <>
-      <h3 className="text-xs font-bold tracking-widest uppercase">
+      <h3 className="font-boldonse text-[10px] tracking-widest uppercase">
         03 / Viability Index Analysis
       </h3>
-      <div className="relative w-full border border-t-2 border-border border-t-primary bg-card p-5 sm:p-6">
+      <div className="relative w-full py-5 sm:py-6">
         <div
           ref={containerRef}
           style={{ height: `${chartHeight}px` }}
           className="w-full"
         >
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="95%" height="100%">
             <BarChart
               data={chartData}
               layout="vertical"
@@ -59,18 +59,13 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
                 bottom: 0,
               }}
             >
-              <CartesianGrid
-                strokeDasharray="3 3"
-                horizontal={false}
-                vertical={false}
-                stroke="var(--color-border)"
-              />
+              <CartesianGrid horizontal={false} vertical={false} />
               <XAxis
                 type="number"
                 tick={{
                   fontSize: tickFontSize,
-                  fill: 'var(--color-foreground-muted)',
-                  fontFamily: 'monospace',
+                  fill: 'var(--color-text-primary)',
+                  fontFamily: 'prompt',
                 }}
                 axisLine={{ stroke: 'var(--color-border)' }}
                 tickLine={false}
@@ -82,18 +77,19 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
                 width={yAxisWidth}
                 tick={{
                   fontSize: axisFontSize,
-                  fill: 'var(--color-foreground)',
-                  fontFamily: 'serif',
+                  fill: 'var(--color-text-primary)',
+                  fontFamily: 'prompt',
                 }}
                 axisLine={{ stroke: 'var(--color-border)' }}
                 tickLine={false}
                 interval={0}
               />
               <Tooltip
-                cursor={{ fill: 'var(--color-surface-muted)' }}
+                cursor={{ fill: 'var(--color-background)' }}
                 contentStyle={{
-                  borderRadius: '0',
-                  fontSize: '10px',
+                  fontSize: '13px',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '7px',
                 }}
               />
               <Legend
@@ -102,9 +98,7 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
                 layout="horizontal"
                 iconType="square"
                 iconSize={8}
-                formatter={(value) => (
-                  <span className="text-xxxs">{value}</span>
-                )}
+                formatter={(value) => <span className="text-md">{value}</span>}
                 wrapperStyle={{
                   paddingBottom: '20px',
                   fontSize: '9px',
@@ -116,14 +110,14 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
                 dataKey="Geometry"
                 stackId="a"
                 fill="var(--color-primary)"
-                strokeWidth={1.5}
+                strokeWidth={1}
                 name="Geometry"
               />
               <Bar
                 dataKey="RockMechanics"
                 stackId="a"
                 fill="var(--color-secondary)"
-                strokeWidth={1.5}
+                strokeWidth={1}
                 name="Rock"
               />
             </BarChart>

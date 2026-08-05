@@ -20,12 +20,12 @@ export default function GeotechnicalInput({
   updateInput,
 }: GeotechnicalInputProps) {
   return (
-    <details className="min-w-0 overflow-hidden border border-border p-4 shadow-xs">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-xxs tracking-wide uppercase">
+    <details className="overflow-hidden pt-4 pl-4">
+      <summary className="iterms-center flex cursor-pointer list-none items-center justify-between gap-4 border-l-4 border-border py-1 pl-3 font-mono text-[12px] tracking-wide uppercase">
         <span>{title}</span>
-        <span className="text-xxxs tracking-widest">DETAILS</span>
+        <span className="tracking-widest">DETAILS</span>
       </summary>
-      <div className="mt-4 grid min-w-0 gap-3 xl:grid-cols-1 2xl:grid-cols-2">
+      <div className="mt-4 grid gap-3 xl:grid-cols-1 2xl:grid-cols-2">
         <NumericInput
           label="Substance Strength Ratio"
           value={input[`${prefix}SubStr`]}

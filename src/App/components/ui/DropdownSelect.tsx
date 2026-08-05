@@ -17,11 +17,11 @@ export default function DropdownSelect({
 }: DropdownSelectProps) {
   return (
     <FormField label={label} note={note}>
-      <div className="relative flex items-center justify-between border border-border">
+      <div className="relative flex items-center justify-between rounded-lg border border-border">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="z-20 block cursor-pointer appearance-none px-3 py-2 text-sm font-medium outline-none"
+          className="z-20 block cursor-pointer appearance-none px-3 py-2 text-sm outline-none"
         >
           {options.map((o) => (
             <option key={o.value} value={o.value} className="py-2">

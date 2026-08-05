@@ -57,19 +57,19 @@ export default function Header() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="mb-6 flex flex-col items-start justify-between gap-4 border-b border-border pb-5 md:flex-row md:items-end"
+      className="mb-5 flex flex-col items-start justify-between gap-4 pb-5 md:flex-row md:items-end"
       id="top"
     >
       <div className="max-w-xl">
         <motion.p
           variants={itemVariants}
-          className="mb-2 font-mono text-xxs tracking-widest uppercase"
+          className="mb-4 text-[12px] tracking-widest uppercase"
         >
           Mining Method Advisor
         </motion.p>
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-3xl leading-none font-bold tracking-tight italic md:text-5xl"
+          className="font-boldonse text-2xl leading-none tracking-tight italic md:text-4xl"
         >
           Nicholas Selector .
         </motion.h1>
@@ -81,17 +81,17 @@ export default function Header() {
           onClick={toggleTheme}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="flex cursor-pointer items-center justify-center rounded-full border border-border p-2 transition-all duration-300"
+          className="flex cursor-pointer items-center justify-center rounded-full bg-primary/25 p-2 transition-all duration-300"
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           title={`Current theme: ${theme}`}
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </motion.button>
-        <div className="text-left md:text-right">
-          <motion.p variants={rightItemVariants} className="font-mono text-xs">
+        <div className="text-left font-roboto text-[13px] md:text-right">
+          <motion.p variants={rightItemVariants}>
             REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE
           </motion.p>
-          <motion.p variants={rightItemVariants} className="font-mono text-xs">
+          <motion.p variants={rightItemVariants}>
             EST. 1981 / ROCK MECHANICS
           </motion.p>
         </div>

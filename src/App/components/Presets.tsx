@@ -94,8 +94,8 @@ export default function Presets() {
   const { input, setInputValues } = useNicholasContext();
 
   return (
-    <div className="mb-6 border border-border p-4">
-      <h3 className="mb-3 text-sm font-semibold">
+    <div className="pb-4">
+      <h3 className="mb-3 text-[15px]">
         Predefined Geological Scenarios (1-Click)
       </h3>
 
@@ -108,22 +108,22 @@ export default function Presets() {
               type="button"
               onClick={() => setInputValues(preset.data)}
               whileTap={{ scale: 0.97 }}
-              className={`group relative flex flex-col items-start border p-3 text-left transition-all duration-200 ${
+              className={`group relative flex flex-col items-start rounded-lg border border-border p-3 text-left transition-all duration-200 ${
                 isActive
-                  ? 'border-t-2 border-border border-t-primary bg-primary/4 shadow-xs'
-                  : 'border-border/80 bg-card hover:border-primary/40 hover:bg-surface'
+                  ? 'border-quaternary bg-quaternary/10'
+                  : 'hover:border-tertiary'
               } active:translate-y-0`}
             >
-              <div className="mb-2 flex items-center gap-2 text-xs font-medium">
-                <span>{preset.name}</span>
+              <div className="mb-2 flex items-center gap-2 font-roboto">
+                <span className="text-[13px] font-bold">{preset.name}</span>
               </div>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-col gap-1">
                 {preset.badges.map((badge) => (
                   <span
                     key={badge.label}
-                    className="inline-flex items-center gap-1 py-0.5 pl-1 text-xxs"
+                    className="inline-flex items-center gap-1 py-0.5 pl-1 text-[12px]"
                   >
-                    <span className="font-medium">-{badge.label}:</span>
+                    <span>- {badge.label} :</span>
                     {badge.value}
                   </span>
                 ))}

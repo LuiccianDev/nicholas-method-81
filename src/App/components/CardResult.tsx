@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
-import Button from './ui/Button';
 
 interface CardResultProps {
   bestMethod?: ScoredMethod;
@@ -20,49 +19,48 @@ const CardResult = memo(function CardResult({
 
   return (
     <>
-      <h2 className="text-xs font-bold tracking-widest uppercase">
+      <h2 className="font-boldonse text-[10px] tracking-widest uppercase">
         02 / Method Recommendation
       </h2>
-      <div className="relative flex min-h-72 w-full min-w-0 flex-col border border-t-2 border-border border-t-primary bg-card p-6 sm:p-8">
+      <div className="relative flex min-h-72 w-full flex-col rounded-xl bg-secondary p-6 sm:p-8">
         <div className="mb-auto space-y-3">
-          <p className="font-serif text-[clamp(2.5rem,5vw,5rem)] leading-none wrap-break-word text-secondary italic">
+          <p className="font-boldonse text-[clamp(2rem,4vw,2.6rem)] italic">
             {bestMethod?.method || 'None.'}
           </p>
-          <p className="text-lg font-light tracking-tight sm:text-xl md:text-2xl">
+          <p className="font-roboto text-2xl tracking-tight">
             Optimal Underground Method
           </p>
         </div>
 
         <div className="mt-4 grid gap-4">
-          <p className="max-w-auto text-sm leading-relaxed">
+          <p className="max-w-auto text-[15px] leading-relaxed">
             Based on the{' '}
-            <strong className="text-secondary italic">Geometry</strong> and{' '}
-            <strong className="text-secondary italic">Rock Mechanics</strong>{' '}
+            <strong className="text-quaternary italic">Geometry</strong> and{' '}
+            <strong className="text-quaternary italic">Rock Mechanics</strong>{' '}
             supplied, Nicholas' numerical logic isolates this approach to
             maximize underground extraction viability.
           </p>
 
           {isSurfaceMoreViable && (
-            <div className="max-w-auto gap-4 border border-border bg-surface-muted p-4">
-              <p className="font-mono text-xxs leading-relaxed">
-                <strong className="">SURFACE COMPARISON:</strong> Note that{' '}
-                <span className="text-foreground italic">Open Pit</span> scored
-                higher overall technical viability ({absoluteBest.total} pts).
-                It is maintained in the selection matrix as a baseline for
-                surface-transition comparisons.
+            <div className="max-w-auto gap-4 rounded-xl border border-border bg-background/80 p-4">
+              <p className="font-monserrate text-[12px] leading-relaxed">
+                <strong>SURFACE COMPARISON:</strong> Note that{' '}
+                <span className="italic">Open Pit</span> scored higher overall
+                technical viability ({absoluteBest.total} pts). It is maintained
+                in the selection matrix as a baseline for surface-transition
+                comparisons.
               </p>
             </div>
           )}
         </div>
 
-        <Button
-          variant="icon"
+        <div
           onClick={onOpenDetails}
-          className="absolute top-4 right-4"
+          className="absolute top-4 right-4 cursor-pointer"
           title="View Full Calculation Matrix"
         >
-          <ListTree className="size-10" />
-        </Button>
+          <ListTree className="size-8" />
+        </div>
       </div>
     </>
   );

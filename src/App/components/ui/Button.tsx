@@ -29,15 +29,7 @@ export default function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button
-      className={cn(
-        'inline-flex cursor-pointer items-center justify-center font-medium transition-all duration-300',
-        variantClasses[variant],
-        sizeClasses[size],
-        className
-      )}
-      {...props}
-    >
+    <button className="inline-flex cursor-pointer items-center justify-center bg-secondary text-surface transition-all duration-300 hover:bg-secondary/90 dark:bg-primary dark:text-surface dark:hover:bg-primary/90">
       {children}
     </button>
   );
