@@ -10,19 +10,6 @@ const ScoringMatrixModal = lazy(
   () => import('./components/calculator/ScoringMatrixModal')
 );
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, x: 50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: 'spring',
-      bounce: 0,
-      duration: 1.2,
-    },
-  },
-};
-
 function CalculatorContent() {
   const {
     input,
@@ -31,7 +18,7 @@ function CalculatorContent() {
     chartData,
     absoluteBest,
     bestUnderground,
-    isPending,
+    isPending, //! Verifca que realiza el pending ?
   } = useNicholasContext();
 
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -40,37 +27,25 @@ function CalculatorContent() {
   const onCloseDetails = useCallback(() => setIsDetailsOpen(false), []);
 
   return (
-    <main className="flex flex-1 flex-col ">
+    <>
       <motion.div
-        className="grid min-w-0 grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
+        className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
         initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
           transition: {
-            type: 'spring',
-            staggerChildren: 0.25,
+            duration: 0.6,
           },
         }}
       >
-        <motion.div
-          variants={itemVariants}
-          className="flex min-w-0 flex-col"
-        >
-          <ParametersForm input={input} updateInput={updateInput} />
-        </motion.div>
+        <ParametersForm input={input} updateInput={updateInput} />
 
-        <motion.div
-          variants={itemVariants}
-          className={`flex  scroll-elegant min-w-0 flex-col gap-6 transition-opacity duration-300 ${
-            isPending ? 'opacity-60' : 'opacity-100'
-          }`}
-        >
-          <div className="flex-none">
-            <h2 className="text-xs font-bold tracking-widest text-primary uppercase">
-              02 / Method Recommendation
-            </h2>
-          </div>
-          <div className="grid w-full min-w-0 gap-6 xl:grid-rows-[auto_auto]">
+        <div className="flex flex-col gap-6">
+          <h2 className="text-xs font-bold tracking-widest uppercase">
+            02 / Method Recommendation
+          </h2>
+
+          <div className="flex flex-col gap-6">
             <BestMethodCard
               bestMethod={bestUnderground}
               absoluteBest={absoluteBest}
@@ -78,7 +53,7 @@ function CalculatorContent() {
             />
             <ComparisonChart chartData={chartData} />
           </div>
-        </motion.div>
+        </div>
       </motion.div>
 
       <Suspense fallback={null}>
@@ -88,16 +63,14 @@ function CalculatorContent() {
           results={results}
         />
       </Suspense>
-    </main>
+    </>
   );
 }
 
 export default function App() {
   return (
     <NicholasProvider>
-      <div className="flex min-h-0 flex-1 flex-col">
-        <CalculatorContent />
-      </div>
+      <CalculatorContent />
     </NicholasProvider>
   );
 }
