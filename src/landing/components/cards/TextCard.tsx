@@ -12,6 +12,7 @@ type TextCardProps = {
   status?: string;
   size: string;
   active?: boolean;
+  delay?: number;
 };
 
 export default function TextCard({
@@ -20,20 +21,25 @@ export default function TextCard({
   status,
   size,
   active = false,
+  delay = 0,
 }: TextCardProps) {
   const statementRef = useRef<HTMLParagraphElement>(null);
+
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   useGSAP(
     () => {
       if (!statementRef.current) return;
-      if (!active) return;
+      if (!active || prefersReducedMotion) return;
 
       const split = SplitText.create(statementRef.current, {
         type: 'words',
         wordsClass: 'letter',
       });
 
-      gsap.fromTo(
+      const tween = gsap.fromTo(
         split.words,
         { opacity: 0, filter: 'blur(8px)', y: 8 },
         {
@@ -42,13 +48,17 @@ export default function TextCard({
           y: 0,
           stagger: 0.04,
           duration: 0.5,
+          delay,
           ease: 'power3.out',
         }
       );
 
-      return () => split.revert();
+      return () => {
+        tween.kill();
+        split.revert();
+      };
     },
-    { scope: statementRef, dependencies: [statement, active] }
+    { scope: statementRef, dependencies: [statement, active, delay] }
   );
 
   return (

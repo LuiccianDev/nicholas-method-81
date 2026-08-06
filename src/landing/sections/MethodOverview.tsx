@@ -81,42 +81,39 @@ export default function MethodOverview() {
     >
       <div ref={containerRef} className="mx-auto px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6">
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+          <span className="tracking-wide uppercase">
             Designed for systematic selection
           </span>
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            NM-81
-          </span>
+          <span className="tracking-wide uppercase">NM-81</span>
         </div>
 
         {/* Main layout — asymmetric grid */}
         <div className="relative grid grid-cols-1 gap-10 md:grid-cols-12">
           {/* Left — headline + meta (col 1-6) */}
-          <div className="relative z-10 flex flex-col justify-between md:col-span-6">
+          <div className="relative z-10 flex flex-col justify-between gap-y-10 md:col-span-6">
             <h2
               id="method-overview-heading"
               ref={headlineRef}
-              className="font-sans text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight text-black opacity-0"
+              className="font-boldonse text-[clamp(2.5rem,5vw,4rem)] leading-[1.2] tracking-tight"
             >
               Nicholas
               <br />
-              <span className="text-black/20">1981</span>
+              <span className="text-primary">1981</span>
               <br />
               Underground
               <br />
               Mining
             </h2>
 
-            <div ref={metaRef} className="mt-16 opacity-0">
-              <p className="max-w-sm font-sans text-sm leading-relaxed text-black/50">
+            <div ref={metaRef} className="mt-16 font-monserrate">
+              <p className="max-w-sm text-sm leading-relaxed">
                 Published in 1981, the Nicholas methodology evaluates ten mining
                 methods using geometric and geomechanical inputs — delivering a
                 ranked, quantitative recommendation in seconds.
               </p>
               <div className="mt-6 flex items-center gap-3">
-                <span className="h-px w-8 bg-black/30" />
-                <span className="font-sans text-xs tracking-[0.15em] text-black/40 uppercase">
+                <span className="text-[15px] font-bold tracking-[0.15em] uppercase italic">
                   Method Selection
                 </span>
               </div>
@@ -136,30 +133,24 @@ export default function MethodOverview() {
                 className="h-full w-full object-cover"
               />
               {/* Subtle overlay gradient */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
             </div>
           </div>
         </div>
 
         {/* Bottom — counter row */}
-        <div className="mt-16 flex items-center gap-12 border-t border-black/10 pt-8">
+        <div className="mt-16 flex items-center gap-12 border-t border-black/20 pt-8 font-sans">
           <div>
-            <p className="font-sans text-3xl font-black text-black">10</p>
-            <p className="font-sans text-xs tracking-[0.15em] text-black/40 uppercase">
-              Methods
-            </p>
+            <p className="text-3xl font-black">10</p>
+            <p className="text-xs tracking-[0.15em] uppercase">Methods</p>
           </div>
           <div>
-            <p className="font-sans text-3xl font-black text-black">13</p>
-            <p className="font-sans text-xs tracking-[0.15em] text-black/40 uppercase">
-              Parameters
-            </p>
+            <p className="text-3xl font-black">13</p>
+            <p className="text-xs tracking-[0.15em] uppercase">Parameters</p>
           </div>
           <div>
-            <p className="font-sans text-3xl font-black text-black">1981</p>
-            <p className="font-sans text-xs tracking-[0.15em] text-black/40 uppercase">
-              Origin
-            </p>
+            <p className="text-3xl font-black">1981</p>
+            <p className="text-xs tracking-[0.15em] uppercase">Origin</p>
           </div>
         </div>
       </div>

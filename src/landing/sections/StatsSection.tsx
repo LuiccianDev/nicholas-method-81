@@ -28,17 +28,13 @@ export default function StatsSection() {
     <section
       aria-labelledby="stats-section-heading"
       data-section="stats-section"
-      className="overflow-hidden bg-white py-24"
+      className="overflow-hidden bg-background py-24"
     >
       <div ref={containerRef} className="px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6">
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            By the numbers
-          </span>
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            NM-04
-          </span>
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+          <span className="tracking-wide uppercase">By the numbers</span>
+          <span className="tracking-wide uppercase">NM-04</span>
         </div>
 
         <h2 id="stats-section-heading" className="sr-only">
@@ -60,7 +56,7 @@ export default function StatsSection() {
                     suffix={stat.suffix}
                     active={active}
                   />
-                  <p className="mt-1 font-sans text-xs tracking-[0.2em] text-black/40 uppercase">
+                  <p className="mt-1 font-sans text-[13px] tracking-wide text-text-primary/40 uppercase">
                     {stat.label}
                   </p>
                 </div>

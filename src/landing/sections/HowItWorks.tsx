@@ -55,20 +55,16 @@ export default function HowItWorks() {
     >
       <div ref={containerRef} className="px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6">
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            Process
-          </span>
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            NM-02
-          </span>
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+          <span className="tracking-wide uppercase">Process</span>
+          <span className="tracking-wide uppercase">NM-02</span>
         </div>
 
         {/* Ghost text */}
         <div className="relative">
           <h2
             id="how-it-works-heading"
-            className="relative z-10 mb-16 font-sans text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight text-black"
+            className="relative z-10 mb-16 font-boldonse text-[clamp(2.5rem,6vw,5rem)] leading-[1.2] tracking-tight"
           >
             How It
             <br />
@@ -82,22 +78,20 @@ export default function HowItWorks() {
                 key={step.number}
                 ref={setStepRef(index)}
                 data-step={step.number}
-                className="flex flex-col opacity-0"
+                className="flex flex-col font-sans"
               >
                 {/* Step number */}
-                <span className="font-sans text-8xl font-black tracking-tight text-black">
+                <span className="text-8xl font-black tracking-tight">
                   {String(step.number).padStart(2, '0')}
                 </span>
 
                 <hr className="my-4 border-black/10" />
 
-                <h3 className="font-sans text-xl leading-snug font-black tracking-tight text-black">
+                <h3 className="text-xl leading-snug font-black tracking-tight">
                   {step.headline}
                 </h3>
 
-                <p className="mt-3 font-sans text-sm leading-relaxed text-black/50">
-                  {step.body}
-                </p>
+                <p className="mt-3 text-sm leading-relaxed">{step.body}</p>
               </div>
             ))}
           </div>

@@ -9,7 +9,7 @@ import Footer from './Footer';
 
 export default function App() {
   return (
-    <div className="pt-20 text-black">
+    <div className="pt-20">
       <Header />
       <Hero />
       <MethodOverview />

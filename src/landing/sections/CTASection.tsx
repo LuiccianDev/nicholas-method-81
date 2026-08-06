@@ -12,13 +12,9 @@ export default function CTASection() {
     >
       <div className="px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6">
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            Get started
-          </span>
-          <span className="font-sans text-xs font-medium tracking-[0.2em] text-black/40 uppercase">
-            NM-05
-          </span>
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium tracking-wide italic">
+          <span className="uppercase">Get started</span>
+          <span className="uppercase">NM-05</span>
         </div>
 
         {/* Ghost text */}
@@ -35,7 +31,7 @@ export default function CTASection() {
           >
             <h2
               id="cta-section-heading"
-              className="mb-12 font-sans text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight text-black"
+              className="mb-12 font-sans text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight"
             >
               {CTA_HEADLINE}
             </h2>
@@ -44,7 +40,7 @@ export default function CTASection() {
               {/* Primary CTA */}
               <a
                 href="/calculator"
-                className="rounded-sm bg-black px-6 py-3 font-sans text-sm font-black tracking-[0.15em] text-white uppercase transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+                className="rounded-sm bg-black px-6 py-3 font-sans text-sm font-black tracking-[0.15em] text-white uppercase hover:bg-tertiary"
               >
                 Use the Calculator
               </a>
@@ -52,7 +48,7 @@ export default function CTASection() {
               {/* Secondary CTA */}
               <a
                 href="/chat"
-                className="flex items-center gap-3 font-sans text-sm font-black tracking-[0.15em] text-black uppercase transition-opacity hover:opacity-60 focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+                className="flex items-center gap-3 font-sans text-sm font-black tracking-[0.15em] text-black uppercase"
               >
                 <span className="h-px w-8 bg-black" />
                 Ask the AI

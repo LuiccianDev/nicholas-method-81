@@ -86,14 +86,14 @@ export default function LandingFooter() {
   return (
     <footer
       ref={footerRef}
-      className="relative overflow-hidden border-t border-black/10 bg-[#FEFFA7] font-sans"
+      className="relative overflow-hidden border-t border-black/10 bg-secondary font-sans"
     >
       {/* ── Nav columns ── */}
       <div ref={navRef} className="px-10 py-16">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           {/* Platform */}
           <div className="footer-col flex flex-col gap-4 opacity-0">
-            <h4 className="font-sans text-[10px] font-black tracking-[0.2em] text-black uppercase">
+            <h4 className="font-sans text-[10px] font-black tracking-wide text-black uppercase">
               Platform
             </h4>
             <div className="flex flex-col gap-2">
@@ -116,7 +116,7 @@ export default function LandingFooter() {
 
           {/* Resources */}
           <div className="footer-col flex flex-col gap-4 opacity-0">
-            <h4 className="font-sans text-[10px] font-black tracking-[0.2em] text-black uppercase">
+            <h4 className="font-sans text-[10px] font-black tracking-wide text-black uppercase">
               Resources
             </h4>
             <div className="flex flex-col gap-2">
@@ -154,7 +154,7 @@ export default function LandingFooter() {
 
           {/* Company */}
           <div className="footer-col flex flex-col gap-4 opacity-0">
-            <h4 className="font-sans text-[10px] font-black tracking-[0.2em] text-black uppercase">
+            <h4 className="font-sans text-[10px] font-black tracking-wide text-black uppercase">
               Company
             </h4>
             <div className="flex flex-col gap-2">
@@ -189,7 +189,7 @@ export default function LandingFooter() {
 
           {/* Contact */}
           <div className="footer-col flex flex-col gap-4 opacity-0">
-            <h4 className="font-sans text-[10px] font-black tracking-[0.2em] text-black uppercase">
+            <h4 className="font-sans text-[10px] font-black tracking-wide text-black uppercase">
               Contact
             </h4>
             <div className="flex flex-col gap-3">
@@ -209,13 +209,13 @@ export default function LandingFooter() {
               <div className="mt-2 flex flex-col gap-2">
                 <button
                   onClick={scrollToTop}
-                  className="w-full cursor-pointer bg-black py-3 font-sans text-[10px] font-black tracking-[0.2em] text-white uppercase transition-opacity hover:opacity-80"
+                  className="w-full cursor-pointer bg-black py-3 font-sans text-[10px] font-black tracking-wide text-white uppercase transition-opacity hover:opacity-80"
                 >
                   Start Free
                 </button>
                 <a
                   href="/chat"
-                  className="w-full border border-black py-3 text-center font-sans text-[10px] font-black tracking-[0.2em] text-black uppercase transition-opacity hover:opacity-60"
+                  className="w-full border border-black py-3 text-center font-sans text-[10px] font-black tracking-wide text-black uppercase transition-opacity hover:opacity-60"
                 >
                   Ask the AI
                 </a>

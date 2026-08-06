@@ -168,6 +168,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           status="A short form, not a full study"
           size="h-50 w-full "
           active={activeGroup === 0}
+          delay={0.95}
         />
       </div>
 
@@ -209,6 +210,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Highest-ranked methods"
             size="h-56 w-full "
             active={activeGroup === 2}
+            delay={0.15}
           />
           <NumberCard
             eyebrow="Decision"

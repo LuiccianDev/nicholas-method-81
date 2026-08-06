@@ -70,7 +70,7 @@ export default function Navigation() {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="absolute top-0 right-0 flex h-full w-72 flex-col bg-background shadow-2xl"
             >
-              <div className="flex items-center justify-between border-b border-tertiary px-6 py-6">
+              <div className="flex items-center justify-between border-b border-gray-100 px-6 py-6">
                 <span className="text-lg font-black tracking-wide uppercase">
                   Menu
                 </span>
