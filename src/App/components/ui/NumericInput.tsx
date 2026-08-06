@@ -21,7 +21,7 @@ export default function NumericInput({
 }: NumericInputProps) {
   return (
     <FormField label={label} note={note} derivedLabel={derivedLabel}>
-      <div className="relative flex items-center justify-between rounded-lg border border-border">
+      <div className="relative flex w-full items-center justify-between rounded-lg border border-border">
         <input
           type="number"
           value={value}
@@ -30,10 +30,10 @@ export default function NumericInput({
             onChange(val === '' ? '' : Number(val));
           }}
           placeholder={placeholder}
-          className="z-10 block px-3 py-2 font-mono text-sm outline-none"
+          className="w-full py-2 pr-10 pl-3 font-mono text-sm outline-none"
         />
         {unit && (
-          <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 font-mono text-xs">
+          <div className="pointer-events-none absolute top-1/2 right-3 ml-2 -translate-y-1/2 font-mono text-[20px]">
             {unit}
           </div>
         )}
