@@ -17,7 +17,7 @@ export default function DropdownSelect({
 }: DropdownSelectProps) {
   return (
     <FormField label={label} note={note}>
-      <div className="relative flex items-center justify-between rounded-lg border border-border">
+      <div className="relative flex w-full items-center justify-between rounded-lg border border-border">
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
