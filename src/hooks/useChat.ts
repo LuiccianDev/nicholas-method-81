@@ -12,17 +12,16 @@ export interface ChatMessage {
   content: string;
 }
 
-const WELCOME_MESSAGE: ChatMessage = {
-  id: 'welcome',
-  role: 'assistant',
-  content:
-    "Hello! I'm your Nicholas Method 81 assistant. Ask me anything about your geotechnical input parameters, score breakdown, or underground mining method selection.",
-};
-
 const RESET_MESSAGE: ChatMessage = {
   id: 'welcome-reset',
   role: 'assistant',
   content: 'Chat history reset. Ask me anything about Nicholas Method 81.',
+};
+const WELCOME_MESSAGE: ChatMessage = {
+  id: 'welcome',
+  role: 'assistant',
+  content:
+    'Hello! I am the Nicholas Method 81 assistant. How can I help you today?',
 };
 
 export function useChat() {

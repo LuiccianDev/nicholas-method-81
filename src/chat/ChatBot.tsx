@@ -160,6 +160,11 @@ export default function ChatBot() {
     'Summarize my geotechnical case',
   ];
 
+  const hasStarted = messages.some((m) => m.role === 'user');
+  const displayMessages = messages.filter(
+    (m) => m.id !== 'welcome' && m.id !== 'welcome-reset'
+  );
+
   return (
     <>
       <button
@@ -180,7 +185,7 @@ export default function ChatBot() {
             ? 'pointer-events-auto scale-100 opacity-100'
             : 'pointer-events-none scale-95 opacity-0'
         }`}
-        style={{ maxHeight: '70vh', height: '600px' }}
+        style={{ maxHeight: '60vh', height: '600px' }}
       >
         <div className="flex items-center justify-between bg-secondary px-4 py-3">
           <div className="flex items-center gap-2">
@@ -192,38 +197,67 @@ export default function ChatBot() {
               Nicholas 81 Assistant
             </h3>
           </div>
-          <button
-            onClick={clearChat}
-            className="flex size-8 cursor-pointer items-center justify-center"
-            title="Reset chat"
-            aria-label="Reset chat history"
-          >
-            <Trash2 size={20} />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={clearChat}
+              className="flex size-8 cursor-pointer items-center justify-center"
+              title="Reset chat"
+              aria-label="Reset chat history"
+            >
+              <Trash2 size={20} />
+            </button>
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => setIsOpen(false)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setIsOpen(false);
+                }
+              }}
+              className="flex size-8 cursor-pointer items-center justify-center transition-colors hover:bg-background/20"
+              title="Close chat"
+              aria-label="Close chat"
+            >
+              <X size={20} />
+            </div>
+          </div>
         </div>
 
         <div className="scroll-elegant flex-1 space-y-3 overflow-y-auto p-4">
-          {messages.map((msg) => (
-            <ChatBubble
-              key={msg.id}
-              message={msg}
-              isTyping={activeTypingId === msg.id}
-              displayedText={getDisplayedText(msg.id, msg.content)}
-              copiedId={copiedId}
-              onCopy={handleCopy}
-            />
-          ))}
+          {displayMessages.length === 0 ? (
+            <div className="flex min-h-full flex-col items-center justify-center gap-3 px-2 text-center">
+              <p className="font-boldonse text-[20px] leading-relaxed">
+                Ask me about Nicholas Method 81 geotechnical inputs and method
+                selection.
+              </p>
+            </div>
+          ) : (
+            displayMessages.map((msg) => (
+              <ChatBubble
+                key={msg.id}
+                message={msg}
+                isTyping={activeTypingId === msg.id}
+                displayedText={getDisplayedText(msg.id, msg.content)}
+                copiedId={copiedId}
+                onCopy={handleCopy}
+              />
+            ))
+          )}
 
           {isLoading && <LoadingDots />}
 
           <div ref={messagesEndRef} />
         </div>
 
-        <QuickSuggestions
-          prompts={quickPrompts}
-          onSelect={sendMessage}
-          disabled={isLoading}
-        />
+        {!hasStarted && (
+          <QuickSuggestions
+            prompts={quickPrompts}
+            onSelect={sendMessage}
+            disabled={isLoading}
+          />
+        )}
 
         <div className="flex flex-col gap-1 border-t border-border p-3">
           <div className="flex items-center gap-2">

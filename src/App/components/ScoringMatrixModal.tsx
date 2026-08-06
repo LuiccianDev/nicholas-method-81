@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { type ScoredMethod } from '../../types';
 import RankingTable from './RankingTable';
-import Button from './ui/Button';
 
 interface ScoringMatrixModalProps {
   isOpen: boolean;
@@ -45,14 +44,9 @@ export default function ScoringMatrixModal({
                   Numerical Breakdown / Nicholas Optimization
                 </p>
               </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onClose}
-                className="p-2"
-              >
+              <button onClick={onClose} className="p-2">
                 <X className="h-6 w-6" />
-              </Button>
+              </button>
             </div>
 
             {/* Body */}
@@ -62,9 +56,7 @@ export default function ScoringMatrixModal({
 
             {/* Footer */}
             <div className="flex justify-end border-t border-border p-4">
-              <Button variant="ghost" onClick={onClose}>
-                Close
-              </Button>
+              <button onClick={onClose}>Close</button>
             </div>
           </motion.div>
         </div>
