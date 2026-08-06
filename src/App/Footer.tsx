@@ -193,19 +193,21 @@ export default function Footer() {
       className="relative mt-8 flex min-h-[58vh] flex-col justify-between border-t-2 border-border pt-16"
     >
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-xl bg-secondary p-7 shadow-sm md:p-10">
-          <div className="relative z-10 flex flex-row lg:items-center">
-            <h3
-              ref={titleRef}
-              className="text-3xl leading-snug font-bold tracking-tight italic"
-            >
-              Evaluating deposit viability with numerical mechanics logic.
-            </h3>
+        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-secondary p-6 shadow-md sm:p-8 md:p-10">
+          <div className="relative z-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-8">
+            <div className="lg:col-span-6">
+              <h3
+                ref={titleRef}
+                className="font-serif text-2xl leading-snug font-bold tracking-tight italic sm:text-3xl lg:text-4xl text-pretty text-center"
+              >
+                Evaluating deposit viability with numerical mechanics logic.
+              </h3>
+            </div>
 
-            <div className="flex flex-col gap-4 lg:ml-8">
+            <div className="flex flex-col gap-5 lg:col-span-6">
               <p
                 ref={descriptionRef}
-                className="font-monserrate text-[12px] leading-relaxed tracking-widest uppercase"
+                className="font-monserrate text-xs leading-relaxed tracking-wider text-text-primary/80 uppercase sm:text-sm text-pretty text-center"
               >
                 Assess geomechanical conditions, grade distributions, and
                 deposit geometry with David Nicholas' optimized selection
@@ -214,11 +216,11 @@ export default function Footer() {
 
               <div
                 ref={detailsRef}
-                className="flex flex-wrap items-center justify-center gap-4 pt-2 text-[12px] font-bold"
+                className="flex flex-wrap items-center justify-center gap-3 pt-1 text-xs font-bold sm:gap-4"
               >
                 <button
                   onClick={scrollToTop}
-                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-black px-6 py-3 tracking-widest text-white uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-tertiary"
+                  className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-black px-6 py-3.5 tracking-widest text-white uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-tertiary hover:text-black active:scale-95"
                 >
                   Get started
                 </button>
@@ -226,9 +228,9 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white"
+                  className="group flex cursor-pointer items-center gap-2 rounded-xl border border-black/10  px-5 py-3.5 tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-background hover:text-black active:scale-95"
                 >
-                  ▶ Watch details guide
+                  <span>▶ Watch details guide</span>
                 </a>
               </div>
             </div>
