@@ -1,12 +1,11 @@
-import { Suspense, lazy, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { NicholasProvider } from '../state/calculator';
 import ParametersForm from './components/ParametersForm';
 import CardResult from './components/CardResult';
 import BarChart from './components/BarChart';
+import ScoringMatrixView from './components/ScoringMatrixView';
 import { useNicholasContext } from '../state/calculator';
-
-const ScoringMatrixView = lazy(() => import('./components/ScoringMatrixView'));
 
 function CalculatorContent() {
   const {
@@ -16,7 +15,6 @@ function CalculatorContent() {
     chartData,
     absoluteBest,
     bestUnderground,
-    isPending, //! Verifca que realiza el pending ?
   } = useNicholasContext();
 
   const [showMatrix, setShowMatrix] = useState(false);
@@ -53,9 +51,7 @@ function CalculatorContent() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
           >
-            <Suspense fallback={null}>
-              <ScoringMatrixView results={results} onBack={onCloseDetails} />
-            </Suspense>
+            <ScoringMatrixView results={results} onBack={onCloseDetails} />
           </motion.div>
         )}
       </AnimatePresence>

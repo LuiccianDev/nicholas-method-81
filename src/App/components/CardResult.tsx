@@ -1,6 +1,6 @@
 import { memo, useRef } from 'react';
 import { type ScoredMethod } from '../../types';
-import { ListTree } from 'lucide-react';
+import { ListTree, ArrowDown } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { motion } from 'motion/react';
@@ -90,10 +90,11 @@ const CardResult = memo(function CardResult({
 
         <div
           onClick={onOpenDetails}
-          className="absolute top-4 right-4 cursor-pointer"
+          className="absolute top-4 right-4 flex cursor-pointer flex-row items-center gap-2 rounded-lg bg-black px-3.5 py-2 font-medium text-white transition-all hover:bg-quaternary active:scale-95"
           title="View Full Calculation Matrix"
         >
-          <ListTree className="size-8" />
+          <ArrowDown className="size-5" />
+          <span className="">Matrix</span>
         </div>
       </motion.div>
     </>

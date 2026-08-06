@@ -7,15 +7,15 @@ interface RankingTableProps {
 
 export default function RankingTable({ results }: RankingTableProps) {
   return (
-    <div className="overflow-x-auto border border-border bg-card">
-      <table className="w-full text-left text-sm">
-        <thead className="sticky top-0 border-b border-border text-xxs tracking-widest uppercase md:relative">
+    <div className="overflow-x-auto rounded-xl border border-border bg-background">
+      <table className="w-full rounded-2xl text-left text-sm">
+        <thead className="sticky top-0 border-b border-border text-[12px] tracking-widest uppercase md:relative">
           <tr>
-            <th className="px-4 py-4 font-normal">Rank</th>
-            <th className="px-4 py-4 font-normal">Method</th>
-            <th className="px-4 py-4 text-right font-normal">Geo</th>
-            <th className="px-4 py-4 text-right font-normal">Rock</th>
-            <th className="px-4 py-4 text-right font-normal">Total</th>
+            <th className="px-4 py-4">Rank</th>
+            <th className="px-4 py-4">Method</th>
+            <th className="px-4 py-4 text-right">Geo</th>
+            <th className="px-4 py-4 text-right">Rock</th>
+            <th className="px-4 py-4 text-right">Total</th>
           </tr>
         </thead>
         <tbody>
@@ -26,32 +26,32 @@ export default function RankingTable({ results }: RankingTableProps) {
               <tr
                 key={result.method}
                 className={cn(
-                  'border-b border-border-strong transition-colors last:border-0',
-                  eliminated && 'opacity-30',
+                  'transition-colors',
+                  eliminated && 'opacity-60',
                   !eliminated && ''
                 )}
               >
-                <td className="px-4 py-4 text-xxs">
+                <td className="px-4 py-4 text-[10px]">
                   {!eliminated ? `0${idx + 1}`.slice(-2) : '-'}
                 </td>
                 <td
                   className={cn(
-                    'px-4 py-4 font-serif italic',
+                    'px-4 py-4',
                     eliminated && 'text-zinc-500 line-through',
                     !eliminated && (isFirst ? 'font-bold text-primary' : '')
                   )}
                 >
                   {result.method}
                 </td>
-                <td className="px-4 py-4 text-right font-mono text-xs">
+                <td className="px-4 py-4 text-right text-[13px]">
                   {result.geometryScore}
                 </td>
-                <td className="px-4 py-4 text-right font-mono text-xs text-secondary">
+                <td className="px-4 py-4 text-right text-[13px] font-bold text-quaternary">
                   {result.rockTotal}
                 </td>
                 <td
                   className={cn(
-                    'px-4 py-4 text-right font-mono text-xs',
+                    'px-4 py-4 text-right text-[13px]',
                     isFirst ? 'font-bold text-primary' : ''
                   )}
                 >
