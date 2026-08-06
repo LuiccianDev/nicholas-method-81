@@ -10,17 +10,17 @@ export const STEPS_DATA: Step[] = [
   {
     number: 1,
     headline: 'Enter geometric & geomechanical parameters',
-    body: 'Ingresa los parámetros geométricos y geomecánicos del yacimiento.',
+    body: 'Describe the deposit — geometry, grade distribution, and ore, hanging-wall, and footwall rock substance strength.',
   },
   {
     number: 2,
     headline: 'Nicholas 1981 ranks all 10 methods',
-    body: 'El algoritmo Nicholas 1981 calcula y rankea los 10 métodos de minería subterránea.',
+    body: 'The algorithm scores each method from your inputs and returns a ranked shortlist in seconds.',
   },
   {
     number: 3,
     headline: 'Validate with AI Chat',
-    body: 'Consulta el chat IA para validar y profundizar el resultado.',
+    body: 'Ask the AI assistant to explain the ranking, explore trade-offs, and refine your decision.',
   },
 ];
 

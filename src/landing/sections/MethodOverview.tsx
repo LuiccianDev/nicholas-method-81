@@ -110,10 +110,9 @@ export default function MethodOverview() {
 
             <div ref={metaRef} className="mt-16 opacity-0">
               <p className="max-w-sm font-sans text-sm leading-relaxed text-black/50">
-                Published in 1981, the Nicholas methodology evaluates ten
-                underground mining methods using geometric and geomechanical
-                parameters — delivering a ranked, quantitative recommendation in
-                seconds.
+                Published in 1981, the Nicholas methodology evaluates ten mining
+                methods using geometric and geomechanical inputs — delivering a
+                ranked, quantitative recommendation in seconds.
               </p>
               <div className="mt-6 flex items-center gap-3">
                 <span className="h-px w-8 bg-black/30" />
@@ -151,7 +150,7 @@ export default function MethodOverview() {
             </p>
           </div>
           <div>
-            <p className="font-sans text-3xl font-black text-black">6</p>
+            <p className="font-sans text-3xl font-black text-black">13</p>
             <p className="font-sans text-xs tracking-[0.15em] text-black/40 uppercase">
               Parameters
             </p>

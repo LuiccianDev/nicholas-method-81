@@ -98,7 +98,7 @@ export default function LandingFooter() {
             </h4>
             <div className="flex flex-col gap-2">
               {[
-                { label: 'Calculator', href: '/App' },
+                { label: 'Calculator', href: '/calculator' },
                 { label: 'AI Assistant', href: '/chat' },
                 { label: 'Scoring Matrix', href: '#' },
                 { label: 'Method Overview', href: '#' },

@@ -3,7 +3,8 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { type RefObject, useRef, useState } from 'react';
-import Card from './Card';
+import NumberCard from './cards/NumberCard';
+import TextCard from './cards/TextCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,14 +29,25 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         if (!sectionRef.current) return;
 
-        gsap.to(group1Ref.current, {
-          y: 110,
-          opacity: 1,
-          duration: 0.5,
-          delay: 0.8,
-        });
+        const reveal = gsap.timeline({ delay: 0 });
+        reveal.fromTo(
+          group1Ref.current,
+          { opacity: 0, y: 110, filter: 'blur(36px)' },
+          { opacity: 1, y: 110, duration: 0.6, ease: 'power2.out' },
+          0
+        );
+        reveal.fromTo(
+          group1Ref.current,
+          { filter: 'blur(36px)' },
+          { filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' },
+          0
+        );
+        reveal.set(group1Ref.current, { filter: 'none' }, 0.9);
 
-        // Grupo 2 y 3: inician debajo del viewport
+        // Grupo 2 y 3: inician debajo del viewport y borrosos
+        gsap.set(group2Ref.current, { filter: 'blur(20px)' });
+        gsap.set(group3Ref.current, { filter: 'blur(20px)' });
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: pinTrigger.current,
@@ -62,9 +74,17 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         );
         tl.to(
           group2Ref.current,
-          { y: -50, opacity: 1, scale: 1, duration: 0.4, ease: 'circ.out' },
+          {
+            y: -50,
+            opacity: 1,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 0.4,
+            ease: 'circ.out',
+          },
           0.6
         );
+        tl.set(group2Ref.current, { filter: 'none' }, 1.0);
         tl.call(() => setActiveGroup(1), undefined, 1.0);
 
         // --- Beat 2: Grupo 2 descansa visible en el centro (hold 0.6→1.6) ---
@@ -77,16 +97,30 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         );
         tl.to(
           group3Ref.current,
-          { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 0.4,
+            ease: 'power3.out',
+          },
           1.6
         );
+        tl.set(group3Ref.current, { filter: 'none' }, 2.0);
         tl.call(() => setActiveGroup(2), undefined, 2.0);
       });
 
       mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(group1Ref.current, { opacity: 1, y: 320 });
-        gsap.set(group2Ref.current, { opacity: 1, y: 0, scale: 1 });
-        gsap.set(group3Ref.current, { opacity: 1, y: 0, scale: 1 });
+        // Solo el grupo 1 visible: se evita apilar los 3 grupos en simultáneo
+        gsap.set(group1Ref.current, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'none',
+        });
+        gsap.set(group2Ref.current, { display: 'none' });
+        gsap.set(group3Ref.current, { display: 'none' });
       });
 
       return () => mm.revert();
@@ -100,35 +134,39 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       <div
         ref={group1Ref}
         className="absolute inset-0 flex flex-col items-center justify-center gap-4"
-        style={{ opacity: 0, transform: 'translateY(50px)' }}
+        style={{
+          opacity: 0,
+          transform: 'translateY(50px)',
+          filter: 'blur(36px)',
+        }}
       >
-        <div className="grid w-full max-w-lg grid-cols-2 gap-2">
-          <Card
-            label="Soil stability"
-            value={87}
-            suffix="%"
+        <div className="grid w-full grid-cols-2 gap-2">
+          <NumberCard
+            eyebrow="Deposit parameters"
+            value={13}
+            suffix="params"
             decimals={0}
-            status="Low Risk"
+            status="Geometry · grade · geomechanics"
             size="h-40 w-full max-w-sm"
             active={activeGroup === 0}
+            delay={1.3}
           />
-          <Card
-            label="Tree canopy loss"
-            value={12}
-            suffix="%"
+          <NumberCard
+            eyebrow="Rock zones"
+            value={3}
+            suffix="zones"
             decimals={0}
-            status="Projected"
+            status="Ore · hanging-wall · footwall"
             size="h-40 w-full max-w-sm"
             active={activeGroup === 0}
+            delay={1.3}
           />
         </div>
-        <Card
-          label="Water table"
-          value={3.2}
-          suffix=""
-          decimals={1}
-          status="Flag"
-          size="h-50 w-full max-w-lg"
+        <TextCard
+          eyebrow="Describe the deposit"
+          statement="Your geology in — ranked results out"
+          status="A short form, not a full study"
+          size="h-50 w-full "
           active={activeGroup === 0}
         />
       </div>
@@ -137,15 +175,19 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       <div
         ref={group2Ref}
         className="absolute inset-0 flex items-center justify-center"
-        style={{ opacity: 0, transform: 'translateY(400px)' }}
+        style={{
+          opacity: 0,
+          transform: 'translateY(400px)',
+          filter: 'blur(28px)',
+        }}
       >
-        <Card
-          label="Landslide risk"
-          value={74}
-          suffix="%"
+        <NumberCard
+          eyebrow="Ranked objectively"
+          value={10}
+          suffix="methods"
           decimals={0}
-          status="Elevated"
-          size="h-56 w-full max-w-md"
+          status="Nicholas 1981 methodology"
+          size="h-56 w-full"
           active={activeGroup === 1}
         />
       </div>
@@ -154,25 +196,27 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
       <div
         ref={group3Ref}
         className="absolute inset-0 flex items-center justify-center"
-        style={{ opacity: 0, transform: 'translateY(400px)' }}
+        style={{
+          opacity: 0,
+          transform: 'translateY(400px)',
+          filter: 'blur(28px)',
+        }}
       >
-        <div className="grid w-full max-w-lg grid-cols-2 gap-4">
-          <Card
-            label="Air quality"
-            value={91}
-            suffix="%"
-            decimals={0}
-            status="Good"
-            size="h-56 w-full max-w-md"
+        <div className="grid w-full grid-cols-2 gap-4">
+          <TextCard
+            eyebrow="Shortlist"
+            statement="Keep the top picks"
+            status="Highest-ranked methods"
+            size="h-56 w-full "
             active={activeGroup === 2}
           />
-          <Card
-            label="Erosion rate"
-            value={3.8}
-            suffix=""
-            decimals={1}
-            status="Within limits"
-            size="h-56 w-full max-w-md"
+          <NumberCard
+            eyebrow="Decision"
+            value={1}
+            suffix="winner"
+            decimals={0}
+            status="Refine by cost with the AI"
+            size="h-56 w-full "
             active={activeGroup === 2}
           />
         </div>

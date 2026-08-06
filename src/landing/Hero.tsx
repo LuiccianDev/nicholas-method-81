@@ -84,10 +84,10 @@ export default function HeroVisual() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mx-auto my-5 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-balance text-black uppercase"
             >
-              AI analyzes site data and predicts environmental risk — <br />
-              before a single tree comes down
+              Rank all ten mining methods from the deposit's <br />
+              geometry, grade, and geomechanics — in seconds.
             </motion.p>
-            <BlurText text="See the impact before you break ground" />
+            <BlurText text="The right method, ranked in seconds" />
           </div>
           <motion.div
             initial={{ y: -100, opacity: 0 }}
@@ -96,12 +96,12 @@ export default function HeroVisual() {
           >
             <div className="absolute top-1/2 left-12 z-10 max-w-60 -translate-y-1/2">
               <p className="text-3xl leading-tight font-bold text-white">
-                Drone + sensor fusion
+                Geometry · Grade · Geomechanics
               </p>
             </div>
             <div className="absolute top-1/2 right-12 z-10 max-w-60 -translate-y-1/2 text-right">
               <p className="text-3xl leading-tight font-bold text-white">
-                Risk flagged automatically
+                Ranked in seconds
               </p>
             </div>
           </motion.div>

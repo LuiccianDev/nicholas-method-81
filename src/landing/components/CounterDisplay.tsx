@@ -1,25 +1,27 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useRef, useState } from 'react';
-import { EASINGS, DURATIONS } from '../animations';
+import { SplitText } from 'gsap/SplitText';
+import { useRef } from 'react';
 
-type CounterDisplayProps = {
-  start: number;
-  end: number;
-  suffix: string;
+gsap.registerPlugin(useGSAP, SplitText);
+
+type FlipBoardProps = {
+  value: number;
+  suffix?: string;
   decimals?: number;
-  active: boolean;
+  active?: boolean;
+  delay?: number;
 };
 
-export default function CounterDisplay({
-  start,
-  end,
-  suffix,
+export default function FlipBoard({
+  value,
+  suffix = '',
   decimals = 0,
-  active,
-}: CounterDisplayProps) {
-  const [value, setValue] = useState(start);
-  const ref = useRef<HTMLDivElement>(null);
+  active = true,
+  delay = 0,
+}: FlipBoardProps) {
+  const container = useRef<HTMLHeadingElement>(null);
+  const text = `${value.toFixed(decimals)}${suffix}`;
 
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
@@ -27,35 +29,39 @@ export default function CounterDisplay({
 
   useGSAP(
     () => {
-      if (prefersReducedMotion) {
-        setValue(active ? end : start);
-        return;
-      }
-      if (!active) {
-        setValue(start);
-        return;
-      }
-      const obj = { value: start };
-      const tween = gsap.to(obj, {
-        value: end,
-        duration: DURATIONS.counter,
-        ease: EASINGS.smoothSlow,
-        onUpdate: () =>
-          setValue(
-            decimals > 0
-              ? parseFloat(obj.value.toFixed(decimals))
-              : Math.round(obj.value)
-          ),
+      if (!container.current) return;
+      if (!active || prefersReducedMotion) return;
+
+      const split = SplitText.create(container.current, {
+        type: 'chars',
+        charsClass: 'letter',
       });
-      return () => tween.kill();
+
+      const tween = gsap.from(split.chars, {
+        rotationX: 90,
+        transformOrigin: '50% 100%',
+        opacity: 0,
+        stagger: { each: 0.18, from: 'start' },
+        duration: 0.35,
+        delay,
+        ease: 'power2.out',
+      });
+
+      return () => {
+        tween.kill();
+        split.revert();
+      };
     },
-    { scope: ref, dependencies: [active, end] }
+    {
+      scope: container,
+      dependencies: [text, active],
+      revertOnUpdate: true,
+    }
   );
 
   return (
-    <div ref={ref} className="mb-1 w-full text-center text-5xl font-bold">
-      {value}
-      {suffix}
-    </div>
+    <h3 ref={container} className="text text-6xl font-bold">
+      {text}
+    </h3>
   );
 }

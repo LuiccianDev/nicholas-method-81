@@ -56,8 +56,7 @@ export default function StatsSection() {
                   className={isOdd ? 'text-left' : 'text-right'}
                 >
                   <CounterDisplay
-                    start={0}
-                    end={stat.value}
+                    value={stat.value}
                     suffix={stat.suffix}
                     active={active}
                   />
