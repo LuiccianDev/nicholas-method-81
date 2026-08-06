@@ -8,6 +8,7 @@ import ChatBubble from './ChatBubble';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import { motion } from 'motion/react';
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(SplitText);
 
@@ -75,17 +76,16 @@ export default function ChatBot() {
 
   return (
     <>
-      <button
+      <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 bottom-4 z-50 flex size-13 cursor-pointer items-center justify-center bg-secondary transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
+        className="fixed right-4 bottom-4 z-50 flex size-13 rounded-xl cursor-pointer items-center justify-center bg-secondary transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
       >
-        {isOpen ? (
-          <X size={30} />
-        ) : (
-          <IconHelmet className="size-15 text-secondary" />
-        )}
-      </button>
+          <IconHelmet className="size-15 text-secondary rounded-xl" />
+      </motion.button>
 
       <div
         className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl transition-all duration-300 md:right-6 md:bottom-22 ${
