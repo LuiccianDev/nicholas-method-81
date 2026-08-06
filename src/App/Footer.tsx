@@ -198,7 +198,7 @@ export default function Footer() {
             <div className="lg:col-span-6">
               <h3
                 ref={titleRef}
-                className="font-serif text-2xl leading-snug font-bold tracking-tight italic sm:text-3xl lg:text-4xl text-pretty text-center"
+                className="text-center font-serif text-2xl leading-snug font-bold tracking-tight text-pretty italic sm:text-3xl lg:text-4xl"
               >
                 Evaluating deposit viability with numerical mechanics logic.
               </h3>
@@ -207,7 +207,7 @@ export default function Footer() {
             <div className="flex flex-col gap-5 lg:col-span-6">
               <p
                 ref={descriptionRef}
-                className="font-monserrate text-xs leading-relaxed tracking-wider text-text-primary/80 uppercase sm:text-sm text-pretty text-center"
+                className="text-center font-monserrate text-xs leading-relaxed tracking-wider text-pretty text-text-primary/80 uppercase sm:text-sm"
               >
                 Assess geomechanical conditions, grade distributions, and
                 deposit geometry with David Nicholas' optimized selection
@@ -228,7 +228,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-2 rounded-xl border border-black/10  px-5 py-3.5 tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-background hover:text-black active:scale-95"
+                  className="group flex cursor-pointer items-center gap-2 rounded-xl border border-black/10 px-5 py-3.5 tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-background hover:text-black active:scale-95"
                 >
                   <span>▶ Watch details guide</span>
                 </a>

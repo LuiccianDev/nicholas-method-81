@@ -53,7 +53,7 @@ const ParametersForm = memo(function ParametersForm({
                 { value: 'TP', label: 'Platy / Tabular' },
                 { value: 'I', label: 'Irregular' },
               ]}
-              note="Equi-dimensional: All dimensions are roughly equal. Platy/Tabular: Two dimensions are significantly larger than the thickness (usually < 100m). Irregular: Dimensions vary drastically over short distances."
+              note="Massive: Equal dimensions • Tabular: 2 large dimensions, thin (< 100m) • Irregular: Variable boundaries."
             />
             <NumericInput
               label="Ore Thickness"
@@ -61,7 +61,7 @@ const ParametersForm = memo(function ParametersForm({
               onChange={(v) => updateInput('thickness', v)}
               unit="m"
               derivedLabel={getThicknessLabel(input.thickness)}
-              note="Narrow: < 10 m (< 30 ft) • Intermediate: 10 - 30 m (30 - 100 ft) • Thick: 30 - 100 m (100 - 325 ft) • Very Thick: > 100 m (> 325 ft)"
+              note="Narrow: <10m • Intermediate: 10–30m • Thick: 30–100m • Very Thick: >100m"
             />
             <NumericInput
               label="Plunge"
@@ -69,7 +69,7 @@ const ParametersForm = memo(function ParametersForm({
               onChange={(v) => updateInput('plunge', v)}
               unit="°"
               derivedLabel={getPlungeLabel(input.plunge)}
-              note="Flat: Dip is less than 20°. Intermediate: Dip is between 20° and 55°. Steep: Dip is greater than 55°."
+              note="Flat: <20° • Intermediate: 20°–55° • Steep: >55°"
             />
 
             <DropdownSelect
@@ -81,7 +81,7 @@ const ParametersForm = memo(function ParametersForm({
                 { value: 'G', label: 'Gradational' },
                 { value: 'E', label: 'Erratic' },
               ]}
-              note="Uniform: Grade is consistent with no significant variations. Gradational: Grades display distinct zonal characteristics, transitioning smoothly. Erratic: Grades fluctuate inconsistently with no discernible pattern."
+              note="Uniform: Constant grade • Gradational: Smooth zonal transitions • Erratic: High fluctuation."
             />
           </div>
         </motion.details>

@@ -34,7 +34,7 @@ export default function GeotechnicalInput({
           }
           unit="Ratio"
           derivedLabel={getSubStrLabel(input[`${prefix}SubStr`])}
-          note="Ratio of uniaxial compressive strength to overburden pressure. Weak: Ratio < 8 • Moderate: Ratio between 8 and 15 • Strong: Ratio > 15"
+          note="UCS / Overburden pressure • Weak: <8 • Moderate: 8–15 • Strong: >15"
         />
         <NumericInput
           label="Fracture Spacing"
@@ -44,7 +44,7 @@ export default function GeotechnicalInput({
           }
           unit="frac/m"
           derivedLabel={getFracSpacLabel(input[`${prefix}FracSpac`])}
-          note="Very Close: > 16 fractures/m (RQD 0-20%) • Close: 10-16 fractures/m (RQD 20-40%) • Wide: 3-10 fractures/m (RQD 40-70%) • Very Wide: < 3 fractures/m (RQD 70-100%)"
+          note="Very Close: >16/m (RQD <20%) • Close: 10–16/m • Wide: 3–10/m • Very Wide: <3/m (RQD >70%)"
         />
         <div className="min-w-0 xl:col-span-1 2xl:col-span-2">
           <DropdownSelect
@@ -58,7 +58,7 @@ export default function GeotechnicalInput({
               { value: 'M', label: 'Moderate' },
               { value: 'S', label: 'Strong' },
             ]}
-            note="Weak: Clean joint with a smooth surface or soft filling (strength < intact rock). Moderate: Clean joint with a rough surface. Strong: Filled with material ≥ intact rock strength."
+            note="Weak: Smooth joint / soft fill • Moderate: Rough joint • Strong: Hard fill (≥ rock strength)"
           />
         </div>
       </div>
