@@ -25,20 +25,20 @@ export default function Navigation() {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="rounded-sm bg-[#1A1A1A] px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
+            className="rounded-sm bg-black px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
             data-purpose="cta-book-demo"
           >
             Book
           </motion.button>
         </div>
-        <div className="flex items-center justify-center rounded-sm bg-white pl-4">
-          <span className="pr-2 text-lg font-black tracking-wide uppercase">
+        <div className="flex items-center justify-center rounded-sm bg-background pl-4">
+          <span className="pr-2 font-monserrate text-lg font-bold tracking-wide uppercase">
             Luiccian
           </span>
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMenuOpen(true)}
-            className="rounded-sm bg-black p-2 text-white"
+            className="rounded-sm bg-primary p-2 text-white"
             data-purpose="mobile-menu-trigger"
           >
             <Menu className="h-5 w-5" />
@@ -47,7 +47,7 @@ export default function Navigation() {
         <div className="flex flex-1 items-center justify-end">
           <motion.div
             whileHover={{ opacity: 0.6 }}
-            className="cursor-pointer rounded-sm bg-white px-4 py-2 text-[10px] font-bold tracking-widest text-gray-500 uppercase"
+            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[10px] font-bold tracking-widest text-gray-500 uppercase"
           >
             Login / Sign Up
           </motion.div>
@@ -68,16 +68,16 @@ export default function Navigation() {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute top-0 right-0 flex h-full w-72 flex-col bg-white shadow-2xl"
+              className="absolute top-0 right-0 flex h-full w-72 flex-col bg-background shadow-2xl"
             >
-              <div className="flex items-center justify-between border-b border-gray-100 px-6 py-6">
+              <div className="flex items-center justify-between border-b border-tertiary px-6 py-6">
                 <span className="text-lg font-black tracking-wide uppercase">
                   Menu
                 </span>
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMenuOpen(false)}
-                  className="rounded-sm bg-black p-2 text-white"
+                  className="rounded-sm bg-black p-2 text-background"
                 >
                   <X className="h-5 w-5" />
                 </motion.button>
@@ -93,7 +93,7 @@ export default function Navigation() {
                     >
                       <a
                         href={item.href}
-                        className="text-lg font-semibold text-gray-800 transition-colors hover:text-black"
+                        className="text-lg font-semibold transition-colors hover:text-quaternary"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {item.label}
@@ -102,11 +102,11 @@ export default function Navigation() {
                   ))}
                 </ul>
               </nav>
-              <div className="border-t border-gray-100 px-6 py-6">
+              <div className="border-t border-tertiary px-6 py-6">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full rounded-sm bg-[#1A1A1A] px-4 py-3 text-xs font-bold tracking-widest text-white uppercase"
+                  className="w-full rounded-sm bg-black px-4 py-3 text-xs font-bold tracking-widest text-background uppercase"
                 >
                   Book
                 </motion.button>

@@ -100,7 +100,7 @@ export function useChat() {
 
         const data = await res.json();
         const assistantMessageId = `assistant-${Date.now()}`;
-        const replyText = data.reply || '❌ Could not retrieve a response.';
+        const replyText = data.reply || 'Could not retrieve a response.';
 
         setMessages((prev) => [
           ...prev,
@@ -116,7 +116,7 @@ export function useChat() {
           {
             id: `err-${Date.now()}`,
             role: 'assistant',
-            content: '❌ Connection error. Please try again.',
+            content: 'Connection error. Please try again.',
           },
         ]);
       } finally {

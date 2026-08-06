@@ -78,13 +78,13 @@ export default function ChatBot() {
     <>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed right-4 bottom-4 z-50 flex size-13 rounded-xl cursor-pointer items-center justify-center bg-secondary transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
+        className="fixed right-4 bottom-4 z-50 flex size-13 cursor-pointer items-center justify-center rounded-xl bg-secondary transition-all duration-300 hover:scale-110 active:scale-95 md:right-6 md:bottom-6"
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-          <IconHelmet className="size-15 text-secondary rounded-xl" />
+        <IconHelmet className="size-15 rounded-xl text-secondary" />
       </motion.button>
 
       <div

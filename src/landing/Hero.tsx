@@ -82,7 +82,7 @@ export default function HeroVisual() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mx-auto my-10 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-black uppercase"
+              className="mx-auto my-5 max-w-70 text-sm leading-relaxed font-medium tracking-tight text-balance text-black uppercase"
             >
               AI analyzes site data and predicts environmental risk — <br />
               before a single tree comes down
