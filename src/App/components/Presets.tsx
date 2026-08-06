@@ -1,6 +1,11 @@
+import { useRef } from 'react';
 import { motion } from 'motion/react';
 import type { RawMethodInput } from '../../types';
 import { useNicholasContext } from '../../state/calculator';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP);
 
 interface PresetOption {
   id: string;
@@ -92,6 +97,61 @@ const PRESETS: PresetOption[] = [
 
 export default function Presets() {
   const { input, setInputValues } = useNicholasContext();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const blobRef = useRef<HTMLSpanElement>(null);
+  const moveBlobRef = useRef<(target: HTMLButtonElement) => void>(() => {});
+  const hideBlobRef = useRef<() => void>(() => {});
+
+  const activeId = PRESETS.find((p) => inputsMatch(input, p.data))?.id;
+
+  useGSAP(
+    (_, contextSafe : any) => {
+      const moveBlob = contextSafe((target: HTMLButtonElement) => {
+        const blob = blobRef.current;
+        const wrap = wrapperRef.current;
+        if (!blob || !wrap) return;
+        const rect = target.getBoundingClientRect();
+        const nav = wrap.getBoundingClientRect();
+        gsap.to(blob, {
+          left: rect.left - nav.left - 2,
+          top: rect.top - nav.top - 2,
+          width: rect.width + 4,
+          height: rect.height + 4,
+          duration: 0.5,
+          ease: 'back.out(0.8)',
+        });
+      });
+
+      const hideBlob = contextSafe(() => {
+        if (blobRef.current) {
+          gsap.to(blobRef.current, { autoAlpha: 0, duration: 0.1});
+        }
+      });
+
+      moveBlobRef.current = moveBlob;
+      hideBlobRef.current = hideBlob;
+
+      const activeBtn = wrapperRef.current?.querySelector<HTMLButtonElement>(
+        '[data-active="true"]'
+      );
+      const blob = blobRef.current;
+      const wrap = wrapperRef.current;
+      if (activeBtn && blob && wrap) {
+        const rect = activeBtn.getBoundingClientRect();
+        const nav = wrap.getBoundingClientRect();
+        gsap.set(blob, {
+          autoAlpha: 1,
+          left: rect.left - nav.left - 2,
+          top: rect.top - nav.top - 2,
+          width: rect.width + 4,
+          height: rect.height + 4,
+        });
+      } else {
+        hideBlob();
+      }
+    },
+    { scope: wrapperRef, dependencies: [activeId] }
+  );
 
   return (
     <div className="pb-4">
@@ -99,38 +159,57 @@ export default function Presets() {
         Predefined Geological Scenarios (1-Click)
       </h3>
 
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-        {PRESETS.map((preset) => {
-          const isActive = inputsMatch(input, preset.data);
-          return (
-            <motion.button
-              key={preset.id}
-              type="button"
-              onClick={() => setInputValues(preset.data)}
-              whileTap={{ scale: 0.97 }}
-              className={`group relative flex flex-col items-start rounded-lg border border-border p-3 text-left transition-all duration-200 ${
-                isActive
-                  ? 'border-quaternary bg-quaternary/10'
-                  : 'hover:border-tertiary'
-              } active:translate-y-0`}
-            >
-              <div className="mb-2 flex items-center gap-2 font-roboto">
-                <span className="text-[13px] font-bold">{preset.name}</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                {preset.badges.map((badge) => (
-                  <span
-                    key={badge.label}
-                    className="inline-flex items-center gap-1 py-0.5 pl-1 text-[12px]"
-                  >
-                    <span>- {badge.label} :</span>
-                    {badge.value}
-                  </span>
-                ))}
-              </div>
-            </motion.button>
-          );
-        })}
+      <div
+        ref={wrapperRef}
+        onMouseLeave={() => {
+          const activeBtn =
+            wrapperRef.current?.querySelector<HTMLButtonElement>(
+              '[data-active="true"]'
+            );
+          if (activeBtn) moveBlobRef.current(activeBtn);
+          else hideBlobRef.current();
+        }}
+        className="relative px-2"
+      >
+        <span
+          ref={blobRef}
+          className="pointer-events-none absolute inset-auto z-0 rounded-lg border border-quaternary bg-secondary opacity-0"
+        />
+
+        <div className="relative z-1 grid grid-cols-1 gap-2 sm:grid-cols-3">
+          {PRESETS.map((preset) => {
+            const isActive = inputsMatch(input, preset.data);
+            return (
+              <motion.button
+                key={preset.id}
+                type="button"
+                data-active={isActive || undefined}
+                onMouseEnter={(e) => moveBlobRef.current(e.currentTarget)}
+                onClick={(e) => {
+                  setInputValues(preset.data);
+                  moveBlobRef.current(e.currentTarget);
+                }}
+                whileTap={{ scale: 0.97 }}
+                className="relative flex flex-col items-start rounded-lg  p-3 text-left "
+              >
+                <div className="mb-2 flex items-center gap-2 font-boldonse">
+                  <span className="text-[9px]">{preset.name}</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  {preset.badges.map((badge) => (
+                    <span
+                      key={badge.label}
+                      className="inline-flex items-center gap-1 py-0.5 pl-1 text-[12px]"
+                    >
+                      <span className="font-bold">- {badge.label} :</span>
+                      {badge.value}
+                    </span>
+                  ))}
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
