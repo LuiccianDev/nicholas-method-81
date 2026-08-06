@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-
+import { motion } from 'motion/react';
 interface ComparisonBarChartProps {
   chartData: ChartDataRow[];
 }
@@ -39,10 +39,20 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
 
   return (
     <>
-      <h3 className="font-boldonse text-[10px] tracking-widest uppercase">
+      <motion.h3
+        className="font-boldonse text-[10px] tracking-widest uppercase"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+      >
         03 / Viability Index Analysis
-      </h3>
-      <div className="relative w-full py-5 sm:py-6">
+      </motion.h3>
+      <motion.div
+        className="relative w-full py-5 sm:py-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         <div
           ref={containerRef}
           style={{ height: `${chartHeight}px` }}
@@ -123,7 +133,7 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
             </BarChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 });

@@ -28,16 +28,7 @@ function CalculatorContent() {
 
   return (
     <>
-      <motion.div
-        className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]"
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: {
-            duration: 0.6,
-          },
-        }}
-      >
+      <motion.div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]">
         <ParametersForm input={input} updateInput={updateInput} />
 
         <div className="flex flex-col gap-6">

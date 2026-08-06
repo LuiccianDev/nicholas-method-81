@@ -8,6 +8,7 @@ import DropdownSelect from './ui/DropdownSelect';
 import NumericInput from './ui/NumericInput';
 import GeotechnicalInput from './GeotechnicalInput';
 import Presets from './Presets';
+import { motion } from 'motion/react';
 
 interface ParametersFormProps {
   input: RawMethodInput;
@@ -20,14 +21,24 @@ const ParametersForm = memo(function ParametersForm({
 }: ParametersFormProps) {
   return (
     <div className="flex h-full flex-col">
-      <h2 className="mb-4 font-boldonse text-[10px] tracking-widest uppercase">
+      <Presets />
+      <motion.h2
+        className="mb-4 font-boldonse text-[10px] tracking-widest uppercase"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         01 / Analysis Inputs
-      </h2>
+      </motion.h2>
 
       <div className="flex-1 overflow-y-auto">
-        <Presets />
-
-        <details open className="overflow-hidden py-4 sm:py-5">
+        <motion.details
+          open
+          className="overflow-hidden py-4 sm:py-5"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-2 font-mono text-[13px] tracking-wide uppercase">
             <span>Geometry &amp; Grade</span>
             <span className="tracking-widest">OPEN</span>
@@ -73,9 +84,14 @@ const ParametersForm = memo(function ParametersForm({
               note="Uniform: Grade is consistent with no significant variations. Gradational: Grades display distinct zonal characteristics, transitioning smoothly. Erratic: Grades fluctuate inconsistently with no discernible pattern."
             />
           </div>
-        </details>
+        </motion.details>
 
-        <details className="py-4 sm:py-5">
+        <motion.details
+          className="py-4 sm:py-5"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[13px] tracking-wide uppercase">
             <span>Rock Mechanics</span>
             <span className="tracking-widest">TOGGLE</span>
@@ -100,7 +116,7 @@ const ParametersForm = memo(function ParametersForm({
               updateInput={updateInput}
             />
           </div>
-        </details>
+        </motion.details>
       </div>
     </div>
   );

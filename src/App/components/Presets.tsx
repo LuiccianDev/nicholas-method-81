@@ -40,9 +40,9 @@ const PRESETS: PresetOption[] = [
       fwFracStr: 'S',
     },
     badges: [
-      { label: 'Shape', value: 'Irregular' },
-      { label: 'Thickness', value: '3 m' },
-      { label: 'Grade', value: 'Gradational' },
+      { label: 'S', value: 'Irregular' },
+      { label: 'T', value: '3 m' },
+      { label: 'G', value: 'Gradational' },
     ],
   },
   {
@@ -64,9 +64,9 @@ const PRESETS: PresetOption[] = [
       fwFracStr: 'M',
     },
     badges: [
-      { label: 'Shape', value: 'Equi-dimensional' },
-      { label: 'Thickness', value: '65 m' },
-      { label: 'Grade', value: 'Uniform' },
+      { label: 'S', value: 'Equi-dimensional' },
+      { label: 'T', value: '65 m' },
+      { label: 'G', value: 'Uniform' },
     ],
   },
   {
@@ -88,9 +88,9 @@ const PRESETS: PresetOption[] = [
       fwFracStr: 'S',
     },
     badges: [
-      { label: 'Shape', value: 'Platy / Tabular' },
-      { label: 'Thickness', value: '12 m' },
-      { label: 'Grade', value: 'Erratic' },
+      { label: 'S', value: 'Platy / Tabular' },
+      { label: 'T', value: '12 m' },
+      { label: 'G', value: 'Erratic' },
     ],
   },
 ];
@@ -101,35 +101,62 @@ export default function Presets() {
   const blobRef = useRef<HTMLSpanElement>(null);
   const moveBlobRef = useRef<(target: HTMLButtonElement) => void>(() => {});
   const hideBlobRef = useRef<() => void>(() => {});
+  const currentTargetRef = useRef<HTMLButtonElement | null>(null);
 
   const activeId = PRESETS.find((p) => inputsMatch(input, p.data))?.id;
 
   useGSAP(
-    (_, contextSafe : any) => {
-      const moveBlob = contextSafe((target: HTMLButtonElement) => {
-        const blob = blobRef.current;
-        const wrap = wrapperRef.current;
-        if (!blob || !wrap) return;
+    (_, contextSafe: any) => {
+      const reduced = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      const measure = (target: HTMLElement, wrap: HTMLElement) => {
         const rect = target.getBoundingClientRect();
         const nav = wrap.getBoundingClientRect();
-        gsap.to(blob, {
+        return {
           left: rect.left - nav.left - 2,
           top: rect.top - nav.top - 2,
           width: rect.width + 4,
           height: rect.height + 4,
-          duration: 0.5,
+        };
+      };
+
+      const moveBlob = contextSafe((target: HTMLButtonElement) => {
+        const blob = blobRef.current;
+        const wrap = wrapperRef.current;
+        if (!blob || !wrap || !target.isConnected) return;
+        currentTargetRef.current = target;
+        gsap.to(blob, {
+          ...measure(target, wrap),
+          duration: reduced ? 0 : 0.5,
           ease: 'back.out(0.8)',
         });
       });
 
       const hideBlob = contextSafe(() => {
+        currentTargetRef.current = null;
         if (blobRef.current) {
-          gsap.to(blobRef.current, { autoAlpha: 0, duration: 0.1});
+          gsap.to(blobRef.current, {
+            autoAlpha: 0,
+            duration: reduced ? 0 : 0.1,
+          });
         }
       });
 
       moveBlobRef.current = moveBlob;
       hideBlobRef.current = hideBlob;
+
+      const syncBlob = contextSafe(() => {
+        const wrap = wrapperRef.current;
+        const target = currentTargetRef.current;
+        if (!wrap) return;
+        if (target && target.isConnected && blobRef.current) {
+          gsap.set(blobRef.current, { autoAlpha: 1, ...measure(target, wrap) });
+        } else {
+          hideBlob();
+        }
+      });
 
       const activeBtn = wrapperRef.current?.querySelector<HTMLButtonElement>(
         '[data-active="true"]'
@@ -137,29 +164,38 @@ export default function Presets() {
       const blob = blobRef.current;
       const wrap = wrapperRef.current;
       if (activeBtn && blob && wrap) {
-        const rect = activeBtn.getBoundingClientRect();
-        const nav = wrap.getBoundingClientRect();
-        gsap.set(blob, {
-          autoAlpha: 1,
-          left: rect.left - nav.left - 2,
-          top: rect.top - nav.top - 2,
-          width: rect.width + 4,
-          height: rect.height + 4,
-        });
+        currentTargetRef.current = activeBtn;
+        gsap.set(blob, { autoAlpha: 1, ...measure(activeBtn, wrap) });
       } else {
         hideBlob();
       }
+
+      window.addEventListener('resize', syncBlob);
+      window.addEventListener('orientationchange', syncBlob);
+      const observer = new ResizeObserver(syncBlob);
+      if (wrapperRef.current) observer.observe(wrapperRef.current);
+
+      return () => {
+        window.removeEventListener('resize', syncBlob);
+        window.removeEventListener('orientationchange', syncBlob);
+        observer.disconnect();
+      };
     },
-    { scope: wrapperRef, dependencies: [activeId] }
+    { scope: wrapperRef, dependencies: [activeId], revertOnUpdate: true }
   );
 
   return (
-    <div className="pb-4">
-      <h3 className="mb-3 text-[15px]">
+    <>
+      <motion.h3
+        className="mb-3 text-[15px]"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         Predefined Geological Scenarios (1-Click)
-      </h3>
+      </motion.h3>
 
-      <div
+      <motion.div
         ref={wrapperRef}
         onMouseLeave={() => {
           const activeBtn =
@@ -169,7 +205,10 @@ export default function Presets() {
           if (activeBtn) moveBlobRef.current(activeBtn);
           else hideBlobRef.current();
         }}
-        className="relative px-2"
+        className="relative px-2 pb-9"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
       >
         <span
           ref={blobRef}
@@ -190,7 +229,7 @@ export default function Presets() {
                   moveBlobRef.current(e.currentTarget);
                 }}
                 whileTap={{ scale: 0.97 }}
-                className="relative flex flex-col items-start rounded-lg  p-3 text-left "
+                className="relative flex flex-col items-start rounded-lg p-3 text-left"
               >
                 <div className="mb-2 flex items-center gap-2 font-boldonse">
                   <span className="text-[9px]">{preset.name}</span>
@@ -210,7 +249,7 @@ export default function Presets() {
             );
           })}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 }

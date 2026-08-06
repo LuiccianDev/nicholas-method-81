@@ -29,7 +29,7 @@ export default function ChatBubble({
       </div>
       {message.role === 'assistant' ? (
         <div className="flex max-w-[85%] flex-col">
-          <div className="rounded-lg border border-border bg-background px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap">
+          <div className="bg-background px-3.5 py-2.5 text-[13px] leading-relaxed text-pretty whitespace-pre-wrap">
             {displayedText}
             {isTyping && (
               <span className="ml-0.5 animate-pulse font-bold text-primary">

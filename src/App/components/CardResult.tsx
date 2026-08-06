@@ -1,6 +1,10 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { type ScoredMethod } from '../../types';
 import { ListTree } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { motion } from 'motion/react';
+gsap.registerPlugin(useGSAP);
 
 interface CardResultProps {
   bestMethod?: ScoredMethod;
@@ -13,18 +17,48 @@ const CardResult = memo(function CardResult({
   absoluteBest,
   onOpenDetails,
 }: CardResultProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const isSurfaceMoreViable =
     absoluteBest?.method === 'Open Pit' &&
     absoluteBest.total > (bestMethod?.total || 0);
 
+  useGSAP(
+    () => {
+      if (!bestMethod?.method) return;
+      gsap.fromTo(
+        '.text',
+        { clipPath: 'inset(0 100% 0 0)' },
+        {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: 1.2,
+          ease: 'power3.inOut',
+          clearProps: 'clipPath',
+        }
+      );
+    },
+    { scope: containerRef, dependencies: [bestMethod?.method] }
+  );
+
   return (
     <>
-      <h2 className="font-boldonse text-[10px] tracking-widest uppercase">
+      <motion.h2
+        className="font-boldonse text-[10px] tracking-widest uppercase"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         02 / Method Recommendation
-      </h2>
-      <div className="relative flex min-h-72 w-full flex-col rounded-xl bg-secondary p-6 sm:p-8">
+      </motion.h2>
+      <motion.div
+        ref={containerRef}
+        className="relative flex min-h-72 w-full flex-col rounded-xl bg-secondary p-6 sm:p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
         <div className="mb-auto space-y-3">
-          <p className="font-boldonse text-[clamp(2rem,4vw,2.6rem)] italic">
+          <p className="text font-boldonse text-[clamp(2rem,4vw,2.6rem)] italic">
             {bestMethod?.method || 'None.'}
           </p>
           <p className="font-roboto text-2xl tracking-tight">
@@ -61,7 +95,7 @@ const CardResult = memo(function CardResult({
         >
           <ListTree className="size-8" />
         </div>
-      </div>
+      </motion.div>
     </>
   );
 });

@@ -1,13 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { X, Send, Bot, Trash2 } from 'lucide-react';
 import IconHelmet from '../App/icons/IconHelmet';
 import { useChat } from '../hooks/useChat';
 import QuickSuggestions from './QuickSuggestions';
 import LoadingDots from './LoadingDots';
 import ChatBubble from './ChatBubble';
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
+import { useGSAP } from '@gsap/react';
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(SplitText);
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const playedRef = useRef(false);
   const {
     messages,
     input,
@@ -31,6 +38,27 @@ export default function ChatBot() {
       setTimeout(() => inputRef.current?.focus(), 150);
     }
   }, [isOpen, inputRef]);
+
+  useGSAP(
+    () => {
+      if (!isOpen || playedRef.current || !textRef.current) return;
+      playedRef.current = true;
+
+      const split = SplitText.create(textRef.current, {
+        type: 'words,chars',
+        wordsClass: 'inline-block whitespace-nowrap',
+      });
+      gsap.from(split.chars, {
+        opacity: 0.1,
+        scale: 0.8,
+        filter: 'blur(4px)',
+        stagger: { each: 0.01, from: 'center' },
+        duration: 0.2,
+        ease: 'power2.out',
+      });
+    },
+    { dependencies: [isOpen] }
+  );
 
   const topMethodName =
     bestUndergroundMethod || absoluteBestMethod || 'recommended method';
@@ -107,12 +135,12 @@ export default function ChatBot() {
 
         <div className="scroll-elegant flex-1 space-y-3 overflow-y-auto p-4">
           {displayMessages.length === 0 ? (
-            <div className="flex min-h-full flex-col items-center justify-center gap-3 px-2 text-center">
-              <p className="font-boldonse text-[20px] leading-relaxed">
-                Ask me about Nicholas Method 81 geotechnical inputs and method
-                selection.
-              </p>
-            </div>
+            <p
+              ref={textRef}
+              className="px-4 pt-15 text-center font-boldonse text-[25px] text-pretty"
+            >
+              Ask me about Nicholas Method
+            </p>
           ) : (
             displayMessages.map((msg) => (
               <ChatBubble
