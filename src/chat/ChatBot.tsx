@@ -56,7 +56,7 @@ function ChatBubble({
                 title="Copy message"
               >
                 {copiedId === message.id ? (
-                  <Check size={12} className="text-green-500" />
+                  <Check size={12} className="text-primary" />
                 ) : (
                   <Copy size={12} />
                 )}
