@@ -1,5 +1,5 @@
-import { cn } from '../../lib/utils';
-import { type ScoredMethod } from '../../types';
+import { cn } from '@/lib/utils';
+import { type ScoredMethod } from '@/types';
 
 interface RankingTableProps {
   results: ScoredMethod[];

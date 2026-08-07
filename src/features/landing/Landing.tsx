@@ -5,7 +5,7 @@ import HowItWorks from './sections/HowItWorks';
 import MethodsGrid from './sections/MethodsGrid';
 import StatsSection from './sections/StatsSection';
 import CTASection from './sections/CTASection';
-import Footer from '../App/Footer';
+import Footer from '@/components/layout/Footer';
 
 export default function App() {
   return (

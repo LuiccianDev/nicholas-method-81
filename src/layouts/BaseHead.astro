@@ -1,0 +1,48 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  displayFont?: boolean;
+}
+
+const {
+  title = 'Nicholas Method 81 | Mining Method Selection',
+  description = 'Evaluate and recommend optimal mining methods using a numerical approach based on deposit geometry and geomechanical conditions.',
+  displayFont = false,
+} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" href="/icon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+
+<meta name="description" content={description} />
+<meta
+  name="keywords"
+  content="nicholas method, mining method selection, underground mining, geomechanics, engineering software"
+/>
+<meta
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large"
+/>
+<meta name="author" content="LuiccianDev" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content="/banner.png" />
+<meta property="og:site_name" content="Nicholas Method 81" />
+
+{
+  displayFont && (
+    <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+        rel="stylesheet"
+      />
+    </>
+  )
+}

@@ -1,4 +1,4 @@
-import type { MethodInput, ScoredMethod } from '../../types';
+import type { MethodInput, ScoredMethod } from '@/types';
 import {
   ELIMINATED,
   MINING_METHODS,

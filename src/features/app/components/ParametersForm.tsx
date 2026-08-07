@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import { type RawMethodInput } from '../../types';
+import { type RawMethodInput } from '@/types';
 import {
   getThicknessLabel,
   getPlungeLabel,
-} from '../../lib/nicholas/categorizeInput';
+} from '@/lib/nicholas/categorizeInput';
 import DropdownSelect from './ui/DropdownSelect';
 import NumericInput from './ui/NumericInput';
 import GeotechnicalInput from './GeotechnicalInput';

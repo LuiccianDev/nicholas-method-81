@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { X, Send, Bot, Trash2 } from 'lucide-react';
-import IconHelmet from '../App/icons/IconHelmet';
-import { useChat } from '../hooks/useChat';
+import IconHelmet from '@/components/icons/IconHelmet';
+import { useChat } from './useChat';
 import QuickSuggestions from './QuickSuggestions';
 import LoadingDots from './LoadingDots';
 import ChatBubble from './ChatBubble';

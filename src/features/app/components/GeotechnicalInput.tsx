@@ -1,10 +1,10 @@
-import { type RawMethodInput } from '../../types';
+import { type RawMethodInput } from '@/types';
 import DropdownSelect from './ui/DropdownSelect';
 import NumericInput from './ui/NumericInput';
 import {
   getSubStrLabel,
   getFracSpacLabel,
-} from '../../lib/nicholas/categorizeInput';
+} from '@/lib/nicholas/categorizeInput';
 
 interface GeotechnicalInputProps {
   title: string;

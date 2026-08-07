@@ -1,5 +1,5 @@
 import { memo, useRef } from 'react';
-import { type ScoredMethod } from '../../types';
+import { type ScoredMethod } from '@/types';
 import { ListTree, ArrowDown } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';

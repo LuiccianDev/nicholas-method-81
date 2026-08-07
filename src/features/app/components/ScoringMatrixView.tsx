@@ -1,5 +1,5 @@
 import { ArrowUp } from 'lucide-react';
-import { type ScoredMethod } from '../../types';
+import { type ScoredMethod } from '@/types';
 import RankingTable from './RankingTable';
 import { motion } from 'motion/react';
 

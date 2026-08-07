@@ -3,7 +3,7 @@ import {
   getCalculatorData,
   subscribeCalculatorData,
   type CalculatorSnapshot,
-} from '../lib/nicholas/calculatorStore';
+} from '@/state/calculatorStore';
 import { useTypingAnimation } from './useTypingAnimation';
 
 export interface ChatMessage {

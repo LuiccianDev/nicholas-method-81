@@ -41,12 +41,15 @@ No existen scripts de `lint` ni `test`. No hay configuración de ESLint.
 
 ## Estructura
 
-- `src/pages/` — rutas Astro (`index.astro`) y endpoints API (`api/chat.ts`).
-- `src/components/` — UI React: `calculator/`, `landing/`, `chat/`, `layout/`, `ui/`, `icons/`.
-- `src/lib/nicholas/` — lógica de negocio (matrices de puntuación, cálculo de scores).
-- `src/state/` — estado global (Zustand-like) para calculadora y tema.
-- `src/hooks/` — hooks personalizados, `src/types/` — tipos compartidos.
-- `src/styles/` — CSS global (`index.css` más los menos Tailwind 4) y temas.
+- `src/pages/` — rutas Astro (`index.astro`, `App.astro`) y endpoints API (`api/chat.ts`).
+- `src/features/` — features autocontenidas en minúsculas: `app/` (calculadora), `chat/`, `landing/`. Cada una agrupa sus componentes, secciones y hooks propios (p. ej. `features/chat/useChat.ts`).
+- `src/components/` — componentes **compartidos** entre features: `layout/Footer.tsx`, `icons/IconHelmet.tsx`.
+- `src/layouts/` — layouts Astro: `LayoutApp.astro`, `LayoutLanding.astro`, `BaseHead.astro` (head/meta/SEO único).
+- `src/lib/nicholas/` — **solo dominio**: matrices de puntuación, cálculo de scores, categorización de inputs. Ni stores ni estado.
+- `src/state/` — estado global (context) + stores externos: `calculator.tsx`, `calculatorStore.ts`, `theme.ts`.
+- `src/types/` — tipos compartidos; `src/styles/` — CSS global (`index.css` + temas Tailwind 4).
+
+**Importación:** usa SIEMPRE el alias raíz `@/*` (definido en `tsconfig.json` → `paths: { "@/*": ["src/*"] }`) para imports entre carpetas: p. ej. `@/state/calculator`, `@/lib/nicholas/calculateScores`, `@/features/app/App`, `@/layouts/LayoutApp.astro`. Solo rutas dentro de la misma feature usan relativas (`./`).
 
 ## Verificación de cambios (Playwright + skills)
 

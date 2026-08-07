@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { NicholasProvider } from '../state/calculator';
+import { NicholasProvider } from '@/state/calculator';
 import ParametersForm from './components/ParametersForm';
 import CardResult from './components/CardResult';
 import BarChart from './components/BarChart';
 import ScoringMatrixView from './components/ScoringMatrixView';
-import { useNicholasContext } from '../state/calculator';
+import { useNicholasContext } from '@/state/calculator';
 
 function CalculatorContent() {
   const {

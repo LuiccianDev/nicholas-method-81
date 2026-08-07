@@ -1,5 +1,5 @@
 import { memo, useState, useEffect, useRef } from 'react';
-import { type ChartDataRow } from '../../types';
+import { type ChartDataRow } from '@/types';
 import {
   BarChart,
   Bar,

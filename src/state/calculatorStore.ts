@@ -1,4 +1,4 @@
-import type { RawMethodInput, ScoredMethod } from '../types';
+import type { RawMethodInput, ScoredMethod } from '@/types';
 
 export interface CalculatorSnapshot {
   input: RawMethodInput;

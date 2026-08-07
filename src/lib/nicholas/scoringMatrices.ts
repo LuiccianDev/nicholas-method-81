@@ -1,4 +1,4 @@
-import type { MiningMethod } from '../../types';
+import type { MiningMethod } from '@/types';
 
 export const ELIMINATED = -49;
 

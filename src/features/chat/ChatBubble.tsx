@@ -1,5 +1,5 @@
 import { Bot, User, Copy, Check } from 'lucide-react';
-import { type ChatMessage } from '../hooks/useChat';
+import { type ChatMessage } from './useChat';
 
 export default function ChatBubble({
   message,
