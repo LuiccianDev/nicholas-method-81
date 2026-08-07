@@ -39,19 +39,10 @@ export default function CTASection() {
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               {/* Primary CTA */}
               <a
-                href="/calculator"
+                href="/App"
                 className="rounded-sm bg-black px-6 py-3 font-sans text-sm font-black tracking-[0.15em] text-white uppercase hover:bg-tertiary"
               >
                 Use the Calculator
-              </a>
-
-              {/* Secondary CTA */}
-              <a
-                href="/chat"
-                className="flex items-center gap-3 font-sans text-sm font-black tracking-[0.15em] text-black uppercase"
-              >
-                <span className="h-px w-8 bg-black" />
-                Ask the AI
               </a>
             </div>
           </motion.div>

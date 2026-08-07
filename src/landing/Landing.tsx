@@ -5,18 +5,17 @@ import HowItWorks from './sections/HowItWorks';
 import MethodsGrid from './sections/MethodsGrid';
 import StatsSection from './sections/StatsSection';
 import CTASection from './sections/CTASection';
-import Footer from './Footer';
+import Footer from '../App/Footer';
 
 export default function App() {
   return (
-    <div className="pt-20">
+    <div className="pt-20 pb-12">
       <Header />
       <Hero />
       <MethodOverview />
       <HowItWorks />
       <MethodsGrid />
       <StatsSection />
-      <CTASection />
       <Footer />
     </div>
   );

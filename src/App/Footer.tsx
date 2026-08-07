@@ -220,6 +220,7 @@ export default function Footer() {
               >
                 <button
                   onClick={scrollToTop}
+
                   className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-black px-6 py-3.5 tracking-widest text-white uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-tertiary hover:text-black active:scale-95"
                 >
                   Get started

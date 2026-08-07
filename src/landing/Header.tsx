@@ -4,9 +4,9 @@ import { Menu, X } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const menuItems = [
-  { label: 'Features', href: '#' },
-  { label: 'How it works', href: '#' },
-  { label: 'About', href: '#' },
+  { label: 'How it works', href: '#how-it-works' },
+  { label: 'Methods', href: '#methods-mining' },
+  { label: 'About', href: '/About' },
 ];
 
 export default function Navigation() {
@@ -46,10 +46,10 @@ export default function Navigation() {
         </div>
         <div className="flex flex-1 items-center justify-end">
           <motion.div
-            whileHover={{ opacity: 0.6 }}
-            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[10px] font-bold tracking-widest text-gray-500 uppercase"
+            whileHover={{ opacity: 0.8 }}
+            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[12px] font-bold tracking-widest uppercase"
           >
-            Login / Sign Up
+            <a href="/App">NIcholas Method</a>
           </motion.div>
         </div>
       </motion.nav>

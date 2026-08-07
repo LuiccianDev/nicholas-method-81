@@ -51,6 +51,7 @@ export default function MethodsGrid({
 
   return (
     <section
+      id="methods-mining"
       aria-labelledby="methods-grid-heading"
       data-section="methods-grid"
       className="overflow-hidden bg-white py-24"

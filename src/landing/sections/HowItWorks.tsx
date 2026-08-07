@@ -49,6 +49,7 @@ export default function HowItWorks() {
 
   return (
     <section
+      id="how-it-works"
       aria-labelledby="how-it-works-heading"
       data-section="how-it-works"
       className="overflow-hidden bg-white py-24"
