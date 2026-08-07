@@ -11,7 +11,7 @@ import {
 import type { RawMethodInput, ScoredMethod, ChartDataRow } from '@/types';
 import { calculateScores } from '@/lib/nicholas/calculateScores';
 import { deriveMethodInput } from '@/lib/nicholas/categorizeInput';
-import { publishCalculatorData } from './calculatorStore';
+import { publishCalculatorData } from './calculatorBridge';
 
 const DEFAULT_INPUT: RawMethodInput = {
   shape: 'I',

@@ -1,4 +1,4 @@
-// src/components/landing/sections/data.ts
+// Content data for the landing sections.
 
 export type Step = {
   number: number;

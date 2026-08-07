@@ -12,7 +12,7 @@ import { motion } from 'motion/react';
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(SplitText);
 
-export default function ChatBot() {
+export default function ChatAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
   const playedRef = useRef(false);

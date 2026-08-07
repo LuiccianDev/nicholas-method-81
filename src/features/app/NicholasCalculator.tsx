@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { NicholasProvider } from '@/state/calculator';
+import { NicholasProvider } from '@/state/NicholasContext';
 import ParametersForm from './components/ParametersForm';
 import CardResult from './components/CardResult';
 import BarChart from './components/BarChart';
 import ScoringMatrixView from './components/ScoringMatrixView';
-import { useNicholasContext } from '@/state/calculator';
+import { useNicholasContext } from '@/state/NicholasContext';
 
 function CalculatorContent() {
   const {
@@ -59,7 +59,7 @@ function CalculatorContent() {
   );
 }
 
-export default function App() {
+export default function NicholasCalculator() {
   return (
     <NicholasProvider>
       <CalculatorContent />

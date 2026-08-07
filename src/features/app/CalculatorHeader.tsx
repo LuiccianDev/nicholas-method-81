@@ -49,7 +49,7 @@ const themeToggleVariants = {
   },
 };
 
-export default function Header() {
+export default function CalculatorHeader() {
   const { theme, toggleTheme } = useTheme();
 
   return (

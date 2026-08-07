@@ -2,9 +2,9 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef, useState } from 'react';
-import { SCROLL_TRIGGER_DEFAULTS } from '../animations';
+import { SCROLL_TRIGGER_DEFAULTS } from '../gsapConfig';
 import CounterDisplay from '../components/CounterDisplay';
-import { STATS_DATA } from './data';
+import { STATS_DATA } from './landingContent';
 
 gsap.registerPlugin(ScrollTrigger);
 

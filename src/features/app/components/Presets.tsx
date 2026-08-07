@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion } from 'motion/react';
 import type { RawMethodInput } from '@/types';
-import { useNicholasContext } from '@/state/calculator';
+import { useNicholasContext } from '@/state/NicholasContext';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 

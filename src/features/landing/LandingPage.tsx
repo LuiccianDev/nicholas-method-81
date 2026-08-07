@@ -1,4 +1,4 @@
-import Header from './Header';
+import LandingNav from './LandingNav';
 import Hero from './Hero';
 import MethodOverview from './sections/MethodOverview';
 import HowItWorks from './sections/HowItWorks';
@@ -7,10 +7,10 @@ import StatsSection from './sections/StatsSection';
 import CTASection from './sections/CTASection';
 import Footer from '@/components/layout/Footer';
 
-export default function App() {
+export default function LandingPage() {
   return (
     <div className="pt-20 pb-12">
-      <Header />
+      <LandingNav />
       <Hero />
       <MethodOverview />
       <HowItWorks />

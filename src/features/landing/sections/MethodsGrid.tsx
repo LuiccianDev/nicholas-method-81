@@ -7,8 +7,8 @@ import {
   DURATIONS,
   EASINGS,
   SCROLL_TRIGGER_DEFAULTS,
-} from '../animations';
-import { METHODS_DATA, type MethodCard } from './data';
+} from '../gsapConfig';
+import { METHODS_DATA, type MethodCard } from './landingContent';
 
 gsap.registerPlugin(ScrollTrigger);
 

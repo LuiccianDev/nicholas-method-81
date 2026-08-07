@@ -1,5 +1,5 @@
 ---
-import ChatBot from '@/features/chat/ChatBot';
+import ChatAssistant from '@/features/chat/ChatAssistant';
 import BaseHead from './BaseHead.astro';
 import '../styles/index.css';
 ---
@@ -13,6 +13,6 @@ import '../styles/index.css';
     <div class="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6">
       <slot />
     </div>
-    <ChatBot client:idle />
+    <ChatAssistant client:idle />
   </body>
 </html>

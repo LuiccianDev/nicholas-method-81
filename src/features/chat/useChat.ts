@@ -3,7 +3,7 @@ import {
   getCalculatorData,
   subscribeCalculatorData,
   type CalculatorSnapshot,
-} from '@/state/calculatorStore';
+} from '@/state/calculatorBridge';
 import { useTypingAnimation } from './useTypingAnimation';
 
 export interface ChatMessage {

@@ -1,0 +1,12 @@
+---
+import NicholasCalculator from '@/features/app/NicholasCalculator';
+import Footer from '@/components/layout/Footer';
+import CalculatorHeader from '@/features/app/CalculatorHeader';
+import LayoutApp from '@/layouts/LayoutApp.astro';
+---
+
+<LayoutApp>
+  <CalculatorHeader client:load />
+  <NicholasCalculator client:load />
+  <Footer client:load />
+</LayoutApp>

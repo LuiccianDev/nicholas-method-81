@@ -9,7 +9,7 @@ const menuItems = [
   { label: 'About', href: '/About' },
 ];
 
-export default function Navigation() {
+export default function LandingNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -49,7 +49,7 @@ export default function Navigation() {
             whileHover={{ opacity: 0.8 }}
             className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[12px] font-bold tracking-widest uppercase"
           >
-            <a href="/App">NIcholas Method</a>
+            <a href="/calculator">NIcholas Method</a>
           </motion.div>
         </div>
       </motion.nav>

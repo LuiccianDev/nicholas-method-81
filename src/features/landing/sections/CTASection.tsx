@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { CTA_HEADLINE } from './data';
+import { CTA_HEADLINE } from './landingContent';
 
 export default function CTASection() {
   const prefersReduced = useReducedMotion();
@@ -39,7 +39,7 @@ export default function CTASection() {
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               {/* Primary CTA */}
               <a
-                href="/App"
+                href="/calculator"
                 className="rounded-sm bg-black px-6 py-3 font-sans text-sm font-black tracking-[0.15em] text-white uppercase hover:bg-tertiary"
               >
                 Use the Calculator

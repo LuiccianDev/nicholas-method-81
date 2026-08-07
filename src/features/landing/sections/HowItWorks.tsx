@@ -7,8 +7,8 @@ import {
   DURATIONS,
   EASINGS,
   SCROLL_TRIGGER_DEFAULTS,
-} from '../animations';
-import { STEPS_DATA } from './data';
+} from '../gsapConfig';
+import { STEPS_DATA } from './landingContent';
 
 gsap.registerPlugin(ScrollTrigger);
 
