@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/banner.png" width="100%" alt="Nicholas Method Banner">
+  <img src="public/Readme.png" width="100%"  alt="Nicholas Method Banner">
 
   # Nicholas Method 81
   *Mining Method Selection: A Numerical Approach*
