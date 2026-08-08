@@ -21,7 +21,7 @@ export default function DropdownSelect({
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="z-20 block w-full cursor-pointer appearance-none px-3 py-2 text-sm outline-none"
+          className="z-20 block w-full bg-background   cursor-pointer appearance-none px-3 py-2 text-sm outline-none"
         >
           {options.map((o) => (
             <option key={o.value} value={o.value} className="py-2">
@@ -29,9 +29,6 @@ export default function DropdownSelect({
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-[11px]">
-          ▼
-        </div>
       </div>
     </FormField>
   );

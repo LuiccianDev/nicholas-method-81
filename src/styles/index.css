@@ -39,13 +39,13 @@
 /* Dark Mode Overrides */
 .dark {
   /*! Se pude cambias los colroe smasn adecuasnoas peor para depsued */
-  --color-primary: #8f8040;
-  --color-secondary: #dacf3f;
-  --color-tertiary: #ec9e5f;
-  --color-quaternary: #7a634c;
+  --color-primary: #61533d;
+  --color-secondary: #91806d;
+  --color-tertiary: #c78530;
+  --color-quaternary: #977241;
   --color-text-primary: #ffffff;
-  --color-background: #1a1b19;
-  --color-border: #474035;
+  --color-background: #1d1d1d;
+  --color-border: #2e3325;
 }
 
 /* Base Styles */

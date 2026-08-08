@@ -229,7 +229,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-2 rounded-xl border border-black/10 px-5 py-3.5 tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-background hover:text-black active:scale-95"
+                  className="group flex cursor-pointer items-center gap-2 rounded-xl border border-black/10 px-5 py-3.5 tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-background/10 hover:text-black active:scale-95"
                 >
                   <span>▶ Watch details guide</span>
                 </a>

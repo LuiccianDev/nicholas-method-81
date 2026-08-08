@@ -30,10 +30,10 @@ export default function NumericInput({
             onChange(val === '' ? '' : Number(val));
           }}
           placeholder={placeholder}
-          className="w-full py-2 pr-10 pl-3 font-mono text-sm outline-none"
+          className="w-full py-2 pr-15 pl-3 font-mono text-sm outline-none"
         />
         {unit && (
-          <div className="pointer-events-none absolute top-1/2 right-3 ml-2 -translate-y-1/2 font-mono text-[20px]">
+          <div className="pointer-events-none absolute top-1/2 right-3 ml-4 -translate-y-1/2 font-mono text-[10px]">
             {unit}
           </div>
         )}
