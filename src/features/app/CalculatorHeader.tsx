@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
-import { useTheme } from '@/state/theme';
 import ThemeToggle from './components/ui/ThemeToggle';
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -49,7 +49,6 @@ const themeToggleVariants = {
 };
 
 export default function CalculatorHeader() {
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <motion.header
