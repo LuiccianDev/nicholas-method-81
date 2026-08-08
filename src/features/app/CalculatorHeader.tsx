@@ -49,7 +49,6 @@ const themeToggleVariants = {
 };
 
 export default function CalculatorHeader() {
-
   return (
     <motion.header
       initial="hidden"

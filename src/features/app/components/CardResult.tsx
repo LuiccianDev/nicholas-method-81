@@ -68,11 +68,10 @@ const CardResult = memo(function CardResult({
 
         <div className="mt-4 grid gap-4">
           <p className="max-w-auto text-[15px] leading-relaxed">
-            Based on the{' '}
-            <strong className="italic">Geometry</strong> and{' '}
-            <strong className="italic">Rock Mechanics</strong>{' '}
-            supplied, Nicholas' numerical logic isolates this approach to
-            maximize underground extraction viability.
+            Based on the <strong className="italic">Geometry</strong> and{' '}
+            <strong className="italic">Rock Mechanics</strong> supplied,
+            Nicholas' numerical logic isolates this approach to maximize
+            underground extraction viability.
           </p>
 
           {isSurfaceMoreViable && (
