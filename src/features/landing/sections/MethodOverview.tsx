@@ -142,15 +142,17 @@ export default function MethodOverview() {
         <div className="mt-16 flex items-center gap-12 border-t border-black/20 pt-8 font-sans">
           <div>
             <p className="text-3xl font-black">10</p>
-            <p className="text-xs tracking-[0.15em] uppercase">Methods</p>
+            <p className="text-[11px] tracking-[0.15em] uppercase">Methods</p>
           </div>
           <div>
             <p className="text-3xl font-black">13</p>
-            <p className="text-xs tracking-[0.15em] uppercase">Parameters</p>
+            <p className="text-[11px] tracking-[0.15em] uppercase">
+              Parameters
+            </p>
           </div>
           <div>
             <p className="text-3xl font-black">1981</p>
-            <p className="text-xs tracking-[0.15em] uppercase">Origin</p>
+            <p className="text-[11px] tracking-[0.15em] uppercase">Origin</p>
           </div>
         </div>
       </div>

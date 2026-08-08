@@ -106,7 +106,7 @@ export default function LandingNav() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full rounded-sm bg-black px-4 py-3 text-xs font-bold tracking-widest text-background uppercase"
+                  className="w-full rounded-sm bg-black px-4 py-3 text-[11px] font-bold tracking-widest text-background uppercase"
                 >
                   Book
                 </motion.button>

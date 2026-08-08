@@ -22,7 +22,7 @@ export default function QuickSuggestions({
             type="button"
             onClick={() => onSelect(promptText)}
             disabled={disabled}
-            className="rounded-md border border-border px-2.5 py-1 text-xs transition-all hover:border-quaternary hover:bg-secondary/20 active:scale-95 disabled:opacity-50"
+            className="rounded-md border border-border px-2.5 py-1 text-[11px] transition-all hover:border-quaternary hover:bg-secondary/20 active:scale-95 disabled:opacity-50"
           >
             {promptText}
           </button>

@@ -29,7 +29,7 @@ export default function DropdownSelect({
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs">
+        <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-[11px]">
           ▼
         </div>
       </div>

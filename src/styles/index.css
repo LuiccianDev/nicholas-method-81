@@ -10,13 +10,7 @@
   /* Typography */
   --font-sans:
     'Inter', ui-sans-serif, system-ui, sans-serif; /* ! no usaar l ofnt sans */
-
-  --font-serif:
-    'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times,
-    serif;
-
   --font-monserrate: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-  --font-dm-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
   /* Utiliados fonts */
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
@@ -37,30 +31,6 @@
 
   --color-border: #ecb65f;
 
-  /* Semantic Surface Colors */
-  --color-surface: #fffdf9;
-  --color-surface-muted: #fbf5e6;
-
-  /* Semantic Foreground Colors */
-  --color-foreground: #67223b;
-  --color-foreground-muted: #914562;
-
-  --color-border-strong: #b95e82;
-
-  /* Component Colors */
-  --color-card: #ffffff;
-  --color-card-muted: #fffbf5;
-  --color-tooltip: #ffffff;
-  --color-tooltip-foreground: #67223b;
-
-  /* Extended Typography Scale */
-  --text-xxs: 10px;
-  --text-xxs--line-height: 1.2;
-  --text-xxxs: 9px;
-  --text-xxxs--line-height: 1.2;
-  --text-xs: 11px;
-  --text-xs--line-height: 1.2;
-
   /* Tracking Tokens */
   --tracking-widest: 0.3em;
   --tracking-wide: 0.2em;
@@ -68,18 +38,14 @@
 
 /* Dark Mode Overrides */
 .dark {
-  --color-surface: #0a0104;
-  --color-surface-muted: #1c0610;
-  --color-foreground: #ffecc0;
-  --color-foreground-muted: #dec9a4;
-  --color-primary: #b95e82;
-  --color-secondary: #ffc29b;
-  --color-border: #300c1c;
-  --color-border-strong: #b95e82;
-  --color-card: #18050e;
-  --color-card-muted: #240916;
-  --color-tooltip: #18050e;
-  --color-tooltip-foreground: #ffecc0;
+  /*! Se pude cambias los colroe smasn adecuasnoas peor para depsued */
+  --color-primary: #8f8040;
+  --color-secondary: #dacf3f;
+  --color-tertiary: #ec9e5f;
+  --color-quaternary: #7a634c;
+  --color-text-primary: #ffffff;
+  --color-background: #1a1b19;
+  --color-border: #474035;
 }
 
 /* Base Styles */
@@ -96,7 +62,7 @@ body {
 /* Global Elegant Scrollbar */
 html {
   scrollbar-width: none; /* Cambia con thin para el groosos y que aprezacac  */
-  scrollbar-color: var(--color-border-strong) transparent;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 html::-webkit-scrollbar {
@@ -108,12 +74,12 @@ html::-webkit-scrollbar-track {
 }
 
 html::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
+  background: var(--color-border);
   border-radius: 10px;
 }
 
 html::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground-muted);
+  background: var(--color-border);
 }
 
 /* Scrollbar Utility */

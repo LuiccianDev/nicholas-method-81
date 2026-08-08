@@ -198,7 +198,7 @@ export default function Footer() {
             <div className="lg:col-span-6">
               <h3
                 ref={titleRef}
-                className="text-center font-serif text-2xl leading-snug font-bold tracking-tight text-pretty italic sm:text-3xl lg:text-4xl"
+                className="text-center font-boldonse text-xl leading-snug font-bold tracking-tight text-pretty italic sm:text-2xl lg:text-3xl"
               >
                 Evaluating deposit viability with numerical mechanics logic.
               </h3>
@@ -207,7 +207,7 @@ export default function Footer() {
             <div className="flex flex-col gap-5 lg:col-span-6">
               <p
                 ref={descriptionRef}
-                className="text-center font-monserrate text-xs leading-relaxed tracking-wider text-pretty text-text-primary/80 uppercase sm:text-sm"
+                className="text-center font-monserrate text-[11px] leading-relaxed tracking-wider text-pretty text-text-primary/80 uppercase sm:text-sm"
               >
                 Assess geomechanical conditions, grade distributions, and
                 deposit geometry with David Nicholas' optimized selection
@@ -216,7 +216,7 @@ export default function Footer() {
 
               <div
                 ref={detailsRef}
-                className="flex flex-wrap items-center justify-center gap-3 pt-1 text-xs font-bold sm:gap-4"
+                className="flex flex-wrap items-center justify-center gap-3 pt-1 text-[11px] font-bold sm:gap-4"
               >
                 <button
                   onClick={scrollToTop}
