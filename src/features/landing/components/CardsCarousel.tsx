@@ -12,10 +12,47 @@ type CardsCarouselProps = {
   pinTrigger: RefObject<HTMLDivElement | null>;
 };
 
+type GroupRef = RefObject<HTMLDivElement | null>;
+
+// Encapsula el patrón "grupo sale mientras el siguiente entra".
+// onEnter se dispara al INICIO de la transición (no al final) para darle
+// al reveal de texto/números el máximo tiempo real posible antes del
+// siguiente cambio de beat.
+function addGroupTransition(
+  tl: gsap.core.Timeline,
+  from: GroupRef,
+  to: GroupRef,
+  atTime: number,
+  toY: number,
+  onEnter: () => void
+) {
+  tl.call(onEnter, undefined, atTime);
+
+  tl.to(
+    from.current,
+    { y: -100, opacity: 0, scale: 0.95, duration: 0.4, ease: 'circ.out' },
+    atTime
+  );
+
+  tl.to(
+    to.current,
+    {
+      y: toY,
+      opacity: 1,
+      scale: 1,
+      filter: 'blur(0px)',
+      duration: 0.4,
+      ease: 'circ.out',
+    },
+    atTime
+  );
+
+  tl.set(to.current, { filter: 'none' }, atTime + 0.4);
+}
+
 export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // un ref por GRUPO, no por card individual
   const group1Ref = useRef<HTMLDivElement>(null); // 3 cards (grid)
   const group2Ref = useRef<HTMLDivElement>(null); // 1 card
   const group3Ref = useRef<HTMLDivElement>(null); // 2 cards (grid)
@@ -44,7 +81,6 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         );
         reveal.set(group1Ref.current, { filter: 'none' }, 0.9);
 
-        // Grupo 2 y 3: inician debajo del viewport y borrosos
         gsap.set(group2Ref.current, { filter: 'blur(20px)' });
         gsap.set(group3Ref.current, { filter: 'blur(20px)' });
 
@@ -52,8 +88,8 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           scrollTrigger: {
             trigger: pinTrigger.current,
             start: 'top top',
-            end: '+=150%',
-            scrub: 1,
+            end: '+=190%',
+            scrub: 0.5,
           },
         });
 
@@ -66,53 +102,22 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           0
         );
 
-        // --- Transición 1→2: Grupo 1 sale mientras Grupo 2 entra ---
-        tl.to(
-          group1Ref.current,
-          { y: -100, opacity: 0, scale: 0.95, duration: 0.4, ease: 'circ.out' },
-          0.6
+        // --- Transición 1 → 2 ---
+        addGroupTransition(tl, group1Ref, group2Ref, 0.6, -50, () =>
+          setActiveGroup(1)
         );
-        tl.to(
-          group2Ref.current,
-          {
-            y: -50,
-            opacity: 1,
-            scale: 1,
-            filter: 'blur(0px)',
-            duration: 0.4,
-            ease: 'circ.out',
-          },
-          0.6
-        );
-        tl.set(group2Ref.current, { filter: 'none' }, 1.0);
-        tl.call(() => setActiveGroup(1), undefined, 1.0);
 
-        // --- Beat 2: Grupo 2 descansa visible en el centro (hold 0.6→1.6) ---
+        // --- Transición 2 → 3 ---
+        addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0, () =>
+          setActiveGroup(2)
+        );
 
-        // --- Transición 2→3: Grupo 2 sale mientras Grupo 3 entra ---
-        tl.to(
-          group2Ref.current,
-          { y: -100, opacity: 0, scale: 0.95, duration: 0.4, ease: 'circ.out' },
-          1.6
-        );
-        tl.to(
-          group3Ref.current,
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            filter: 'blur(0px)',
-            duration: 0.4,
-            ease: 'power3.out',
-          },
-          1.6
-        );
-        tl.set(group3Ref.current, { filter: 'none' }, 2.0);
-        tl.call(() => setActiveGroup(2), undefined, 2.0);
+        // Colchón final: mantiene el grupo 3 estático en pantalla para que
+        // su reveal de texto/números termine antes de que el pin se libere.
+        tl.to({}, { duration: 0.6 });
       });
 
       mm.add('(prefers-reduced-motion: reduce)', () => {
-        // Solo el grupo 1 visible: se evita apilar los 3 grupos en simultáneo
         gsap.set(group1Ref.current, {
           opacity: 1,
           y: 0,
@@ -149,7 +154,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Geometry · grade · geomechanics"
             size="h-40 w-full max-w-sm"
             active={activeGroup === 0}
-            delay={1.3}
+            delay={0.1}
           />
           <NumberCard
             eyebrow="Rock zones"
@@ -159,7 +164,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Ore · hanging-wall · footwall"
             size="h-40 w-full max-w-sm"
             active={activeGroup === 0}
-            delay={1.3}
+            delay={0.1}
           />
         </div>
         <TextCard
@@ -168,7 +173,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           status="A short form, not a full study"
           size="h-50 w-full "
           active={activeGroup === 0}
-          delay={0.95}
+          delay={0.1}
         />
       </div>
 
@@ -210,7 +215,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Highest-ranked methods"
             size="h-56 w-full "
             active={activeGroup === 2}
-            delay={0.15}
+            delay={0.1}
           />
           <NumberCard
             eyebrow="Decision"

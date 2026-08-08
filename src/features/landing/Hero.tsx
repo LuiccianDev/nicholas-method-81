@@ -27,9 +27,9 @@ export default function HeroVisual() {
             y: -5,
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top 20px',
-              end: '+=20',
-              scrub: true,
+              start: 'top top',
+              end: '+=20%',
+              scrub: 0.3,
             },
           }
         );
@@ -42,21 +42,23 @@ export default function HeroVisual() {
             ease: 'none',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top 30px',
-              end: '+=20',
-              scrub: 1,
+              start: 'top top',
+              end: '+=20%',
+              scrub: 0.3,
             },
           }
         );
 
-        // Pin del hero: pina el contenedor completo
+        // Pin del hero. El rango debe coincidir con el end del scroll-timeline
+        // de CardsCarousel para que ambos avancen sobre la misma distancia.
+        // (scrub quitado: este ScrollTrigger no tiene animación asociada,
+        // solo pinea, así que scrub no tenía efecto).
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=150%',
+          end: '+=190%',
           pin: true,
           pinSpacing: true,
-          scrub: 1,
           markers: false,
         });
       });

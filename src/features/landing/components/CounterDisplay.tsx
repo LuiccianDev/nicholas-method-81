@@ -41,8 +41,8 @@ export default function FlipBoard({
         rotationX: 90,
         transformOrigin: '50% 100%',
         opacity: 0,
-        stagger: { each: 0.18, from: 'start' },
-        duration: 0.35,
+        stagger: { each: 0.045, from: 'start' },
+        duration: 0.3,
         delay,
         ease: 'power2.out',
       });

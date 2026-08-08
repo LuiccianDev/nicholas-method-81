@@ -46,8 +46,8 @@ export default function TextCard({
           opacity: 1,
           filter: 'blur(0px)',
           y: 0,
-          stagger: 0.04,
-          duration: 0.5,
+          stagger: 0.025,
+          duration: 0.35,
           delay,
           ease: 'power3.out',
         }
