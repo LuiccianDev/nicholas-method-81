@@ -1,7 +1,6 @@
 import { motion } from 'motion/react';
-import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/state/theme';
-
+import ThemeToggle from './components/ui/ThemeToggle';
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -75,18 +74,7 @@ export default function CalculatorHeader() {
         </motion.h1>
       </div>
       <div className="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end">
-        <motion.button
-          suppressHydrationWarning
-          variants={themeToggleVariants}
-          onClick={toggleTheme}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex cursor-pointer items-center justify-center rounded-full bg-primary/25 p-2 transition-all duration-300"
-          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-          title={`Current theme: ${theme}`}
-        >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-        </motion.button>
+        <ThemeToggle />
         <div className="text-left font-roboto text-[13px] md:text-right">
           <motion.p variants={rightItemVariants}>
             REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE

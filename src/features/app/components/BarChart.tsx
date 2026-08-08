@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { motion } from 'motion/react';
+
 interface ComparisonBarChartProps {
   chartData: ChartDataRow[];
 }
