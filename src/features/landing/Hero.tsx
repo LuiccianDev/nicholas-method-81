@@ -2,20 +2,85 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import BlurText from './components/BlurText';
 import CardsCarousel from './components/CardsCarousel';
+import { HERO_PIN_DISTANCE } from './gsapConfig';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const HERO_CAPTIONS = [
+  { left: 'Geometry · Grade · Geomechanics', right: 'Ranked in seconds' },
+  {
+    left: 'Every method scored the same way',
+    right: 'Nicholas 1981 methodology',
+  },
+  { left: 'From ten candidates to one', right: 'Refine by cost with the AI' },
+] as const;
 
 export default function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLVideoElement>(null);
+  const captionLeftRef = useRef<HTMLParagraphElement>(null);
+  const captionRightRef = useRef<HTMLParagraphElement>(null);
+  const captionBottomRef = useRef<HTMLDivElement>(null);
+  const isFirstBeat = useRef(true);
+  const [activeBeat, setActiveBeat] = useState(0);
 
   useGSAP(
     () => {
+      if (!captionLeftRef.current || !captionRightRef.current) return;
+      if (isFirstBeat.current) {
+        isFirstBeat.current = false;
+        return;
+      }
+
+      gsap
+        .timeline()
+        .to([captionLeftRef.current, captionRightRef.current], {
+          opacity: 0,
+          y: -8,
+          duration: 0.2,
+          ease: 'power2.out',
+        })
+        .call(() => {
+          if (captionLeftRef.current)
+            captionLeftRef.current.textContent = HERO_CAPTIONS[activeBeat].left;
+          if (captionRightRef.current)
+            captionRightRef.current.textContent =
+              HERO_CAPTIONS[activeBeat].right;
+        })
+        .fromTo(
+          [captionLeftRef.current, captionRightRef.current],
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }
+        )
+    },
+    { dependencies: [activeBeat], scope: containerRef }
+  );
+
+  useGSAP(
+    () => {
+      // Reveal inicial del video — corre siempre al montar, sin depender del
+      // scroll ni de prefers-reduced-motion (igual que la versión anterior
+      // con Framer Motion). clipPath y opacity quedan 100% en manos de GSAP
+      // acá: antes Framer Motion también los controlaba vía initial/animate
+      // en <motion.video>, y al re-renderizar Hero (por el cambio de
+      // activeBeat) Framer reafirmaba su valor y pisaba el progreso del
+      // scroll — eso causaba el recorte incorrecto al llegar al 2do grupo.
+      gsap.fromTo(
+        imageRef.current,
+        { clipPath: 'inset(100% 0 0 0)', opacity: 0 },
+        {
+          clipPath: 'inset(35% 0 0 0)',
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.inOut',
+        }
+      );
+
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -34,6 +99,8 @@ export default function HeroVisual() {
           }
         );
 
+        // Continúa el clip que empezó el reveal de arriba, ahora atado al
+        // scroll. Mismo elemento, mismo propietario (GSAP) de principio a fin.
         gsap.fromTo(
           imageRef.current,
           { clipPath: 'inset(35% 0 0 0)' },
@@ -49,14 +116,14 @@ export default function HeroVisual() {
           }
         );
 
-        // Pin del hero. El rango debe coincidir con el end del scroll-timeline
-        // de CardsCarousel para que ambos avancen sobre la misma distancia.
-        // (scrub quitado: este ScrollTrigger no tiene animación asociada,
-        // solo pinea, así que scrub no tenía efecto).
+        // Pin del hero — dedicado, sin animación propia. El rango debe
+        // coincidir con el end del scroll-timeline de CardsCarousel para
+        // que ambos avancen sobre la misma distancia (de ahí la constante
+        // compartida HERO_PIN_DISTANCE en vez de repetir el string).
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=190%',
+          end: HERO_PIN_DISTANCE,
           pin: true,
           pinSpacing: true,
           markers: false,
@@ -97,31 +164,44 @@ export default function HeroVisual() {
             transition={{ duration: 0.5, delay: 0.55 }}
           >
             <div className="absolute top-1/2 left-12 z-10 max-w-60 -translate-y-1/2">
-              <p className="text-3xl leading-tight font-bold text-white">
-                Geometry · Grade · Geomechanics
+              <p
+                ref={captionLeftRef}
+                className="text-3xl leading-tight font-bold text-white"
+              >
+                {HERO_CAPTIONS[0].left}
               </p>
             </div>
             <div className="absolute top-1/2 right-12 z-10 max-w-60 -translate-y-1/2 text-right">
-              <p className="text-3xl leading-tight font-bold text-white">
-                Ranked in seconds
+              <p
+                ref={captionRightRef}
+                className="text-3xl leading-tight font-bold text-white"
+              >
+                {HERO_CAPTIONS[0].right}
               </p>
             </div>
           </motion.div>
 
+          <div  className="absolute bottom-20 z-10 flex justify-center items-center mx-auto w-full text-center"
+          >
+            <p ref={captionBottomRef} style={{ opacity: 0 }} className="text-9xl leading-tight font-bold text-center text-white">
+            Enginierrinf Descicion 
+            </p>
+          </div>
+
           <div className="absolute inset-0 overflow-hidden">
-            <motion.video
+            <video
               ref={imageRef}
               autoPlay
               muted
               loop
               className="absolute inset-0 h-full w-full object-cover"
-              style={{ clipPath: 'inset(35% 0 0 0)' }}
+              style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
               src="/video-test.mp4"
-              initial={{ opacity: 0, clipPath: 'inset(100% 0 0 0)' }}
-              animate={{ opacity: 1, clipPath: 'inset(35% 0 0 0)' }}
-              transition={{ duration: 0.8, ease: 'easeInOut' }}
             />
-            <CardsCarousel pinTrigger={containerRef} />
+            <CardsCarousel
+              pinTrigger={containerRef}
+              onBeatChange={setActiveBeat}
+            />
             <div className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-white font-sans"></div>
           </div>
         </div>

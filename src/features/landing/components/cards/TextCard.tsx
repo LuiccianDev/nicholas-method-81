@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -24,10 +25,7 @@ export default function TextCard({
   delay = 0,
 }: TextCardProps) {
   const statementRef = useRef<HTMLParagraphElement>(null);
-
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {
@@ -58,7 +56,10 @@ export default function TextCard({
         split.revert();
       };
     },
-    { scope: statementRef, dependencies: [statement, active, delay] }
+    {
+      scope: statementRef,
+      dependencies: [statement, active, delay, prefersReducedMotion],
+    }
   );
 
   return (

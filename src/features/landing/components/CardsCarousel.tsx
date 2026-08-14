@@ -5,19 +5,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { type RefObject, useRef, useState } from 'react';
 import NumberCard from './cards/NumberCard';
 import TextCard from './cards/TextCard';
+import { HERO_PIN_DISTANCE } from '../gsapConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
 type CardsCarouselProps = {
   pinTrigger: RefObject<HTMLDivElement | null>;
+  onBeatChange?: (index: number) => void;
 };
 
 type GroupRef = RefObject<HTMLDivElement | null>;
 
-// Encapsula el patrón "grupo sale mientras el siguiente entra".
-// onEnter se dispara al INICIO de la transición (no al final) para darle
-// al reveal de texto/números el máximo tiempo real posible antes del
-// siguiente cambio de beat.
 function addGroupTransition(
   tl: gsap.core.Timeline,
   from: GroupRef,
@@ -50,14 +48,22 @@ function addGroupTransition(
   tl.set(to.current, { filter: 'none' }, atTime + 0.4);
 }
 
-export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
+export default function CardsCarousel({
+  pinTrigger,
+  onBeatChange,
+}: CardsCarouselProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const group1Ref = useRef<HTMLDivElement>(null); // 3 cards (grid)
-  const group2Ref = useRef<HTMLDivElement>(null); // 1 card
-  const group3Ref = useRef<HTMLDivElement>(null); // 2 cards (grid)
+  const group1Ref = useRef<HTMLDivElement>(null);
+  const group2Ref = useRef<HTMLDivElement>(null);
+  const group3Ref = useRef<HTMLDivElement>(null);
 
   const [activeGroup, setActiveGroup] = useState(0);
+
+  const goToBeat = (index: number) => {
+    setActiveGroup(index);
+    onBeatChange?.(index);
+  };
 
   useGSAP(
     () => {
@@ -84,17 +90,19 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
         gsap.set(group2Ref.current, { filter: 'blur(20px)' });
         gsap.set(group3Ref.current, { filter: 'blur(20px)' });
 
+        // Timeline de scrub — NO pinea (el pin es responsabilidad exclusiva
+        // del ScrollTrigger dedicado en Hero.tsx). Mismo trigger y mismo
+        // end (HERO_PIN_DISTANCE) para que avancen en paralelo.
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: pinTrigger.current,
             start: 'top top',
-            end: '+=190%',
+            end: HERO_PIN_DISTANCE,
             scrub: 0.5,
           },
         });
 
-        // --- Beat 1: Grupo 1 sube al centro ---
-        tl.call(() => setActiveGroup(0), undefined, 0);
+        tl.call(() => goToBeat(0), undefined, 0);
         tl.fromTo(
           group1Ref.current,
           { y: 110 },
@@ -102,18 +110,11 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           0
         );
 
-        // --- Transición 1 → 2 ---
         addGroupTransition(tl, group1Ref, group2Ref, 0.6, -50, () =>
-          setActiveGroup(1)
+          goToBeat(1)
         );
+        addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0, () => goToBeat(2));
 
-        // --- Transición 2 → 3 ---
-        addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0, () =>
-          setActiveGroup(2)
-        );
-
-        // Colchón final: mantiene el grupo 3 estático en pantalla para que
-        // su reveal de texto/números termine antes de que el pin se libere.
         tl.to({}, { duration: 0.6 });
       });
 
@@ -135,7 +136,6 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
 
   return (
     <div ref={sectionRef} className="absolute inset-0 mx-auto w-full max-w-2xl">
-      {/* Grupo 1 — 3 cards en grid (2 arriba + 1 abajo) */}
       <div
         ref={group1Ref}
         className="absolute inset-0 flex flex-col items-center justify-center gap-4"
@@ -154,7 +154,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Geometry · grade · geomechanics"
             size="h-40 w-full max-w-sm"
             active={activeGroup === 0}
-            delay={0.1}
+            delay={0.9}
           />
           <NumberCard
             eyebrow="Rock zones"
@@ -164,7 +164,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Ore · hanging-wall · footwall"
             size="h-40 w-full max-w-sm"
             active={activeGroup === 0}
-            delay={0.1}
+            delay={0.9}
           />
         </div>
         <TextCard
@@ -173,11 +173,10 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           status="A short form, not a full study"
           size="h-50 w-full "
           active={activeGroup === 0}
-          delay={0.1}
+          delay={0.9}
         />
       </div>
 
-      {/* Grupo 2 — 1 card sola */}
       <div
         ref={group2Ref}
         className="absolute inset-0 flex items-center justify-center"
@@ -195,10 +194,10 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
           status="Nicholas 1981 methodology"
           size="h-56 w-full"
           active={activeGroup === 1}
+          delay={0.45}
         />
       </div>
 
-      {/* Grupo 3 — 2 cards en grid */}
       <div
         ref={group3Ref}
         className="absolute inset-0 flex items-center justify-center"
@@ -215,7 +214,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Highest-ranked methods"
             size="h-56 w-full "
             active={activeGroup === 2}
-            delay={0.1}
+            delay={0.45}
           />
           <NumberCard
             eyebrow="Decision"
@@ -225,6 +224,7 @@ export default function CardsCarousel({ pinTrigger }: CardsCarouselProps) {
             status="Refine by cost with the AI"
             size="h-56 w-full "
             active={activeGroup === 2}
+            delay={0.45}
           />
         </div>
       </div>

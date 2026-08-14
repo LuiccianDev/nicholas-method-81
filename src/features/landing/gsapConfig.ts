@@ -31,10 +31,11 @@ export const DISTANCES = {
   fadeUpSmall: 20,
 };
 
-/**
- * Creates a fade-up tween with ScrollTrigger on an array of elements.
- * Use inside useGSAP() with mm.add('(prefers-reduced-motion: no-preference)', ...).
- */
+// Distancia de scroll que dura el pin del Hero. La usan tanto el
+// ScrollTrigger que pinea (Hero.tsx) como el que scrubea el timeline
+// de las cards (CardsCarousel.tsx) — deben coincidir siempre.
+export const HERO_PIN_DISTANCE = '+=190%';
+
 export function createFadeUpScrollTrigger(
   targets: Element | Element[] | null,
   trigger: Element | null,
