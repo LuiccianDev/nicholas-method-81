@@ -15,7 +15,7 @@ export default function LandingNav() {
   return (
     <>
       <motion.nav
-        className="fixed top-5 right-0 left-0 z-50 flex items-center justify-between px-10 py-6"
+        className="fixed top-5 right-0 left-0 z-50 flex items-center text-[12px] not-first:justify-between px-10 py-6"
         data-purpose="main-navigation"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,10 +25,10 @@ export default function LandingNav() {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="rounded-sm bg-black px-4 py-2 text-[10px] font-bold tracking-widest text-white uppercase"
+            className="rounded-sm bg-black px-4 py-2  font-bold tracking-widest text-white uppercase"
             data-purpose="cta-book-demo"
           >
-            Book
+            <a href="/calculator">Paper</a>
           </motion.button>
         </div>
         <div className="flex items-center justify-center rounded-sm bg-background pl-4">
@@ -38,7 +38,7 @@ export default function LandingNav() {
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMenuOpen(true)}
-            className="rounded-sm bg-primary p-2 text-white"
+            className="rounded-sm bg-tertiary p-2 "
             data-purpose="mobile-menu-trigger"
           >
             <Menu className="h-5 w-5" />
@@ -47,7 +47,7 @@ export default function LandingNav() {
         <div className="flex flex-1 items-center justify-end">
           <motion.div
             whileHover={{ opacity: 0.8 }}
-            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[12px] font-bold tracking-widest uppercase"
+            className="cursor-pointer rounded-sm bg-background px-4 py-2  font-bold tracking-widest uppercase"
           >
             <a href="/calculator">NIcholas Method</a>
           </motion.div>
