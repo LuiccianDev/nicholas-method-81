@@ -5,7 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import BlurText from './components/BlurText';
-import CardsCarousel from './components/CardsCarousel';
+import CardsCarousel, {
+  type CardsCarouselHandle,
+} from './components/CardsCarousel';
 import { HERO_PIN_DISTANCE } from './gsapConfig';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -40,6 +42,7 @@ export default function HeroVisual() {
   const captionBottomPrimaryRef = useRef<HTMLSpanElement>(null);
   const captionBottomSecondaryRef = useRef<HTMLSpanElement>(null);
   const captionBottomWrapperRef = useRef<HTMLDivElement>(null);
+  const cardsCarouselRef = useRef<CardsCarouselHandle>(null);
   const isFirstBeat = useRef(true);
   const [activeBeat, setActiveBeat] = useState(0);
 
@@ -100,7 +103,11 @@ export default function HeroVisual() {
 
   useGSAP(
     () => {
-      gsap.fromTo(
+      // Timeline maestro de entrada: la imagen (clipPath) y el reveal del
+      // group1 de CardsCarousel corren aquí, en el MISMO timeline —
+      // mismo reloj, sin posibilidad de desfase entre ambos archivos.
+      const introTl = gsap.timeline();
+      introTl.fromTo(
         imageRef.current,
         { clipPath: 'inset(100% 0 0 0)', opacity: 0 },
         {
@@ -108,28 +115,30 @@ export default function HeroVisual() {
           opacity: 1,
           duration: 0.8,
           ease: 'power2.inOut',
-        }
+        },
+        0
       );
+      cardsCarouselRef.current?.addRevealTo(introTl, 0.5);
 
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         // Timeline único: tagline, caption inferior e imagen comparten el mismo
         // scrollTrigger (0% -> 20%) para que avancen perfectamente sincronizados.
-        const introTl = gsap.timeline({
+        const scrollTl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'top top',
             end: '+=20%',
-            scrub: 0.2,
+            scrub: 0.3,
           },
         });
 
-        introTl
+        scrollTl
           .fromTo(
             taglineRef.current,
             { opacity: 1, y: 0 },
-            { opacity: 0, y: -300, ease: 'none' },
+            { opacity: 0, y: -400, ease: 'none' },
             0
           )
           .fromTo(
@@ -202,7 +211,7 @@ export default function HeroVisual() {
             className="pointer-events-none absolute inset-x-0 bottom-20 z-10 flex flex-col items-center justify-center px-4 text-center text-6xl text-white select-none"
             style={{ opacity: 0 }}
           >
-            <h2 className="flex flex-col items-center justify-center  leading-none tracking-tight">
+            <h2 className="flex flex-col items-center justify-center leading-none tracking-tight">
               <span ref={captionBottomPrimaryRef}>
                 {HERO_CAPTIONS[0].bottomPrimary}
               </span>
@@ -220,10 +229,11 @@ export default function HeroVisual() {
               src="/Underground.jpeg"
             />
             <CardsCarousel
+              ref={cardsCarouselRef}
               pinTrigger={containerRef}
               onBeatChange={setActiveBeat}
             />
-            <div className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-white "></div>
+            <div className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-white"></div>
           </div>
         </div>
       </div>

@@ -2,7 +2,13 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { type RefObject, useRef, useState } from 'react';
+import {
+  forwardRef,
+  type RefObject,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import NumberCard from './cards/NumberCard';
 import TextCard from './cards/TextCard';
 import { HERO_PIN_DISTANCE } from '../gsapConfig';
@@ -12,6 +18,10 @@ gsap.registerPlugin(ScrollTrigger);
 type CardsCarouselProps = {
   pinTrigger: RefObject<HTMLDivElement | null>;
   onBeatChange?: (index: number) => void;
+};
+
+export type CardsCarouselHandle = {
+  addRevealTo: (tl: gsap.core.Timeline, position?: number | string) => void;
 };
 
 type GroupRef = RefObject<HTMLDivElement | null>;
@@ -48,186 +58,199 @@ function addGroupTransition(
   tl.set(to.current, { filter: 'none' }, atTime + 0.4);
 }
 
-export default function CardsCarousel({
-  pinTrigger,
-  onBeatChange,
-}: CardsCarouselProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
+const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
+  function CardsCarousel({ pinTrigger, onBeatChange }, ref) {
+    const sectionRef = useRef<HTMLDivElement>(null);
 
-  const group1Ref = useRef<HTMLDivElement>(null);
-  const group2Ref = useRef<HTMLDivElement>(null);
-  const group3Ref = useRef<HTMLDivElement>(null);
+    const group1Ref = useRef<HTMLDivElement>(null);
+    const group2Ref = useRef<HTMLDivElement>(null);
+    const group3Ref = useRef<HTMLDivElement>(null);
 
-  const [activeGroup, setActiveGroup] = useState(0);
+    const [activeGroup, setActiveGroup] = useState(0);
 
-  const goToBeat = (index: number) => {
-    setActiveGroup(index);
-    onBeatChange?.(index);
-  };
+    const goToBeat = (index: number) => {
+      setActiveGroup(index);
+      onBeatChange?.(index);
+    };
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+    // El entrance de group1 ya NO corre en un timeline propio. Se expone
+    // aquí para que HeroVisual lo inyecte en SU MISMO timeline maestro,
+    // junto al clipPath de la imagen — mismo reloj, cero desincronización.
+    useImperativeHandle(ref, () => ({
+      addRevealTo(tl, position = 0) {
+        const start = typeof position === 'number' ? position : 0;
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        if (!sectionRef.current) return;
-
-        const reveal = gsap.timeline({ delay: 0 });
-        reveal.fromTo(
-          group1Ref.current,
-          { opacity: 0, y: 110, filter: 'blur(36px)' },
-          { opacity: 1, y: 110, duration: 0.6, delay: 0.5, ease: 'power2.out' },
-          0
-        );
-        reveal.fromTo(
-          group1Ref.current,
-          { filter: 'blur(36px)' },
-          { filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' },
-          0
-        );
-        reveal.set(group1Ref.current, { filter: 'none'}, 0.9);
-
-        gsap.set(group2Ref.current, { filter: 'blur(20px)' });
-        gsap.set(group3Ref.current, { filter: 'blur(20px)' });
-
-        // Timeline de scrub — NO pinea (el pin es responsabilidad exclusiva
-        // del ScrollTrigger dedicado en Hero.tsx). Mismo trigger y mismo
-        // end (HERO_PIN_DISTANCE) para que avancen en paralelo.
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: pinTrigger.current,
-            start: 'top top',
-            end: HERO_PIN_DISTANCE,
-            scrub: 0.5,
-          },
-        });
-
-        tl.call(() => goToBeat(0), undefined, 0);
         tl.fromTo(
           group1Ref.current,
-          { y: 110 },
-          { y: -50, duration: 0.4, ease: 'circ.out' },
-          0
+          { opacity: 0, y: 110, filter: 'blur(36px)' },
+          { opacity: 1, y: 110, duration: 0.6 },
+          position
+        ).fromTo(
+          group1Ref.current,
+          { filter: 'blur(36px)' },
+          { filter: 'blur(0px)', duration: 0.7 },
+          position
         );
 
-        addGroupTransition(tl, group1Ref, group2Ref, 0.6, -50, () =>
-          goToBeat(1)
-        );
-        addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0, () => goToBeat(2));
+        tl.set(group1Ref.current, { filter: 'none' }, start + 0.7);
+      },
+    }));
 
-        tl.to({}, { duration: 0.6 });
-      });
+    useGSAP(
+      () => {
+        const mm = gsap.matchMedia();
 
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(group1Ref.current, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: 'none',
+        mm.add('(prefers-reduced-motion: no-preference)', () => {
+          if (!sectionRef.current) return;
+
+          gsap.set(group2Ref.current, { filter: 'blur(20px)' });
+          gsap.set(group3Ref.current, { filter: 'blur(20px)' });
+
+          // Timeline de scrub — NO pinea (el pin es responsabilidad exclusiva
+          // del ScrollTrigger dedicado en Hero.tsx). Mismo trigger y mismo
+          // end (HERO_PIN_DISTANCE) para que avancen en paralelo.
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: pinTrigger.current,
+              start: 'top top',
+              end: HERO_PIN_DISTANCE,
+              scrub: 0.5,
+            },
+          });
+
+          tl.call(() => goToBeat(0), undefined, 0);
+          tl.fromTo(
+            group1Ref.current,
+            { y: 110 },
+            { y: -50, duration: 0.4, ease: 'circ.out' },
+            0
+          );
+
+          addGroupTransition(tl, group1Ref, group2Ref, 0.6, -50, () =>
+            goToBeat(1)
+          );
+          addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0, () =>
+            goToBeat(2)
+          );
+
+          tl.to({}, { duration: 0.6 });
         });
-        gsap.set(group2Ref.current, { display: 'none' });
-        gsap.set(group3Ref.current, { display: 'none' });
-      });
 
-      return () => mm.revert();
-    },
-    { scope: sectionRef, dependencies: [pinTrigger] }
-  );
+        mm.add('(prefers-reduced-motion: reduce)', () => {
+          gsap.set(group1Ref.current, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: 'none',
+          });
+          gsap.set(group2Ref.current, { display: 'none' });
+          gsap.set(group3Ref.current, { display: 'none' });
+        });
 
-  return (
-    <div ref={sectionRef} className="absolute inset-0 mx-auto w-full max-w-2xl">
+        return () => mm.revert();
+      },
+      { scope: sectionRef, dependencies: [pinTrigger] }
+    );
+
+    return (
       <div
-        ref={group1Ref}
-        className="absolute inset-0 flex flex-col items-center justify-center gap-4"
-        style={{
-          opacity: 0,
-          transform: 'translateY(50px)',
-
-        }}
+        ref={sectionRef}
+        className="absolute inset-0 mx-auto w-full max-w-2xl"
       >
-        <div className="grid w-full grid-cols-2 gap-2">
-          <NumberCard
-            eyebrow="Deposit parameters"
-            value={13}
-            suffix="params"
-            decimals={0}
-            status="Geometry · grade · geomechanics"
-            size="h-40 w-full max-w-sm"
-            active={activeGroup === 0}
-            delay={0.9}
-          />
-          <NumberCard
-            eyebrow="Rock zones"
-            value={3}
-            suffix="zones"
-            decimals={0}
-            status="Ore · hanging-wall · footwall"
-            size="h-40 w-full max-w-sm"
-            active={activeGroup === 0}
-            delay={0.9}
-          />
-        </div>
-        <TextCard
-          eyebrow="Describe the deposit"
-          statement="Your geology in — ranked results out"
-          status="A short form, not a full study"
-          size="h-50 w-full "
-          active={activeGroup === 0}
-          delay={0.9}
-        />
-      </div>
-
-      <div
-        ref={group2Ref}
-        className="absolute inset-0 flex items-center justify-center"
-        style={{
-          opacity: 0,
-          transform: 'translateY(400px)',
-          filter: 'blur(28px)',
-        }}
-      >
-        <NumberCard
-          eyebrow="Ranked objectively"
-          value={10}
-          suffix="methods"
-          decimals={0}
-          status="Nicholas 1981 methodology"
-          size="h-56 w-full"
-          active={activeGroup === 1}
-          delay={0.45}
-        />
-      </div>
-
-      <div
-        ref={group3Ref}
-        className="absolute inset-0 flex items-center justify-center"
-        style={{
-          opacity: 0,
-          transform: 'translateY(400px)',
-          filter: 'blur(28px)',
-        }}
-      >
-        <div className="grid w-full grid-cols-2 gap-4">
+        <div
+          ref={group1Ref}
+          className="absolute inset-0 flex flex-col items-center justify-center gap-4"
+          style={{
+            opacity: 0,
+            transform: 'translateY(50px)',
+          }}
+        >
+          <div className="grid w-full grid-cols-2 gap-2">
+            <NumberCard
+              eyebrow="Deposit parameters"
+              value={13}
+              suffix="params"
+              decimals={0}
+              status="Geometry · grade · geomechanics"
+              size="h-40 w-full max-w-sm"
+              active={activeGroup === 0}
+              delay={0.9}
+            />
+            <NumberCard
+              eyebrow="Rock zones"
+              value={3}
+              suffix="zones"
+              decimals={0}
+              status="Ore · hanging-wall · footwall"
+              size="h-40 w-full max-w-sm"
+              active={activeGroup === 0}
+              delay={0.9}
+            />
+          </div>
           <TextCard
-            eyebrow="Shortlist"
-            statement="Keep the top picks"
-            status="Highest-ranked methods"
-            size="h-56 w-full "
-            active={activeGroup === 2}
-            delay={0.45}
+            eyebrow="Describe the deposit"
+            statement="Your geology in — ranked results out"
+            status="A short form, not a full study"
+            size="h-50 w-full "
+            active={activeGroup === 0}
+            delay={0.9}
           />
+        </div>
+
+        <div
+          ref={group2Ref}
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            opacity: 0,
+            transform: 'translateY(400px)',
+            filter: 'blur(28px)',
+          }}
+        >
           <NumberCard
-            eyebrow="Decision"
-            value={1}
-            suffix="winner"
+            eyebrow="Ranked objectively"
+            value={10}
+            suffix="methods"
             decimals={0}
-            status="Refine by cost with the AI"
-            size="h-56 w-full "
-            active={activeGroup === 2}
+            status="Nicholas 1981 methodology"
+            size="h-56 w-full"
+            active={activeGroup === 1}
             delay={0.45}
           />
         </div>
+
+        <div
+          ref={group3Ref}
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            opacity: 0,
+            transform: 'translateY(400px)',
+            filter: 'blur(28px)',
+          }}
+        >
+          <div className="grid w-full grid-cols-2 gap-4">
+            <TextCard
+              eyebrow="Shortlist"
+              statement="Keep the top picks"
+              status="Highest-ranked methods"
+              size="h-56 w-full "
+              active={activeGroup === 2}
+              delay={0.45}
+            />
+            <NumberCard
+              eyebrow="Decision"
+              value={1}
+              suffix="winner"
+              decimals={0}
+              status="Refine by cost with the AI"
+              size="h-56 w-full "
+              active={activeGroup === 2}
+              delay={0.45}
+            />
+          </div>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+export default CardsCarousel;
