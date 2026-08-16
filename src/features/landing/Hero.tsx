@@ -114,51 +114,36 @@ export default function HeroVisual() {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.fromTo(
-          taglineRef.current,
-          { opacity: 1, y: 0 },
-          {
-            opacity: 0,
-            y: -10,
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top top',
-              end: '+=20%',
-              scrub: 0.3,
-            },
-          }
-        );
+        // Timeline único: tagline, caption inferior e imagen comparten el mismo
+        // scrollTrigger (0% -> 20%) para que avancen perfectamente sincronizados.
+        const introTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: '+=20%',
+            scrub: 0.2,
+          },
+        });
 
-        gsap.fromTo(
-          captionBottomWrapperRef.current,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top top',
-              end: '+=20%',
-              scrub: 0.3,
-            },
-          }
-        );
-
-        gsap.fromTo(
-          imageRef.current,
-          { clipPath: 'inset(35% 0 0 0)' },
-          {
-            clipPath: 'inset(0% 0 0 0)',
-            ease: 'none',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top top',
-              end: '+=20%',
-              scrub: 0.3,
-            },
-          }
-        );
+        introTl
+          .fromTo(
+            taglineRef.current,
+            { opacity: 1, y: 0 },
+            { opacity: 0, y: -300, ease: 'none' },
+            0
+          )
+          .fromTo(
+            captionBottomWrapperRef.current,
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, ease: 'power2.out' },
+            0
+          )
+          .fromTo(
+            imageRef.current,
+            { clipPath: 'inset(35% 0 0 0)' },
+            { clipPath: 'inset(0% 0 0 0)', ease: 'none' },
+            0
+          );
 
         ScrollTrigger.create({
           trigger: containerRef.current,
@@ -200,7 +185,6 @@ export default function HeroVisual() {
           </div>
           <motion.div
             className="absolute inset-0 text-[25px] font-bold text-white"
-
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2, delay: 0.55 }}
@@ -231,7 +215,6 @@ export default function HeroVisual() {
           <div className="absolute inset-0 overflow-hidden">
             <img
               ref={imageRef}
-
               className="absolute inset-0 h-full w-full object-cover"
               style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
               src="/Underground.jpeg"
