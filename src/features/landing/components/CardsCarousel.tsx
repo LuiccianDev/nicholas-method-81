@@ -76,7 +76,7 @@ export default function CardsCarousel({
         reveal.fromTo(
           group1Ref.current,
           { opacity: 0, y: 110, filter: 'blur(36px)' },
-          { opacity: 1, y: 110, duration: 0.6, ease: 'power2.out' },
+          { opacity: 1, y: 110, duration: 0.6, delay: 0.5, ease: 'power2.out' },
           0
         );
         reveal.fromTo(
@@ -85,7 +85,7 @@ export default function CardsCarousel({
           { filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' },
           0
         );
-        reveal.set(group1Ref.current, { filter: 'none' }, 0.9);
+        reveal.set(group1Ref.current, { filter: 'none'}, 0.9);
 
         gsap.set(group2Ref.current, { filter: 'blur(20px)' });
         gsap.set(group3Ref.current, { filter: 'blur(20px)' });
@@ -142,7 +142,7 @@ export default function CardsCarousel({
         style={{
           opacity: 0,
           transform: 'translateY(50px)',
-          filter: 'blur(36px)',
+
         }}
       >
         <div className="grid w-full grid-cols-2 gap-2">
