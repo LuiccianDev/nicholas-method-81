@@ -1,137 +1,171 @@
-import { motion, useInView } from 'motion/react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
 import { METHODS_DATA, type MethodCard } from './landingContent';
 
-// Unsplash images mapped to each mining method (used until real assets arrive)
-const METHOD_IMAGES: Record<string, string> = {
-  'Open Pit':
-    'https://images.unsplash.com/photo-1624397640148-949b1732bb0a?w=600&q=80',
-  'Block Caving':
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-  'Sublevel Stoping':
-    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80',
-  'Sublevel Caving':
-    'https://images.unsplash.com/photo-1590593162201-f67611a18b87?w=600&q=80',
-  Longwall:
-    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80',
-  'Room & Pillar':
-    'https://images.unsplash.com/photo-1565793979748-85b2ef7e3636?w=600&q=80',
-  'Shrinkage Stoping':
-    'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&q=80',
-  'Cut & Fill':
-    'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80',
-  'Top Slicing':
-    'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80',
-  'Square Set':
-    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80',
-};
+gsap.registerPlugin(ScrollTrigger);
 
-// Animation variants
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
+// ─── Placeholder images (rotated until real method assets arrive) ─────────────
+const PUBLIC_IMAGES = [
+  '/Underground_Portada.jpeg',
+  '/Underground.jpeg',
+  '/dashboard_bg.jpg',
+];
+const getImg = (i: number) => PUBLIC_IMAGES[i % PUBLIC_IMAGES.length];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 48 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-  },
-};
-
-const headlineVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.65,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-  },
-};
-
-type MethodsGridProps = {
-  methods?: MethodCard[];
-};
-
+// ─── Single method card ───────────────────────────────────────────────────────
 function MethodCard({ method, index }: { method: MethodCard; index: number }) {
-  const imgSrc = METHOD_IMAGES[method.name] ?? method.image;
   const num = String(index + 1).padStart(2, '0');
 
   return (
-    <motion.article
-      variants={cardVariants}
-      className="group flex flex-col gap-0"
+    <article
+      className="method-card group flex w-56 shrink-0 flex-col gap-0 md:w-68"
       aria-label={`Mining method: ${method.name}`}
     >
-      {/* Image block */}
-      <div className="relative overflow-hidden rounded-xl bg-text-primary/5">
-        <div
-          className="relative w-full overflow-hidden"
-          style={{ aspectRatio: '3/4' }}
-        >
+      {/* Image — compact, 3/4 aspect */}
+      <div className="relative overflow-hidden rounded-xl bg-text-primary">
+        <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
           <img
-            src={imgSrc}
+            src={getImg(index)}
             alt={`${method.name} mining method`}
             loading="lazy"
             decoding="async"
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          {/* Dark gradient overlay */}
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
+          {/* gradient */}
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" />
 
-          {/* Index badge — top left */}
-          <span className="absolute top-3 left-3 font-mono text-[11px] font-bold tracking-widest text-white/70 uppercase">
+          {/* index badge */}
+          <span className="absolute top-3 left-3 font-mono text-[10px] font-bold tracking-widest text-white/60 uppercase">
             {num}
           </span>
 
-          {/* Method code — bottom overlay */}
+          {/* method code overlay */}
           <div className="absolute right-0 bottom-0 left-0 p-4">
-            <span className="font-boldonse text-[13px] leading-tight tracking-wide text-white/90 uppercase">
+            <span className="font-boldonse text-[11px] leading-tight tracking-widest text-white/85 uppercase">
               {method.code}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Text block */}
-      <div className="flex flex-col gap-0.5 px-0.5 pt-3 pb-1">
-        <h3 className="font-boldonse text-[16px] leading-snug tracking-tight text-text-primary">
+      {/* Text */}
+      <div className="flex flex-col gap-0.5 px-0.5 pt-2.5 pb-1">
+        <h3 className="font-boldonse text-[14px] leading-snug tracking-tight text-text-primary">
           {method.name}
         </h3>
-        <p className="font-prompt text-[12px] leading-relaxed text-text-primary/55">
+        <p className="font-prompt text-[12px] leading-relaxed text-text-primary/50">
           {method.descriptor}
         </p>
       </div>
-    </motion.article>
+    </article>
   );
 }
+
+// ─── Main section ─────────────────────────────────────────────────────────────
+type MethodsGridProps = {
+  methods?: MethodCard[];
+};
 
 export default function MethodsGrid({
   methods = METHODS_DATA,
 }: MethodsGridProps) {
+  // The outer wrapper is what we pin
   const sectionRef = useRef<HTMLElement>(null);
+  // The headline block animates in Y on scroll-enter
   const headRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  // The inner horizontal rail (this is what moves in X)
+  const railRef = useRef<HTMLDivElement>(null);
+  // Wrapper that clips the rail
+  const viewportRef = useRef<HTMLDivElement>(null);
 
-  const headInView = useInView(headRef, {
-    once: true,
-    margin: '0px 0px -80px 0px',
-  });
-  const gridInView = useInView(gridRef, {
-    once: true,
-    margin: '0px 0px -60px 0px',
-  });
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // ── 1. Headline fade-up on scroll enter ────────────────────────────
+        gsap.fromTo(
+          headRef.current,
+          { opacity: 0, y: 48 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headRef.current,
+              start: 'top 85%',
+              end: 'top 45%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        );
+
+        // ── 2. Horizontal scroll — pin section, animate rail in X ──────────
+        const rail = railRef.current;
+        const viewport = viewportRef.current;
+        if (!rail || !viewport) return;
+
+        // Total X distance = total rail width minus what's already visible
+        const getScrollDistance = () =>
+          -(rail.scrollWidth - viewport.offsetWidth);
+
+        const scrollTween = gsap.to(rail, {
+          x: getScrollDistance,
+          ease: 'none', // REQUIRED for containerAnimation + scrub
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            // pin for as long as the rail needs to travel (ratio: rail/viewport)
+            end: () =>
+              `+=${rail.scrollWidth - viewport.offsetWidth + window.innerHeight * 0.5}`,
+            pin: true,
+            scrub: 1.2,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // ── 3. Each card fades-up triggered by containerAnimation ──────────
+        // Cards reveal as they scroll into view horizontally
+        const cards = rail.querySelectorAll<HTMLElement>('.method-card');
+        cards.forEach((card) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 36 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.55,
+              ease: 'power2.out',
+              scrollTrigger: {
+                containerAnimation: scrollTween,
+                trigger: card,
+                start: 'left 90%',
+                end: 'left 40%',
+                toggleActions: 'play none none reverse',
+              },
+            }
+          );
+        });
+
+        return () => {
+          scrollTween.scrollTrigger?.kill();
+        };
+      });
+
+      // Reduced-motion: no pin, no horizontal scroll
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(headRef.current, { opacity: 1, y: 0 });
+        gsap.set('.method-card', { opacity: 1, y: 0 });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <section
@@ -139,23 +173,18 @@ export default function MethodsGrid({
       ref={sectionRef}
       aria-labelledby="methods-grid-heading"
       data-section="methods-grid"
-      className="overflow-hidden bg-background py-24"
+      className="bg-tertiary rounded-t-3xl"
     >
-      <div className="mx-auto w-full max-w-425 px-4 md:px-8">
-        {/* Top rule + label */}
+      {/* ── Headline block (inside pin, scrolls away naturally) ────────────── */}
+      <div className="mx-auto w-full max-w-425 px-4 pt-24 pb-12 md:px-8">
+        {/* Top rule */}
         <div className="mb-12 flex items-center gap-6 border-t border-text-primary/10 pt-6 font-mono text-[11px] font-medium tracking-widest uppercase">
           <span>Methods evaluated</span>
           <span className="ml-auto text-text-primary/40">NM-03</span>
         </div>
 
-        {/* Headline block */}
-        <motion.div
-          ref={headRef}
-          variants={headlineVariants}
-          initial="hidden"
-          animate={headInView ? 'visible' : 'hidden'}
-          className="mb-16"
-        >
+        {/* Headline */}
+        <div ref={headRef} style={{ opacity: 0 }}>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <h2
               id="methods-grid-heading"
@@ -163,30 +192,54 @@ export default function MethodsGrid({
             >
               10 Mining
               <br />
-              <span className="text-primary">Methods</span>
+              <span className="text-white">Methods</span>
             </h2>
             <p className="max-w-xs font-prompt text-[13px] leading-relaxed text-text-primary/55 md:text-right">
               Every method evaluated by the Nicholas&nbsp;1981 algorithm — from
               surface to deep underground.
             </p>
           </div>
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Methods grid — 2 cols mobile, 5 cols desktop */}
-        <motion.div
-          ref={gridRef}
-          variants={containerVariants}
-          initial="hidden"
-          animate={gridInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-5"
+      {/* ── Horizontal rail viewport ────────────────────────────────────────── */}
+      {/*
+        Tailwind 4: max-w-425 = 425 × 0.25rem = 106.25rem = 1700px.
+        The rail's paddingLeft mirrors mx-auto max-w-425 px-4 md:px-8:
+          on wide screens  → (100vw - 1700px) / 2 + 32px
+          on narrow screens → clamp floor of 16px (px-4)
+      */}
+      <div
+        ref={viewportRef}
+        className="w-full overflow-hidden pb-20"
+        aria-label="Scroll to see all 10 mining methods"
+      >
+        {/* Rail — flex row of cards, wider than the viewport */}
+        <div
+          ref={railRef}
+          className="flex gap-4 will-change-transform md:gap-6"
+          style={{
+            paddingLeft: 'max(1rem, calc((100vw - 1700px) / 2 + 2rem))',
+          }}
         >
           {methods.map((method, index) => (
             <MethodCard key={method.name} method={method} index={index} />
           ))}
-        </motion.div>
+          {/* Trailing spacer — mirrors the left padding so the last card
+              ends with the same margin as the right edge of max-w-425 */}
+          <div
+            className="shrink-0"
+            style={{
+              width: 'max(1rem, calc((100vw - 1700px) / 2 + 2rem))',
+            }}
+            aria-hidden="true"
+          />
+        </div>
+      </div>
 
-        {/* Bottom rule */}
-        <div className="mt-16 flex items-center justify-between border-t border-text-primary/10 pt-6 font-mono text-[11px] tracking-widest text-text-primary/40 uppercase">
+      {/* ── Bottom rule (outside pin scope so it doesn't block) ─────────────── */}
+      <div className="mx-auto w-full max-w-425 px-4 md:px-8">
+        <div className="flex items-center justify-between border-t border-text-primary/10 py-6 font-mono text-[11px] tracking-widest text-text-primary/40 uppercase">
           <span>Nicholas 1981</span>
           <span>10 / 10</span>
         </div>

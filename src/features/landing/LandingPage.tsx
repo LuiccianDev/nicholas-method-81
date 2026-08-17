@@ -3,8 +3,6 @@ import Hero from './Hero';
 import MethodOverview from './sections/MethodOverview';
 import HowItWorks from './sections/HowItWorks';
 import MethodsGrid from './sections/MethodsGrid';
-import StatsSection from './sections/StatsSection';
-import CTASection from './sections/CTASection';
 import Footer from '@/components/layout/Footer';
 
 export default function LandingPage() {
@@ -15,7 +13,6 @@ export default function LandingPage() {
       <MethodOverview />
       <HowItWorks />
       <MethodsGrid />
-      <StatsSection />
       <Footer />
     </div>
   );

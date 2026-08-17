@@ -77,7 +77,7 @@ export default function MethodOverview() {
     <section
       aria-labelledby="method-overview-heading"
       data-section="method-overview"
-      className="overflow-hidden bg-white py-24"
+      className="overflow-hidden bg-white pt-10"
     >
       <div
         ref={containerRef}

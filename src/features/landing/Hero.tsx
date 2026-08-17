@@ -156,11 +156,11 @@ export default function HeroVisual() {
 
         ScrollTrigger.create({
           trigger: containerRef.current,
-          start: 'top top',
+          start: 'top 2%',
           end: HERO_PIN_DISTANCE,
           pin: true,
           pinSpacing: true,
-          markers: false,
+          markers: true,
         });
       });
 
@@ -175,6 +175,7 @@ export default function HeroVisual() {
         ref={containerRef}
         className="h-svh w-full px-5"
         data-purpose="hero-visual"
+
       >
         <div className="relative h-full overflow-hidden">
           <div
@@ -227,7 +228,7 @@ export default function HeroVisual() {
           <div className="absolute inset-0 overflow-hidden">
             <img
               ref={imageRef}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-[full] w-full object-cover"
               style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
               src="/Underground.jpeg"
             />
@@ -236,7 +237,7 @@ export default function HeroVisual() {
               pinTrigger={containerRef}
               onBeatChange={setActiveBeat}
             />
-            <div className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-white"></div>
+            <div className="absolute right-0 bottom-0 left-0 z-49 min-h-5 flex-col bg-black"></div>
           </div>
         </div>
       </div>
