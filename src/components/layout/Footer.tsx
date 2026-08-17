@@ -190,56 +190,50 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative  flex min-h-[58vh] flex-col justify-between "
+      className="relative flex min-h-[70vh]  flex-col justify-between"
     >
-      <div className="relative z-20  w-full  ">
-        <div className="relative overflow-hidden  bg-[url('/Underground.jpeg')] py-35 p-6 shadow-md ">
-          <div className="relative z-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-8">
-            <div className="lg:col-span-6">
-              <h3
-                ref={titleRef}
-                className="text-center font-boldonse text-xl tracking-tight text-pretty sm:text-2xl lg:text-3xl"
-              >
-                Evaluating deposit viability with numerical mechanics logic.
-              </h3>
-            </div>
+      <div className="relative z-20 mb-5 w-full px-5">
+        <div className="relative overflow-hidden bg-[url('/footer.jpeg')] bg-center px-6  pt-30 pb-5">
+          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center">
+            <h3
+              ref={titleRef}
+              className="font-boldonse text-xl tracking-tight text-pretty text-white sm:text-2xl lg:text-3xl"
+            >
+              Evaluating deposit viability with numerical mechanics logic.
+            </h3>
 
-            <div className="flex flex-col gap-5 lg:col-span-6">
-              <p
-                ref={descriptionRef}
-                className="text-center text-[11px] leading-relaxed tracking-wider text-pretty text-text-primary/80 uppercase sm:text-sm"
-              >
-                Assess geomechanical conditions, grade distributions, and
-                deposit geometry with David Nicholas' optimized selection
-                engine.
-              </p>
+            <p
+              ref={descriptionRef}
+              className="max-w-2xl text-[11px] leading-relaxed tracking-wider text-pretty text-white/90 uppercase sm:text-sm"
+            >
+              Assess geomechanical conditions, grade distributions, and deposit
+              geometry with David Nicholas' optimized selection engine.
+            </p>
 
-              <div
-                ref={detailsRef}
-                className="flex flex-wrap items-center justify-center gap-3 pt-1 text-[11px] font-bold sm:gap-4"
+            <div
+              ref={detailsRef}
+              className="flex flex-wrap items-center justify-center gap-3 pt-1 text-[12px] font-bold sm:gap-4"
+            >
+              <button
+                onClick={scrollToTop}
+                className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-primary/90 px-6 py-3.5 tracking-wide text-black uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] hover:bg-primary  active:scale-95"
               >
-                <button
-                  onClick={scrollToTop}
-
-                  className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-black px-6 py-3.5 tracking-widest text-white uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-tertiary hover:text-black active:scale-95"
-                >
-                  Get started
-                </button>
-                <a
-                  href="https://github.com/LuiccianDev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-2 rounded-xl border border-black/10 px-5 py-3.5 tracking-wider uppercase transition-all duration-300 hover:scale-[1.03] hover:bg-background/10 hover:text-black active:scale-95"
-                >
-                  <span>▶ Watch details guide</span>
-                </a>
-              </div>
+                Get started
+              </button>
+              <a
+                href="https://github.com/LuiccianDev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex cursor-pointer items-center gap-2 rounded-sm border border-white/30 bg-white/10 px-5 py-3.5 tracking-wider text-white uppercase backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:bg-white/20 active:scale-95"
+              >
+                <span>▶ Watch details guide</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
             <div className="mb-4 text-3xl tracking-tighter uppercase select-none">
@@ -342,17 +336,17 @@ export default function Footer() {
       >
         <h1
           ref={textRef}
-          className="mx-0 mt-15 text-center font-boldonse text-[clamp(50px,15vw,270px)] leading-none font-black tracking-tight text-black uppercase antialiased select-none"
+          className="mx-0 mt-25 text-center font-boldonse text-[clamp(50px,15vw,270px)] leading-none font-black tracking-tight text-black uppercase antialiased select-none"
         >
           LUICCIAN
         </h1>
       </div>
 
-      <div className="relative z-20 w-full px-6 py-8 text-[14px] sm:px-8 lg:px-12">
+      <div className="relative z-20 w-full px-6 pt-15 text-[14px] sm:px-8 lg:px-12">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <span className="tracking-wider">All systems operational</span>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="flex flex-wrap items-center gap-x-6">
             <span>
               © {new Date().getFullYear()} luiccian. All rights reserved.
             </span>
@@ -365,9 +359,9 @@ export default function Footer() {
                   id="back-to-top"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
+                  exit={{ opacity: 0, scale: 0.8 }}  
                   onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 tracking-wider uppercase transition-all duration-300 hover:bg-quaternary hover:text-white"
+                  className="ml-auto cursor-pointer rounded-sm bg-primary/90 backdrop-blur-3xl px-3 py-1 tracking-wider uppercase transition-all duration-300 hover:bg-primary "
                 >
                   ↑ TOP
                 </motion.button>

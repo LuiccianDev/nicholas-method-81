@@ -174,7 +174,7 @@ export default function HeroVisual() {
       <div
         ref={containerRef}
         className="h-svh w-full px-5"
-        data-purpose="hero-visual"
+        data-purpose="hero-visual "
       >
         <div className="relative h-full overflow-hidden">
           <div

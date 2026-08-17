@@ -58,7 +58,7 @@ export default function HowItWorks() {
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
       data-section="how-it-works"
-      className="overflow-hidden bg-white py-24"
+      className="overflow-hidden bg-white py-5 "
     >
       <div ref={sectionRef} className="mx-auto w-full max-w-425 px-4 md:px-8">
         {/* ── Header ─────────────────────────────────────────────────────── */}
@@ -89,13 +89,13 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* ── Desktop: asymmetric floating layout ────────────────────────── */}
-        <div className="relative mt-16 hidden min-h-[480px] md:block">
+        <div className="relative mt-16 hidden min-h-90 md:block">
           {/* Step 1 — left, lower */}
           <motion.div
             variants={fromLeft}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
-            className="absolute top-32 left-0 w-[30%]"
+            className="absolute top-40 left-0 w-[30%]"
           >
             <StepCard step={STEPS_DATA[0]} />
           </motion.div>
@@ -115,16 +115,12 @@ export default function HowItWorks() {
             variants={fromRight}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
-            className="absolute top-32 right-0 w-[30%]"
+            className="absolute top-50 right-0 w-[30%]"
           >
             <StepCard step={STEPS_DATA[2]} />
           </motion.div>
 
-          {/* Dashed connector */}
-          <div
-            aria-hidden="true"
-            className="absolute top-[4.5rem] right-[15%] left-[15%] border-t border-dashed border-black/10"
-          />
+
         </div>
 
         {/* ── Mobile: stacked list ─────────────────────────────────────────── */}
@@ -141,11 +137,6 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* Bottom rule */}
-        <div className="mt-16 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[11px] tracking-widest text-black/30 uppercase">
-          <span>Nicholas 1981</span>
-          <span>3 steps</span>
-        </div>
       </div>
     </section>
   );
@@ -158,7 +149,7 @@ function StepCard({ step }: { step: (typeof STEPS_DATA)[number] }) {
       {/* Ghost number */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -top-4 right-0 font-boldonse text-[6rem] leading-none font-black tracking-tighter text-black/[0.055] select-none"
+        className="pointer-events-none absolute -top-4 right-0 font-boldonse text-[6rem] leading-none font-black tracking-tighter text-black/5 select-none"
       >
         *{step.number}
       </span>

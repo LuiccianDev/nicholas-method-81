@@ -173,7 +173,7 @@ export default function MethodsGrid({
       ref={sectionRef}
       aria-labelledby="methods-grid-heading"
       data-section="methods-grid"
-      className="bg-tertiary"
+      className="bg-white"
     >
       {/* ── Headline block (inside pin, scrolls away naturally) ────────────── */}
       <div className="mx-auto w-full max-w-425 px-4 pt-24 pb-12 md:px-8">
@@ -192,7 +192,7 @@ export default function MethodsGrid({
             >
               10 Mining
               <br />
-              <span className="text-white">Methods</span>
+              <span className="text-primary">Methods</span>
             </h2>
             <p className="max-w-xs font-prompt text-[13px] leading-relaxed text-text-primary/55 md:text-right">
               Every method evaluated by the Nicholas&nbsp;1981 algorithm — from

@@ -84,11 +84,11 @@ export default function MethodOverview() {
         className="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6"
       >
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center justify-center gap-6 border-t border-black/10 pt-6 font-mono text-[11px] font-medium ">
           <span className="tracking-wide uppercase">
             Designed for systematic selection
           </span>
-          <span className="tracking-wide uppercase">NM-81</span>
+          <span className=" ml-auto tracking-wide uppercase">NM-81</span>
         </div>
 
         {/* Main layout — asymmetric grid */}

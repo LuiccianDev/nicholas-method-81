@@ -15,7 +15,7 @@ export default function LandingNav() {
   return (
     <>
       <motion.nav
-        className="fixed top-5 right-0 left-0 z-50 flex items-center px-10 py-6 text-[12px] not-first:justify-between"
+        className="fixed top-7 right-0 left-0 z-50 flex items-center px-10 pt-2 text-[12px] not-first:justify-between"
         data-purpose="main-navigation"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -31,26 +31,25 @@ export default function LandingNav() {
             <a href="/calculator">Paper</a>
           </motion.button>
         </div>
-        <div className="flex items-center justify-center rounded-sm bg-background pl-4">
-          <span className="pr-2 text-lg font-bold tracking-wide uppercase">
+        <div className="flex items-center justify-center rounded-sm bg-background  pl-4">
+          <span className="pr-2 text-[14px] font-bold tracking-wide uppercase">
             Luiccian
           </span>
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMenuOpen(true)}
-            className="rounded-sm bg-tertiary p-2"
+            className="rounded-sm bg-primary p-2"
             data-purpose="mobile-menu-trigger"
           >
             <Menu className="h-5 w-5" />
           </motion.button>
         </div>
         <div className="flex flex-1 items-center justify-end">
-          <motion.div
-            whileHover={{ opacity: 0.8 }}
-            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[15px] font-bold tracking-widest uppercase"
+          <div
+            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[10px] font-bold tracking-widest uppercase"
           >
             <a href="/calculator">NIcholas Method</a>
-          </motion.div>
+          </div>
         </div>
       </motion.nav>
 
