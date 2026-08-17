@@ -1,3 +1,4 @@
+// CounterDisplay.tsx
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
@@ -12,6 +13,17 @@ type FlipBoardProps = {
   decimals?: number;
   active?: boolean;
   delay?: number;
+  size?: 'default' | 'large';
+};
+
+const NUMBER_SIZE = {
+  default: 'text-6xl',
+  large: 'text-8xl md:text-9xl',
+};
+
+const SUFFIX_SIZE = {
+  default: 'text-lg',
+  large: 'text-2xl md:text-3xl',
 };
 
 export default function FlipBoard({
@@ -20,46 +32,70 @@ export default function FlipBoard({
   decimals = 0,
   active = true,
   delay = 0,
+  size = 'default',
 }: FlipBoardProps) {
-  const container = useRef<HTMLHeadingElement>(null);
-  const text = `${value.toFixed(decimals)}${suffix}`;
+  const numberRef = useRef<HTMLSpanElement>(null);
+  const suffixRef = useRef<HTMLSpanElement>(null);
+  const numberText = value.toFixed(decimals);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {
-      if (!container.current) return;
+      if (!numberRef.current) return;
       if (!active || prefersReducedMotion) return;
 
-      const split = SplitText.create(container.current, {
+      const split = SplitText.create(numberRef.current, {
         type: 'chars',
         charsClass: 'letter',
       });
 
-      const tween = gsap.from(split.chars, {
+      const tl = gsap.timeline({ delay });
+
+      tl.from(split.chars, {
         rotationX: 90,
         transformOrigin: '50% 100%',
         opacity: 0,
         stagger: { each: 0.045, from: 'start' },
         duration: 0.3,
-        delay,
         ease: 'power2.out',
       });
 
+      if (suffixRef.current) {
+        tl.from(
+          suffixRef.current,
+          { opacity: 0, y: 4, duration: 0.25, ease: 'power2.out' },
+          '-=0.15'
+        );
+      }
+
       return () => {
-        tween.kill();
+        tl.kill();
         split.revert();
       };
     },
     {
-      scope: container,
-      dependencies: [text, active, prefersReducedMotion],
+      scope: numberRef,
+      dependencies: [numberText, suffix, active, prefersReducedMotion],
       revertOnUpdate: true,
     }
   );
 
   return (
-    <h3 ref={container} className="text text-6xl font-bold">
-      {text}
+    <h3 className="flex items-baseline justify-center gap-2">
+      <span
+        ref={numberRef}
+        className={`font-bold tabular-nums ${NUMBER_SIZE[size]}`}
+      >
+        {numberText}
+      </span>
+      {suffix ? (
+        <span
+          ref={suffixRef}
+          className={`font-medium text-white/60 ${SUFFIX_SIZE[size]}`}
+        >
+          {suffix}
+        </span>
+      ) : null}
     </h3>
   );
 }

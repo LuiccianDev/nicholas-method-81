@@ -11,6 +11,7 @@ import {
 } from 'react';
 import NumberCard from './cards/NumberCard';
 import TextCard from './cards/TextCard';
+import FeaturedNumberCard from './cards/FeaturedNumberCard';
 import { HERO_PIN_DISTANCE } from '../gsapConfig';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -155,7 +156,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
     return (
       <div
         ref={sectionRef}
-        className="absolute inset-0 mx-auto w-full max-w-2xl"
+        className="absolute inset-0 mx-auto w-full max-w-3xl"
       >
         <div
           ref={group1Ref}
@@ -172,7 +173,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               suffix="params"
               decimals={0}
               status="Geometry · grade · geomechanics"
-              size="h-40 w-full max-w-sm"
+              size="h-50 w-full max-w-sm"
               active={activeGroup === 0}
               delay={0.9}
             />
@@ -182,7 +183,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               suffix="zones"
               decimals={0}
               status="Ore · hanging-wall · footwall"
-              size="h-40 w-full max-w-sm"
+              size="h-50 w-full max-w-sm"
               active={activeGroup === 0}
               delay={0.9}
             />
@@ -206,7 +207,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
             filter: 'blur(28px)',
           }}
         >
-          <NumberCard
+          <FeaturedNumberCard
             eyebrow="Ranked objectively"
             value={10}
             suffix="methods"
@@ -215,6 +216,14 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
             size="h-100 w-full"
             active={activeGroup === 1}
             delay={0.45}
+            tags={[
+              'Open pit',
+              'Block caving',
+              'Cut & fill',
+              'Sublevel stoping',
+              'Room & pillar',
+              '+5 more',
+            ]}
           />
         </div>
 
