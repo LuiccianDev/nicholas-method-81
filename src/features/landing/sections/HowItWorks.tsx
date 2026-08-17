@@ -58,7 +58,7 @@ export default function HowItWorks() {
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
       data-section="how-it-works"
-      className="overflow-hidden bg-white py-5 "
+      className="overflow-hidden bg-white py-5"
     >
       <div ref={sectionRef} className="mx-auto w-full max-w-425 px-4 md:px-8">
         {/* ── Header ─────────────────────────────────────────────────────── */}
@@ -119,8 +119,6 @@ export default function HowItWorks() {
           >
             <StepCard step={STEPS_DATA[2]} />
           </motion.div>
-
-
         </div>
 
         {/* ── Mobile: stacked list ─────────────────────────────────────────── */}
@@ -136,7 +134,6 @@ export default function HowItWorks() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
