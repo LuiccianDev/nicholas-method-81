@@ -39,6 +39,28 @@ No existen scripts de `lint` ni `test`. No hay configuración de ESLint.
 - **`.prettierignore` ignora todo excepto `src/`**: `pnpm format` solo toca archivos dentro de `src/`. No intentes formatear fuera de ahí.
 - `prettier-plugin-tailwindcss` usa `tailwindStylesheet` apuntando a `src/styles/index.css` — no muevas/renombres ese archivo sin ajustar `.prettierrc`.
 
+## Tipografía — uso correcto de fuentes
+
+Tokens definidos en `src/styles/index.css` (`@theme`). Usa SIEMPRE la utility de Tailwind correspondiente; no apliques `font-family` manual.
+
+| Token | Utility | Cuándo usarla |
+| --- | --- | --- |
+| `--font-mono` (JetBrains Mono) | `font-mono` | Datos y números: inputs numéricos, resultados/scores, etiquetas técnicas (uppercase + tracking), matrices, badges, códigos de sección (NM-0x), placeholders de imagen. |
+| `--font-boldonse` (Boldonse) | `font-boldonse` | Hero, headlines (h1/h2/h3 de display), texto decorativo grande, marca/logo, títulos de tarjetas. |
+| `--font-prompt` (Prompt) | `font-prompt` (heredado en `body`) | UI base: párrafos, labels, botones, navegación. Es el default — no hace falta añadirla. |
+
+### Prohibidas (no usar)
+
+- `font-sans` (Inter), `font-monserrate` (Montserrat) y `font-roboto` (Roboto) están marcadas como "Typography not Use" en `index.css:11-13`. No usarlas en código nuevo ni mantenerlas en código existente.
+
+### Reglas rápidas
+
+- Número / etiqueta técnica → `font-mono`.
+- Titular grande / impacto → `font-boldonse`.
+- Todo lo demás (texto funcional) → `font-prompt` (default, sin clase).
+- Eyebrows/labels en mayúsculas: combina `font-mono` con `tracking-wide`/`tracking-widest` (tokens en `index.css:36-37`).
+- No mezclar: ni `font-boldonse` en párrafos ni `font-mono` en headlines.
+
 ## Estructura
 
 - `src/pages/` — rutas Astro (`index.astro`, `App.astro`) y endpoints API (`api/chat.ts`).
