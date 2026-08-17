@@ -31,7 +31,7 @@ export default function LandingNav() {
             <a href="/calculator">Paper</a>
           </motion.button>
         </div>
-        <div className="flex items-center justify-center rounded-sm bg-background  pl-4">
+        <div className="flex items-center justify-center rounded-sm bg-background pl-4">
           <span className="pr-2 text-[14px] font-bold tracking-wide uppercase">
             Luiccian
           </span>
@@ -45,9 +45,7 @@ export default function LandingNav() {
           </motion.button>
         </div>
         <div className="flex flex-1 items-center justify-end">
-          <div
-            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[10px] font-bold tracking-widest uppercase"
-          >
+          <div className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[10px] font-bold tracking-widest uppercase">
             <a href="/calculator">NIcholas Method</a>
           </div>
         </div>

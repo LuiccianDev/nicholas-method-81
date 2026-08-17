@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -25,7 +26,14 @@ export default function Footer() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    gsap.to(window, {
+      scrollTo: 0,
+      duration: reduceMotion ? 0 : 1,
+      ease: 'power2.inOut',
+    });
   };
 
   useGSAP(
@@ -190,10 +198,10 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative flex min-h-[70vh]  flex-col justify-between"
+      className="relative flex min-h-[70vh] flex-col justify-between"
     >
       <div className="relative z-20 mb-5 w-full px-5">
-        <div className="relative overflow-hidden bg-[url('/footer.jpeg')] bg-center px-6  pt-30 pb-5">
+        <div className="relative overflow-hidden bg-[url('/footer.jpeg')] bg-center px-6 pt-30 pb-5">
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center">
             <h3
               ref={titleRef}
@@ -216,7 +224,7 @@ export default function Footer() {
             >
               <button
                 onClick={scrollToTop}
-                className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-primary/90 px-6 py-3.5 tracking-wide text-black uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] hover:bg-primary  active:scale-95"
+                className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-primary/90 px-6 py-3.5 tracking-wide text-black uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] hover:bg-primary active:scale-95"
               >
                 Get started
               </button>
@@ -359,9 +367,9 @@ export default function Footer() {
                   id="back-to-top"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}  
+                  exit={{ opacity: 0, scale: 0.8 }}
                   onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-primary/90 backdrop-blur-3xl px-3 py-1 tracking-wider uppercase transition-all duration-300 hover:bg-primary "
+                  className="ml-auto cursor-pointer rounded-sm bg-primary/90 px-3 py-1 tracking-wider uppercase backdrop-blur-3xl transition-all duration-300 hover:bg-primary"
                 >
                   ↑ TOP
                 </motion.button>
