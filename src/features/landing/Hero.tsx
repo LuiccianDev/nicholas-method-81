@@ -236,9 +236,6 @@ export default function HeroVisual() {
               pinTrigger={containerRef}
               onBeatChange={setActiveBeat}
             />
-
-            {/* Bottom fade — softens the hero into the page, no hard edge */}
-            <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 h-56 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer';
 
 export default function LandingPage() {
   return (
-    <div className="pt-20 pb-12">
+    <div className="pt-20">
       <LandingNav />
       <Hero />
       <MethodOverview />
