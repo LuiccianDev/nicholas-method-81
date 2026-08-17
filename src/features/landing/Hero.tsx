@@ -160,7 +160,7 @@ export default function HeroVisual() {
           end: HERO_PIN_DISTANCE,
           pin: true,
           pinSpacing: true,
-          markers: true,
+          markers: false,
         });
       });
 

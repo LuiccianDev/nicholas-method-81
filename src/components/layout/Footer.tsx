@@ -190,10 +190,10 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative mt-8 flex min-h-[58vh] flex-col justify-between pt-16"
+      className="relative  flex min-h-[58vh] flex-col justify-between "
     >
-      <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-tertiary p-6 shadow-md sm:p-8 md:p-10">
+      <div className="relative z-20  w-full  ">
+        <div className="relative overflow-hidden  bg-[url('/Underground.jpeg')] py-35 p-6 shadow-md ">
           <div className="relative z-10 grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-8">
             <div className="lg:col-span-6">
               <h3

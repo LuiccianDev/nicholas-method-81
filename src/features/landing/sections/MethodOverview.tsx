@@ -127,13 +127,13 @@ export default function MethodOverview() {
           <div className="relative z-10 md:col-span-6">
             <div
               ref={imageRef}
-              className="relative ml-auto w-full overflow-hidden rounded-2xl opacity-0 "
+              className="relative ml-auto w-full overflow-hidden rounded-2xl opacity-0"
               style={{ aspectRatio: '16/9' }}
             >
               <img
                 src="/Underground_Portada.jpeg"
                 alt="Nicholas Method dashboard overview"
-                className="h-full w-full "
+                className="h-full w-full"
               />
               {/* Subtle overlay gradient */}
               <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />

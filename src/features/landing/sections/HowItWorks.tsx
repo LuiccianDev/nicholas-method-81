@@ -1,106 +1,181 @@
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import {
-  DISTANCES,
-  DURATIONS,
-  EASINGS,
-  SCROLL_TRIGGER_DEFAULTS,
-} from '../gsapConfig';
 import { STEPS_DATA } from './landingContent';
 
-gsap.registerPlugin(ScrollTrigger);
+// ─── Animation variants ───────────────────────────────────────────────────────
+const fromLeft = {
+  hidden: { opacity: 0, x: -48 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+const fromTop = {
+  hidden: { opacity: 0, y: -48 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      delay: 0.1,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+const fromRight = {
+  hidden: { opacity: 0, x: 48 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      delay: 0.2,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+const fromBottom = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const CARD_VARIANTS = [fromLeft, fromTop, fromRight];
 
 export default function HowItWorks() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const stepsRef = useRef<HTMLDivElement[]>([]);
-
-  const setStepRef = (index: number) => (el: HTMLDivElement | null) => {
-    if (el) stepsRef.current[index] = el;
-  };
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.fromTo(
-          stepsRef.current,
-          { opacity: 0, y: DISTANCES.fadeUp },
-          {
-            opacity: 1,
-            y: 0,
-            duration: DURATIONS.section,
-            ease: EASINGS.smooth,
-            stagger: DURATIONS.cardStagger,
-            scrollTrigger: {
-              trigger: containerRef.current,
-              ...SCROLL_TRIGGER_DEFAULTS,
-            },
-          }
-        );
-      });
-
-      return () => mm.revert();
-    },
-    { scope: containerRef }
-  );
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, {
+    once: true,
+    margin: '0px 0px -100px 0px',
+  });
 
   return (
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
       data-section="how-it-works"
-      className="overflow-hidden bg-white py-10"
+      className="overflow-hidden bg-white py-24"
     >
-      <div
-        ref={containerRef}
-        className="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6"
-      >
-        {/* Top rule + label */}
-        <div className="mb-12 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
-          <span className="tracking-wide uppercase">Process</span>
-          <span className="tracking-wide uppercase">NM-02</span>
+      <div ref={sectionRef} className="mx-auto w-full max-w-425 px-4 md:px-8">
+        {/* ── Header ─────────────────────────────────────────────────────── */}
+        <motion.div
+          variants={fromBottom}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
+          <div className="mb-16 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[11px] font-medium tracking-widest uppercase">
+            <span>Process</span>
+            <span className="ml-auto text-black/40">NM-02</span>
+          </div>
+
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <h2
+              id="how-it-works-heading"
+              className="font-boldonse text-[clamp(2.8rem,7vw,5.5rem)] leading-[0.92] tracking-tight text-text-primary"
+            >
+              How It
+              <br />
+              <span className="text-primary">Works</span>
+            </h2>
+            <p className="max-w-xs font-prompt text-[13px] leading-relaxed text-black/50 md:text-right">
+              Three steps from raw deposit data to a ranked, AI-validated mining
+              method selection.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ── Desktop: asymmetric floating layout ────────────────────────── */}
+        <div className="relative mt-16 hidden min-h-[480px] md:block">
+          {/* Step 1 — left, lower */}
+          <motion.div
+            variants={fromLeft}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            className="absolute top-32 left-0 w-[30%]"
+          >
+            <StepCard step={STEPS_DATA[0]} />
+          </motion.div>
+
+          {/* Step 2 — center, higher */}
+          <motion.div
+            variants={fromTop}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            className="absolute top-0 left-1/2 w-[30%] -translate-x-1/2"
+          >
+            <StepCard step={STEPS_DATA[1]} />
+          </motion.div>
+
+          {/* Step 3 — right, lower */}
+          <motion.div
+            variants={fromRight}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+            className="absolute top-32 right-0 w-[30%]"
+          >
+            <StepCard step={STEPS_DATA[2]} />
+          </motion.div>
+
+          {/* Dashed connector */}
+          <div
+            aria-hidden="true"
+            className="absolute top-[4.5rem] right-[15%] left-[15%] border-t border-dashed border-black/10"
+          />
         </div>
 
-        {/* Ghost text */}
-        <div className="relative">
-          <h2
-            id="how-it-works-heading"
-            className="relative z-10 mb-16 text-center font-boldonse text-[clamp(2.5rem,6vw,5rem)] leading-[1.2] tracking-tight"
-          >
-            How It
-            <br />
-            Works
-          </h2>
+        {/* ── Mobile: stacked list ─────────────────────────────────────────── */}
+        <div className="mt-12 flex flex-col gap-10 md:hidden">
+          {STEPS_DATA.map((step, i) => (
+            <motion.div
+              key={step.number}
+              variants={CARD_VARIANTS[i]}
+              initial="hidden"
+              animate={inView ? 'visible' : 'hidden'}
+            >
+              <StepCard step={step} />
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Step cards grid */}
-          <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {STEPS_DATA.map((step, index) => (
-              <div
-                key={step.number}
-                ref={setStepRef(index)}
-                data-step={step.number}
-                className="flex flex-col"
-              >
-                {/* Step number */}
-                <span className="font-mono text-8xl font-black tracking-tight">
-                  {String(step.number).padStart(2, '0')}
-                </span>
-
-                <hr className="my-4 border-black/10" />
-
-                <h3 className="font-boldonse text-xl leading-snug font-black tracking-tight">
-                  {step.headline}
-                </h3>
-
-                <p className="mt-3 text-sm leading-relaxed">{step.body}</p>
-              </div>
-            ))}
-          </div>
+        {/* Bottom rule */}
+        <div className="mt-16 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[11px] tracking-widest text-black/30 uppercase">
+          <span>Nicholas 1981</span>
+          <span>3 steps</span>
         </div>
       </div>
     </section>
+  );
+}
+
+// ─── Step card ────────────────────────────────────────────────────────────────
+function StepCard({ step }: { step: (typeof STEPS_DATA)[number] }) {
+  return (
+    <div className="relative flex flex-col gap-3 pt-6">
+      {/* Ghost number */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-4 right-0 font-boldonse text-[6rem] leading-none font-black tracking-tighter text-black/[0.055] select-none"
+      >
+        *{step.number}
+      </span>
+
+      <div className="w-8 border-t-2 border-black/30" />
+
+      <span className="font-mono text-[10px] tracking-widest text-black/35 uppercase">
+        Step {String(step.number).padStart(2, '0')}
+      </span>
+
+      <h3 className="font-boldonse text-[1.05rem] leading-snug tracking-tight text-text-primary">
+        {step.headline}
+      </h3>
+
+      <p className="font-prompt text-[12px] leading-relaxed text-black/55">
+        {step.body}
+      </p>
+    </div>
   );
 }
