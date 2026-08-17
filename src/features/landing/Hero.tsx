@@ -208,10 +208,10 @@ export default function HeroVisual() {
 
           <div
             ref={captionBottomWrapperRef}
-            className="pointer-events-none absolute inset-x-0 bottom-20 z-10 flex flex-col items-center justify-center px-4 text-center text-5xl  text-white select-none"
+            className="pointer-events-none absolute inset-x-0 bottom-20 z-10 flex flex-col items-center justify-center px-4 text-center text-5xl text-white select-none"
             style={{ opacity: 0 }}
           >
-            <h2 className="flex flex-col items-center justify-center  font-boldonse tracking-tight">
+            <h2 className="flex flex-col items-center justify-center font-boldonse tracking-tight">
               <span ref={captionBottomPrimaryRef}>
                 {HERO_CAPTIONS[0].bottomPrimary}
               </span>

@@ -32,7 +32,7 @@ export default function LandingNav() {
           </motion.button>
         </div>
         <div className="flex items-center justify-center rounded-sm bg-background pl-4">
-          <span className="pr-2  text-lg font-bold tracking-wide uppercase">
+          <span className="pr-2 text-lg font-bold tracking-wide uppercase">
             Luiccian
           </span>
           <motion.button

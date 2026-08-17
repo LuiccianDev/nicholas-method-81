@@ -89,10 +89,7 @@ export default function FlipBoard({
         {numberText}
       </span>
       {suffix ? (
-        <span
-          ref={suffixRef}
-          className={`font-medium  ${SUFFIX_SIZE[size]}`}
-        >
+        <span ref={suffixRef} className={`font-medium ${SUFFIX_SIZE[size]}`}>
           {suffix}
         </span>
       ) : null}

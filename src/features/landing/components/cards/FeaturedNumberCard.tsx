@@ -66,7 +66,7 @@ export default function FeaturedNumberCard({
       className={`relative flex items-center justify-between gap-8 overflow-hidden rounded-2xl border border-white/20 bg-black/10 p-8 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] md:p-10 ${size}`}
     >
       <div className="flex h-full flex-col justify-between gap-6">
-        <p className="font-mono text-lg font-medium tracking-wide  uppercase md:text-xl">
+        <p className="font-mono text-lg font-medium tracking-wide uppercase md:text-xl">
           {eyebrow}
         </p>
         <CounterDisplay
@@ -77,9 +77,7 @@ export default function FeaturedNumberCard({
           delay={delay}
           size="large"
         />
-        <p className="text-lg font-medium tracking-wide ">
-          {status}
-        </p>
+        <p className="text-lg font-medium tracking-wide">{status}</p>
       </div>
 
       {tags.length > 0 && (
@@ -91,7 +89,7 @@ export default function FeaturedNumberCard({
             <span
               key={tag}
               data-tag
-              className="rounded-full border border-white/15 bg-black/10 px-3 py-1.5 font-mono text-xs font-medium tracking-wide "
+              className="rounded-full border border-white/15 bg-black/10 px-3 py-1.5 font-mono text-xs font-medium tracking-wide"
             >
               {tag}
             </span>
