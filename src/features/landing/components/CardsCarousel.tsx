@@ -190,7 +190,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
           </div>
           <TextCard
             eyebrow="Describe the deposit"
-            statement="Your geology in — ranked results out"
+            statement="Your geology in ranked results out"
             status="A short form, not a full study"
             size="h-50 w-full "
             active={activeGroup === 0}

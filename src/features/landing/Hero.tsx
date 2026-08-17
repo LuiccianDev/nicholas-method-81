@@ -185,7 +185,7 @@ export default function HeroVisual() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mx-auto my-5 max-w-90 text-sm leading-relaxed font-medium tracking-tight text-balance uppercase"
+              className="mx-auto my-5 max-w-90 text-sm leading-relaxed   text-balance uppercase"
             >
               Rank all ten mining methods from the deposit's geometry, grade,
               and geomechanics in seconds.
@@ -193,7 +193,7 @@ export default function HeroVisual() {
             <BlurText text="The right method, ranked in seconds" />
           </div>
           <motion.div
-            className="absolute inset-0 text-[25px] font-bold text-white"
+            className="absolute inset-0 text-[25px] font-bold text-white "
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2, delay: 0.55 }}
@@ -212,10 +212,10 @@ export default function HeroVisual() {
             style={{ opacity: 0 }}
           >
             <h2 className="flex flex-col items-center justify-center leading-none tracking-tight">
-              <span ref={captionBottomPrimaryRef}>
+              <span ref={captionBottomPrimaryRef} >
                 {HERO_CAPTIONS[0].bottomPrimary}
               </span>
-              <span ref={captionBottomSecondaryRef} className="mt-1">
+              <span ref={captionBottomSecondaryRef} className=" font-boldonse tracking-tight italic -mt-1">
                 {HERO_CAPTIONS[0].bottomSecondary}
               </span>
             </h2>

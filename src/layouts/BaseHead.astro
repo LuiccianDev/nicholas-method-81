@@ -2,13 +2,11 @@
 interface Props {
   title?: string;
   description?: string;
-  displayFont?: boolean;
 }
 
 const {
   title = 'Nicholas Method 81 | Mining Method Selection',
   description = 'Evaluate and recommend optimal mining methods using a numerical approach based on deposit geometry and geomechanical conditions.',
-  displayFont = false,
 } = Astro.props;
 ---
 
@@ -35,15 +33,3 @@ const {
 <meta property="og:image" content="/banner.png" />
 <meta property="og:site_name" content="Nicholas Method 81" />
 
-{
-  displayFont && (
-    <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
-        rel="stylesheet"
-      />
-    </>
-  )
-}
