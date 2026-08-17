@@ -81,7 +81,7 @@ export default function MethodOverview() {
     >
       <div ref={containerRef} className="mx-auto px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
           <span className="tracking-wide uppercase">
             Designed for systematic selection
           </span>
@@ -106,14 +106,14 @@ export default function MethodOverview() {
               Mining
             </h2>
 
-            <div ref={metaRef} className="mt-16 font-monserrate">
+            <div ref={metaRef} className="mt-16">
               <p className="max-w-sm text-sm leading-relaxed">
                 Published in 1981, the Nicholas methodology evaluates ten mining
                 methods using geometric and geomechanical inputs — delivering a
                 ranked, quantitative recommendation in seconds.
               </p>
               <div className="mt-6 flex items-center gap-3">
-                <span className="text-[15px] font-bold tracking-[0.15em] uppercase italic">
+                <span className="font-mono text-[15px] font-bold tracking-[0.15em] uppercase italic">
                   Method Selection
                 </span>
               </div>
@@ -139,7 +139,7 @@ export default function MethodOverview() {
         </div>
 
         {/* Bottom — counter row */}
-        <div className="mt-16 flex items-center gap-12 border-t border-black/20 pt-8 font-sans">
+        <div className="mt-16 flex items-center gap-12 border-t border-black/20 pt-8 font-mono">
           <div>
             <p className="text-3xl font-black">10</p>
             <p className="text-[11px] tracking-[0.15em] uppercase">Methods</p>

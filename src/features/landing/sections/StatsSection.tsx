@@ -32,7 +32,7 @@ export default function StatsSection() {
     >
       <div ref={containerRef} className="px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
           <span className="tracking-wide uppercase">By the numbers</span>
           <span className="tracking-wide uppercase">NM-04</span>
         </div>
@@ -56,7 +56,7 @@ export default function StatsSection() {
                     suffix={stat.suffix}
                     active={active}
                   />
-                  <p className="mt-1 font-sans text-[13px] tracking-wide text-text-primary/40 uppercase">
+                  <p className="mt-1 font-mono text-[13px] tracking-wide text-text-primary/40 uppercase">
                     {stat.label}
                   </p>
                 </div>

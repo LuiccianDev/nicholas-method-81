@@ -49,7 +49,7 @@ export default function BlurText({ text }: { text: string }) {
   return (
     <h1
       ref={container}
-      className="px-2 text-7xl leading-tight font-extrabold tracking-tighter text-black"
+      className="px-2 font-boldonse text-6xl  font-extrabold tracking-tight text-black"
       style={{ opacity: 0 }}
     >
       {text}

@@ -32,7 +32,7 @@ export default function LandingNav() {
           </motion.button>
         </div>
         <div className="flex items-center justify-center rounded-sm bg-background pl-4">
-          <span className="pr-2 font-monserrate text-lg font-bold tracking-wide uppercase">
+          <span className="pr-2  text-lg font-bold tracking-wide uppercase">
             Luiccian
           </span>
           <motion.button
@@ -47,7 +47,7 @@ export default function LandingNav() {
         <div className="flex flex-1 items-center justify-end">
           <motion.div
             whileHover={{ opacity: 0.8 }}
-            className="cursor-pointer rounded-sm bg-background px-4 py-2 font-bold tracking-widest uppercase"
+            className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[15px] font-bold tracking-widest uppercase"
           >
             <a href="/calculator">NIcholas Method</a>
           </motion.div>

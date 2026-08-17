@@ -66,10 +66,10 @@ export default function TextCard({
     <div
       className={`flex flex-col justify-between gap-3 rounded-xl border border-black/20 bg-black/10 p-5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] md:p-6 ${size}`}
     >
-      <p className="text-center text-xl font-medium">{eyebrow}</p>
+      <p className="text-center font-mono text-xl font-medium">{eyebrow}</p>
       <p
         ref={statementRef}
-        className="text-center text-3xl leading-tight font-bold"
+        className="text-center font-boldonse text-3xl leading-tight font-bold"
       >
         {statement}
       </p>

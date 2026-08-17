@@ -58,7 +58,7 @@ export default function MethodsGrid({
     >
       <div ref={containerRef} className="px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
           <span className="tracking-wide uppercase">Methods evaluated</span>
           <span className="tracking-wide uppercase">NM-03</span>
         </div>
@@ -68,7 +68,7 @@ export default function MethodsGrid({
           <div className="relative z-10">
             <h2
               id="methods-grid-heading"
-              className="text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight"
+              className="font-boldonse text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight"
             >
               10 Mining
               <br />
@@ -88,12 +88,12 @@ export default function MethodsGrid({
               ref={(el) => {
                 if (el) cardsRef.current[index] = el;
               }}
-              className="flex flex-col gap-1 bg-background p-5 font-monserrate opacity-0"
+              className="flex flex-col gap-1 bg-background p-5 opacity-0"
             >
-              <span className="text-[0.65rem] font-medium tracking-[0.15em] text-black/30 uppercase">
+              <span className="font-mono text-[0.65rem] font-medium tracking-[0.15em] text-black/30 uppercase">
                 {String(index + 1).padStart(2, '0')}
               </span>
-              <span className="text-[18px] font-black tracking-tight">
+              <span className="font-boldonse text-[18px] font-black tracking-tight">
                 {method.name}
               </span>
               <span className="text-[13px] leading-relaxed text-text-primary/60">

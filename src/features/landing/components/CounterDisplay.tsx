@@ -84,14 +84,14 @@ export default function FlipBoard({
     <h3 className="flex items-baseline justify-center gap-2">
       <span
         ref={numberRef}
-        className={`font-bold tabular-nums ${NUMBER_SIZE[size]}`}
+        className={`font-mono font-bold tabular-nums ${NUMBER_SIZE[size]}`}
       >
         {numberText}
       </span>
       {suffix ? (
         <span
           ref={suffixRef}
-          className={`font-medium text-white/60 ${SUFFIX_SIZE[size]}`}
+          className={`font-medium  ${SUFFIX_SIZE[size]}`}
         >
           {suffix}
         </span>

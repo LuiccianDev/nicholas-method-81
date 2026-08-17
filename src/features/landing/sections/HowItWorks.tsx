@@ -56,7 +56,7 @@ export default function HowItWorks() {
     >
       <div ref={containerRef} className="px-10">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-sans text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
           <span className="tracking-wide uppercase">Process</span>
           <span className="tracking-wide uppercase">NM-02</span>
         </div>
@@ -79,16 +79,16 @@ export default function HowItWorks() {
                 key={step.number}
                 ref={setStepRef(index)}
                 data-step={step.number}
-                className="flex flex-col font-sans"
+                className="flex flex-col"
               >
                 {/* Step number */}
-                <span className="text-8xl font-black tracking-tight">
+                <span className="font-mono text-8xl font-black tracking-tight">
                   {String(step.number).padStart(2, '0')}
                 </span>
 
                 <hr className="my-4 border-black/10" />
 
-                <h3 className="text-xl leading-snug font-black tracking-tight">
+                <h3 className="font-boldonse text-xl leading-snug font-black tracking-tight">
                   {step.headline}
                 </h3>
 

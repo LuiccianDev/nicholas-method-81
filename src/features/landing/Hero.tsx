@@ -179,13 +179,13 @@ export default function HeroVisual() {
         <div className="relative h-full overflow-hidden">
           <div
             ref={taglineRef}
-            className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-12 text-center"
+            className="absolute inset-x-0 top-0 z-10 flex flex-col items-center justify-center px-6 pt-10 text-center"
           >
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mx-auto my-5 max-w-90 text-sm leading-relaxed   text-balance uppercase"
+              className="mx-auto mb-10 max-w-90 text-sm leading-relaxed text-balance uppercase"
             >
               Rank all ten mining methods from the deposit's geometry, grade,
               and geomechanics in seconds.
@@ -193,7 +193,7 @@ export default function HeroVisual() {
             <BlurText text="The right method, ranked in seconds" />
           </div>
           <motion.div
-            className="absolute inset-0 text-[25px] font-bold text-white "
+            className="absolute inset-0 text-[25px] font-bold text-white"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2, delay: 0.55 }}
@@ -208,14 +208,17 @@ export default function HeroVisual() {
 
           <div
             ref={captionBottomWrapperRef}
-            className="pointer-events-none absolute inset-x-0 bottom-20 z-10 flex flex-col items-center justify-center px-4 text-center text-6xl text-white select-none"
+            className="pointer-events-none absolute inset-x-0 bottom-20 z-10 flex flex-col items-center justify-center px-4 text-center text-5xl  text-white select-none"
             style={{ opacity: 0 }}
           >
-            <h2 className="flex flex-col items-center justify-center leading-none tracking-tight">
-              <span ref={captionBottomPrimaryRef} >
+            <h2 className="flex flex-col items-center justify-center  font-boldonse tracking-tight">
+              <span ref={captionBottomPrimaryRef}>
                 {HERO_CAPTIONS[0].bottomPrimary}
               </span>
-              <span ref={captionBottomSecondaryRef} className=" font-boldonse tracking-tight italic -mt-1">
+              <span
+                ref={captionBottomSecondaryRef}
+                className="mt-5 font-boldonse tracking-tight italic shadow-xl"
+              >
                 {HERO_CAPTIONS[0].bottomSecondary}
               </span>
             </h2>

@@ -207,7 +207,7 @@ export default function Footer() {
             <div className="flex flex-col gap-5 lg:col-span-6">
               <p
                 ref={descriptionRef}
-                className="text-center font-monserrate text-[11px] leading-relaxed tracking-wider text-pretty text-text-primary/80 uppercase sm:text-sm"
+                className="text-center text-[11px] leading-relaxed tracking-wider text-pretty text-text-primary/80 uppercase sm:text-sm"
               >
                 Assess geomechanical conditions, grade distributions, and
                 deposit geometry with David Nicholas' optimized selection
@@ -242,10 +242,10 @@ export default function Footer() {
       <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
-            <div className="mb-4 font-sans text-3xl font-black tracking-tighter uppercase select-none">
+            <div className="mb-4 font-boldonse text-3xl font-black tracking-tighter uppercase select-none">
               luiccian
             </div>
-            <p className="max-w-sm font-sans text-[12px] leading-relaxed">
+            <p className="max-w-sm text-[12px] leading-relaxed">
               There is no risk-free extraction, only optimized selection.
               Nicholas numerical matrix assesses core geometries and rock
               conditions to refine mining pathways.
@@ -263,19 +263,19 @@ export default function Footer() {
               <div className="flex flex-col space-y-2">
                 <button
                   onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                  className="footer-link w-fit cursor-pointer text-left text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   About Selector
                 </button>
                 <button
                   onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                  className="footer-link w-fit cursor-pointer text-left text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Optimization Logic
                 </button>
                 <button
                   onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                  className="footer-link w-fit cursor-pointer text-left text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Scoring Matrix
                 </button>
@@ -291,7 +291,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                  className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Core Algorithm
                 </a>
@@ -299,7 +299,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                  className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Technical Docs
                 </a>
@@ -307,7 +307,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                  className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Estimation Guide
                 </a>
@@ -325,7 +325,7 @@ export default function Footer() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="footer-link w-fit font-sans text-[13px] transition-all duration-300 hover:translate-x-1"
+                    className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                   >
                     {link.name}
                   </a>
@@ -349,7 +349,7 @@ export default function Footer() {
       </div>
 
       <div className="relative z-20 w-full px-6 py-8 text-[14px] sm:px-8 lg:px-12">
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 font-roboto md:flex-row md:items-center md:justify-between">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <span className="tracking-wider">All systems operational</span>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
