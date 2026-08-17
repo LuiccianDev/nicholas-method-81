@@ -212,7 +212,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
             suffix="methods"
             decimals={0}
             status="Nicholas 1981 methodology"
-            size="h-56 w-full"
+            size="h-100 w-full"
             active={activeGroup === 1}
             delay={0.45}
           />
@@ -232,7 +232,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               eyebrow="Shortlist"
               statement="Keep the top picks"
               status="Highest-ranked methods"
-              size="h-56 w-full "
+              size="h-80 w-full "
               active={activeGroup === 2}
               delay={0.45}
             />
@@ -242,7 +242,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               suffix="winner"
               decimals={0}
               status="Refine by cost with the AI"
-              size="h-56 w-full "
+              size="h-80 w-full "
               active={activeGroup === 2}
               delay={0.45}
             />

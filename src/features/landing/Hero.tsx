@@ -198,10 +198,10 @@ export default function HeroVisual() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2, delay: 0.55 }}
           >
-            <div className="absolute top-1/2 left-6 z-10 max-w-80 -translate-y-1/2">
+            <div className="absolute top-1/2 left-10 z-10 max-w-80 -translate-y-1/2">
               <p ref={captionLeftRef}>{HERO_CAPTIONS[0].left}</p>
             </div>
-            <div className="absolute top-1/2 right-6 z-10 max-w-80 -translate-y-1/2 text-right">
+            <div className="absolute top-1/2 right-10 z-10 max-w-80 -translate-y-1/2 text-right">
               <p ref={captionRightRef}>{HERO_CAPTIONS[0].right}</p>
             </div>
           </motion.div>
