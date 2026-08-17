@@ -10,9 +10,9 @@ export default function CTASection() {
       data-section="cta-section"
       className="overflow-hidden bg-white py-24"
     >
-      <div className="px-10">
+      <div className="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6">
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium tracking-wide italic">
+        <div className="mb-12 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[20px] font-medium tracking-wide italic">
           <span className="uppercase">Get started</span>
           <span className="uppercase">NM-05</span>
         </div>
@@ -31,12 +31,12 @@ export default function CTASection() {
           >
             <h2
               id="cta-section-heading"
-              className="mb-12 font-boldonse text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight"
+              className="mb-12 text-center font-boldonse text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] font-black tracking-tight"
             >
               {CTA_HEADLINE}
             </h2>
 
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center">
               {/* Primary CTA */}
               <a
                 href="/calculator"

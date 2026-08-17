@@ -30,9 +30,12 @@ export default function StatsSection() {
       data-section="stats-section"
       className="overflow-hidden bg-background py-24"
     >
-      <div ref={containerRef} className="px-10">
+      <div
+        ref={containerRef}
+        className="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6"
+      >
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
           <span className="tracking-wide uppercase">By the numbers</span>
           <span className="tracking-wide uppercase">NM-04</span>
         </div>

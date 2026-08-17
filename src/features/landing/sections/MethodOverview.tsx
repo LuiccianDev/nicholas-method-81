@@ -79,9 +79,12 @@ export default function MethodOverview() {
       data-section="method-overview"
       className="overflow-hidden bg-white py-24"
     >
-      <div ref={containerRef} className="mx-auto px-10">
+      <div
+        ref={containerRef}
+        className="mx-auto w-full max-w-425 px-4 py-4 md:px-8 md:py-6"
+      >
         {/* Top rule + label */}
-        <div className="mb-12 flex items-center justify-between border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
+        <div className="mb-12 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[20px] font-medium italic">
           <span className="tracking-wide uppercase">
             Designed for systematic selection
           </span>
@@ -95,7 +98,7 @@ export default function MethodOverview() {
             <h2
               id="method-overview-heading"
               ref={headlineRef}
-              className="font-boldonse text-[clamp(2.5rem,5vw,4rem)] leading-[1.2] tracking-tight"
+              className="text-center font-boldonse text-[clamp(2.5rem,5vw,4rem)] leading-[1.2] tracking-tight"
             >
               Nicholas
               <br />
@@ -106,13 +109,13 @@ export default function MethodOverview() {
               Mining
             </h2>
 
-            <div ref={metaRef} className="mt-16">
-              <p className="max-w-sm text-sm leading-relaxed">
+            <div ref={metaRef} className="mt-16 text-center">
+              <p className="mx-auto max-w-sm text-sm leading-relaxed">
                 Published in 1981, the Nicholas methodology evaluates ten mining
                 methods using geometric and geomechanical inputs — delivering a
                 ranked, quantitative recommendation in seconds.
               </p>
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-6 flex items-center justify-center gap-3">
                 <span className="font-mono text-[15px] font-bold tracking-[0.15em] uppercase italic">
                   Method Selection
                 </span>
@@ -139,7 +142,7 @@ export default function MethodOverview() {
         </div>
 
         {/* Bottom — counter row */}
-        <div className="mt-16 flex items-center gap-12 border-t border-black/20 pt-8 font-mono">
+        <div className="mt-16 flex items-center justify-center gap-12 border-t border-black/20 pt-8 font-mono">
           <div>
             <p className="text-3xl font-black">10</p>
             <p className="text-[11px] tracking-[0.15em] uppercase">Methods</p>
