@@ -190,7 +190,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative mt-8 flex min-h-[58vh] flex-col justify-between  pt-16 "
+      className="relative mt-8 flex min-h-[58vh] flex-col justify-between pt-16"
     >
       <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-tertiary p-6 shadow-md sm:p-8 md:p-10">
@@ -198,7 +198,7 @@ export default function Footer() {
             <div className="lg:col-span-6">
               <h3
                 ref={titleRef}
-                className="text-center font-boldonse text-xl  tracking-tight text-pretty sm:text-2xl lg:text-3xl"
+                className="text-center font-boldonse text-xl tracking-tight text-pretty sm:text-2xl lg:text-3xl"
               >
                 Evaluating deposit viability with numerical mechanics logic.
               </h3>
@@ -242,7 +242,7 @@ export default function Footer() {
       <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
-            <div className="mb-4  text-3xl  tracking-tighter uppercase select-none">
+            <div className="mb-4 text-3xl tracking-tighter uppercase select-none">
               luiccian
             </div>
             <p className="max-w-sm text-[12px] leading-relaxed">

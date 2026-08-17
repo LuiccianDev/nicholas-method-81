@@ -173,7 +173,7 @@ export default function MethodsGrid({
       ref={sectionRef}
       aria-labelledby="methods-grid-heading"
       data-section="methods-grid"
-      className="bg-tertiary rounded-t-3xl"
+      className="rounded-t-3xl bg-tertiary"
     >
       {/* ── Headline block (inside pin, scrolls away naturally) ────────────── */}
       <div className="mx-auto w-full max-w-425 px-4 pt-24 pb-12 md:px-8">
