@@ -247,19 +247,20 @@ export default function Footer() {
         className="pointer-events-none fixed inset-0 z-9999 bg-background opacity-0"
       />
 
-      <div className="relative z-20 mb-5 w-full px-5">
-        <div className="relative overflow-hidden bg-[url('/footer.jpeg')] bg-center px-6 pt-30 pb-5">
+      <div className="relative z-20 mb-5 w-full pt-10 px-5">
+        <div className="relative overflow-hidden bg-[url('/footer.jpeg')] rounded-sm  bg-center px-6 py-18 pb-5">
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/30" />
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center">
             <h3
               ref={titleRef}
-              className="font-boldonse text-xl tracking-tight text-pretty text-white sm:text-2xl lg:text-3xl"
+              className="font-boldonse text-xl tracking-tight text-pretty text-background sm:text-2xl lg:text-3xl"
             >
               Evaluating deposit viability with numerical mechanics logic.
             </h3>
 
             <p
               ref={descriptionRef}
-              className="max-w-2xl text-[11px] leading-relaxed tracking-wider text-pretty text-white/90 uppercase sm:text-sm"
+              className="max-w-2xl text-[11px] leading-relaxed tracking-wider text-pretty text-background uppercase sm:text-sm"
             >
               Assess geomechanical conditions, grade distributions, and deposit
               geometry with David Nicholas' optimized selection engine.
