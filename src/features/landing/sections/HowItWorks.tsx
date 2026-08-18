@@ -49,7 +49,7 @@ const CARD_VARIANTS = [fromLeft, fromTop, fromRight];
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, {
-    once: true,
+    once: false,
     margin: '0px 0px -100px 0px',
   });
 

@@ -6,29 +6,9 @@ import { motion } from 'motion/react';
 import BlurReveal from '../../components/BlurReveal';
 import HeroCarousel, { type HeroCarouselHandle } from './HeroCarousel';
 import { HERO_PIN_DISTANCE } from '../../animation';
+import { HERO_CAPTIONS, HERO_HEADLINE, HERO_TAGLINE } from '../../content';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const HERO_CAPTIONS = [
-  {
-    left: 'Built for the ground truth, not the estimate',
-    right: 'Rank all ten mining methods ',
-    bottomPrimary: 'Engineering decisions',
-    bottomSecondary: "your site can't take back",
-  },
-  {
-    left: 'Every method scored the same way',
-    right: 'Evaluates deposit characteristics objectively.',
-    bottomPrimary: 'Objective scoring',
-    bottomSecondary: 'backed by Nicholas 1981',
-  },
-  {
-    left: 'From ten candidates to one',
-    right: 'Refine by cost and technical ',
-    bottomPrimary: 'Optimal selection',
-    bottomSecondary: 'refined with intelligent AI',
-  },
-] as const;
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -184,10 +164,9 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="mx-auto mb-10 max-w-90 text-sm leading-relaxed text-balance uppercase"
             >
-              Rank all ten mining methods from the deposit's geometry, grade,
-              and geomechanics in seconds.
+              {HERO_TAGLINE}
             </motion.p>
-            <BlurReveal text="The right method, ranked in seconds" />
+            <BlurReveal text={HERO_HEADLINE} />
           </div>
           <motion.div
             className="absolute inset-0 text-[25px] font-bold text-white"

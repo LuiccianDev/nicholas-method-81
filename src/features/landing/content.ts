@@ -108,3 +108,29 @@ export const STATS_DATA: Stat[] = [
 ];
 
 export const CTA_HEADLINE = 'SELECT YOUR METHOD. NOW.';
+
+export const HERO_TAGLINE =
+  "Rank all ten mining methods from the deposit's geometry, grade, and geomechanics in seconds.";
+
+export const HERO_HEADLINE = 'The right method, ranked in seconds';
+
+export const HERO_CAPTIONS: { left: string; right: string; bottomPrimary: string; bottomSecondary: string }[] = [
+  {
+    left: 'Built for the ground truth, not the estimate',
+    right: 'Rank all ten mining methods ',
+    bottomPrimary: 'Engineering decisions',
+    bottomSecondary: "your site can't take back",
+  },
+  {
+    left: 'Every method scored the same way',
+    right: 'Evaluates deposit characteristics objectively.',
+    bottomPrimary: 'Objective scoring',
+    bottomSecondary: 'backed by Nicholas 1981',
+  },
+  {
+    left: 'From ten candidates to one',
+    right: 'Refine by cost and technical ',
+    bottomPrimary: 'Optimal selection',
+    bottomSecondary: 'refined with intelligent AI',
+  },
+];
