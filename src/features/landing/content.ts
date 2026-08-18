@@ -114,7 +114,12 @@ export const HERO_TAGLINE =
 
 export const HERO_HEADLINE = 'The right method, ranked in seconds';
 
-export const HERO_CAPTIONS: { left: string; right: string; bottomPrimary: string; bottomSecondary: string }[] = [
+export const HERO_CAPTIONS: {
+  left: string;
+  right: string;
+  bottomPrimary: string;
+  bottomSecondary: string;
+}[] = [
   {
     left: 'Built for the ground truth, not the estimate',
     right: 'Rank all ten mining methods ',
