@@ -1,11 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -15,25 +13,37 @@ export default function Footer() {
   const linksRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => setIsVisible(window.scrollY > 300);
-    toggleVisibility();
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
+  const backToTopRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const isScrollingRef = useRef(false);
 
   const scrollToTop = () => {
+    if (isScrollingRef.current) return;
+
+    const overlayEl = overlayRef.current;
+    if (!overlayEl) return;
+
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
-    gsap.to(window, {
-      scrollTo: 0,
-      duration: reduceMotion ? 0 : 1,
-      ease: 'power2.inOut',
-    });
+
+    if (reduceMotion) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    isScrollingRef.current = true;
+
+    gsap
+      .timeline({ onComplete: () => (isScrollingRef.current = false) })
+      .to(overlayEl, { autoAlpha: 1, duration: 0.1, ease: 'power1.in' })
+      .call(() => window.scrollTo(0, 0))
+      .to(overlayEl, {
+        autoAlpha: 0,
+        duration: 0.02,
+        ease: 'power1.out',
+        delay: 0.43,
+      });
   };
 
   useGSAP(
@@ -176,6 +186,32 @@ export default function Footer() {
               );
             }
           }
+
+          if (backToTopRef.current) {
+            const backToTopEl = backToTopRef.current;
+
+            gsap.set(backToTopEl, { autoAlpha: 0, y: 8 });
+
+            ScrollTrigger.create({
+              start: 300,
+              onEnter: () =>
+                gsap.to(backToTopEl, {
+                  autoAlpha: 1,
+                  y: 0,
+                  duration: reduceMotion ? 0 : 0.3,
+                  ease: 'power2.out',
+                  overwrite: true,
+                }),
+              onLeaveBack: () =>
+                gsap.to(backToTopEl, {
+                  autoAlpha: 0,
+                  y: 8,
+                  duration: reduceMotion ? 0 : 0.25,
+                  ease: 'power2.in',
+                  overwrite: true,
+                }),
+            });
+          }
         }
       );
 
@@ -200,6 +236,12 @@ export default function Footer() {
       ref={footerRef}
       className="relative flex min-h-[70vh] flex-col justify-between"
     >
+      <div
+        ref={overlayRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-9999 bg-background opacity-0"
+      />
+
       <div className="relative z-20 mb-5 w-full px-5">
         <div className="relative overflow-hidden bg-[url('/footer.jpeg')] bg-center px-6 pt-30 pb-5">
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center">
@@ -361,20 +403,14 @@ export default function Footer() {
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Use</a>
 
-            <AnimatePresence>
-              {isVisible && (
-                <motion.button
-                  id="back-to-top"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-primary/90 px-3 py-1 tracking-wider uppercase backdrop-blur-3xl transition-all duration-300 hover:bg-primary"
-                >
-                  ↑ TOP
-                </motion.button>
-              )}
-            </AnimatePresence>
+            <button
+              ref={backToTopRef}
+              id="back-to-top"
+              onClick={scrollToTop}
+              className="invisible ml-auto cursor-pointer rounded-sm bg-primary/90 px-3 py-1 tracking-wider uppercase opacity-0 backdrop-blur-3xl transition-colors duration-300 hover:bg-primary"
+            >
+              ↑ TOP
+            </button>
           </div>
         </div>
       </div>
