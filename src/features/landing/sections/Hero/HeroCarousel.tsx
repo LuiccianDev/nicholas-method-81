@@ -1,4 +1,3 @@
-// CardsCarousel.tsx
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,19 +8,19 @@ import {
   useRef,
   useState,
 } from 'react';
-import NumberCard from './cards/NumberCard';
-import TextCard from './cards/TextCard';
-import FeaturedNumberCard from './cards/FeaturedNumberCard';
-import { HERO_PIN_DISTANCE } from '../gsapConfig';
+import StatCard from '../../components/cards/StatCard';
+import StatementCard from '../../components/cards/StatementCard';
+import FeaturedStatCard from '../../components/cards/FeaturedStatCard';
+import { HERO_PIN_DISTANCE } from '../../animation';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type CardsCarouselProps = {
+type HeroCarouselProps = {
   pinTrigger: RefObject<HTMLDivElement | null>;
   onBeatChange?: (index: number) => void;
 };
 
-export type CardsCarouselHandle = {
+export type HeroCarouselHandle = {
   addRevealTo: (tl: gsap.core.Timeline, position?: number | string) => void;
 };
 
@@ -59,8 +58,8 @@ function addGroupTransition(
   tl.set(to.current, { filter: 'none' }, atTime + 0.4);
 }
 
-const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
-  function CardsCarousel({ pinTrigger, onBeatChange }, ref) {
+const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
+  function HeroCarousel({ pinTrigger, onBeatChange }, ref) {
     const sectionRef = useRef<HTMLDivElement>(null);
 
     const group1Ref = useRef<HTMLDivElement>(null);
@@ -75,7 +74,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
     };
 
     // El entrance de group1 ya NO corre en un timeline propio. Se expone
-    // aquí para que HeroVisual lo inyecte en SU MISMO timeline maestro,
+    // aquí para que Hero lo inyecte en SU MISMO timeline maestro,
     // junto al clipPath de la imagen — mismo reloj, cero desincronización.
     useImperativeHandle(ref, () => ({
       addRevealTo(tl, position = 0) {
@@ -167,7 +166,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
           }}
         >
           <div className="grid w-full grid-cols-2 gap-2">
-            <NumberCard
+            <StatCard
               eyebrow="Deposit parameters"
               value={13}
               suffix="params"
@@ -177,7 +176,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               active={activeGroup === 0}
               delay={0.9}
             />
-            <NumberCard
+            <StatCard
               eyebrow="Rock zones"
               value={3}
               suffix="zones"
@@ -188,7 +187,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               delay={0.9}
             />
           </div>
-          <TextCard
+          <StatementCard
             eyebrow="Describe the deposit"
             statement="Your geology in ranked results out"
             status="A short form, not a full study"
@@ -207,7 +206,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
             filter: 'blur(28px)',
           }}
         >
-          <FeaturedNumberCard
+          <FeaturedStatCard
             eyebrow="Ranked objectively"
             value={10}
             suffix="methods"
@@ -237,7 +236,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
           }}
         >
           <div className="grid w-full grid-cols-2 gap-4">
-            <TextCard
+            <StatementCard
               eyebrow="Shortlist"
               statement="Keep the top picks"
               status="Highest-ranked methods"
@@ -245,7 +244,7 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
               active={activeGroup === 2}
               delay={0.45}
             />
-            <NumberCard
+            <StatCard
               eyebrow="Decision"
               value={1}
               suffix="winner"
@@ -262,4 +261,4 @@ const CardsCarousel = forwardRef<CardsCarouselHandle, CardsCarouselProps>(
   }
 );
 
-export default CardsCarousel;
+export default HeroCarousel;

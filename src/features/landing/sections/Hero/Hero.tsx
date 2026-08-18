@@ -1,14 +1,11 @@
-// HeroVisual.tsx
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import BlurText from '../components/BlurText';
-import CardsCarousel, {
-  type CardsCarouselHandle,
-} from '../components/CardsCarousel';
-import { HERO_PIN_DISTANCE } from '../gsapConfig';
+import BlurReveal from '../../components/BlurReveal';
+import HeroCarousel, { type HeroCarouselHandle } from './HeroCarousel';
+import { HERO_PIN_DISTANCE } from '../../animation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,7 +30,7 @@ const HERO_CAPTIONS = [
   },
 ] as const;
 
-export default function HeroVisual() {
+export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -42,7 +39,7 @@ export default function HeroVisual() {
   const captionBottomPrimaryRef = useRef<HTMLSpanElement>(null);
   const captionBottomSecondaryRef = useRef<HTMLSpanElement>(null);
   const captionBottomWrapperRef = useRef<HTMLDivElement>(null);
-  const cardsCarouselRef = useRef<CardsCarouselHandle>(null);
+  const carouselRef = useRef<HeroCarouselHandle>(null);
   const isFirstBeat = useRef(true);
   const [activeBeat, setActiveBeat] = useState(0);
 
@@ -104,7 +101,7 @@ export default function HeroVisual() {
   useGSAP(
     () => {
       // Timeline maestro de entrada: la imagen (clipPath) y el reveal del
-      // group1 de CardsCarousel corren aquí, en el MISMO timeline —
+      // group1 de HeroCarousel corren aquí, en el MISMO timeline —
       // mismo reloj, sin posibilidad de desfase entre ambos archivos.
       const introTl = gsap.timeline();
       introTl.fromTo(
@@ -118,7 +115,7 @@ export default function HeroVisual() {
         },
         0
       );
-      cardsCarouselRef.current?.addRevealTo(introTl, 0.5);
+      carouselRef.current?.addRevealTo(introTl, 0.5);
 
       const mm = gsap.matchMedia();
 
@@ -190,7 +187,7 @@ export default function HeroVisual() {
               Rank all ten mining methods from the deposit's geometry, grade,
               and geomechanics in seconds.
             </motion.p>
-            <BlurText text="The right method, ranked in seconds" />
+            <BlurReveal text="The right method, ranked in seconds" />
           </div>
           <motion.div
             className="absolute inset-0 text-[25px] font-bold text-white"
@@ -231,8 +228,8 @@ export default function HeroVisual() {
               style={{ clipPath: 'inset(100% 0 0 0)', opacity: 0 }}
               src="/Underground.jpeg"
             />
-            <CardsCarousel
-              ref={cardsCarouselRef}
+            <HeroCarousel
+              ref={carouselRef}
               pinTrigger={containerRef}
               onBeatChange={setActiveBeat}
             />

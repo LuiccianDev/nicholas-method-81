@@ -1,7 +1,6 @@
-// NumberCard.tsx
-import CounterDisplay from '../CounterDisplay';
+import FlipBoard from '../FlipBoard';
 
-type NumberCardProps = {
+type StatCardProps = {
   eyebrow: string;
   value: number;
   suffix: string;
@@ -12,7 +11,7 @@ type NumberCardProps = {
   delay?: number;
 };
 
-export default function NumberCard({
+export default function StatCard({
   eyebrow,
   value,
   suffix,
@@ -21,7 +20,7 @@ export default function NumberCard({
   decimals = 0,
   active = false,
   delay = 0,
-}: NumberCardProps) {
+}: StatCardProps) {
   return (
     <div
       className={`flex flex-col justify-between gap-3 rounded-sm border border-white/20 bg-black/10 p-5 text-white backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] md:p-6 ${size}`}
@@ -29,7 +28,7 @@ export default function NumberCard({
       <p className="text-center font-mono text-base font-medium md:text-lg">
         {eyebrow}
       </p>
-      <CounterDisplay
+      <FlipBoard
         value={value}
         suffix={suffix}
         decimals={decimals}

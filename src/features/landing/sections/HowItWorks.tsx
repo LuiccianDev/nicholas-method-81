@@ -1,6 +1,6 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-import { STEPS_DATA } from './landingContent';
+import { STEPS_DATA } from '../content';
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 const fromLeft = {

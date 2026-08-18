@@ -5,7 +5,7 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-export default function BlurText({
+export default function BlurReveal({
   text,
   size = 'text-6xl',
 }: {

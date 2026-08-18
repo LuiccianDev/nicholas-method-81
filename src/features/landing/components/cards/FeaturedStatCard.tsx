@@ -1,11 +1,10 @@
-// FeaturedNumberCard.tsx
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef } from 'react';
-import CounterDisplay from '../CounterDisplay';
+import FlipBoard from '../FlipBoard';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
-type FeaturedNumberCardProps = {
+type FeaturedStatCardProps = {
   eyebrow: string;
   value: number;
   suffix: string;
@@ -17,7 +16,7 @@ type FeaturedNumberCardProps = {
   tags?: string[];
 };
 
-export default function FeaturedNumberCard({
+export default function FeaturedStatCard({
   eyebrow,
   value,
   suffix,
@@ -27,7 +26,7 @@ export default function FeaturedNumberCard({
   active = false,
   delay = 0,
   tags = [],
-}: FeaturedNumberCardProps) {
+}: FeaturedStatCardProps) {
   const tagsRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -69,7 +68,7 @@ export default function FeaturedNumberCard({
         <p className="font-mono text-lg font-medium tracking-wide uppercase md:text-xl">
           {eyebrow}
         </p>
-        <CounterDisplay
+        <FlipBoard
           value={value}
           suffix={suffix}
           decimals={decimals}

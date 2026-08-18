@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
-import { METHODS_DATA, type MethodCard } from './landingContent';
+import { METHODS_DATA, type MethodCard } from '../content';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,13 +64,13 @@ function MethodCard({ method, index }: { method: MethodCard; index: number }) {
 }
 
 // ─── Main section ─────────────────────────────────────────────────────────────
-type MethodsGridProps = {
+type MethodsRailProps = {
   methods?: MethodCard[];
 };
 
-export default function MethodsGrid({
+export default function MethodsRail({
   methods = METHODS_DATA,
-}: MethodsGridProps) {
+}: MethodsRailProps) {
   // The outer wrapper is what we pin
   const sectionRef = useRef<HTMLElement>(null);
   // The headline block animates in Y on scroll-enter

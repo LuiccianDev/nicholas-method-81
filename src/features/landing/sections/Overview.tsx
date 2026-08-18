@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function MethodOverview() {
+export default function Overview() {
   const containerRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);

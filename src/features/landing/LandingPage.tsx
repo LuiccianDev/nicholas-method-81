@@ -1,15 +1,15 @@
-import Hero from './sections/Hero';
-import MethodOverview from './sections/MethodOverview';
+import Hero from './sections/Hero/Hero';
+import Overview from './sections/Overview';
 import HowItWorks from './sections/HowItWorks';
-import MethodsGrid from './sections/MethodsGrid';
+import MethodsRail from './sections/MethodsRail';
 
 export default function LandingPage() {
   return (
     <div className="pt-20">
       <Hero />
-      <MethodOverview />
+      <Overview />
       <HowItWorks />
-      <MethodsGrid />
+      <MethodsRail />
     </div>
   );
 }

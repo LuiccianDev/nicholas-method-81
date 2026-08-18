@@ -1,4 +1,3 @@
-// TextCard.tsx
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -7,7 +6,7 @@ import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-type TextCardProps = {
+type StatementCardProps = {
   eyebrow: string;
   statement: string;
   status?: string;
@@ -16,14 +15,14 @@ type TextCardProps = {
   delay?: number;
 };
 
-export default function TextCard({
+export default function StatementCard({
   eyebrow,
   statement,
   status,
   size,
   active = false,
   delay = 0,
-}: TextCardProps) {
+}: StatementCardProps) {
   const statementRef = useRef<HTMLParagraphElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
