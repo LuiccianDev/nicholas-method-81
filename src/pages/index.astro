@@ -1,8 +1,8 @@
 ---
-import LayoutLanding from '@/layouts/LayoutLanding.astro';
 import LandingPage from '@/features/landing/LandingPage';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
-<LayoutLanding>
+<BaseLayout title="Nicholas Method" description="Nicholas Method">
   <LandingPage client:load />
-</LayoutLanding>
+</BaseLayout>

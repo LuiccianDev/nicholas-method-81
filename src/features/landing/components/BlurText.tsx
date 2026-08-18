@@ -5,7 +5,13 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-export default function BlurText({ text }: { text: string }) {
+export default function BlurText({
+  text,
+  size = 'text-6xl',
+}: {
+  text: string;
+  size?: string;
+}) {
   const container = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
@@ -49,7 +55,7 @@ export default function BlurText({ text }: { text: string }) {
   return (
     <h1
       ref={container}
-      className="px-2 font-boldonse text-6xl font-extrabold tracking-tight text-black"
+      className={`px-2 font-boldonse font-extrabold tracking-tight text-black ${size}`}
       style={{ opacity: 0 }}
     >
       {text}

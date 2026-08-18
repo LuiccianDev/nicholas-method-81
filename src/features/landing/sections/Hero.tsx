@@ -4,11 +4,11 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import BlurText from './components/BlurText';
+import BlurText from '../components/BlurText';
 import CardsCarousel, {
   type CardsCarouselHandle,
-} from './components/CardsCarousel';
-import { HERO_PIN_DISTANCE } from './gsapConfig';
+} from '../components/CardsCarousel';
+import { HERO_PIN_DISTANCE } from '../gsapConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 

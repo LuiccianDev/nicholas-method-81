@@ -1,4 +1,4 @@
-import LandingNav from '@/features/landing/LandingNav';
+import LandingNav from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhySection from './sections/WhySection';
 import FeaturesSection from './sections/FeaturesSection';
