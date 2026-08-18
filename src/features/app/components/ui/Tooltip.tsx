@@ -107,7 +107,7 @@ export default function Tooltip({ content }: TooltipProps) {
                     ? { top: `${coords.top}px` }
                     : { bottom: `${window.innerHeight - coords.top}px` }),
                 }}
-                className="wrap-break-words z-9999 w-72 max-w-[calc(100vw-2rem)] rounded-md border border-border bg-background p-3.5 text-left font-sans text-[11px] leading-relaxed tracking-normal whitespace-normal normal-case not-italic"
+                className="wrap-break-words z-9999 w-72 max-w-[calc(100vw-2rem)] rounded-md border border-border bg-background p-3.5 text-left text-[11px] leading-relaxed tracking-normal whitespace-normal normal-case not-italic"
               >
                 <div>{content}</div>
               </motion.div>

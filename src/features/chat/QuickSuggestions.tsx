@@ -11,7 +11,7 @@ export default function QuickSuggestions({
 }) {
   return (
     <div className="border-t border-border/40 bg-primary/8 px-3 py-2">
-      <div className="mb-1 flex items-center gap-1 font-monserrate text-[10px] tracking-wider uppercase">
+      <div className="mb-1 flex items-center gap-1 font-mono text-[10px] tracking-wider uppercase">
         <Sparkles size={11} className="text-primary" />
         <span>Quick Suggestions</span>
       </div>

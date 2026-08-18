@@ -61,7 +61,7 @@ const CardResult = memo(function CardResult({
           <p className="text font-boldonse text-[clamp(2rem,4vw,2.6rem)] italic">
             {bestMethod?.method || 'None.'}
           </p>
-          <p className="font-roboto text-2xl tracking-tight">
+          <p className="font-boldonse text-2xl tracking-tight">
             Optimal Underground Method
           </p>
         </div>
@@ -76,7 +76,7 @@ const CardResult = memo(function CardResult({
 
           {isSurfaceMoreViable && (
             <div className="max-w-auto gap-4 rounded-xl border border-border bg-background/80 p-4">
-              <p className="font-monserrate text-[12px] leading-relaxed">
+              <p className="text-[12px] leading-relaxed">
                 <strong>SURFACE COMPARISON:</strong> Note that{' '}
                 <span className="italic">Open Pit</span> scored higher overall
                 technical viability ({absoluteBest.total} pts). It is maintained

@@ -73,7 +73,7 @@ export default function CalculatorHeader() {
       </div>
       <div className="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end">
         <ThemeToggle />
-        <div className="text-left font-roboto text-[13px] md:text-right">
+        <div className="text-left font-mono text-[13px] md:text-right">
           <motion.p variants={rightItemVariants}>
             REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE
           </motion.p>

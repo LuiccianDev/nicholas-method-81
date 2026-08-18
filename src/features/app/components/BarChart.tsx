@@ -76,7 +76,7 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
                 tick={{
                   fontSize: tickFontSize,
                   fill: 'var(--color-text-primary)',
-                  fontFamily: 'prompt',
+                  fontFamily: 'var(--font-prompt)',
                 }}
                 axisLine={{ stroke: 'var(--color-border)' }}
                 tickLine={false}
@@ -89,7 +89,7 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
                 tick={{
                   fontSize: axisFontSize,
                   fill: 'var(--color-text-primary)',
-                  fontFamily: 'prompt',
+                  fontFamily: 'var(--font-prompt)',
                 }}
                 axisLine={{ stroke: 'var(--color-border)' }}
                 tickLine={false}

@@ -16,7 +16,7 @@ export default function ChatBubble({
 }) {
   return (
     <div
-      className={`group relative flex items-start gap-2 font-roboto ${
+      className={`group relative flex items-start gap-2 ${
         message.role === 'user' ? 'flex-row-reverse' : ''
       }`}
     >

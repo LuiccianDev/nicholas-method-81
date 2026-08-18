@@ -29,7 +29,7 @@ export default function ScoringMatrixView({
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <p className="font-monserrate text-[14px] font-bold tracking-widest uppercase">
+          <p className="font-mono text-[14px] font-bold tracking-widest uppercase">
             Numerical Breakdown / Nicholas Optimization
           </p>
 
