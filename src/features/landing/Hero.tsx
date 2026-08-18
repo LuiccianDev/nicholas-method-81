@@ -138,7 +138,7 @@ export default function HeroVisual() {
           .fromTo(
             taglineRef.current,
             { opacity: 1, y: 0 },
-            { opacity: 0, y: -400, ease: 'none' },
+            { opacity: 0, y: -300, ease: 'none' },
             0
           )
           .fromTo(

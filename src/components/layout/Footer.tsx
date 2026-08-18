@@ -2,8 +2,9 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -15,6 +16,7 @@ export default function Footer() {
   const textRef = useRef<HTMLHeadingElement>(null);
   const backToTopRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const textTagRef = useRef<HTMLHeadingElement>(null);
   const isScrollingRef = useRef(false);
 
   const scrollToTop = () => {
@@ -36,13 +38,16 @@ export default function Footer() {
 
     gsap
       .timeline({ onComplete: () => (isScrollingRef.current = false) })
-      .to(overlayEl, { autoAlpha: 1, duration: 0.1, ease: 'power1.in' })
-      .call(() => window.scrollTo(0, 0))
+      // El overlay se pone opaco...
+      .to(overlayEl, { autoAlpha: 1, duration: 0.01, ease: 'power1.in' })
+      // ...al mismo tiempo que el scroll real se anima hacia arriba, oculto detrás
+      .to(window, { scrollTo: 0, duration: 0.1, ease: 'power2.inOut' }, '<')
+      // Recién cuando el scroll terminó, se destapa
       .to(overlayEl, {
         autoAlpha: 0,
-        duration: 0.02,
+        duration: 0.15,
         ease: 'power1.out',
-        delay: 0.43,
+        delay: 0.4,
       });
   };
 
