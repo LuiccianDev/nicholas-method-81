@@ -5,7 +5,6 @@ import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import BlurReveal from '../../components/BlurReveal';
 import HeroCarousel, { type HeroCarouselHandle } from './HeroCarousel';
-import { HERO_PIN_DISTANCE } from '../../animation';
 import { HERO_CAPTIONS, HERO_HEADLINE, HERO_TAGLINE } from '../../content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -134,7 +133,7 @@ export default function Hero() {
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: 'top 2%',
-          end: HERO_PIN_DISTANCE,
+          end: '+=190%',
           pin: true,
           pinSpacing: true,
           markers: false,
@@ -151,7 +150,7 @@ export default function Hero() {
       <div
         ref={containerRef}
         className="h-svh w-full px-5"
-        data-purpose="hero-visual "
+        data-purpose="hero-visual"
       >
         <div className="relative h-full overflow-hidden">
           <div

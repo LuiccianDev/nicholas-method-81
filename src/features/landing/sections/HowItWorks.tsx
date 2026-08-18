@@ -1,48 +1,27 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
+import Eyebrow from '../components/Eyebrow';
 import { STEPS_DATA } from '../content';
 
 // ─── Animation variants ───────────────────────────────────────────────────────
-const fromLeft = {
-  hidden: { opacity: 0, x: -48 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-const fromTop = {
-  hidden: { opacity: 0, y: -48 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      delay: 0.1,
-      ease: [0.22, 1, 0.36, 1] as const,
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+function fadeFrom(x: number, y: number, delay = 0, duration = 0.8) {
+  return {
+    hidden: { opacity: 0, x, y },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: { duration, delay, ease: EASE },
     },
-  },
-};
-const fromRight = {
-  hidden: { opacity: 0, x: 48 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      delay: 0.2,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-const fromBottom = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
+  };
+}
+
+const fromLeft = fadeFrom(-48, 0);
+const fromTop = fadeFrom(0, -48, 0.1);
+const fromRight = fadeFrom(48, 0, 0.2);
+const fromBottom = fadeFrom(0, 40, 0, 0.7);
 
 const CARD_VARIANTS = [fromLeft, fromTop, fromRight];
 
@@ -67,10 +46,7 @@ export default function HowItWorks() {
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          <div className="mb-16 flex items-center gap-6 border-t border-black/10 pt-6 font-mono text-[11px] font-medium tracking-widest uppercase">
-            <span>Process</span>
-            <span className="ml-auto text-black/40">NM-02</span>
-          </div>
+          <Eyebrow label="Process" code="NM-02" />
 
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <h2

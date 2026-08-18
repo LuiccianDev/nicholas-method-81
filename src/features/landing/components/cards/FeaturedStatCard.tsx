@@ -62,7 +62,7 @@ export default function FeaturedStatCard({
 
   return (
     <div
-      className={`relative flex items-center justify-between gap-8 overflow-hidden rounded-sm border border-white/20 bg-black/10 p-8 text-white backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] md:p-10 ${size}`}
+      className={`relative flex card-shell items-center justify-between gap-8 overflow-hidden p-8 md:p-10 ${size}`}
     >
       <div className="flex h-full flex-col justify-between gap-6">
         <p className="font-mono text-lg font-medium tracking-wide uppercase md:text-xl">

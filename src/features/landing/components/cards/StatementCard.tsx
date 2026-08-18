@@ -33,7 +33,7 @@ export default function StatementCard({
 
       const split = SplitText.create(statementRef.current, {
         type: 'words',
-        wordsClass: 'letter',
+        wordsClass: 'word',
       });
 
       const tween = gsap.fromTo(
@@ -63,7 +63,7 @@ export default function StatementCard({
 
   return (
     <div
-      className={`flex flex-col justify-between gap-3 rounded-sm border border-black/20 bg-black/10 p-5 text-white backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01] md:p-6 ${size}`}
+      className={`flex card-shell flex-col justify-between gap-3 p-5 md:p-6 ${size}`}
     >
       <p className="text-center font-mono text-xl font-medium">{eyebrow}</p>
       <p

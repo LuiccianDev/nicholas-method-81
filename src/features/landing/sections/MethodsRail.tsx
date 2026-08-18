@@ -2,70 +2,19 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
-import { METHODS_DATA, type MethodCard } from '../content';
+import Eyebrow from '../components/Eyebrow';
+import Reveal from '../components/Reveal';
+import MethodCard from '../components/cards/MethodCard';
+import { METHODS_DATA, type MethodCard as MethodCardData } from '../content';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Placeholder images (rotated until real method assets arrive) ─────────────
-const PUBLIC_IMAGES = [
-  '/Underground_Portada.jpeg',
-  '/Underground.jpeg',
-  '/dashboard_bg.jpg',
-];
-const getImg = (i: number) => PUBLIC_IMAGES[i % PUBLIC_IMAGES.length];
+// max-w-425 = 1700px: mirrors the content column so the rail starts and ends
+// under the same horizontal padding as the rest of the page.
+const RAIL_PADDING = 'max(1rem, calc((100vw - 1700px) / 2 + 2rem))';
 
-// ─── Single method card ───────────────────────────────────────────────────────
-function MethodCard({ method, index }: { method: MethodCard; index: number }) {
-  const num = String(index + 1).padStart(2, '0');
-
-  return (
-    <article
-      className="method-card group flex w-56 shrink-0 flex-col gap-0 md:w-68"
-      aria-label={`Mining method: ${method.name}`}
-    >
-      {/* Image — compact, 3/4 aspect */}
-      <div className="relative overflow-hidden rounded-xl bg-text-primary">
-        <div className="relative w-full" style={{ aspectRatio: '2/3' }}>
-          <img
-            src={getImg(index)}
-            alt={`${method.name} mining method`}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-          {/* gradient */}
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" />
-
-          {/* index badge */}
-          <span className="absolute top-3 left-3 font-mono text-[10px] font-bold tracking-widest text-white/60 uppercase">
-            {num}
-          </span>
-
-          {/* method code overlay */}
-          <div className="absolute right-0 bottom-0 left-0 p-4">
-            <span className="font-boldonse text-[11px] leading-tight tracking-widest text-white/85 uppercase">
-              {method.code}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Text */}
-      <div className="flex flex-col gap-0.5 px-0.5 pt-2.5 pb-1">
-        <h3 className="font-boldonse text-[14px] leading-snug tracking-tight text-text-primary">
-          {method.name}
-        </h3>
-        <p className="font-prompt text-[12px] leading-relaxed text-text-primary/50">
-          {method.descriptor}
-        </p>
-      </div>
-    </article>
-  );
-}
-
-// ─── Main section ─────────────────────────────────────────────────────────────
 type MethodsRailProps = {
-  methods?: MethodCard[];
+  methods?: MethodCardData[];
 };
 
 export default function MethodsRail({
@@ -73,8 +22,6 @@ export default function MethodsRail({
 }: MethodsRailProps) {
   // The outer wrapper is what we pin
   const sectionRef = useRef<HTMLElement>(null);
-  // The headline block animates in Y on scroll-enter
-  const headRef = useRef<HTMLDivElement>(null);
   // The inner horizontal rail (this is what moves in X)
   const railRef = useRef<HTMLDivElement>(null);
   // Wrapper that clips the rail
@@ -85,42 +32,21 @@ export default function MethodsRail({
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        // ── 1. Headline fade-up on scroll enter ────────────────────────────
-        gsap.fromTo(
-          headRef.current,
-          { opacity: 0, y: 48 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: headRef.current,
-              start: 'top 85%',
-              end: 'top 45%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-
-        // ── 2. Horizontal scroll — pin section, animate rail in X ──────────
         const rail = railRef.current;
         const viewport = viewportRef.current;
         if (!rail || !viewport) return;
 
         // Total X distance = total rail width minus what's already visible
-        const getScrollDistance = () =>
-          -(rail.scrollWidth - viewport.offsetWidth);
+        const railOverflow = () => rail.scrollWidth - viewport.offsetWidth;
 
         const scrollTween = gsap.to(rail, {
-          x: getScrollDistance,
+          x: () => -railOverflow(),
           ease: 'none', // REQUIRED for containerAnimation + scrub
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top top',
             // pin for as long as the rail needs to travel (ratio: rail/viewport)
-            end: () =>
-              `+=${rail.scrollWidth - viewport.offsetWidth + window.innerHeight * 0.5}`,
+            end: () => `+=${railOverflow() + window.innerHeight * 0.5}`,
             pin: true,
             scrub: 1.2,
             anticipatePin: 1,
@@ -128,7 +54,6 @@ export default function MethodsRail({
           },
         });
 
-        // ── 3. Each card fades-up triggered by containerAnimation ──────────
         // Cards reveal as they scroll into view horizontally
         const cards = rail.querySelectorAll<HTMLElement>('.method-card');
         cards.forEach((card) => {
@@ -158,8 +83,9 @@ export default function MethodsRail({
 
       // Reduced-motion: no pin, no horizontal scroll
       mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(headRef.current, { opacity: 1, y: 0 });
-        gsap.set('.method-card', { opacity: 1, y: 0 });
+        sectionRef.current
+          ?.querySelectorAll('.method-card')
+          .forEach((card) => gsap.set(card, { opacity: 1, y: 0 }));
       });
 
       return () => mm.revert();
@@ -177,14 +103,10 @@ export default function MethodsRail({
     >
       {/* ── Headline block (inside pin, scrolls away naturally) ────────────── */}
       <div className="mx-auto w-full max-w-425 px-4 pt-24 pb-12 md:px-8">
-        {/* Top rule */}
-        <div className="mb-12 flex items-center gap-6 border-t border-text-primary/10 pt-6 font-mono text-[11px] font-medium tracking-widest uppercase">
-          <span>Methods evaluated</span>
-          <span className="ml-auto text-text-primary/40">NM-03</span>
-        </div>
+        <Eyebrow label="Methods evaluated" code="NM-03" />
 
         {/* Headline */}
-        <div ref={headRef} style={{ opacity: 0 }}>
+        <Reveal y={48} duration={0.8}>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <h2
               id="methods-grid-heading"
@@ -199,16 +121,10 @@ export default function MethodsRail({
               surface to deep underground.
             </p>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       {/* ── Horizontal rail viewport ────────────────────────────────────────── */}
-      {/*
-        Tailwind 4: max-w-425 = 425 × 0.25rem = 106.25rem = 1700px.
-        The rail's paddingLeft mirrors mx-auto max-w-425 px-4 md:px-8:
-          on wide screens  → (100vw - 1700px) / 2 + 32px
-          on narrow screens → clamp floor of 16px (px-4)
-      */}
       <div
         ref={viewportRef}
         className="w-full overflow-hidden pb-20"
@@ -218,9 +134,7 @@ export default function MethodsRail({
         <div
           ref={railRef}
           className="flex gap-4 will-change-transform md:gap-6"
-          style={{
-            paddingLeft: 'max(1rem, calc((100vw - 1700px) / 2 + 2rem))',
-          }}
+          style={{ paddingLeft: RAIL_PADDING }}
         >
           {methods.map((method, index) => (
             <MethodCard key={method.name} method={method} index={index} />
@@ -229,9 +143,7 @@ export default function MethodsRail({
               ends with the same margin as the right edge of max-w-425 */}
           <div
             className="shrink-0"
-            style={{
-              width: 'max(1rem, calc((100vw - 1700px) / 2 + 2rem))',
-            }}
+            style={{ width: RAIL_PADDING }}
             aria-hidden="true"
           />
         </div>

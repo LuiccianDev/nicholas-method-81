@@ -95,3 +95,8 @@ html::-webkit-scrollbar-thumb:hover {
     background: var(--color-primary);
   }
 }
+
+/* Hero cards — shared surface, border and hover lift */
+@utility card-shell {
+  @apply rounded-sm border border-white/20 bg-black/10 text-white backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01];
+}

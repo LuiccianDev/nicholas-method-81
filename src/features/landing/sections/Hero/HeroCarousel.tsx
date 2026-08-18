@@ -11,7 +11,7 @@ import {
 import StatCard from '../../components/cards/StatCard';
 import StatementCard from '../../components/cards/StatementCard';
 import FeaturedStatCard from '../../components/cards/FeaturedStatCard';
-import { HERO_PIN_DISTANCE } from '../../animation';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +21,7 @@ type HeroCarouselProps = {
 };
 
 export type HeroCarouselHandle = {
-  addRevealTo: (tl: gsap.core.Timeline, position?: number | string) => void;
+  addRevealTo: (tl: gsap.core.Timeline, position?: number) => void;
 };
 
 type GroupRef = RefObject<HTMLDivElement | null>;
@@ -78,8 +78,6 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
     // junto al clipPath de la imagen — mismo reloj, cero desincronización.
     useImperativeHandle(ref, () => ({
       addRevealTo(tl, position = 0) {
-        const start = typeof position === 'number' ? position : 0;
-
         tl.fromTo(
           group1Ref.current,
           { opacity: 0, y: 110, filter: 'blur(36px)' },
@@ -92,7 +90,7 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
           position
         );
 
-        tl.set(group1Ref.current, { filter: 'none' }, start + 0.7);
+        tl.set(group1Ref.current, { filter: 'none' }, position + 0.7);
       },
     }));
 
@@ -113,7 +111,7 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
             scrollTrigger: {
               trigger: pinTrigger.current,
               start: 'top top',
-              end: HERO_PIN_DISTANCE,
+              end: '+=190%',
               scrub: 0.5,
             },
           });
