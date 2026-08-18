@@ -249,7 +249,7 @@ export default function Footer() {
 
       <div className="relative z-20 mb-5 w-full pt-10 px-5">
         <div className="relative overflow-hidden bg-[url('/footer.jpeg')] rounded-sm  bg-center px-6 py-18 pb-5">
-        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/30" />
+        <div className="absolute inset-0 bg-black/10" />
           <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center">
             <h3
               ref={titleRef}

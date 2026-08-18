@@ -52,7 +52,7 @@ const CardResult = memo(function CardResult({
       </motion.h2>
       <motion.div
         ref={containerRef}
-        className="relative flex min-h-72 w-full flex-col rounded-xl bg-secondary p-6 sm:p-8"
+        className="relative flex min-h-72 w-full flex-col rounded-sm bg-primary p-6 sm:p-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
