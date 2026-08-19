@@ -12,7 +12,6 @@ import StatCard from '../../components/cards/StatCard';
 import StatementCard from '../../components/cards/StatementCard';
 import FeaturedStatCard from '../../components/cards/FeaturedStatCard';
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 type HeroCarouselProps = {

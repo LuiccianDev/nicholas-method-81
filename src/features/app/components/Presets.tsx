@@ -205,7 +205,7 @@ export default function Presets() {
           if (activeBtn) moveBlobRef.current(activeBtn);
           else hideBlobRef.current();
         }}
-        className="relative px-2 pb-9 "
+        className="relative px-2 pb-9"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
@@ -215,7 +215,7 @@ export default function Presets() {
           className="pointer-events-none absolute inset-auto z-0 rounded-sm border border-primary bg-primary opacity-0"
         />
 
-        <div className="relative z-1 grid grid-cols-1 gap-2 sm:grid-cols-3 ">
+        <div className="relative z-1 grid grid-cols-1 gap-2 sm:grid-cols-3">
           {PRESETS.map((preset) => {
             const isActive = inputsMatch(input, preset.data);
             return (

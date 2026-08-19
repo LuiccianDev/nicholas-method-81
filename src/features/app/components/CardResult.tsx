@@ -89,12 +89,11 @@ const CardResult = memo(function CardResult({
 
         <div
           onClick={onOpenDetails}
-          className="absolute top-4 right-4 flex cursor-pointer flex-row items-center gap-2 rounded-md bg-black px-3.5 py-2 font-medium
-          text-white transition-all hover:bg-white hover:text-text-primary hover:scale-1.01 "
+          className="hover:scale-1.01 absolute top-4 right-4 flex cursor-pointer flex-row items-center gap-2 rounded-md bg-black px-3.5 py-2 font-medium text-white transition-all hover:bg-white hover:text-text-primary"
           title="View Full Calculation Matrix"
         >
           <ArrowDown className="size-5" />
-          <span >Matrix</span>
+          <span>Matrix</span>
         </div>
       </motion.div>
     </>

@@ -95,11 +95,10 @@ export default function ChatAssistant() {
         }`}
         style={{ maxHeight: '60vh', height: '600px' }}
       >
-        <div className="flex items-center justify-between bg-background border-b border-tertiary px-4 py-3">
-
-            <h3 className="font-boldonse text-[12px] leading-tight">
-              Nicholas 81 Assistant
-            </h3>
+        <div className="flex items-center justify-between border-b border-tertiary bg-background px-4 py-3">
+          <h3 className="font-boldonse text-[12px] leading-tight">
+            Nicholas 81 Assistant
+          </h3>
 
           <div className="flex items-center gap-1">
             <button

@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Boldonse&family=Prompt:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @import 'tailwindcss';
-@import './toggleTheme.css';
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   /* Data /Numero */
@@ -29,18 +26,6 @@
   /* Tracking Tokens */
   --tracking-widest: 0.3em;
   --tracking-wide: 0.2em;
-}
-
-/* Dark Mode Overrides */
-.dark {
-  /*! Se pude cambias los colroe smasn adecuasnoas peor para depsued */
-  --color-primary: #61533d;
-  --color-secondary: #91806d;
-  --color-tertiary: #c78530;
-  --color-quaternary: #977241;
-  --color-text-primary: #ffffff;
-  --color-background: #1d1d1d;
-  --color-border: #2e3325;
 }
 
 /* Base Styles */
