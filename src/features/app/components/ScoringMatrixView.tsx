@@ -23,7 +23,7 @@ export default function ScoringMatrixView({
         04 / Result Matrix
       </motion.h2>
       <motion.div
-        className="relative mb-15 flex min-h-72 w-full flex-col rounded-xl bg-secondary p-6 sm:p-8"
+        className="relative mb-15 flex min-h-72 w-full flex-col rounded-sm bg-primary p-6 sm:p-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -35,7 +35,7 @@ export default function ScoringMatrixView({
 
           <button
             onClick={onBack}
-            className="flex cursor-pointer items-center gap-2 rounded-lg bg-black px-3.5 py-2 text-sm font-medium text-white transition-all hover:bg-quaternary active:scale-95"
+            className="flex cursor-pointer items-center gap-2 rounded-sm bg-background px-3.5 py-2 text-sm font-medium text-text-primary transition-all hover:bg-black hover:text-background active:scale-95"
             title="Return to Summary view"
           >
             <ArrowUp className="size-5" />

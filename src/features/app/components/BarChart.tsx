@@ -120,14 +120,14 @@ const ComparisonBarChart = memo(function ComparisonBarChart({
               <Bar
                 dataKey="Geometry"
                 stackId="a"
-                fill="var(--color-primary)"
+                fill="var(--color-secondary)"
                 strokeWidth={1}
                 name="Geometry"
               />
               <Bar
                 dataKey="RockMechanics"
                 stackId="a"
-                fill="var(--color-secondary)"
+                fill="var(--color-tertiary)"
                 strokeWidth={1}
                 name="Rock"
               />

@@ -7,9 +7,9 @@ interface RankingTableProps {
 
 export default function RankingTable({ results }: RankingTableProps) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-border bg-background">
-      <table className="w-full rounded-2xl text-left text-sm">
-        <thead className="sticky top-0 border-b border-border text-[12px] tracking-widest uppercase md:relative">
+    <div className="overflow-x-auto rounded-sm border border-primary bg-background">
+      <table className="w-full rounded-sm text-left text-sm">
+        <thead className="sticky top-0 border-b text-[13px] tracking-wide uppercase md:relative">
           <tr>
             <th className="px-4 py-4">Rank</th>
             <th className="px-4 py-4">Method</th>

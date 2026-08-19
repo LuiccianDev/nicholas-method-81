@@ -84,7 +84,7 @@ export default function ChatAssistant() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <IconHelmet className="size-15 rounded-xl text-primary" />
+        <IconHelmet className="size-15 rounded-xl text-tertiary" />
       </motion.button>
 
       <div

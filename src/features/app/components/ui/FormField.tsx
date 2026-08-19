@@ -24,7 +24,7 @@ export default function FormField({
           {note && <Tooltip content={note} />}
         </div>
         {derivedLabel && (
-          <span className="shrink-0 border border-primary/40 bg-background px-1.5 font-mono text-[10px] tracking-widest text-primary uppercase">
+          <span className="shrink-0 border border-primary/40 bg-background px-1.5 font-mono text-[10px] tracking-widest text-text-primary uppercase">
             {derivedLabel}
           </span>
         )}

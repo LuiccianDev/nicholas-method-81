@@ -75,7 +75,7 @@ export default function Tooltip({ content }: TooltipProps) {
         ref={buttonRef}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex cursor-pointer items-center justify-center px-1 font-mono transition-colors select-none hover:text-primary active:scale-95"
+        className="flex cursor-pointer items-center justify-center px-1 font-mono transition-colors select-none active:scale-95"
         title="Click to toggle info note"
         aria-label="Toggle info note"
       >

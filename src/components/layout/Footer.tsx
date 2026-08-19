@@ -272,7 +272,7 @@ export default function Footer() {
             >
               <button
                 onClick={scrollToTop}
-                className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-primary/90 px-6 py-3.5 tracking-wide text-black uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] hover:bg-primary active:scale-95"
+                className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-black/70 px-6 py-3.5 tracking-wide text-background uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] active:scale-95"
               >
                 Get started
               </button>
@@ -280,7 +280,7 @@ export default function Footer() {
                 href="https://github.com/LuiccianDev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex cursor-pointer items-center gap-2 rounded-sm border border-white/30 bg-white/10 px-5 py-3.5 tracking-wider text-white uppercase backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:bg-white/20 active:scale-95"
+                className="group flex cursor-pointer items-center gap-2 rounded-sm bg-white/20 px-5 py-3.5 tracking-wider text-white uppercase backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:bg-white/20 active:scale-95"
               >
                 <span>▶ Watch details guide</span>
               </a>
@@ -413,7 +413,7 @@ export default function Footer() {
               ref={backToTopRef}
               id="back-to-top"
               onClick={scrollToTop}
-              className="invisible ml-auto cursor-pointer rounded-sm bg-primary/90 px-3 py-1 tracking-wider uppercase opacity-0 backdrop-blur-3xl transition-colors duration-300 hover:bg-primary"
+              className="invisible ml-auto cursor-pointer rounded-sm bg-quaternary/90 px-3 py-1 tracking-wider uppercase opacity-0 backdrop-blur-3xl transition-colors duration-300 hover:bg-quaternary"
             >
               ↑ TOP
             </button>
