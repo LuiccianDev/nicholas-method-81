@@ -32,20 +32,20 @@ export default function LandingNav() {
           </motion.button>
         </div>
         <div className="flex items-center justify-center rounded-sm bg-background pl-4">
-          <span className="pr-2 text-[14px] font-bold tracking-wide uppercase">
+          <a href="/" className="pr-2 text-[15px] font-semibold tracking-wide uppercase">
             Luiccian
-          </span>
+          </a>
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMenuOpen(true)}
             className="rounded-sm bg-primary p-2"
             data-purpose="mobile-menu-trigger"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="size-4" />
           </motion.button>
         </div>
         <div className="flex flex-1 items-center justify-end">
-          <div className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[10px] font-bold tracking-widest uppercase">
+          <div className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[12px] font-semibold tracking-widest uppercase">
             <a href="/calculator">NIcholas Method</a>
           </div>
         </div>
