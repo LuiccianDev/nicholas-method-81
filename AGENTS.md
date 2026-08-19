@@ -104,6 +104,7 @@ Tokens definidos en `src/styles/index.css` (`@theme`). Usa SIEMPRE la utility de
 Antes de abordar una tarea, carga la skill relevante vía la herramienta de skills cuando el trabajo matchee (obligatorio, no opcional):
 
 - Animación/scroll (GSAP/ScrollTrigger): `gsap-react`, `gsap-scrolltrigger` u otra específica del contexto.
+- Animación declarativa/React (Motion v13, `motion/react`): `motion` (islas React, gestures, layout, exit, scroll, springs).
 - Diseño de UI / styling / rediseño: `frontend-design`, `tailwind-css-patterns`.
 - Accesibilidad / a11y: `accessibility`.
 - SEO / meta tags: `seo`.
