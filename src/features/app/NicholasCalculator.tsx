@@ -23,7 +23,7 @@ function CalculatorContent() {
   const onCloseDetails = useCallback(() => setShowMatrix(false), []);
 
   return (
-    <motion.div className="mx-auto grid w-full grid-cols-1 gap-8 px-4 pt-30 md:px-15 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]">
+    <motion.div className="mx-auto grid w-full grid-cols-1 gap-10 px-4 pt-30 md:px-20 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]">
       <ParametersForm input={input} updateInput={updateInput} />
 
       <AnimatePresence mode="wait">

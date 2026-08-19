@@ -84,27 +84,23 @@ export default function ChatAssistant() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        <IconHelmet className="size-15 rounded-xl text-secondary" />
+        <IconHelmet className="size-15 rounded-xl text-primary" />
       </motion.button>
 
       <div
-        className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-xl transition-all duration-300 md:right-6 md:bottom-22 ${
+        className={`fixed right-4 bottom-20 z-50 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-md border border-border bg-background shadow-xl transition-all duration-300 md:right-6 md:bottom-22 ${
           isOpen
             ? 'pointer-events-auto scale-100 opacity-100'
             : 'pointer-events-none scale-95 opacity-0'
         }`}
         style={{ maxHeight: '60vh', height: '600px' }}
       >
-        <div className="flex items-center justify-between bg-secondary px-4 py-3">
-          <div className="flex items-center gap-2">
-            <div className="flex size-7 items-center justify-center rounded-lg bg-primary/50">
-              <Bot size={20} />
-            </div>
+        <div className="flex items-center justify-between bg-background border-b border-tertiary px-4 py-3">
 
             <h3 className="font-boldonse text-[12px] leading-tight">
               Nicholas 81 Assistant
             </h3>
-          </div>
+
           <div className="flex items-center gap-1">
             <button
               onClick={clearChat}

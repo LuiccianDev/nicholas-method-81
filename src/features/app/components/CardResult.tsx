@@ -75,7 +75,7 @@ const CardResult = memo(function CardResult({
           </p>
 
           {isSurfaceMoreViable && (
-            <div className="max-w-auto gap-4 rounded-xl border border-border bg-background/80 p-4">
+            <div className="max-w-auto gap-4 rounded-sm border border-background bg-background p-4">
               <p className="text-[12px] leading-relaxed">
                 <strong>SURFACE COMPARISON:</strong> Note that{' '}
                 <span className="italic">Open Pit</span> scored higher overall
@@ -89,11 +89,12 @@ const CardResult = memo(function CardResult({
 
         <div
           onClick={onOpenDetails}
-          className="absolute top-4 right-4 flex cursor-pointer flex-row items-center gap-2 rounded-lg bg-black px-3.5 py-2 font-medium text-white transition-all hover:bg-quaternary active:scale-95"
+          className="absolute top-4 right-4 flex cursor-pointer flex-row items-center gap-2 rounded-md bg-black px-3.5 py-2 font-medium
+          text-white transition-all hover:bg-white hover:text-text-primary hover:scale-1.01 "
           title="View Full Calculation Matrix"
         >
           <ArrowDown className="size-5" />
-          <span className="">Matrix</span>
+          <span >Matrix</span>
         </div>
       </motion.div>
     </>
