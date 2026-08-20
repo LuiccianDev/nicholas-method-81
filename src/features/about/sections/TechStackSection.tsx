@@ -64,7 +64,7 @@ export default function TechStackSection() {
                     key={item}
                     variants={chipVariants}
                     whileHover={{ scale: 1.06, y: -2 }}
-                    className="cursor-default rounded-sm border border-text-primary/15 px-3 py-1.5 font-mono text-[10px] tracking-widest text-text-primary/70 uppercase transition-colors duration-300 hover:border-primary/70 hover:bg-primary "
+                    className="cursor-default rounded-sm border border-text-primary/15 px-3 py-1.5 font-mono text-[10px] tracking-widest text-text-primary/70 uppercase transition-colors duration-300 hover:border-primary/70 hover:bg-primary"
                   >
                     {item}
                   </motion.span>

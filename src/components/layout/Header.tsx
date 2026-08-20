@@ -4,10 +4,12 @@ import { Menu, X } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const menuItems = [
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Methods', href: '#methods-mining' },
+  { label: 'Home', href: '/' },
+  { label: 'Calculator', href: '/calculator' },
   { label: 'About', href: '/About' },
 ];
+
+const GITHUB_REPO = 'https://github.com/LuiccianDev/NicholasMethod81';
 
 export default function LandingNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,14 +24,17 @@ export default function LandingNav() {
         transition={{ duration: 0.6 }}
       >
         <div className="flex-1">
-          <motion.button
+          <motion.a
+            href={GITHUB_REPO}
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="rounded-sm bg-black px-4 py-2 font-bold tracking-widest text-white uppercase"
-            data-purpose="cta-book-demo"
+            className="inline-block rounded-sm bg-black px-4 py-2 font-bold tracking-widest text-white uppercase"
+            data-purpose="paper-github"
           >
-            <a href="/calculator">Paper</a>
-          </motion.button>
+            Paper
+          </motion.a>
         </div>
         <div className="flex items-center justify-center rounded-sm bg-background pl-4">
           <a
@@ -49,7 +54,7 @@ export default function LandingNav() {
         </div>
         <div className="flex flex-1 items-center justify-end">
           <div className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[12px] font-semibold tracking-widest uppercase">
-            <a href="/calculator">NIcholas Method</a>
+            <a href="/calculator">Calculator</a>
           </div>
         </div>
       </motion.nav>
@@ -103,13 +108,16 @@ export default function LandingNav() {
                 </ul>
               </nav>
               <div className="border-t border-tertiary px-6 py-6">
-                <motion.button
+                <motion.a
+                  href={GITHUB_REPO}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full rounded-sm bg-black px-4 py-3 text-[11px] font-bold tracking-widest text-background uppercase"
+                  className="block w-full rounded-sm bg-black px-4 py-3 text-center text-[11px] font-bold tracking-widest text-background uppercase"
                 >
-                  Book
-                </motion.button>
+                  Paper
+                </motion.a>
               </div>
             </motion.aside>
           </div>,
