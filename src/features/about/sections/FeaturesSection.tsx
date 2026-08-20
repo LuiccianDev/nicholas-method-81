@@ -1,6 +1,21 @@
+import { motion } from 'motion/react';
 import Eyebrow from '../components/Eyebrow';
 import Reveal from '../components/Reveal';
 import { FEATURES } from '../aboutContent';
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const gridVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
 
 export default function FeaturesSection() {
   return (
@@ -30,13 +45,37 @@ export default function FeaturesSection() {
           </div>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {FEATURES.items.map((item, i) => (
-            <Reveal key={item.number} delay={0.05 * i}>
-              <div className="relative flex h-full flex-col gap-3 border-t border-text-primary/15 pt-6">
-                <span className="font-mono text-[10px] tracking-widest text-text-primary/40 uppercase">
-                  Step {String(item.number).padStart(2, '0')}
+        <motion.div
+          className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2"
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+        >
+          {FEATURES.items.map((item) => (
+            <motion.div
+              key={item.number}
+              variants={cardVariants}
+              whileHover={{ y: -4 }}
+            >
+              <div className="group relative flex h-full flex-col gap-3 border-t border-text-primary/15 pt-6 transition-colors duration-300 hover:border-primary/60">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-4 right-0 font-boldonse text-[4rem] leading-none font-black tracking-tighter text-black/5 select-none"
+                >
+                  *{item.number}
                 </span>
+
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] tracking-widest text-text-primary/40 uppercase">
+                    Step {String(item.number).padStart(2, '0')}
+                  </span>
+                  <item.icon
+                    className="size-5 text-primary"
+                    strokeWidth={1.75}
+                  />
+                </div>
+
                 <h3 className="font-boldonse text-[1.25rem] leading-snug tracking-tight text-text-primary">
                   {item.title}
                 </h3>
@@ -44,9 +83,9 @@ export default function FeaturesSection() {
                   {item.body}
                 </p>
               </div>
-            </Reveal>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

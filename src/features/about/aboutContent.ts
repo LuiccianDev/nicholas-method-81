@@ -1,3 +1,11 @@
+import {
+  Bot,
+  Calculator,
+  ListOrdered,
+  Table2,
+  type LucideIcon,
+} from 'lucide-react';
+
 export const ABOUT_HERO = {
   eyebrow: 'About this project',
   sectionCode: 'NM-00',
@@ -60,6 +68,13 @@ export const METHODOLOGY = {
   ],
 };
 
+export type FeatureItem = {
+  number: number;
+  title: string;
+  body: string;
+  icon: LucideIcon;
+};
+
 export const FEATURES = {
   sectionCode: 'NM-03',
   label: 'What the site does',
@@ -73,21 +88,25 @@ export const FEATURES = {
       number: 1,
       title: 'Deposit calculator',
       body: 'Enter geometry, grade and geomechanics for the ore, hanging wall and footwall.',
+      icon: Calculator,
     },
     {
       number: 2,
       title: 'Ranked shortlist',
       body: 'All ten methods are scored and ordered in seconds, with a clear winner on top.',
+      icon: ListOrdered,
     },
     {
       number: 3,
       title: 'Scoring matrix',
       body: 'Inspect exactly how every method was scored across the Nicholas matrix.',
+      icon: Table2,
     },
     {
       number: 4,
       title: 'AI validation',
       body: 'Ask the assistant to explain the ranking, explore trade-offs and refine the decision.',
+      icon: Bot,
     },
   ],
 };

@@ -1,9 +1,7 @@
-import { useRef, type ReactNode } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion, useReducedMotion } from 'motion/react';
+import type { ReactNode } from 'react';
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 type RevealProps = {
   children: ReactNode;
@@ -20,44 +18,17 @@ export default function Reveal({
   delay = 0,
   duration = 0.7,
 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.fromTo(
-          ref.current,
-          { opacity: 0, y },
-          {
-            opacity: 1,
-            y: 0,
-            duration,
-            delay,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: ref.current,
-              start: 'top 85%',
-              end: 'top 45%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        );
-      });
-
-      mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(ref.current, { opacity: 1, y: 0 });
-      });
-
-      return () => mm.revert();
-    },
-    { scope: ref }
-  );
+  const reduceMotion = useReducedMotion();
 
   return (
-    <div ref={ref} className={className} style={{ opacity: 0 }}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -100px 0px' }}
+      transition={{ duration, delay, ease: EASE }}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }
