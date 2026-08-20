@@ -1,6 +1,7 @@
 import { type RawMethodInput } from '@/types';
 import DropdownSelect from './ui/DropdownSelect';
 import NumericInput from './ui/NumericInput';
+import ExpandableDetails from './ui/ExpandableDetails';
 import {
   getSubStrLabel,
   getFracSpacLabel,
@@ -20,11 +21,11 @@ export default function GeotechnicalInput({
   updateInput,
 }: GeotechnicalInputProps) {
   return (
-    <details className="overflow-hidden pt-4 pl-4">
-      <summary className="iterms-center flex cursor-pointer list-none items-center justify-between gap-4 border-l-4 border-border py-1 pl-3 font-mono text-[12px] tracking-wide uppercase">
-        <span>{title}</span>
-        <span className="tracking-widest">DETAILS</span>
-      </summary>
+    <ExpandableDetails
+      title={title}
+      className="overflow-hidden pt-4 pl-4"
+      summaryClassName="flex cursor-pointer list-none items-center justify-between gap-4 border-l-4 border-border py-1 pl-3 font-mono text-[12px] tracking-wide uppercase"
+    >
       <div className="mt-4 grid gap-3 xl:grid-cols-1 2xl:grid-cols-2">
         <NumericInput
           label="Substance Strength Ratio"
@@ -62,6 +63,6 @@ export default function GeotechnicalInput({
           />
         </div>
       </div>
-    </details>
+    </ExpandableDetails>
   );
 }
