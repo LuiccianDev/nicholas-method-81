@@ -4,7 +4,7 @@ import type { MethodCard as MethodCardData } from '../../content';
 const PUBLIC_IMAGES = [
   '/Underground_Portada.jpeg',
   '/Underground.jpeg',
-  '/dashboard_bg.jpg',
+  '/Underground_Potada_2.jpeg',
 ];
 const getImg = (i: number) => PUBLIC_IMAGES[i % PUBLIC_IMAGES.length];
 

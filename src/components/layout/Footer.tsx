@@ -270,14 +270,14 @@ export default function Footer() {
               ref={detailsRef}
               className="flex flex-wrap items-center justify-center gap-3 pt-1 text-[12px] font-bold sm:gap-4"
             >
-              <button
-                onClick={scrollToTop}
+              <a
+                href="/calculator"
                 className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-black/70 px-6 py-3.5 tracking-wide text-background uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] active:scale-95"
               >
                 Get started
-              </button>
+              </a>
               <a
-                href="https://github.com/LuiccianDev"
+                href="https://github.com/LuiccianDev/NicholasMethod81"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex cursor-pointer items-center gap-2 rounded-sm bg-white/20 px-5 py-3.5 tracking-wider text-white uppercase backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:bg-white/20 active:scale-95"
@@ -311,24 +311,24 @@ export default function Footer() {
                 Selector
               </h4>
               <div className="flex flex-col space-y-2">
-                <button
-                  onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left text-[13px] transition-all duration-300 hover:translate-x-1"
+                <a
+                  href="/About"
+                  className="footer-link w-fit cursor-pointer text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   About Selector
-                </button>
-                <button
-                  onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left text-[13px] transition-all duration-300 hover:translate-x-1"
+                </a>
+                <a
+                  href="/About"
+                  className="footer-link w-fit cursor-pointer text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Optimization Logic
-                </button>
-                <button
-                  onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left text-[13px] transition-all duration-300 hover:translate-x-1"
+                </a>
+                <a
+                  href="/calculator"
+                  className="footer-link w-fit cursor-pointer text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Scoring Matrix
-                </button>
+                </a>
               </div>
             </div>
 
@@ -406,8 +406,8 @@ export default function Footer() {
             <span>
               © {new Date().getFullYear()} luiccian. All rights reserved.
             </span>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
+            <span>Privacy Policy</span>
+            <span>Terms of Use</span>
 
             <button
               ref={backToTopRef}
