@@ -1,4 +1,4 @@
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Download } from 'lucide-react';
 import { type ScoredMethod } from '@/types';
 import RankingTable from './RankingTable';
 import { motion } from 'motion/react';
@@ -6,11 +6,13 @@ import { motion } from 'motion/react';
 interface ScoringMatrixViewProps {
   results: ScoredMethod[];
   onBack: () => void;
+  onExportCsv: () => void;
 }
 
 export default function ScoringMatrixView({
   results,
   onBack,
+  onExportCsv,
 }: ScoringMatrixViewProps) {
   return (
     <>
@@ -33,14 +35,24 @@ export default function ScoringMatrixView({
             Numerical Breakdown / Nicholas Optimization
           </p>
 
-          <button
-            onClick={onBack}
-            className="flex cursor-pointer items-center gap-2 rounded-sm bg-background px-3.5 py-2 text-sm font-medium text-text-primary transition-all hover:bg-black hover:text-background active:scale-95"
-            title="Return to Summary view"
-          >
-            <ArrowUp className="size-5" />
-            <span>Back to Summary</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={onExportCsv}
+              className="flex cursor-pointer items-center gap-2 rounded-sm bg-black px-3.5 py-2 text-sm font-medium text-background transition-all hover:bg-white hover:text-text-primary active:scale-95"
+              title="Download results as CSV"
+            >
+              <Download className="size-5" />
+              <span>Export CSV</span>
+            </button>
+            <button
+              onClick={onBack}
+              className="flex cursor-pointer items-center gap-2 rounded-sm bg-background px-3.5 py-2 text-sm font-medium text-text-primary transition-all hover:bg-black hover:text-background active:scale-95"
+              title="Return to Summary view"
+            >
+              <ArrowUp className="size-5" />
+              <span>Back to Summary</span>
+            </button>
+          </div>
         </div>
 
         {/* Body */}

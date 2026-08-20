@@ -6,6 +6,7 @@ import CardResult from './components/CardResult';
 import BarChart from './components/BarChart';
 import ScoringMatrixView from './components/ScoringMatrixView';
 import { useNicholasContext } from '@/state/NicholasContext';
+import { downloadResultsCsv } from './exportCsv';
 
 function CalculatorContent() {
   const {
@@ -21,6 +22,7 @@ function CalculatorContent() {
 
   const onOpenDetails = useCallback(() => setShowMatrix(true), []);
   const onCloseDetails = useCallback(() => setShowMatrix(false), []);
+  const onExportCsv = useCallback(() => downloadResultsCsv(results), [results]);
 
   return (
     <motion.div className="mx-auto grid w-full grid-cols-1 gap-10 px-4 pt-25 pb-5 md:px-20 xl:grid-cols-[minmax(22rem,0.72fr)_minmax(0,1.28fr)]">
@@ -51,7 +53,11 @@ function CalculatorContent() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
           >
-            <ScoringMatrixView results={results} onBack={onCloseDetails} />
+            <ScoringMatrixView
+              results={results}
+              onBack={onCloseDetails}
+              onExportCsv={onExportCsv}
+            />
           </motion.div>
         )}
       </AnimatePresence>
