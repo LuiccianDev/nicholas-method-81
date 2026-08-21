@@ -5,6 +5,7 @@ const PUBLIC_IMAGES = [
   '/Underground_Portada.jpeg',
   '/Underground.jpeg',
   '/Underground_Potada_2.jpeg',
+  '/Open-pit.jpeg'
 ];
 const getImg = (i: number) => PUBLIC_IMAGES[i % PUBLIC_IMAGES.length];
 
