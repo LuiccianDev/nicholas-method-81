@@ -10,27 +10,27 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/react": "^6.0.3",
-    "@astrojs/vercel": "^11.0.6",
-    "@google/genai": "^2.17.1",
+    "@astrojs/react": "^6.0.6",
+    "@astrojs/vercel": "^11.0.14",
+    "@google/genai": "^2.28.0",
     "@gsap/react": "^2.1.2",
-    "astro": "^7.2.3",
+    "astro": "^7.3.8",
     "gsap": "^3.15.0",
-    "lucide-react": "^1.32.0",
+    "lucide-react": "^1.55.0",
     "motion": "13.1.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "recharts": "3.10.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.3.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4.3.3",
     "typescript": "~6.0.3"
   },
-  "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
+  "packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9"
 }

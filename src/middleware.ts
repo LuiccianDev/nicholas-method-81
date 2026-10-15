@@ -9,13 +9,12 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
 };
 
-export const onRequest = defineMiddleware((_context, next) => {
-  const response = next();
+export const onRequest = defineMiddleware(async (_context, next) => {
+  const response = await next();
 
-  return response.then((res) => {
-    for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
-      res.headers.set(key, value);
-    }
-    return res;
-  });
+  for (const [key, value] of Object.entries(SECURITY_HEADERS)) {
+    response.headers.set(key, value);
+  }
+
+  return response;
 });
