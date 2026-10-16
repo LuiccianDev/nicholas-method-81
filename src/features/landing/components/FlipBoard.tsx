@@ -35,13 +35,16 @@ export default function FlipBoard({
 }: FlipBoardProps) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const suffixRef = useRef<HTMLSpanElement>(null);
+  const hasPlayedRef = useRef(false);
   const numberText = value.toFixed(decimals);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {
       if (!numberRef.current) return;
-      if (!active || prefersReducedMotion) return;
+      if (!active || prefersReducedMotion || hasPlayedRef.current) return;
+
+      hasPlayedRef.current = true;
 
       const split = SplitText.create(numberRef.current, {
         type: 'chars',
@@ -66,16 +69,10 @@ export default function FlipBoard({
           '-=0.15'
         );
       }
-
-      return () => {
-        tl.kill();
-        split.revert();
-      };
     },
     {
       scope: numberRef,
       dependencies: [numberText, suffix, active, prefersReducedMotion],
-      revertOnUpdate: true,
     }
   );
 

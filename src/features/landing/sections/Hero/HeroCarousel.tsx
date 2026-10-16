@@ -30,14 +30,18 @@ function addGroupTransition(
   from: GroupRef,
   to: GroupRef,
   atTime: number,
-  toY: number,
-  onEnter: () => void
+  toY: number
 ) {
-  tl.call(onEnter, undefined, atTime);
-
   tl.to(
     from.current,
-    { y: -100, opacity: 0, scale: 0.95, duration: 0.4, ease: 'circ.out' },
+    {
+      y: -100,
+      opacity: 0,
+      scale: 0.95,
+      filter: 'blur(16px)',
+      duration: 0.45,
+      ease: 'power2.inOut',
+    },
     atTime
   );
 
@@ -48,13 +52,13 @@ function addGroupTransition(
       opacity: 1,
       scale: 1,
       filter: 'blur(0px)',
-      duration: 0.4,
-      ease: 'circ.out',
+      duration: 0.45,
+      ease: 'power2.out',
     },
-    atTime
+    atTime + 0.05
   );
 
-  tl.set(to.current, { filter: 'none' }, atTime + 0.4);
+  tl.set(to.current, { filter: 'none' }, atTime + 0.5);
 }
 
 const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
@@ -65,9 +69,12 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
     const group2Ref = useRef<HTMLDivElement>(null);
     const group3Ref = useRef<HTMLDivElement>(null);
 
+    const lastBeatRef = useRef(0);
     const [activeGroup, setActiveGroup] = useState(0);
 
     const goToBeat = (index: number) => {
+      if (lastBeatRef.current === index) return;
+      lastBeatRef.current = index;
       setActiveGroup(index);
       onBeatChange?.(index);
     };
@@ -80,12 +87,12 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
         tl.fromTo(
           group1Ref.current,
           { opacity: 0, y: 110, filter: 'blur(36px)' },
-          { opacity: 1, y: 110, duration: 0.6 },
+          { opacity: 1, y: 110, duration: 0.6, ease: 'power2.out' },
           position
         ).fromTo(
           group1Ref.current,
           { filter: 'blur(36px)' },
-          { filter: 'blur(0px)', duration: 0.7 },
+          { filter: 'blur(0px)', duration: 0.7, ease: 'power2.out' },
           position
         );
 
@@ -107,8 +114,18 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
         mm.add('(prefers-reduced-motion: no-preference)', () => {
           if (!sectionRef.current) return;
 
-          gsap.set(group2Ref.current, { filter: 'blur(20px)' });
-          gsap.set(group3Ref.current, { filter: 'blur(20px)' });
+          gsap.set(group2Ref.current, {
+            opacity: 0,
+            y: 260,
+            scale: 0.96,
+            filter: 'blur(20px)',
+          });
+          gsap.set(group3Ref.current, {
+            opacity: 0,
+            y: 260,
+            scale: 0.96,
+            filter: 'blur(20px)',
+          });
 
           // Timeline de scrub — NO pinea (el pin es responsabilidad exclusiva
           // del ScrollTrigger dedicado en Hero.tsx). Mismo trigger y mismo
@@ -118,24 +135,29 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
               trigger: pinTrigger.current,
               start: 'top top',
               end: '+=190%',
-              scrub: 0.5,
+              scrub: 0.6,
+              onUpdate: () => {
+                const t = tl.time();
+                if (t < 0.6) {
+                  goToBeat(0);
+                } else if (t < 1.6) {
+                  goToBeat(1);
+                } else {
+                  goToBeat(2);
+                }
+              },
             },
           });
 
-          tl.call(() => goToBeat(0), undefined, 0);
           tl.fromTo(
             group1Ref.current,
             { y: 110 },
-            { y: -50, duration: 0.4, ease: 'circ.out' },
+            { y: -50, duration: 0.45, ease: 'power2.out' },
             0
           );
 
-          addGroupTransition(tl, group1Ref, group2Ref, 0.6, -50, () =>
-            goToBeat(1)
-          );
-          addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0, () =>
-            goToBeat(2)
-          );
+          addGroupTransition(tl, group1Ref, group2Ref, 0.6, -50);
+          addGroupTransition(tl, group2Ref, group3Ref, 1.6, 0);
 
           tl.to({}, { duration: 0.6 });
         });

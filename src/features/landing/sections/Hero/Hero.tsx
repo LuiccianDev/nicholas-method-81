@@ -43,7 +43,7 @@ export default function Hero() {
       }
 
       gsap
-        .timeline()
+        .timeline({ defaults: { overwrite: 'auto' } })
         .to(
           [
             captionLeftRef.current,

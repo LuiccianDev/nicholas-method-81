@@ -24,19 +24,22 @@ export default function StatementCard({
   delay = 0,
 }: StatementCardProps) {
   const statementRef = useRef<HTMLParagraphElement>(null);
+  const hasPlayedRef = useRef(false);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {
       if (!statementRef.current) return;
-      if (!active || prefersReducedMotion) return;
+      if (!active || prefersReducedMotion || hasPlayedRef.current) return;
+
+      hasPlayedRef.current = true;
 
       const split = SplitText.create(statementRef.current, {
         type: 'words',
         wordsClass: 'word',
       });
 
-      const tween = gsap.fromTo(
+      gsap.fromTo(
         split.words,
         { opacity: 0, filter: 'blur(8px)', y: 8 },
         {
@@ -49,11 +52,6 @@ export default function StatementCard({
           ease: 'power3.out',
         }
       );
-
-      return () => {
-        tween.kill();
-        split.revert();
-      };
     },
     {
       scope: statementRef,

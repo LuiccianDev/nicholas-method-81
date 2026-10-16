@@ -28,17 +28,20 @@ export default function FeaturedStatCard({
   tags = [],
 }: FeaturedStatCardProps) {
   const tagsRef = useRef<HTMLDivElement>(null);
+  const hasPlayedRef = useRef(false);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {
       if (!tagsRef.current) return;
-      if (!active || prefersReducedMotion) return;
+      if (!active || prefersReducedMotion || hasPlayedRef.current) return;
+
+      hasPlayedRef.current = true;
 
       const pills = tagsRef.current.querySelectorAll('[data-tag]');
       if (!pills.length) return;
 
-      const tween = gsap.fromTo(
+      gsap.fromTo(
         pills,
         { opacity: 0, y: 6, scale: 0.95 },
         {
@@ -51,8 +54,6 @@ export default function FeaturedStatCard({
           ease: 'power2.out',
         }
       );
-
-      return () => tween.kill();
     },
     {
       scope: tagsRef,
