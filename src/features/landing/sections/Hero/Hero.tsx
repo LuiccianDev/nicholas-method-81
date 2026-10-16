@@ -33,6 +33,12 @@ export default function Hero() {
         return;
       if (isFirstBeat.current) {
         isFirstBeat.current = false;
+        captionLeftRef.current.textContent = HERO_CAPTIONS[activeBeat].left;
+        captionRightRef.current.textContent = HERO_CAPTIONS[activeBeat].right;
+        captionBottomPrimaryRef.current.textContent =
+          HERO_CAPTIONS[activeBeat].bottomPrimary;
+        captionBottomSecondaryRef.current.textContent =
+          HERO_CAPTIONS[activeBeat].bottomSecondary;
         return;
       }
 
@@ -79,6 +85,17 @@ export default function Hero() {
 
   useGSAP(
     () => {
+      // Si el usuario recarga la página estando a mitad del scroll, llevamos
+      // el scroll a 0 antes de que GSAP cree los pines y los timelines.
+      // Así la secuencia de entrada (introTl) y el scrub (HeroCarousel)
+      // se ejecutan siempre limpios y en su orden original sin superponerse.
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      if (window.scrollY > 0) {
+        window.scrollTo(0, 0);
+      }
+
       // Timeline maestro de entrada: la imagen (clipPath) y el reveal del
       // group1 de HeroCarousel corren aquí, en el MISMO timeline —
       // mismo reloj, sin posibilidad de desfase entre ambos archivos.
@@ -149,7 +166,7 @@ export default function Hero() {
     <>
       <div
         ref={containerRef}
-        className="h-svh w-full px-5"
+        className="h-[96svh] w-full px-5"
         data-purpose="hero-visual"
       >
         <div className="relative h-full overflow-hidden">

@@ -95,6 +95,13 @@ const HeroCarousel = forwardRef<HeroCarouselHandle, HeroCarouselProps>(
 
     useGSAP(
       () => {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        if (window.scrollY > 0) {
+          window.scrollTo(0, 0);
+        }
+
         const mm = gsap.matchMedia();
 
         mm.add('(prefers-reduced-motion: no-preference)', () => {
