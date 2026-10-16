@@ -1,0 +1,11 @@
+{
+  "name": "nicholas-mining-methodology",
+  "displayName": "Nicholas Method 81 - Mining Methodology",
+  "description": "Numerical approach for mining method selection based on David E. Nicholas (1981). Scoring matrices, geomechanical criteria, deposit geometry, and decision rules.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Explicar el criterio de selección de método subterráneo según Nicholas 1981",
+    "Validar consistencia de los parámetros geomecánicos del yacimiento",
+    "Analizar el ranking de métodos mineros para una veta angosta con roca competente"
+  ]
+}

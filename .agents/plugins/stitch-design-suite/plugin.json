@@ -1,0 +1,11 @@
+{
+  "name": "stitch-design-suite",
+  "displayName": "Stitch Design Suite",
+  "description": "Suite de diseño para Nicholas Method 81. Integra Stitch CLI, servidor MCP nativo y flujos de captura, variantes y sincronización de UI.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Sincronizar el DESIGN.md de Nicholas Method con Stitch",
+    "Capturar la pantalla de la calculadora y subirla a Stitch",
+    "Generar variantes visuales con Stitch para los paneles geomecánicos"
+  ]
+}

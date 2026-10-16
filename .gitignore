@@ -26,7 +26,7 @@ dist-ssr
 
 .astro/
 
-.agents/
+
 skills-lock.json
 .github/
 .kiro/

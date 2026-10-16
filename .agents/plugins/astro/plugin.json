@@ -1,0 +1,11 @@
+{
+  "name": "astro",
+  "displayName": "Astro Framework & Live Docs",
+  "description": "Dedicated Astro 7 plugin with official live documentation MCP connection, SSR configurations, React islands architecture, and build patterns.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Consultar la documentación oficial de Astro sobre adaptadores SSR",
+    "Configurar directivas de hidratación de islas de React en Astro",
+    "Optimizar el middleware y endpoints de servidor en Astro 7"
+  ]
+}

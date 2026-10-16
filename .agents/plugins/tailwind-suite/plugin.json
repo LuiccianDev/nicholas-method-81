@@ -1,0 +1,11 @@
+{
+  "name": "tailwind-suite",
+  "displayName": "Tailwind CSS v4 Suite",
+  "description": "Tailwind CSS v4 utility patterns, design tokens in @theme, color palette standards, and CSS-first styling practices.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Crear estilos con utilidades oficiales de Tailwind v4",
+    "Configurar tokens de color o sombras en @theme dentro de index.css",
+    "Diseñar layouts responsivos con Flexbox y Grid en Tailwind"
+  ]
+}

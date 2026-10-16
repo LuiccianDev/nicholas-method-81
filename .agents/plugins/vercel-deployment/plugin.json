@@ -1,0 +1,11 @@
+{
+  "name": "vercel-deployment",
+  "displayName": "Vercel Deployment Suite",
+  "description": "Production deployments to Vercel: server output configuration, environment variable management, preview branches, and build checks.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Verificar los requisitos antes de desplegar a Vercel",
+    "Configurar variables de entorno y secrets en Vercel",
+    "Generar un preview deployment del proyecto"
+  ]
+}
