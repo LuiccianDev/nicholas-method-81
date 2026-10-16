@@ -1,0 +1,11 @@
+---
+import AboutPage from '@/features/about/AboutPage';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About | Nicholas Method 81"
+  description="About the Nicholas Method 81 web tool — why it exists, how the methodology works, the technology behind it, and the creator."
+>
+  <AboutPage client:load />
+</BaseLayout>

@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-backend",
+  "displayName": "Node.js & Backend Architecture",
+  "description": "Backend API development patterns, error handling, request security, middleware guards, and async architectures in Node.js.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Diseñar un endpoint API seguro con validación de schema y límites de tamaño",
+    "Configurar headers de seguridad y políticas de middleware",
+    "Manejar errores asíncronos y fallbacks en endpoints de servidor"
+  ]
+}

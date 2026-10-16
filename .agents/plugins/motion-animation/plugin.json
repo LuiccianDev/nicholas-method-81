@@ -1,0 +1,11 @@
+{
+  "name": "motion-animation",
+  "displayName": "Motion Animation Suite",
+  "description": "Declarative React UI animations, layout transitions with layoutId, exit animations with AnimatePresence, and spring physics using motion/react.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Crear una animación de entrada con AnimatePresence y Motion",
+    "Diseñar una transición de layout compartida con layoutId",
+    "Configurar animaciones basadas en resortes (springs) para botones y modales"
+  ]
+}

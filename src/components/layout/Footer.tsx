@@ -1,40 +1,23 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
-  const textContainerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 300);
-    };
-
-    toggleVisibility();
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
+  const backToTopRef = useRef<HTMLButtonElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const isScrollingRef = useRef(false);
 
-  useGSAP(
+  const { contextSafe } = useGSAP(
     () => {
       if (!footerRef.current) return;
 
@@ -57,7 +40,6 @@ export default function Footer() {
 
           const mainDuration = reduceMotion ? 0 : 1;
 
-          // Intro reveal for CTA card texts.
           const introTimeline = gsap.timeline({
             defaults: {
               duration: mainDuration,
@@ -175,6 +157,27 @@ export default function Footer() {
               );
             }
           }
+
+          if (backToTopRef.current) {
+            gsap.fromTo(
+              backToTopRef.current,
+              {
+                y: reduceMotion ? 0 : 8,
+                autoAlpha: reduceMotion ? 1 : 0,
+              },
+              {
+                scrollTrigger: {
+                  trigger: backToTopRef.current,
+                  start: 'top 98%',
+                  once: true,
+                },
+                y: 0,
+                autoAlpha: 1,
+                duration: reduceMotion ? 0 : 0.4,
+                ease: 'power2.out',
+              }
+            );
+          }
         }
       );
 
@@ -184,6 +187,54 @@ export default function Footer() {
     },
     { scope: footerRef }
   );
+
+  const scrollToTop = contextSafe(() => {
+    if (isScrollingRef.current) return;
+
+    const overlayEl = overlayRef.current;
+    if (!overlayEl) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (reduceMotion) {
+      window.scrollTo(0, 0);
+      ScrollTrigger.update();
+      return;
+    }
+
+    isScrollingRef.current = true;
+
+    gsap
+      .timeline({
+        onComplete: () => {
+          isScrollingRef.current = false;
+        },
+      })
+      .to(overlayEl, {
+        autoAlpha: 1,
+        duration: 0.4,
+        ease: 'power2.inOut',
+      })
+      .call(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        ScrollTrigger.update();
+        ScrollTrigger.getAll().forEach((st) => {
+          st.getTween()?.progress(1);
+          st.animation?.totalProgress(0);
+        });
+      })
+      .to(overlayEl, {
+        autoAlpha: 0,
+        duration: 0.7,
+        delay: 0.15,
+        ease: 'power3.out',
+      });
+  });
 
   const socialLinks = [
     { name: 'Instagram', url: 'https://www.instagram.com/luiccian_dev' },
@@ -197,64 +248,62 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative flex min-h-[58vh] flex-col justify-between overflow-hidden border-t border-border bg-surface pt-16 font-sans"
+      className="relative flex min-h-[70vh] flex-col justify-between"
     >
-      <div className="relative z-20 mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-[#381525]/30 bg-linear-to-br from-[#230d17] via-[#2d111d] to-[#1a0a11] p-7 text-[#ffecc0] shadow-2xl md:p-10">
-          <div className="pointer-events-none absolute -right-24 -bottom-24 h-80 w-80 rounded-full bg-linear-to-tr from-[#b95e82]/20 to-transparent blur-3xl" />
-          <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-linear-to-bl from-[#f39f9f]/10 to-transparent blur-3xl" />
+      <div
+        ref={overlayRef}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-9999 bg-background/95 opacity-0 backdrop-blur-md"
+      />
+      <div className="relative z-20 mb-5 w-full px-5 pt-10">
+        <div className="relative overflow-hidden rounded-sm bg-[url('/footer.jpeg')] bg-center px-6 py-18 pb-5">
+          <div className="absolute inset-0 bg-black/10" />
+          <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-5 text-center">
+            <h3
+              ref={titleRef}
+              className="font-boldonse text-xl tracking-tight text-pretty text-background sm:text-2xl lg:text-3xl"
+            >
+              Evaluating deposit viability with numerical mechanics logic.
+            </h3>
 
-          <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
-            <div className="lg:col-span-7">
-              <h3
-                ref={titleRef}
-                className="font-serif text-2xl leading-snug font-bold tracking-tight text-[#ffecc0] italic sm:text-[1.7rem] lg:text-3xl"
-              >
-                Evaluating deposit viability with numerical mechanics logic.
-              </h3>
-            </div>
+            <p
+              ref={descriptionRef}
+              className="max-w-2xl text-[11px] leading-relaxed tracking-wider text-pretty text-background uppercase sm:text-sm"
+            >
+              Assess geomechanical conditions, grade distributions, and deposit
+              geometry with David Nicholas' optimized selection engine.
+            </p>
 
-            <div className="flex flex-col gap-6 lg:col-span-5">
-              <p
-                ref={descriptionRef}
-                className="font-mono text-[10px] leading-relaxed tracking-widest text-[#dec9a4] uppercase"
+            <div
+              ref={detailsRef}
+              className="flex flex-wrap items-center justify-center gap-3 pt-1 text-[12px] font-bold sm:gap-4"
+            >
+              <a
+                href="/calculator"
+                className="group flex cursor-pointer items-center justify-center gap-2 rounded-sm bg-black/70 px-6 py-3.5 tracking-wide text-background uppercase backdrop-blur-2xl transition-all duration-300 hover:scale-[1.03] active:scale-95"
               >
-                Assess geomechanical conditions, grade distributions, and
-                deposit geometry with David Nicholas' optimized selection
-                engine.
-              </p>
-
-              <div
-                ref={detailsRef}
-                className="flex flex-wrap items-center gap-4"
+                Get started
+              </a>
+              <a
+                href="https://github.com/LuiccianDev/NicholasMethod81"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex cursor-pointer items-center gap-2 rounded-sm bg-white/20 px-5 py-3.5 tracking-wider text-white uppercase backdrop-blur-xl transition-all duration-300 hover:scale-[1.03] hover:bg-white/20 active:scale-95"
               >
-                <button
-                  onClick={scrollToTop}
-                  className="group flex cursor-pointer items-center gap-2 rounded-full bg-[#ffecc0] px-6 py-3 font-mono text-[10px] font-bold tracking-widest text-[#230d17] uppercase shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-[#ffecc0]/90 active:scale-[0.98]"
-                >
-                  Get started 🪄
-                </button>
-                <a
-                  href="https://github.com/LuiccianDev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex cursor-pointer items-center gap-1.5 px-4 py-3 font-mono text-[10px] font-bold tracking-widest text-[#ffecc0] uppercase transition-all duration-300 hover:scale-[1.03] hover:text-white active:scale-[0.98]"
-                >
-                  ▶ Watch details guide
-                </a>
-              </div>
+                <span>▶ Watch details guide</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6 sm:px-8 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col items-start lg:col-span-5">
-            <div className="mb-4 font-sans text-3xl font-black tracking-tighter text-foreground uppercase select-none">
-              luiccian<span className="text-secondary">.</span>
+            <div className="mb-4 text-3xl tracking-tighter uppercase select-none">
+              luiccian
             </div>
-            <p className="max-w-sm font-sans text-xs leading-relaxed text-foreground-muted">
+            <p className="max-w-sm text-[12px] leading-relaxed">
               There is no risk-free extraction, only optimized selection.
               Nicholas numerical matrix assesses core geometries and rock
               conditions to refine mining pathways.
@@ -266,33 +315,33 @@ export default function Footer() {
             className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:gap-4"
           >
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[14px] font-bold tracking-wide uppercase">
                 Selector
               </h4>
               <div className="flex flex-col space-y-2">
-                <button
-                  onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                <a
+                  href="/About"
+                  className="footer-link w-fit cursor-pointer text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   About Selector
-                </button>
-                <button
-                  onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                </a>
+                <a
+                  href="/About"
+                  className="footer-link w-fit cursor-pointer text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Optimization Logic
-                </button>
-                <button
-                  onClick={scrollToTop}
-                  className="footer-link w-fit cursor-pointer text-left font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                </a>
+                <a
+                  href="/calculator"
+                  className="footer-link w-fit cursor-pointer text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Scoring Matrix
-                </button>
+                </a>
               </div>
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[14px] font-bold tracking-wide uppercase">
                 Resources
               </h4>
               <div className="flex flex-col space-y-2">
@@ -300,7 +349,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Core Algorithm
                 </a>
@@ -308,7 +357,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Technical Docs
                 </a>
@@ -316,7 +365,7 @@ export default function Footer() {
                   href="https://github.com/LuiccianDev/NicholasMethod81"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                  className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                 >
                   Estimation Guide
                 </a>
@@ -324,7 +373,7 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-col space-y-4">
-              <h4 className="network-title font-mono text-[10px] font-bold tracking-[0.2em] text-secondary uppercase opacity-80">
+              <h4 className="network-title font-mono text-[14px] font-bold tracking-wide uppercase">
                 Network
               </h4>
               <div className="flex flex-col space-y-2">
@@ -334,7 +383,7 @@ export default function Footer() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="footer-link w-fit font-sans text-[13px] text-foreground-muted transition-all duration-300 hover:translate-x-1 hover:text-primary"
+                    className="footer-link w-fit text-[13px] transition-all duration-300 hover:translate-x-1"
                   >
                     {link.name}
                   </a>
@@ -347,56 +396,40 @@ export default function Footer() {
 
       <div
         ref={textContainerRef}
-        className="pointer-events-none relative mt-auto flex w-full items-end justify-center py-4 select-none"
+        className="pointer-events-none relative mt-auto flex w-full items-end justify-center select-none"
       >
         <h1
           ref={textRef}
-          className="m-0 text-center font-sans text-[clamp(72px,20vw,350px)] leading-none font-black tracking-tight uppercase antialiased select-none"
+          className="mx-0 mt-25 text-center font-boldonse text-[clamp(50px,15vw,270px)] leading-none font-black tracking-tight text-black uppercase antialiased select-none"
         >
           LUICCIAN
         </h1>
       </div>
 
-      {/* 4. Bottom Utilities Row & Copyright */}
-      <div className="relative z-20 w-full border-t border-border bg-surface px-6 py-8 sm:px-8 lg:px-12">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          {/* Left: Interactive status pill badge */}
-          <div className="flex w-fit cursor-default items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-2 shadow-xs transition-all duration-300 hover:bg-primary/20">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-            </span>
-            <span className="font-mono text-[9px] font-semibold tracking-wider text-primary uppercase">
-              All systems operational
-            </span>
-          </div>
+      <div className="relative z-20 w-full px-6 pt-15 text-[14px] sm:px-8 lg:px-12">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <span className="tracking-wider">All systems operational</span>
 
-          {/* Right: copyright text & legal links */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px] text-foreground-muted">
+          <div className="flex flex-wrap items-center gap-x-6">
             <span>
               © {new Date().getFullYear()} luiccian. All rights reserved.
             </span>
-            <a href="#" className="transition-colors hover:text-primary">
-              Privacy Policy
-            </a>
-            <a href="#" className="transition-colors hover:text-primary">
-              Terms of Use
-            </a>
+            <span>Privacy Policy</span>
+            <span>Terms of Use</span>
 
-            <AnimatePresence>
-              {isVisible && (
-                <motion.button
-                  id="back-to-top"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  onClick={scrollToTop}
-                  className="ml-auto cursor-pointer rounded-sm bg-secondary px-3 py-1 font-mono text-[9px] tracking-wider text-surface uppercase transition-all duration-300 hover:bg-primary"
-                >
-                  ↑ TOP
-                </motion.button>
-              )}
-            </AnimatePresence>
+            <button
+              ref={backToTopRef}
+              id="back-to-top"
+              type="button"
+              aria-label="Scroll back to top"
+              onClick={scrollToTop}
+              className="group ml-auto flex cursor-pointer items-center gap-1.5 rounded-sm bg-quaternary/90 px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider uppercase backdrop-blur-3xl transition-all duration-300 hover:bg-quaternary active:scale-95"
+            >
+              <span className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5">
+                ↑
+              </span>
+              <span>TOP</span>
+            </button>
           </div>
         </div>
       </div>

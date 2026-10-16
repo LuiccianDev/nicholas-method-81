@@ -1,5 +1,9 @@
+allowBuilds:
+  '@google/genai': true
+  esbuild: true
+  protobufjs: true
 engineStrict: true
-ignore-scripts: true
+ignoreScripts: true
 minimumReleaseAge: 1440
 overrides:
-  brace-expansion@>=5.0.0 <5.0.6: '>=5.0.6'
+  path-to-regexp@>=4.0.0 <6.3.0: ^6.3.0

@@ -1,0 +1,13 @@
+---
+import NicholasCalculator from '@/features/app/NicholasCalculator';
+import ChatAssistant from '@/features/chat/ChatAssistant';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Nicholas Method Calculator"
+  description="Nicholas Method Calculator"
+>
+  <NicholasCalculator client:load />
+  <ChatAssistant client:idle />
+</BaseLayout>

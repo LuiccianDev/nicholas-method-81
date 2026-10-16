@@ -1,0 +1,11 @@
+{
+  "name": "quality-and-testing-suite",
+  "displayName": "Code Quality, A11y & Browser Testing Suite",
+  "description": "Verification toolkit: Playwright CLI browser automation on port 4321, WCAG 2.2 accessibility compliance, and TypeScript quality audits.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Verificar la interfaz en vivo con Playwright CLI en el puerto 4321",
+    "Auditar el contraste y la accesibilidad WCAG 2.2 en los formularios",
+    "Ejecutar verificación de tipos y comprobación de errores en consola"
+  ]
+}

@@ -1,62 +1,128 @@
-# Guía Técnica: Pre-selección de Métodos de Explotación (Método de Nicholas)
+# Guia tecnica de uso: Metodo de Nicholas
 
-## 1. Introducción: Propósito de la Herramienta
+## 1. Proposito
 
-Bienvenido a la aplicación de evaluación para la selección de métodos de explotación basada en el Método de Nicholas (modificado). Esta herramienta está diseñada específicamente para estudiantes y profesionales de **Ingeniería de Minas** con el objetivo de agilizar el proceso de diseño y planificación inicial.
+Esta aplicacion convierte el metodo numerico de Nicholas para seleccion de metodos de explotacion en un flujo simple de uso. Su objetivo es ayudar a preseleccionar metodos mineros a partir de la geometria del yacimiento, la distribucion de leyes y las condiciones geomecanicas del cuerpo mineralizado, la caja techo y la caja piso.
 
-El principal beneficio de esta aplicación es **eliminar el trabajo manual** de las complejas operaciones matriciales y la categorización de variables continuas. En lugar de cruzar datos a mano en múltiples tablas, la aplicación permite ingresar los datos del yacimiento directamente y procesa la información al instante para generar recomendaciones objetivas.
+La herramienta no reemplaza el criterio del ingeniero. El resultado es una preseleccion tecnica para pasar a una etapa de analisis mas detallado.
 
-> [!WARNING]
-> **Advertencia Crítica:** Esta aplicación entrega una **sugerencia técnica de pre-selección**. El resultado arrojado (por ejemplo, *Sublevel Stoping*) **no reemplaza** el criterio del ingeniero ni los estudios de pre-factibilidad y factibilidad. La decisión final debe siempre considerar parámetros económicos, diseño de ventilación, ritmo de producción requerido y validaciones geotécnicas in-situ.
+## 2. Que evalua la metodologia
 
-## 2. Fundamentos del Método en la Aplicación
+El paper original propone un proceso en dos etapas:
 
-La aplicación digitaliza y automatiza el enfoque numérico de selección de métodos de explotación. El flujo lógico interno es el siguiente:
+1. Stage 1: clasificar el yacimiento por geometria, distribucion de leyes y caracteristicas geomecanicas, y luego rankear los metodos mineros que mejor se ajustan.
+2. Stage 2: tomar los metodos mejor rankeados y hacer un estudio preliminar de mina para estimar costos, cut-off grade, reservas minables y viabilidad economica.
 
-1. **Recepción de Inputs:** Toma las características geométricas y geomecánicas del yacimiento y sus rocas encajonantes (caja techo y caja piso).
-2. **Categorización:** Transforma valores numéricos continuos (como la potencia en metros o el buzamiento en grados) en las categorías discretas requeridas por las matrices originales (ej. "Estrecho", "Intermedio", "Masivo").
-3. **Evaluación Matricial:** Aplica las matrices de puntuación del método de Nicholas/UBC. Cada método minero recibe una calificación geométrica y una calificación geomecánica.
-4. **Sugerencia Óptima:** Suma los puntajes y sugiere el método (o métodos) con el valor numérico más alto, aplicando penalizaciones y reglas de exclusión para aquellos técnicamente inviables.
+La aplicacion implementa la logica de Stage 1 para ordenar los metodos y mostrar cuales tienen mejor encaje tecnico.
 
-> [!IMPORTANT]
-> **Criterios Externos No Evaluados:**
-> La herramienta asume ciertas condiciones estándar para simplificar el cálculo inicial. Como ingeniero, es tu responsabilidad complementar el análisis evaluando factores externos que la herramienta no pide, tales como:
-> - **Profundidad del yacimiento:** Métodos como *Block Caving* o *Room and Pillar* tienen serias limitantes de profundidad debido a los esfuerzos inducidos.
-> - **Dilución y Recuperación Aceptable:** El valor del mineral (leyes) dicta qué tanta dilución es económicamente permisible.
-> - **Disponibilidad de Capital (CAPEX):** Algunos métodos sugeridos pueden requerir inversiones iniciales masivas inasumibles para un proyecto pequeño.
+## 3. Datos que debes ingresar
 
-## 3. Cómo Usar la Aplicación Paso a Paso
+El formulario trabaja con 4 bloques de informacion:
 
-Sigue estos pasos para obtener una recomendación de explotación subterránea a partir de los datos de exploración de tu proyecto.
+### Geometria y distribucion de leyes
 
-### Paso 1: Preparación de Datos (Inputs)
-Antes de abrir la aplicación, asegúrate de tener a la mano el modelo geológico y geotécnico preliminar. Necesitarás:
-- **Geometría:** Forma general del cuerpo, potencia (grosor), buzamiento (inclinación) y distribución de leyes.
-- **Geomecánica (RMR/Q):** Resistencia de la roca intacta (RQD, UCS), fracturamiento y resistencia de discontinuidades tanto para la **Veta/Cuerpo (Ore)**, como para la **Caja Techo (Hanging Wall)** y **Caja Piso (Footwall)**.
+- General shape: forma general del cuerpo mineralizado.
+- Ore thickness: espesor del cuerpo.
+- Ore plunge: inclinacion o buzamiento del cuerpo.
+- Grade distribution: distribucion de leyes.
 
-### Paso 2: Ingreso en el Formulario
-1. Abre la interfaz principal.
-2. Ingresa los parámetros en la sección de formulario. Evita dejar campos vacíos, ya que la matriz requiere información completa para no sesgar el resultado.
-3. El sistema categorizará automáticamente tus números reales a los rangos de la metodología.
+### Roca del mineral (Ore)
 
-### Paso 3: Interpretación de Resultados
-Una vez calculados los puntajes, la interfaz te mostrará varias visualizaciones:
+- Rock substance strength.
+- Fracture spacing.
+- Fracture strength.
 
-- **La Sugerencia Principal:** Verás destacado el **Mejor Método de Explotación Subterránea**. Este es el que matemáticamente se adapta mejor a tu yacimiento.
-- **Gráficos de Barras y Matrices:** Observa los métodos que quedaron en segundo o tercer lugar. Si los puntajes son muy cercanos (ej. *Cut and Fill* vs *Shrinkage*), ambos merecen un estudio económico detallado.
-- **Regla de Exclusión:** Si ves métodos con puntuaciones negativas muy altas (ej. -49), significa que una o más características de tu yacimiento hacen que ese método sea física o económicamente inviable (ej. *Room and Pillar* en una veta muy buzante).
+### Hanging wall
 
-## 4. Caso de Uso de Ejemplo
+- Rock substance strength.
+- Fracture spacing.
+- Fracture strength.
 
-**Contexto del Yacimiento "Mina Ejemplo":**
-- **Forma:** Tabular
-- **Potencia:** 15 metros
-- **Buzamiento:** 75° (Vertical/Subvertical)
-- **Calidad Roca (Cuerpo):** Fuerte (RMR > 70)
-- **Calidad Roca (Cajas):** Regular a Débil (RMR 40-50)
+### Footwall
 
-**Acción en la App:**
-Ingresas estos datos en el formulario. La app toma los 15 metros y los clasifica como "Intermedio". Toma los 75° y los clasifica como "Empinado". Analiza la geomecánica donde el cuerpo es competente pero las cajas colapsarían si se dejan expuestas.
+- Rock substance strength.
+- Fracture spacing.
+- Fracture strength.
 
-**Resultado Esperado:**
-La aplicación descartará métodos de tajeos abiertos (*Open Stopes*) debido a la debilidad de las cajas (penalización severa). Puntuará positivamente métodos soportados, sugiriendo probablemente **Cut and Fill Stoping** (Corte y Relleno) como la mejor alternativa técnica subterránea, eliminando horas de cruce manual de datos en las matrices para el estudiante.
+## 4. Como interpretar cada categoria
+
+La metodologia original usa categorias discretas. Si tu dato real cae entre dos rangos, usa el criterio geologico-geomecanico mas representativo del dominio que estas evaluando.
+
+### Geometria
+
+- General shape: Massive, Tabular/Platy o Irregular.
+- Ore thickness: Narrow, Intermediate, Thick o Very Thick.
+- Ore plunge: Flat, Intermediate o Steep.
+- Grade distribution: Uniform, Gradational o Erratic.
+
+### Rock mechanics
+
+Para el paper, la resistencia del macizo se expresa como una relacion entre resistencia a compresion simple y esfuerzo litostatico.
+
+- Weak: < 8.
+- Moderate: 8 - 15.
+- Strong: > 15.
+
+El espaciamiento de fracturas se interpreta por densidad de discontinuidades o por RQD equivalente.
+
+- Very close.
+- Close.
+- Wide.
+- Very wide.
+
+La resistencia de fractura se clasifica de forma cualitativa:
+
+- Weak: junta limpia y lisa, o con relleno debil.
+- Moderate: junta limpia y rugosa.
+- Strong: junta con relleno mas resistente que la roca de caja.
+
+## 5. Como usar la aplicacion
+
+1. Abre la pantalla principal de la calculadora.
+2. Completa primero la geometria del yacimiento.
+3. Completa luego las tres zonas geomecanicas: ore, hanging wall y footwall.
+4. Revisa que los datos no queden vacios y que cada valor represente el dominio geologico correcto.
+5. Ejecuta el calculo.
+6. Revisa el ranking de metodos resultante.
+
+## 6. Como leer el resultado
+
+La aplicacion presenta un puntaje por metodo minero. El metodo con mejor puntuacion total es el candidato principal de preseleccion.
+
+Un resultado alto significa que el metodo es compatible con la geometria y con las condiciones de roca ingresadas. Un resultado bajo o negativo indica que una o mas caracteristicas penalizan mucho ese metodo, o incluso lo eliminan.
+
+En el paper original, un valor de exclusion muy fuerte aparece como penalizacion extrema y sirve para descartar un metodo cuando la condicion geologica lo hace incompatible.
+
+## 7. Como se debe tomar la decision
+
+No uses el ranking como decision final. El paper insiste en que la seleccion debe pasar despues por una revision de:
+
+- costos de minado y capitalizacion,
+- ritmo de produccion,
+- disponibilidad y tipo de mano de obra,
+- impacto ambiental,
+- condiciones de subsistencia,
+- y restricciones especificas del sitio.
+
+En otras palabras, la aplicacion te dice que metodos vale la pena estudiar con mas detalle, no cual debe construirse automaticamente.
+
+## 8. Ejemplo de uso
+
+Si el cuerpo es tabular, muy grueso, de inclinacion plana y con distribucion uniforme de leyes, el metodo de Nicholas tiende a favorecer alternativas a cielo abierto o metodos masivos segun el conjunto geomecanico.
+
+Si la roca del ore y de las cajas es competente, y la geometria es favorable, el ranking puede empujar metodos como open pit o block caving hacia la parte superior.
+
+Si las cajas son debiles o la geometria es desfavorable para oquedades abiertas, los metodos soportados o con relleno suelen ganar prioridad relativa.
+
+## 9. Recomendacion practica de uso
+
+Para obtener un resultado confiable:
+
+- usa informacion de sondajes y mapeo geologico consistente,
+- no mezcles datos de dominios estructurales distintos en un mismo registro,
+- define bien ore, hanging wall y footwall antes de ingresar valores,
+- y valida siempre el resultado con una revision de factibilidad economica y geotecnica.
+
+## 10. Resumen corto
+
+La aplicacion implementa la primera etapa del metodo de Nicholas para clasificar y rankear metodos de explotacion a partir de geometria, leyes y geomecanica. Su salida es una ayuda de preseleccion tecnica para apoyar el estudio minero, no una decision final de disenio.

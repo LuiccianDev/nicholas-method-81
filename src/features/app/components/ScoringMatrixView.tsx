@@ -1,0 +1,65 @@
+import { ArrowUp, Download } from 'lucide-react';
+import { type ScoredMethod } from '@/types';
+import RankingTable from './RankingTable';
+import { motion } from 'motion/react';
+
+interface ScoringMatrixViewProps {
+  results: ScoredMethod[];
+  onBack: () => void;
+  onExportCsv: () => void;
+}
+
+export default function ScoringMatrixView({
+  results,
+  onBack,
+  onExportCsv,
+}: ScoringMatrixViewProps) {
+  return (
+    <>
+      <motion.h2
+        className="pb-4 font-boldonse text-[10px] tracking-widest uppercase"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        04 / Result Matrix
+      </motion.h2>
+      <motion.div
+        className="relative mb-15 flex min-h-72 w-full flex-col rounded-sm bg-primary p-6 sm:p-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+          <p className="font-mono text-[14px] font-bold tracking-widest uppercase">
+            Numerical Breakdown / Nicholas Optimization
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={onExportCsv}
+              className="flex cursor-pointer items-center gap-2 rounded-sm bg-black px-3.5 py-2 text-sm font-medium text-background transition-all hover:bg-white hover:text-text-primary active:scale-95"
+              title="Download results as CSV"
+            >
+              <Download className="size-5" />
+              <span>Export CSV</span>
+            </button>
+            <button
+              onClick={onBack}
+              className="flex cursor-pointer items-center gap-2 rounded-sm bg-background px-3.5 py-2 text-sm font-medium text-text-primary transition-all hover:bg-black hover:text-background active:scale-95"
+              title="Return to Summary view"
+            >
+              <ArrowUp className="size-5" />
+              <span>Back to Summary</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="scroll-elegant flex-1 overflow-y-auto">
+          <RankingTable results={results} />
+        </div>
+      </motion.div>
+    </>
+  );
+}

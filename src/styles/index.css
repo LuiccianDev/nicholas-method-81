@@ -1,69 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 @import 'tailwindcss';
-@import './toggleTheme.css';
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Typography */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* Data /Numero */
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-  --font-serif:
-    'Playfair Display', ui-serif, Georgia, Cambria, 'Times New Roman', Times,
-    serif;
+  /* Hero, Headelines */
+  --font-boldonse: 'Boldonse', ui-sans-serif, system-ui, sans-serif;
+  /* base UI */
+  --font-prompt: 'Prompt', ui-sans-serif, system-ui, sans-serif;
 
-  /* Semantic Surface Colors */
-  --color-surface: #fffdf9;
-  --color-surface-muted: #fbf5e6;
+  /* New paleete colores directives */
 
-  /* Semantic Foreground Colors */
-  --color-foreground: #67223b;
-  --color-foreground-muted: #914562;
+  --color-primary: #a4cf82;
+  --color-secondary: #f0e76f;
+  --color-tertiary: #ecb65f;
+  --color-quaternary: #e89951;
 
-  /* Accent Colors */
-  --color-primary: #b95e82;
-  --color-secondary: #e89b6b;
+  --color-text-primary: #0e0701;
 
-  /* Structural Colors */
-  --color-border: #ebd1aa;
-  --color-border-strong: #b95e82;
+  --color-background: #fbfdfa;
 
-  /* Component Colors */
-  --color-card: #ffffff;
-  --color-card-muted: #fffbf5;
-  --color-tooltip: #ffffff;
-  --color-tooltip-foreground: #67223b;
-}
+  --color-border: #ecb65f;
 
-/* Dark Mode Overrides */
-.dark {
-  --color-surface: #0a0104;
-  --color-surface-muted: #1c0610;
-  --color-foreground: #ffecc0;
-  --color-foreground-muted: #dec9a4;
-  --color-primary: #b95e82;
-  --color-secondary: #ffc29b;
-  --color-border: #300c1c;
-  --color-border-strong: #b95e82;
-  --color-card: #18050e;
-  --color-card-muted: #240916;
-  --color-tooltip: #18050e;
-  --color-tooltip-foreground: #ffecc0;
+  /* Tracking Tokens */
+  --tracking-widest: 0.3em;
+  --tracking-wide: 0.2em;
 }
 
 /* Base Styles */
 body {
-  background-color: var(--color-surface);
-  color: var(--color-foreground);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   transition:
     background-color 0.4s ease,
     color 0.4s ease;
+  overflow-x: hidden;
+  font-family: var(--font-prompt);
 }
 
 /* Global Elegant Scrollbar */
 html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border-strong) transparent;
+  scrollbar-width: none; /* Cambia con thin para el groosos y que aprezacac  */
+  scrollbar-color: var(--color-border) transparent;
 }
 
 html::-webkit-scrollbar {
@@ -75,33 +52,34 @@ html::-webkit-scrollbar-track {
 }
 
 html::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
+  background: var(--color-border);
   border-radius: 10px;
 }
 
 html::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground-muted);
+  background: var(--color-border);
 }
 
-/* Scrollbar Utility Class */
-.scroll-elegant {
+/* Scrollbar Utility */
+@utility scroll-elegant {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-border-strong) transparent;
+  scrollbar-color: var(--color-primary) transparent;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
 }
 
-.scroll-elegant::-webkit-scrollbar {
-  width: 4px;
-}
-
-.scroll-elegant::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.scroll-elegant::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
-  border-radius: 4px;
-}
-
-.scroll-elegant::-webkit-scrollbar-thumb:hover {
-  background: var(--color-foreground-muted);
+/* Hero cards — shared surface, border and hover lift */
+@utility card-shell {
+  @apply rounded-sm border border-white/20 bg-black/10 text-white backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.01];
 }

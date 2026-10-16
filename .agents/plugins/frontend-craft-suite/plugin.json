@@ -1,0 +1,11 @@
+{
+  "name": "frontend-craft-suite",
+  "displayName": "React 19 & UI Craft Suite",
+  "description": "Accessible React 19 UI composition, Shadcn components, custom design systems, TypeScript advanced types, and strict typography rules.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Crear un componente reactivo respetando la tipografía oficial (JetBrains Mono, Boldonse, Prompt)",
+    "Diseñar patrones de composición en React 19 sin prop drilling",
+    "Integrar componentes accesibles con Shadcn y TypeScript estricto"
+  ]
+}

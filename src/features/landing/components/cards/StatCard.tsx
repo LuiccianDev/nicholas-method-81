@@ -1,0 +1,41 @@
+import FlipBoard from '../FlipBoard';
+
+type StatCardProps = {
+  eyebrow: string;
+  value: number;
+  suffix: string;
+  status: string;
+  size: string;
+  decimals?: number;
+  active?: boolean;
+  delay?: number;
+};
+
+export default function StatCard({
+  eyebrow,
+  value,
+  suffix,
+  status,
+  size,
+  decimals = 0,
+  active = false,
+  delay = 0,
+}: StatCardProps) {
+  return (
+    <div
+      className={`flex card-shell flex-col justify-between gap-3 p-5 md:p-6 ${size}`}
+    >
+      <p className="text-center font-mono text-base font-medium md:text-lg">
+        {eyebrow}
+      </p>
+      <FlipBoard
+        value={value}
+        suffix={suffix}
+        decimals={decimals}
+        active={active}
+        delay={delay}
+      />
+      <p className="text-center text-xs font-medium">{status}</p>
+    </div>
+  );
+}

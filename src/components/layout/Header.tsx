@@ -1,108 +1,128 @@
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Menu, X } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Sun, Moon } from 'lucide-react';
 
-interface HeaderProps {
-  toggleTheme: () => void;
-  theme: 'light' | 'dark';
-}
+const menuItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Calculator', href: '/calculator' },
+  { label: 'About', href: '/About' },
+];
 
-export default function Header({ toggleTheme, theme }: HeaderProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
+const GITHUB_REPO = 'https://github.com/LuiccianDev/NicholasMethod81';
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.215, 0.61, 0.355, 1.0] as const, // Quartic ease out
-      },
-    },
-  };
-
-  const rightItemVariants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.215, 0.61, 0.355, 1.0] as const,
-      },
-    },
-  };
-
-  const themeToggleVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.215, 0.61, 0.355, 1.0] as const,
-      },
-    },
-  };
+export default function LandingNav() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <motion.header
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      className="mb-6 flex flex-col items-start justify-between gap-4 border-b border-border pb-5 md:flex-row md:items-end"
-    >
-      <div className="max-w-xl">
-        <motion.p
-          variants={itemVariants}
-          className="mb-2 font-mono text-[10px] tracking-[0.3em] text-primary uppercase"
-        >
-          Mining Method Advisor
-        </motion.p>
-        <motion.h1
-          variants={itemVariants}
-          className="font-serif text-3xl leading-none font-bold tracking-tight text-foreground italic md:text-5xl"
-        >
-          Nicholas Selector
-          <span className="text-primary">.</span>
-        </motion.h1>
-      </div>
-      <div className="flex w-full flex-col items-start gap-x-8 gap-y-3 md:w-auto md:flex-row md:items-end">
-        <motion.button
-          variants={themeToggleVariants}
-          onClick={toggleTheme}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex cursor-pointer items-center justify-center rounded-full border border-border bg-surface-muted p-2 text-foreground-muted transition-all duration-300 hover:border-primary hover:bg-card hover:text-primary"
-          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-          title={`Current theme: ${theme}`}
-        >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-        </motion.button>
-        <div className="text-left md:text-right">
-          <motion.p
-            variants={rightItemVariants}
-            className="font-mono text-xs text-foreground-muted"
+    <>
+      <motion.nav
+        className="fixed top-7 right-0 left-0 z-50 flex items-center px-10 pt-2 text-[12px] not-first:justify-between"
+        data-purpose="main-navigation"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="flex-1">
+          <motion.a
+            href={GITHUB_REPO}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-block rounded-sm bg-black px-4 py-2 font-bold tracking-widest text-white uppercase"
+            data-purpose="paper-github"
           >
-            REF: DAVID E. NICHOLAS / OPTIMIZATION ENGINE
-          </motion.p>
-          <motion.p
-            variants={rightItemVariants}
-            className="font-mono text-xs text-foreground-muted"
-          >
-            EST. 1981 / ROCK MECHANICS
-          </motion.p>
+            Paper
+          </motion.a>
         </div>
-      </div>
-    </motion.header>
+        <div className="flex items-center justify-center rounded-sm bg-background pl-4">
+          <a
+            href="/"
+            className="pr-2 text-[15px] font-semibold tracking-wide uppercase"
+          >
+            Luiccian
+          </a>
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsMenuOpen(true)}
+            className="rounded-sm bg-primary p-2"
+            data-purpose="mobile-menu-trigger"
+          >
+            <Menu className="size-4" />
+          </motion.button>
+        </div>
+        <div className="flex flex-1 items-center justify-end">
+          <div className="cursor-pointer rounded-sm bg-background px-4 py-2 text-[12px] font-semibold tracking-widest uppercase">
+            <a href="/calculator">Calculator</a>
+          </div>
+        </div>
+      </motion.nav>
+
+      {isMenuOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-50">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-black/40"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="absolute top-0 right-0 flex h-full w-72 flex-col bg-background shadow-2xl"
+            >
+              <div className="flex items-center justify-between border-b border-gray-100 px-6 py-6">
+                <span className="text-lg font-black tracking-wide uppercase">
+                  Menu
+                </span>
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="rounded-sm bg-black p-2 text-background"
+                >
+                  <X className="h-5 w-5" />
+                </motion.button>
+              </div>
+              <nav className="flex-1 px-6 py-8">
+                <ul className="space-y-6">
+                  {menuItems.map((item) => (
+                    <motion.li
+                      key={item.label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <a
+                        href={item.href}
+                        className="text-lg font-semibold transition-colors hover:text-quaternary"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+              <div className="border-t border-tertiary px-6 py-6">
+                <motion.a
+                  href={GITHUB_REPO}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="block w-full rounded-sm bg-black px-4 py-3 text-center text-[11px] font-bold tracking-widest text-background uppercase"
+                >
+                  Paper
+                </motion.a>
+              </div>
+            </motion.aside>
+          </div>,
+          document.body
+        )}
+    </>
   );
 }

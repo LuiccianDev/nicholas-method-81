@@ -11,7 +11,6 @@ export interface RawMethodInput {
   shape: Shape;
   thickness: number | '';
   plunge: number | '';
-  depth: number | '';
   grade: Grade;
   oreSubStr: number | '';
   oreFracSpac: number | '';
@@ -60,7 +59,7 @@ export interface ScoredMethod {
   fwScore: number;
   rockTotal: number;
   total: number;
-  isEliminated?: boolean;
+  isEliminated: boolean;
 }
 
 export interface ChartDataRow {

@@ -1,0 +1,11 @@
+{
+  "name": "gsap-motion-suite",
+  "displayName": "GSAP Animation Suite",
+  "description": "GreenSock Animation Platform (GSAP): timelines, ScrollTrigger, React useGSAP lifecycle hook, and GPU transform performance.",
+  "version": "1.0.0",
+  "suggestedPrompts": [
+    "Crear una animación de scroll con ScrollTrigger y scrub",
+    "Optimizar el rendimiento de animaciones GSAP en React con useGSAP",
+    "Construir una secuencia coreografiada con timelines de GSAP"
+  ]
+}

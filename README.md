@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/banner.png" width="100%" alt="Nicholas Method Banner">
+  <img src="public/Readme.png" width="100%"  alt="Nicholas Method Banner">
 
   # Nicholas Method 81
   *Mining Method Selection: A Numerical Approach*
@@ -54,18 +54,17 @@ pnpm install
 
 ## Available Scripts
 
-- `pnpm dev` - Start development environment with Vite
-- `pnpm build` - Compile TypeScript and generate production build
-- `pnpm preview` - Preview the generated build
-- `pnpm lint` - Run ESLint
-- `pnpm format` - Format project with Prettier
+- `pnpm dev` - Start development server (`http://localhost:4321`)
+- `pnpm build` - Generate production build for Vercel
+- `pnpm preview` - Preview the production build locally
+- `pnpm format` - Format source files with Prettier
 
 ## Quick Start
 
 ```bash
 pnpm dev
 ```
-Then open the local URL shown by Vite (default `http://localhost:5173`).
+Then open `http://localhost:4321`.
 
 ---
 
