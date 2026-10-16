@@ -10,7 +10,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: true,
+      noExternal: ['gsap', '@gsap/react'],
     },
   },
   env: {
