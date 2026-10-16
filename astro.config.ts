@@ -9,6 +9,9 @@ export default defineConfig({
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: true,
+    },
   },
   env: {
     schema: {
@@ -20,3 +23,4 @@ export default defineConfig({
     },
   },
 });
+
