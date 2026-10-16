@@ -32,7 +32,7 @@ function CalculatorContent() {
         : 'Irregular';
 
   return (
-    <div className="mx-auto w-full max-w-425 px-4 pt-16 pb-12 md:px-8">
+    <div className="mx-auto w-full max-w-425 px-4 pt-24 pb-12 md:px-8">
       {/* Telemetry Status Bar inspired by Stitch */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border border-border bg-background px-4 py-2 font-mono text-[11px] text-text-primary/70">
         <div className="flex flex-wrap items-center gap-3">

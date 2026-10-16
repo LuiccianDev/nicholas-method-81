@@ -2,9 +2,8 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -16,42 +15,9 @@ export default function Footer() {
   const textRef = useRef<HTMLHeadingElement>(null);
   const backToTopRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const textTagRef = useRef<HTMLHeadingElement>(null);
   const isScrollingRef = useRef(false);
 
-  const scrollToTop = () => {
-    if (isScrollingRef.current) return;
-
-    const overlayEl = overlayRef.current;
-    if (!overlayEl) return;
-
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-
-    if (reduceMotion) {
-      window.scrollTo(0, 0);
-      return;
-    }
-
-    isScrollingRef.current = true;
-
-    gsap
-      .timeline({ onComplete: () => (isScrollingRef.current = false) })
-      // El overlay se pone opaco...
-      .to(overlayEl, { autoAlpha: 1, duration: 0.01, ease: 'power1.in' })
-      // ...al mismo tiempo que el scroll real se anima hacia arriba, oculto detrás
-      .to(window, { scrollTo: 0, duration: 0.1, ease: 'power2.inOut' }, '<')
-      // Recién cuando el scroll terminó, se destapa
-      .to(overlayEl, {
-        autoAlpha: 0,
-        duration: 0.15,
-        ease: 'power1.out',
-        delay: 0.4,
-      });
-  };
-
-  useGSAP(
+  const { contextSafe } = useGSAP(
     () => {
       if (!footerRef.current) return;
 
@@ -193,29 +159,24 @@ export default function Footer() {
           }
 
           if (backToTopRef.current) {
-            const backToTopEl = backToTopRef.current;
-
-            gsap.set(backToTopEl, { autoAlpha: 0, y: 8 });
-
-            ScrollTrigger.create({
-              start: 300,
-              onEnter: () =>
-                gsap.to(backToTopEl, {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: reduceMotion ? 0 : 0.3,
-                  ease: 'power2.out',
-                  overwrite: true,
-                }),
-              onLeaveBack: () =>
-                gsap.to(backToTopEl, {
-                  autoAlpha: 0,
-                  y: 8,
-                  duration: reduceMotion ? 0 : 0.25,
-                  ease: 'power2.in',
-                  overwrite: true,
-                }),
-            });
+            gsap.fromTo(
+              backToTopRef.current,
+              {
+                y: reduceMotion ? 0 : 8,
+                autoAlpha: reduceMotion ? 1 : 0,
+              },
+              {
+                scrollTrigger: {
+                  trigger: backToTopRef.current,
+                  start: 'top 98%',
+                  once: true,
+                },
+                y: 0,
+                autoAlpha: 1,
+                duration: reduceMotion ? 0 : 0.4,
+                ease: 'power2.out',
+              }
+            );
           }
         }
       );
@@ -226,6 +187,54 @@ export default function Footer() {
     },
     { scope: footerRef }
   );
+
+  const scrollToTop = contextSafe(() => {
+    if (isScrollingRef.current) return;
+
+    const overlayEl = overlayRef.current;
+    if (!overlayEl) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (reduceMotion) {
+      window.scrollTo(0, 0);
+      ScrollTrigger.update();
+      return;
+    }
+
+    isScrollingRef.current = true;
+
+    gsap
+      .timeline({
+        onComplete: () => {
+          isScrollingRef.current = false;
+        },
+      })
+      .to(overlayEl, {
+        autoAlpha: 1,
+        duration: 0.4,
+        ease: 'power2.inOut',
+      })
+      .call(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        ScrollTrigger.update();
+        ScrollTrigger.getAll().forEach((st) => {
+          st.getTween()?.progress(1);
+          st.animation?.totalProgress(0);
+        });
+      })
+      .to(overlayEl, {
+        autoAlpha: 0,
+        duration: 0.7,
+        delay: 0.15,
+        ease: 'power3.out',
+      });
+  });
 
   const socialLinks = [
     { name: 'Instagram', url: 'https://www.instagram.com/luiccian_dev' },
@@ -244,9 +253,8 @@ export default function Footer() {
       <div
         ref={overlayRef}
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-9999 bg-background opacity-0"
+        className="pointer-events-none fixed inset-0 z-9999 bg-background/95 opacity-0 backdrop-blur-md"
       />
-
       <div className="relative z-20 mb-5 w-full px-5 pt-10">
         <div className="relative overflow-hidden rounded-sm bg-[url('/footer.jpeg')] bg-center px-6 py-18 pb-5">
           <div className="absolute inset-0 bg-black/10" />
@@ -412,10 +420,15 @@ export default function Footer() {
             <button
               ref={backToTopRef}
               id="back-to-top"
+              type="button"
+              aria-label="Scroll back to top"
               onClick={scrollToTop}
-              className="invisible ml-auto cursor-pointer rounded-sm bg-quaternary/90 px-3 py-1 tracking-wider uppercase opacity-0 backdrop-blur-3xl transition-colors duration-300 hover:bg-quaternary"
+              className="group ml-auto flex cursor-pointer items-center gap-1.5 rounded-sm bg-quaternary/90 px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider uppercase backdrop-blur-3xl transition-all duration-300 hover:bg-quaternary active:scale-95"
             >
-              ↑ TOP
+              <span className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5">
+                ↑
+              </span>
+              <span>TOP</span>
             </button>
           </div>
         </div>

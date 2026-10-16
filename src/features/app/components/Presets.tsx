@@ -1,11 +1,8 @@
-import { useRef } from 'react';
-import { motion } from 'motion/react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import type { RawMethodInput } from '@/types';
 import { useNicholasContext } from '@/state/NicholasContext';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(useGSAP);
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 interface PresetOption {
   id: string;
@@ -95,94 +92,19 @@ const PRESETS: PresetOption[] = [
   },
 ];
 
+const SPRING_TRANSITION = {
+  type: 'spring' as const,
+  stiffness: 380,
+  damping: 32,
+  mass: 0.7,
+};
+
 export default function Presets() {
   const { input, setInputValues } = useNicholasContext();
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const blobRef = useRef<HTMLSpanElement>(null);
-  const moveBlobRef = useRef<(target: HTMLButtonElement) => void>(() => {});
-  const hideBlobRef = useRef<() => void>(() => {});
-  const currentTargetRef = useRef<HTMLButtonElement | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const activeId = PRESETS.find((p) => inputsMatch(input, p.data))?.id;
-
-  useGSAP(
-    (_, contextSafe: any) => {
-      const reduced = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches;
-
-      const measure = (target: HTMLElement, wrap: HTMLElement) => {
-        const rect = target.getBoundingClientRect();
-        const nav = wrap.getBoundingClientRect();
-        return {
-          left: rect.left - nav.left - 2,
-          top: rect.top - nav.top - 2,
-          width: rect.width + 4,
-          height: rect.height + 4,
-        };
-      };
-
-      const moveBlob = contextSafe((target: HTMLButtonElement) => {
-        const blob = blobRef.current;
-        const wrap = wrapperRef.current;
-        if (!blob || !wrap || !target.isConnected) return;
-        currentTargetRef.current = target;
-        gsap.to(blob, {
-          ...measure(target, wrap),
-          duration: reduced ? 0 : 0.5,
-          ease: 'back.out(0.8)',
-        });
-      });
-
-      const hideBlob = contextSafe(() => {
-        currentTargetRef.current = null;
-        if (blobRef.current) {
-          gsap.to(blobRef.current, {
-            autoAlpha: 0,
-            duration: reduced ? 0 : 0.1,
-          });
-        }
-      });
-
-      moveBlobRef.current = moveBlob;
-      hideBlobRef.current = hideBlob;
-
-      const syncBlob = contextSafe(() => {
-        const wrap = wrapperRef.current;
-        const target = currentTargetRef.current;
-        if (!wrap) return;
-        if (target && target.isConnected && blobRef.current) {
-          gsap.set(blobRef.current, { autoAlpha: 1, ...measure(target, wrap) });
-        } else {
-          hideBlob();
-        }
-      });
-
-      const activeBtn = wrapperRef.current?.querySelector<HTMLButtonElement>(
-        '[data-active="true"]'
-      );
-      const blob = blobRef.current;
-      const wrap = wrapperRef.current;
-      if (activeBtn && blob && wrap) {
-        currentTargetRef.current = activeBtn;
-        gsap.set(blob, { autoAlpha: 1, ...measure(activeBtn, wrap) });
-      } else {
-        hideBlob();
-      }
-
-      window.addEventListener('resize', syncBlob);
-      window.addEventListener('orientationchange', syncBlob);
-      const observer = new ResizeObserver(syncBlob);
-      if (wrapperRef.current) observer.observe(wrapperRef.current);
-
-      return () => {
-        window.removeEventListener('resize', syncBlob);
-        window.removeEventListener('orientationchange', syncBlob);
-        observer.disconnect();
-      };
-    },
-    { scope: wrapperRef, dependencies: [activeId], revertOnUpdate: true }
-  );
 
   return (
     <div className="mb-4">
@@ -196,60 +118,77 @@ export default function Presets() {
       </div>
 
       <motion.div
-        ref={wrapperRef}
-        onMouseLeave={() => {
-          const activeBtn =
-            wrapperRef.current?.querySelector<HTMLButtonElement>(
-              '[data-active="true"]'
-            );
-          if (activeBtn) moveBlobRef.current(activeBtn);
-          else hideBlobRef.current();
-        }}
+        onMouseLeave={() => setHoveredId(null)}
         className="relative py-1"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <span
-          ref={blobRef}
-          className="pointer-events-none absolute inset-auto z-0 rounded-none border border-primary bg-primary/20 opacity-0"
-        />
-
-        <div className="relative z-1 grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div className="relative grid grid-cols-1 gap-2 sm:grid-cols-3">
           {PRESETS.map((preset) => {
-            const isActive = inputsMatch(input, preset.data);
+            const isActive = activeId === preset.id;
+            const isHovered = hoveredId === preset.id;
+
             return (
               <motion.button
                 key={preset.id}
                 type="button"
                 data-active={isActive || undefined}
-                onMouseEnter={(e) => moveBlobRef.current(e.currentTarget)}
-                onClick={(e) => {
-                  setInputValues(preset.data);
-                  moveBlobRef.current(e.currentTarget);
-                }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative flex flex-col items-start border p-2.5 text-left transition-colors ${
+                onMouseEnter={() => setHoveredId(preset.id)}
+                onFocus={() => setHoveredId(preset.id)}
+                onBlur={() => setHoveredId(null)}
+                onClick={() => setInputValues(preset.data)}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.985 }}
+                className={`group relative flex cursor-pointer flex-col items-start border p-2.5 text-left transition-colors duration-300 ${
                   isActive
-                    ? 'border-primary bg-primary/10'
-                    : 'border-border/60 bg-background/80 hover:border-border'
+                    ? 'border-primary'
+                    : 'border-border/60 bg-background/80 hover:border-primary/60'
                 }`}
               >
-                <div className="mb-1.5 flex w-full items-center justify-between">
-                  <span className="font-boldonse text-[10px] tracking-wide text-text-primary uppercase">
+                {/* Shared Hover Highlight Pill */}
+                <AnimatePresence>
+                  {isHovered && !isActive && (
+                    <motion.span
+                      layoutId="preset-hover-bg"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={
+                        prefersReducedMotion
+                          ? { duration: 0 }
+                          : { duration: 0.2, ease: 'easeOut' }
+                      }
+                      className="pointer-events-none absolute inset-0 z-0 bg-primary/8"
+                    />
+                  )}
+                </AnimatePresence>
+
+                {/* Shared Active Selection Pill */}
+                {isActive && (
+                  <motion.span
+                    layoutId="preset-active-bg"
+                    transition={
+                      prefersReducedMotion ? { duration: 0 } : SPRING_TRANSITION
+                    }
+                    className="pointer-events-none absolute inset-0 z-0 border border-primary bg-primary/20 shadow-[inset_0_0_0_1px_rgba(164,207,130,0.25)]"
+                  />
+                )}
+
+                <div className="relative z-10 mb-1.5 flex w-full items-center justify-between gap-1">
+                  <span className="font-boldonse text-[10px] tracking-wide text-text-primary uppercase transition-transform duration-200 group-hover:translate-x-0.5">
                     {preset.name}
                   </span>
-                  {isActive && (
-                    <span className="font-mono text-[8px] font-bold text-primary uppercase">
-                      ACTIVE
-                    </span>
-                  )}
                 </div>
-                <div className="flex flex-wrap gap-1">
+
+                <div className="relative z-10 flex flex-wrap gap-1">
                   {preset.badges.map((badge) => (
                     <span
                       key={badge.label}
-                      className="inline-flex items-center gap-1 border border-border/40 bg-background px-1 py-0.5 font-mono text-[9px] text-text-primary/80"
+                      className={`inline-flex items-center gap-1 border px-1 py-0.5 font-mono text-[9px] text-text-primary/80 transition-colors duration-200 ${
+                        isActive
+                          ? 'border-primary/50 bg-background/95'
+                          : 'border-border/40 bg-background group-hover:border-primary/30'
+                      }`}
                     >
                       <span className="font-bold text-text-primary">
                         {badge.label}:
