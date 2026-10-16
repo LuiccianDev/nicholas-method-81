@@ -185,15 +185,15 @@ export default function Presets() {
   );
 
   return (
-    <>
-      <motion.h3
-        className="mb-3 text-[15px]"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        Predefined Geological Scenarios (1-Click)
-      </motion.h3>
+    <div className="mb-4">
+      <div className="mb-2 flex items-center justify-between border-b border-text-primary/10 pb-1.5">
+        <span className="font-mono text-[10px] font-bold tracking-wider text-text-primary uppercase">
+          Predefined Geological Scenarios (1-Click)
+        </span>
+        <span className="font-mono text-[9px] text-text-primary/50 uppercase">
+          Quick Load
+        </span>
+      </div>
 
       <motion.div
         ref={wrapperRef}
@@ -205,14 +205,14 @@ export default function Presets() {
           if (activeBtn) moveBlobRef.current(activeBtn);
           else hideBlobRef.current();
         }}
-        className="relative px-2 pb-9"
-        initial={{ opacity: 0, y: 20 }}
+        className="relative py-1"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+        transition={{ duration: 0.4 }}
       >
         <span
           ref={blobRef}
-          className="pointer-events-none absolute inset-auto z-0 rounded-sm border border-primary bg-primary opacity-0"
+          className="pointer-events-none absolute inset-auto z-0 rounded-none border border-primary bg-primary/20 opacity-0"
         />
 
         <div className="relative z-1 grid grid-cols-1 gap-2 sm:grid-cols-3">
@@ -228,19 +228,32 @@ export default function Presets() {
                   setInputValues(preset.data);
                   moveBlobRef.current(e.currentTarget);
                 }}
-                whileTap={{ scale: 0.97 }}
-                className="relative flex flex-col items-start rounded-lg p-3 text-left"
+                whileTap={{ scale: 0.98 }}
+                className={`relative flex flex-col items-start border p-2.5 text-left transition-colors ${
+                  isActive
+                    ? 'border-primary bg-primary/10'
+                    : 'border-border/60 bg-background/80 hover:border-border'
+                }`}
               >
-                <div className="mb-2 flex items-center gap-2 font-boldonse">
-                  <span className="text-[9px]">{preset.name}</span>
+                <div className="mb-1.5 flex w-full items-center justify-between">
+                  <span className="font-boldonse text-[10px] tracking-wide text-text-primary uppercase">
+                    {preset.name}
+                  </span>
+                  {isActive && (
+                    <span className="font-mono text-[8px] font-bold text-primary uppercase">
+                      ACTIVE
+                    </span>
+                  )}
                 </div>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-wrap gap-1">
                   {preset.badges.map((badge) => (
                     <span
                       key={badge.label}
-                      className="inline-flex items-center gap-1 py-0.5 pl-1 text-[12px]"
+                      className="inline-flex items-center gap-1 border border-border/40 bg-background px-1 py-0.5 font-mono text-[9px] text-text-primary/80"
                     >
-                      <span className="font-bold">- {badge.label} :</span>
+                      <span className="font-bold text-text-primary">
+                        {badge.label}:
+                      </span>
                       {badge.value}
                     </span>
                   ))}
@@ -250,6 +263,6 @@ export default function Presets() {
           })}
         </div>
       </motion.div>
-    </>
+    </div>
   );
 }

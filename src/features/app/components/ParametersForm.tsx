@@ -23,39 +23,83 @@ const ParametersForm = memo(function ParametersForm({
   return (
     <div className="flex h-full flex-col">
       <Presets />
-      <motion.h2
-        className="mb-4 font-boldonse text-[10px] tracking-widest uppercase"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        01 / Analysis Inputs
-      </motion.h2>
+      <div className="mb-4 flex items-center justify-between border-b border-text-primary/10 pb-2">
+        <div className="flex items-center gap-2">
+          <span className="border border-text-primary/20 bg-background px-2 py-0.5 font-mono text-[10px] tracking-wider text-text-primary uppercase">
+            NM-01
+          </span>
+          <h2 className="font-boldonse text-xs tracking-widest text-text-primary uppercase">
+            Analysis Inputs
+          </h2>
+        </div>
+        <span className="font-mono text-[10px] tracking-wide text-text-primary/60 uppercase">
+          Geotechnical & Geometry
+        </span>
+      </div>
 
       <div className="flex-1 overflow-y-auto">
         <motion.div
-          className="overflow-hidden py-4 sm:py-5"
+          className="overflow-hidden py-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <ExpandableDetails
-            title="Geometry & Grade"
+            title="A. Deposit Geometry"
             defaultOpen
             summaryClassName="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-2 font-mono text-[13px] tracking-wide uppercase"
           >
             <div className="mt-4 grid min-w-0 gap-4 xl:grid-cols-1 2xl:grid-cols-2">
-              <DropdownSelect
-                label="General Shape"
-                value={input.shape}
-                onChange={(v) => updateInput('shape', v)}
-                options={[
-                  { value: 'M', label: 'Equi-dimensional (Massive)' },
-                  { value: 'TP', label: 'Platy / Tabular' },
-                  { value: 'I', label: 'Irregular' },
-                ]}
-                note="Massive: Equal dimensions • Tabular: 2 large dimensions, thin (< 100m) • Irregular: Variable boundaries."
-              />
+              <div className="mb-3">
+                <div className="mb-1.5 flex items-center justify-between">
+                  <label className="block font-prompt text-[11px] font-semibold tracking-wider text-text-primary uppercase">
+                    General Shape
+                  </label>
+                  <span className="font-mono text-[9px] font-bold text-primary uppercase">
+                    {input.shape === 'M'
+                      ? 'Massive [Selected]'
+                      : input.shape === 'TP'
+                        ? 'Tabular [Selected]'
+                        : 'Irregular [Selected]'}
+                  </span>
+                </div>
+                <div className="grid grid-cols-3 gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => updateInput('shape', 'M')}
+                    className={`h-8 border px-2 text-center font-mono text-[11px] font-bold uppercase transition-all ${
+                      input.shape === 'M'
+                        ? 'border-primary bg-primary text-text-primary'
+                        : 'border-border/70 bg-background text-text-primary/70 hover:border-border hover:bg-primary/5'
+                    }`}
+                  >
+                    Massive
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateInput('shape', 'TP')}
+                    className={`h-8 border px-2 text-center font-mono text-[11px] font-bold uppercase transition-all ${
+                      input.shape === 'TP'
+                        ? 'border-primary bg-primary text-text-primary'
+                        : 'border-border/70 bg-background text-text-primary/70 hover:border-border hover:bg-primary/5'
+                    }`}
+                  >
+                    Tabular
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateInput('shape', 'I')}
+                    className={`h-8 border px-2 text-center font-mono text-[11px] font-bold uppercase transition-all ${
+                      input.shape === 'I'
+                        ? 'border-primary bg-primary text-text-primary'
+                        : 'border-border/70 bg-background text-text-primary/70 hover:border-border hover:bg-primary/5'
+                    }`}
+                  >
+                    Irregular
+                  </button>
+                </div>
+              </div>
+
               <NumericInput
                 label="Ore Thickness"
                 value={input.thickness}
@@ -89,15 +133,15 @@ const ParametersForm = memo(function ParametersForm({
         </motion.div>
 
         <motion.div
-          className="py-4 sm:py-5"
+          className="py-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
         >
           <ExpandableDetails
-            title="Rock Mechanics"
+            title="B. Rock Mechanics (Geomechanics)"
             defaultOpen
-            summaryClassName="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-3 font-mono text-[13px] tracking-wide uppercase"
+            summaryClassName="flex cursor-pointer list-none items-center justify-between gap-4 border-b border-border pb-2 font-mono text-[13px] tracking-wide uppercase"
           >
             <div className="grid gap-4">
               <GeotechnicalInput

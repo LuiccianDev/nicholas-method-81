@@ -19,9 +19,27 @@ export default function NumericInput({
   derivedLabel,
   unit,
 }: NumericInputProps) {
+  const handleDecrement = () => {
+    const current = typeof value === 'number' ? value : 0;
+    onChange(Math.max(0, current - 1));
+  };
+
+  const handleIncrement = () => {
+    const current = typeof value === 'number' ? value : 0;
+    onChange(current + 1);
+  };
+
   return (
     <FormField label={label} note={note} derivedLabel={derivedLabel}>
-      <div className="relative flex w-full items-center justify-between rounded-lg border border-border">
+      <div className="relative flex h-8 w-full items-center justify-between rounded-none border border-border/70 bg-background transition-colors focus-within:border-primary">
+        <button
+          type="button"
+          onClick={handleDecrement}
+          className="flex h-full w-8 items-center justify-center border-r border-border/40 font-mono text-sm font-bold text-text-primary/70 transition-colors hover:bg-primary/10 hover:text-text-primary active:scale-95"
+          aria-label="Decrement value"
+        >
+          -
+        </button>
         <input
           type="number"
           value={value}
@@ -30,13 +48,21 @@ export default function NumericInput({
             onChange(val === '' ? '' : Number(val));
           }}
           placeholder={placeholder}
-          className="w-full py-2 pr-15 pl-3 font-mono text-sm outline-none"
+          className="w-full bg-transparent py-1 text-center font-mono text-[13px] font-semibold text-text-primary outline-none"
         />
         {unit && (
-          <div className="pointer-events-none absolute top-1/2 right-3 ml-4 -translate-y-1/2 font-mono text-[10px]">
+          <span className="pointer-events-none pr-1.5 font-mono text-[10px] text-text-primary/50 uppercase">
             {unit}
-          </div>
+          </span>
         )}
+        <button
+          type="button"
+          onClick={handleIncrement}
+          className="flex h-full w-8 items-center justify-center border-l border-border/40 font-mono text-sm font-bold text-text-primary/70 transition-colors hover:bg-primary/10 hover:text-text-primary active:scale-95"
+          aria-label="Increment value"
+        >
+          +
+        </button>
       </div>
     </FormField>
   );

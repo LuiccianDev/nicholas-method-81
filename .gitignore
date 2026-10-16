@@ -35,3 +35,8 @@ skills-lock.json
 .kiro/
 opencode.json
 *.mp4
+
+
+# Stitch Prototyping
+.stitch/
+.stitch.json

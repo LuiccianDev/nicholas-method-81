@@ -112,8 +112,18 @@ Antes de abordar una tarea, carga la skill relevante vía la herramienta de skil
 - Componentes React / performance: `react-best-practices` o `vercel-composition-patterns`.
 - Revisión estricta de calidad: `thermo-nuclear-code-quality-review` (a pedido).
 - Framework Astro: `astro`.
+- Prototipado / Diseño UI / Stitch: `stitch` (plugin local `stitch-design-suite`).
 
 Carga la skill ANTES de escribir código, para aplicar sus patrones desde el inicio.
+
+## Prototipado y Rediseño con Stitch (Workflow Mandatorio)
+
+Cuando el usuario pida prototipar, rediseñar, generar variantes o crear nuevas pantallas con Stitch:
+
+1. **NO modificar código React directamente**: Todo rediseño comienza obligatoriamente en Stitch Canvas.
+2. **Inyección de `DESIGN.md`**: Cada comando (`stitch generate screen`, `stitch edit screen`, `stitch generate variants`) debe inyectar la paleta de colores oficial (`#a4cf82`, `#ecb65f`, `#fbfdfa`, `#0e0701`), tipografía estricta (`font-boldonse`, `font-mono`, `font-prompt`) y estética de laboratorio minero técnico según [prompt-engineering-mining.md](.agents/plugins/stitch-design-suite/skills/stitch/references/prompt-engineering-mining.md).
+3. **Presentación Previa**: Mostrar siempre el enlace directo (`stitch url screen <id> --project <id>`) al usuario para su revisión visual antes de iniciar la implementación.
+4. **Traducción Quirúrgica a React**: Una vez aprobado el prototipo, usar el diccionario [class-mapping.md](.agents/plugins/stitch-design-suite/skills/stitch/references/class-mapping.md) para adaptar la estructura visual a componentes React existentes sin romper el estado global ni los cálculos matemáticos de Nicholas 1981. NUNCA pegar HTML monolítico directamente.
 
 ## Lógica de negocio / cálculo (zona delicada)
 

@@ -23,10 +23,10 @@ export default function GeotechnicalInput({
   return (
     <ExpandableDetails
       title={title}
-      className="overflow-hidden pt-4 pl-4"
-      summaryClassName="flex cursor-pointer list-none items-center justify-between gap-4 border-l-4 border-border py-1 pl-3 font-mono text-[12px] tracking-wide uppercase"
+      className="overflow-hidden border border-border/60 bg-background/50 p-3 transition-colors hover:border-border"
+      summaryClassName="flex cursor-pointer list-none items-center justify-between gap-4 font-mono text-[11px] font-bold tracking-wider text-text-primary uppercase"
     >
-      <div className="mt-4 grid gap-3 xl:grid-cols-1 2xl:grid-cols-2">
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
         <NumericInput
           label="Substance Strength Ratio"
           value={input[`${prefix}SubStr`]}
@@ -47,7 +47,7 @@ export default function GeotechnicalInput({
           derivedLabel={getFracSpacLabel(input[`${prefix}FracSpac`])}
           note="Very Close: >16/m (RQD <20%) • Close: 10–16/m • Wide: 3–10/m • Very Wide: <3/m (RQD >70%)"
         />
-        <div className="min-w-0 xl:col-span-1 2xl:col-span-2">
+        <div className="min-w-0 sm:col-span-2">
           <DropdownSelect
             label="Fracture Strength"
             value={input[`${prefix}FracStr`]}
@@ -55,9 +55,9 @@ export default function GeotechnicalInput({
               updateInput(`${prefix}FracStr` as keyof RawMethodInput, v)
             }
             options={[
-              { value: 'W', label: 'Weak' },
-              { value: 'M', label: 'Moderate' },
-              { value: 'S', label: 'Strong' },
+              { value: 'W', label: 'Weak (Smooth joint / soft fill)' },
+              { value: 'M', label: 'Moderate (Rough joint)' },
+              { value: 'S', label: 'Strong (Hard fill ≥ rock strength)' },
             ]}
             note="Weak: Smooth joint / soft fill • Moderate: Rough joint • Strong: Hard fill (≥ rock strength)"
           />
